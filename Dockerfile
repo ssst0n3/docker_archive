@@ -1,17 +1,4 @@
-FROM ssst0n3/docker_archive:build_basic_ubuntu-20.04
-# cloud_init config
-COPY cloud.txt cloud.txt
-RUN cloud-localds /cloud.img cloud.txt
-
-# COPY start_vm.sh /start_vm.sh
-COPY init_qemu.expect /init_qemu.expect
-RUN /init_qemu.expect 
-
-COPY shrunk.sh /
-RUN /shrunk.sh /ubuntu-server-cloudimg.img
-
 FROM ubuntu:20.04
-COPY --from=0 /ubuntu-server-cloudimg.img /
 COPY start_vm.sh /start_vm.sh
 
 RUN sed -i "s@http://.*.ubuntu.com@http://repo.huaweicloud.com@g" /etc/apt/sources.list
