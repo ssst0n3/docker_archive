@@ -12,7 +12,7 @@ Yep, this form is like Russian nesting dolls, but it's convenient for container 
 {operating system version}_{docker and it's components version}
 
 ## version
-`ubuntu-21.04_docker-ce-20.10.3_docker-ce-cli-20.10.3_containerd.io-1.4.3_runc-1.0.0-rc92`
+`ubuntu-20.04_docker-ce-20.10.3_docker-ce-cli-20.10.3_containerd.io-1.4.3_runc-1.0.0-rc92`
 
 
 ```
