@@ -5,7 +5,7 @@ chpasswd: {expire: False}
 ssh_pwauth: True
 runcmd:
   - echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
-  # - sed -i "s@http://.*.ubuntu.com@http://repo.huaweicloud.com@g" /etc/apt/sources.list
+  - sed -i "s@http://.*.ubuntu.com@http://repo.huaweicloud.com@g" /etc/apt/sources.list
   - apt-get update
   # - apt-get install -y docker.io
   - apt-get -y install apt-transport-https ca-certificates curl gnupg-agent software-properties-common
