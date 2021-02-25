@@ -1,7 +1,7 @@
 #!/usr/bin/expect -f
 set timeout -1
 spawn qemu-system-x86_64 \
-    -hda ubuntu-20.04-server-cloudimg-amd64.img \
+    -hda ubuntu-server-cloudimg.img \
     -hdb cloud.img \
     -nographic \
     -smp 2 \
