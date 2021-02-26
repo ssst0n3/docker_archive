@@ -12,7 +12,7 @@ Yep, this form is like Russian nesting dolls, but it's convenient for container 
 {operating system version}_{docker and it's components version}
 
 ## version
-`ubuntu-20.04_docker-ce-19.03.2_docker-ce-cli-19.03.2_containerd.io-1.2.10-3_runc-1.0.0-rc8-dev`
+`ubuntu-20.04_docker-ce-19.03.2_docker-ce-cli-19.03.2_containerd.io-1.2.6-3_runc-1.0.0-rc8`
 
 
 ```
@@ -48,12 +48,12 @@ Server: Docker Engine - Community
 
 ```
 root@ubuntu:~# containerd --version
-containerd containerd.io 1.2.10 b34a5c8af56e510852c35414db4c1f4fa6172339
+containerd containerd.io 1.2.6 894b81a4b802e4eb2a91d1ce216b8817763c29fb
 ```
 
 ```
 root@ubuntu:~# runc -version
-runc version 1.0.0-rc8+dev
-commit: 3e425f80a8c931f88e6d94a8c831b9d5aa481657
+runc version 1.0.0-rc8
+commit: 425e105d5a03fabd737a126ad93d62a9eeede87f
 spec: 1.0.1-dev
 ```
