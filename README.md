@@ -13,7 +13,7 @@ See all versions of images [here](https://hub.docker.com/repository/docker/ssst0
 
 Pull one and run it
 ```
-$ docker create network test
+$ docker network create test
 $ docker run --network=test -d -p 2222:22 ssst0n3/docker_archive:ubuntu-20.04_docker-ce-20.10.3_docker-ce-cli-20.10.3_containerd.io-1.4.3_runc-1.0.0-rc92
 $ ssh -p 2222 root@127.0.0.1
 root@127.0.0.1's password: root
