@@ -4,7 +4,6 @@
 
 ```
 docker run -ti ssst0n3/docker_archive:linuxkit_docker-19.03.0
-ctr --namespace services.linuxkit tasks exe
 docker version
 ```
 

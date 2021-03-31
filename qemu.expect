@@ -1,0 +1,12 @@
+#!/usr/bin/expect -f
+set timeout -1
+spawn qemu-system-x86_64 \
+    -hda docker.qcow2 \
+    -nographic \
+    -smp 2 \
+    -m 2048M
+
+expect "(ns: getty)"
+send "ctr --namespace services.linuxkit tasks exec --tty --exec-id sh docker /bin/ash -l\r"
+
+interact
