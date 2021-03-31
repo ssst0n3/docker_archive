@@ -1,1 +1,4 @@
 .git
+linuxkit
+*.qcow2
+
