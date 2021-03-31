@@ -1,3 +1,5 @@
 .idea
 root.qcow2
 disk.qcow2
+docker.qcow2
+linuxkit
