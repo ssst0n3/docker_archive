@@ -28,12 +28,8 @@ services:
     image: linuxkit/dhcpcd:v0.8
   - name: ntpd
     image: linuxkit/openntpd:v0.8
-  - name: sshd
-    image: linuxkit/sshd:666b4a1a323140aa1f332826164afba506abf597
-    binds:
-     - /run/config/ssh/authorized_keys:/root/.ssh/authorized_keys
   - name: docker
-    image: docker:19.03.8-dind
+    image: docker:19.03.0-dind
     capabilities:
      - all
     net: host
