@@ -26,7 +26,6 @@ root@ubuntu:~# docker version
 ```
 docker run -ti ssst0n3/docker_archive:linuxkit_docker-19.03.0
 // wait container start up
-ctr --namespace services.linuxkit tasks exe
 docker version
 ```
 
@@ -37,6 +36,7 @@ docker version
 Check versions provided @ [tags](https://github.com/ssst0n3/docker_archive/tags)
 
 * linuxkit_docker-19.03.0
+  * alias: CVE-2019-14271
 * ubuntu-20.04_docker-ce-19.03.0_docker-ce-cli-19.03.0_containerd.io-1.2.6-3_runc-1.0.0-rc8
 * ubuntu-20.04_docker-ce-19.03.2_docker-ce-cli-19.03.2_containerd.io-1.2.10-3_runc-1.0.0-rc8-dev
 * ubuntu-20.04_docker-ce-19.03.2_docker-ce-cli-19.03.2_containerd.io-1.2.6-3_runc-1.0.0-rc8
