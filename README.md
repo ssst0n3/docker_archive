@@ -41,6 +41,7 @@ Check versions provided @ [tags](https://github.com/ssst0n3/docker_archive/tags)
 * ubuntu-20.04_docker-ce-19.03.2_docker-ce-cli-19.03.2_containerd.io-1.2.10-3_runc-1.0.0-rc8-dev
 * ubuntu-20.04_docker-ce-19.03.2_docker-ce-cli-19.03.2_containerd.io-1.2.6-3_runc-1.0.0-rc8
   * alias: CVE-2019-16884
+    * cannot be built by linuxkit, because linux/kernel do not support apparmor
 * ubuntu-20.04_docker-ce-20.10.3_docker-ce-cli-20.10.3_containerd.io-1.4.3_runc-1.0.0-rc92
 
 
