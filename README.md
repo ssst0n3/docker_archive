@@ -3,13 +3,13 @@
 ## usage
 
 ```
-docker run -ti ssst0n3/docker_archive:linuxkit_docker-19.03.0
+docker run -ti ssst0n3/docker_archive:linuxkit_docker-19.03.0-rc3
 docker version
 ```
 
 details
 ```
-st0n3@yoga:~$ docker run -ti ssst0n3/docker_archive:linuxkit_docker-19.03.0
+st0n3@yoga:~$ docker run -ti ssst0n3/docker_archive:linuxkit_docker-19.03.0-rc3
 // wait container startup
 ...
 [   52.339419] e1000 0000:00:03.0 eth0: Intel(R) PRO/1000 Network Connection
@@ -55,32 +55,5 @@ c --tty --exec-id sh docker /bin/ash -l
 linuxkit-525400123456:/# 
 linuxkit-525400123456:/# 
 linuxkit-525400123456:/# docker version
-Client: Docker Engine - Community
- Version:           19.03.0
- API version:       1.40
- Go version:        go1.12.5
- Git commit:        aeac9490dc
- Built:             Wed Jul 17 18:11:50 2019
- OS/Arch:           linux/amd64
- Experimental:      false
 
-Server: Docker Engine - Community
- Engine:
-  Version:          19.03.0
-  API version:      1.40 (minimum version 1.12)
-  Go version:       go1.12.5
-  Git commit:       aeac9490dc
-  Built:            Wed Jul 17 18:22:15 2019
-  OS/Arch:          linux/amd64
-  Experimental:     false
- containerd:
-  Version:          v1.2.6
-  GitCommit:        894b81a4b802e4eb2a91d1ce216b8817763c29fb
- runc:
-  Version:          1.0.0-rc8
-  GitCommit:        425e105d5a03fabd737a126ad93d62a9eeede87f
- docker-init:
-  Version:          0.18.0
-  GitCommit:        fec3683
-linuxkit-525400123456:/# 
 ```
