@@ -12,28 +12,28 @@ Yep, this form is like Russian nesting dolls, but it's convenient for container 
 {operating system version}_{docker and it's components version}
 
 ## version
-`ubuntu-20.04_docker-ce-20.10.1_docker-ce-cli-20.10.1_containerd.io-1.4.3_runc-1.0.0-rc92`
+`ubuntu-20.04_docker-ce-20.10.0_docker-ce-cli-20.10.0_containerd.io-1.4.3_runc-1.0.0-rc92`
 
 
 ```
 root@ubuntu:~# docker version
 Client: Docker Engine - Community
- Version:           20.10.1
+ Version:           20.10.0
  API version:       1.41
  Go version:        go1.13.15
- Git commit:        831ebea
- Built:             Tue Dec 15 04:34:58 2020
+ Git commit:        7287ab3
+ Built:             Tue Dec  8 18:59:40 2020
  OS/Arch:           linux/amd64
  Context:           default
  Experimental:      true
 
 Server: Docker Engine - Community
  Engine:
-  Version:          20.10.1
+  Version:          20.10.0
   API version:      1.41 (minimum version 1.12)
   Go version:       go1.13.15
-  Git commit:       f001486
-  Built:            Tue Dec 15 04:32:52 2020
+  Git commit:       eeddea2
+  Built:            Tue Dec  8 18:57:45 2020
   OS/Arch:          linux/amd64
   Experimental:     false
  containerd:
