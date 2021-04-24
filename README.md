@@ -3,13 +3,13 @@
 ## usage
 
 ```
-docker run -ti ssst0n3/docker_archive:linuxkit_docker-20.10.0
+docker run -ti ssst0n3/docker_archive:linuxkit_docker-19.03.14
 docker version
 ```
 
 details
 ```
-st0n3@yoga:~$ docker run -ti ssst0n3/docker_archive:linuxkit_docker-20.10.0
+st0n3@yoga:~$ docker run -ti ssst0n3/docker_archive:linuxkit_docker-19.03.14
 // wait container startup
 ...
 [   52.339419] e1000 0000:00:03.0 eth0: Intel(R) PRO/1000 Network Connection
@@ -56,32 +56,31 @@ linuxkit-525400123456:/#
 linuxkit-525400123456:/# 
 linuxkit-525400123456:/# docker version
 Client: Docker Engine - Community
- Version:           20.10.0
- API version:       1.41
+ Version:           19.03.14
+ API version:       1.40
  Go version:        go1.13.15
- Git commit:        7287ab3
- Built:             Tue Dec  8 18:54:00 2020
+ Git commit:        5eb3275
+ Built:             Tue Dec  1 19:14:24 2020
  OS/Arch:           linux/amd64
- Context:           default
- Experimental:      true
+ Experimental:      false
 
 Server: Docker Engine - Community
  Engine:
-  Version:          20.10.0
-  API version:      1.41 (minimum version 1.12)
+  Version:          19.03.14
+  API version:      1.40 (minimum version 1.12)
   Go version:       go1.13.15
-  Git commit:       eeddea2
-  Built:            Tue Dec  8 18:58:04 2020
+  Git commit:       5eb3275
+  Built:            Tue Dec  1 19:21:08 2020
   OS/Arch:          linux/amd64
   Experimental:     false
  containerd:
-  Version:          v1.4.3
-  GitCommit:        269548fa27e0089a8b8278fc4fc781d7f65a939b
+  Version:          v1.3.9
+  GitCommit:        ea765aba0d05254012b0b9e595e995c09186427f
  runc:
-  Version:          1.0.0-rc92
-  GitCommit:        ff819c7e9184c13b7c2607fe6c30ae19403a7aff
+  Version:          1.0.0-rc10
+  GitCommit:        dc9208a3303feef5b3839f4323d9beb36df0a9dd
  docker-init:
-  Version:          0.19.0
-  GitCommit:        de40ad0
+  Version:          0.18.0
+  GitCommit:        fec3683
 linuxkit-525400123456:/# 
 ```
