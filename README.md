@@ -3,13 +3,13 @@
 ## usage
 
 ```
-docker run -ti ssst0n3/docker_archive:linuxkit_docker-19.03.0
+docker run -ti ssst0n3/docker_archive:linuxkit_docker-20.10.0
 docker version
 ```
 
 details
 ```
-st0n3@yoga:~$ docker run -ti ssst0n3/docker_archive:linuxkit_docker-19.03.0
+st0n3@yoga:~$ docker run -ti ssst0n3/docker_archive:linuxkit_docker-20.10.0
 // wait container startup
 ...
 [   52.339419] e1000 0000:00:03.0 eth0: Intel(R) PRO/1000 Network Connection
@@ -56,31 +56,32 @@ linuxkit-525400123456:/#
 linuxkit-525400123456:/# 
 linuxkit-525400123456:/# docker version
 Client: Docker Engine - Community
- Version:           19.03.0
- API version:       1.40
- Go version:        go1.12.5
- Git commit:        aeac9490dc
- Built:             Wed Jul 17 18:11:50 2019
+ Version:           20.10.0
+ API version:       1.41
+ Go version:        go1.13.15
+ Git commit:        7287ab3
+ Built:             Tue Dec  8 18:54:00 2020
  OS/Arch:           linux/amd64
- Experimental:      false
+ Context:           default
+ Experimental:      true
 
 Server: Docker Engine - Community
  Engine:
-  Version:          19.03.0
-  API version:      1.40 (minimum version 1.12)
-  Go version:       go1.12.5
-  Git commit:       aeac9490dc
-  Built:            Wed Jul 17 18:22:15 2019
+  Version:          20.10.0
+  API version:      1.41 (minimum version 1.12)
+  Go version:       go1.13.15
+  Git commit:       eeddea2
+  Built:            Tue Dec  8 18:58:04 2020
   OS/Arch:          linux/amd64
   Experimental:     false
  containerd:
-  Version:          v1.2.6
-  GitCommit:        894b81a4b802e4eb2a91d1ce216b8817763c29fb
+  Version:          v1.4.3
+  GitCommit:        269548fa27e0089a8b8278fc4fc781d7f65a939b
  runc:
-  Version:          1.0.0-rc8
-  GitCommit:        425e105d5a03fabd737a126ad93d62a9eeede87f
+  Version:          1.0.0-rc92
+  GitCommit:        ff819c7e9184c13b7c2607fe6c30ae19403a7aff
  docker-init:
-  Version:          0.18.0
-  GitCommit:        fec3683
+  Version:          0.19.0
+  GitCommit:        de40ad0
 linuxkit-525400123456:/# 
 ```
