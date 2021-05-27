@@ -12,48 +12,39 @@ Yep, this form is like Russian nesting dolls, but it's convenient for container 
 {operating system version}_{docker and it's components version}
 
 ## version
-`ubuntu-20.04_docker-ce-19.03.2_docker-ce-cli-19.03.2_containerd.io-1.2.6-3_runc-1.0.0-rc8`
+`ubuntu-20.04_docker-ce-18.09.9_docker-ce-cli-18.09.9_containerd.io-1.2.2-3_runc-1.0.0-rc6`
 
 
 ```
 root@ubuntu:~# docker version
-Client: Docker Engine - Community
- Version:           19.03.2
- API version:       1.40
- Go version:        go1.12.8
- Git commit:        6a30dfc
- Built:             Thu Aug 29 05:29:11 2019
+Client:
+ Version:           18.09.9
+ API version:       1.39
+ Go version:        go1.11.13
+ Git commit:        039a7df9ba
+ Built:             Wed Sep  4 17:24:10 2019
  OS/Arch:           linux/amd64
  Experimental:      false
 
 Server: Docker Engine - Community
  Engine:
-  Version:          19.03.2
-  API version:      1.40 (minimum version 1.12)
-  Go version:       go1.12.8
-  Git commit:       6a30dfc
-  Built:            Thu Aug 29 05:27:45 2019
+  Version:          18.09.9
+  API version:      1.39 (minimum version 1.12)
+  Go version:       go1.11.13
+  Git commit:       039a7df
+  Built:            Wed Sep  4 16:19:38 2019
   OS/Arch:          linux/amd64
   Experimental:     false
- containerd:
-  Version:          1.2.10
-  GitCommit:        b34a5c8af56e510852c35414db4c1f4fa6172339
- runc:
-  Version:          1.0.0-rc8+dev
-  GitCommit:        3e425f80a8c931f88e6d94a8c831b9d5aa481657
- docker-init:
-  Version:          0.18.0
-  GitCommit:        fec3683
 ```
 
 ```
 root@ubuntu:~# containerd --version
-containerd containerd.io 1.2.6 894b81a4b802e4eb2a91d1ce216b8817763c29fb
+containerd github.com/containerd/containerd 1.2.2 9754871865f7fe2f4e74d43e2fc7ccd237edcbce
 ```
 
 ```
 root@ubuntu:~# runc -version
-runc version 1.0.0-rc8
-commit: 425e105d5a03fabd737a126ad93d62a9eeede87f
+runc version 1.0.0-rc6+dev
+commit: 09c8266bf2fcf9519a651b04ae54c967b9ab86ec
 spec: 1.0.1-dev
 ```
