@@ -1,86 +1,37 @@
 # docker archive
 
-## usage
+## rebuild dockerd binary
 
 ```
-docker run -ti ssst0n3/docker_archive:linuxkit_docker-19.03.0
-docker version
+git clone https://github.com/moby/moby.git
+git checkout v19.03.0
+sed -i "s@build %s@build %s, remove osusergo tag@g" cmd/dockerd/docker.go
+sed -i "s/osusergo//g" hack/make.sh
+make BIND_DIR=. shell
 ```
 
-details
+build binary, yes you will the glibc warning
 ```
-st0n3@yoga:~$ docker run -ti ssst0n3/docker_archive:linuxkit_docker-19.03.0
-// wait container startup
-...
-[   52.339419] e1000 0000:00:03.0 eth0: Intel(R) PRO/1000 Network Connection
+root@da1acb618da1:/go/src/github.com/docker/docker# hack/make.sh binary
 
-Welcome to LinuxKit
+Removing bundles/
 
-                        ##         .
-                  ## ## ##        ==
-               ## ## ## ## ##    ===
-           /"""""""""""""""""\___/ ===
-          {                       /  ===-
-           \______ O           __/
-             \    \         __/
-              \____\_______/
-
-[   58.009167] IPVS: ftp: loaded support on port[0] = 21
-[   61.279015] IPVS: ftp: loaded support on port[0] = 21
-[   64.850298] IPVS: ftp: loaded support on port[0] = 21
-[   67.705121] EXT4-fs (sda1): mounted filesystem with ordered data mode. Opts: (null)
-[   72.978379] random: crng init done
-[   75.427699] e1000: eth0 NIC Link is Up 1000 Mbps Full Duplex, Flow Control: RX
-[   75.434645] 8021q: adding VLAN 0 to HW filter on device eth0
-[   75.435977] IPv6: ADDRCONF(NETDEV_CHANGE): eth0: link becomes ready
-[   77.537104] ICMPv6: process `dhcpcd' is using deprecated sysctl (syscall) net.ipv6.neigh.eth0.retrans_time - use net.ipv6.neigh.eth0.retrans_time_ms instead
-getty: starting getty for ttyS0
-
-linuxkit-525400123456 login: root (automatic login)
-
-Welcome to LinuxKit!
-
-NOTE: This system is namespaced.
-The namespace you are currently in may not be the root.
-System services are namespaced; to access, use `ctr -n services.linuxkit ...`
-(ns: getty) linuxkit-525400123456:~# [   98.489339] bpfilter: Loaded bpfilter_umh pid 829
-[   98.525403] Started bpfilter
-[  103.913882] Initializing XFRM netlink socket
-[  104.024304] IPVS: ftp: loaded support on port[0] = 21
-
-(ns: getty) linuxkit-525400123456:~# 
-
-(ns: getty) linuxkit-525400123456:~# ctr --namespace services.linuxkit tasks exe
-c --tty --exec-id sh docker /bin/ash -l
-linuxkit-525400123456:/# 
-linuxkit-525400123456:/# 
-linuxkit-525400123456:/# docker version
-Client: Docker Engine - Community
- Version:           19.03.0
- API version:       1.40
- Go version:        go1.12.5
- Git commit:        aeac9490dc
- Built:             Wed Jul 17 18:11:50 2019
- OS/Arch:           linux/amd64
- Experimental:      false
-
-Server: Docker Engine - Community
- Engine:
-  Version:          19.03.0
-  API version:      1.40 (minimum version 1.12)
-  Go version:       go1.12.5
-  Git commit:       aeac9490dc
-  Built:            Wed Jul 17 18:22:15 2019
-  OS/Arch:          linux/amd64
-  Experimental:     false
- containerd:
-  Version:          v1.2.6
-  GitCommit:        894b81a4b802e4eb2a91d1ce216b8817763c29fb
- runc:
-  Version:          1.0.0-rc8
-  GitCommit:        425e105d5a03fabd737a126ad93d62a9eeede87f
- docker-init:
-  Version:          0.18.0
-  GitCommit:        fec3683
-linuxkit-525400123456:/# 
+---> Making bundle: binary (in bundles/binary)
+Building: bundles/binary-daemon/dockerd-dev
+GOOS="" GOARCH="" GOARM=""
+# github.com/docker/docker/cmd/dockerd
+/tmp/go-link-611217491/000008.o: In function `mygetgrouplist':
+/usr/local/go/src/os/user/getgrouplist_unix.go:16: warning: Using 'getgrouplist' in statically linked applications requires at runtime the shared libraries from the glibc version used for linking
+/tmp/go-link-611217491/000007.o: In function `mygetgrgid_r':
+/usr/local/go/src/os/user/cgo_lookup_unix.go:38: warning: Using 'getgrgid_r' in statically linked applications requires at runtime the shared libraries from the glibc version used for linking
+/tmp/go-link-611217491/000007.o: In function `mygetgrnam_r':
+/usr/local/go/src/os/user/cgo_lookup_unix.go:43: warning: Using 'getgrnam_r' in statically linked applications requires at runtime the shared libraries from the glibc version used for linking
+/tmp/go-link-611217491/000007.o: In function `mygetpwnam_r':
+/usr/local/go/src/os/user/cgo_lookup_unix.go:33: warning: Using 'getpwnam_r' in statically linked applications requires at runtime the shared libraries from the glibc version used for linking
+/tmp/go-link-611217491/000007.o: In function `mygetpwuid_r':
+/usr/local/go/src/os/user/cgo_lookup_unix.go:28: warning: Using 'getpwuid_r' in statically linked applications requires at runtime the shared libraries from the glibc version used for linking
+Created binary: bundles/binary-daemon/dockerd-dev
+Copying nested executables into bundles/binary-daemon
 ```
+
+then we have get the rebuild binary at bundles/binary-daemon/dockerd-dev
