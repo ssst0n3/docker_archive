@@ -18,21 +18,21 @@ Yep, this form is like Russian nesting dolls, but it's convenient for container 
 ```
 root@ubuntu:~# docker version
 Client: Docker Engine - Community
- Version:           19.03.0
+ Version:           19.03.1
  API version:       1.40
  Go version:        go1.12.5
- Git commit:        aeac949
- Built:             Wed Jul 17 18:15:07 2019
+ Git commit:        74b1e89
+ Built:             Thu Jul 25 21:21:05 2019
  OS/Arch:           linux/amd64
  Experimental:      false
 
 Server: Docker Engine - Community
  Engine:
-  Version:          19.03.0
+  Version:          19.03.1
   API version:      1.40 (minimum version 1.12)
   Go version:       go1.12.5
-  Git commit:       aeac949
-  Built:            Wed Jul 17 18:13:43 2019
+  Git commit:       74b1e89
+  Built:            Thu Jul 25 21:19:41 2019
   OS/Arch:          linux/amd64
   Experimental:     false
  containerd:
