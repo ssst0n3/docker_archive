@@ -43,6 +43,8 @@ Check versions provided @ [tags](https://github.com/ssst0n3/docker_archive/tags)
 * linuxkit_docker-ce-19.03.2_docker-ce-cli-19.03.2_containerd-1.2.6_runc-1.0.0-rc8
 * linuxkit_docker-19.03.14
 * linuxkit_docker-20.10.0
+* linuxkit_docker-20.10.2
+  * alias: cve-2021-21285_slim
 
 ### ubuntu
 * ubuntu-20.04_docker-ce-17.06.0
