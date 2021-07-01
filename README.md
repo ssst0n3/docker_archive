@@ -3,13 +3,13 @@
 ## usage
 
 ```
-docker run -ti ssst0n3/docker_archive:linuxkit_docker-20.10.2_slim
+docker run -ti ssst0n3/docker_archive:linuxkit_docker-20.10.2
 docker version
 ```
 
 details
 ```
-st0n3@yoga:~$ docker run -ti ssst0n3/docker_archive:linuxkit_docker-20.10.2_slim
+st0n3@yoga:~$ docker run -ti ssst0n3/docker_archive:linuxkit_docker-20.10.2
 // wait container startup
 ...
 
