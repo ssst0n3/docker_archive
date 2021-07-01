@@ -3,16 +3,15 @@
 ## usage
 
 ```
-docker run -ti ssst0n3/docker_archive:linuxkit_docker-20.10.0
+docker run -ti ssst0n3/docker_archive:linuxkit_docker-20.10.2_slim
 docker version
 ```
 
 details
 ```
-st0n3@yoga:~$ docker run -ti ssst0n3/docker_archive:linuxkit_docker-20.10.0
+st0n3@yoga:~$ docker run -ti ssst0n3/docker_archive:linuxkit_docker-20.10.2_slim
 // wait container startup
 ...
-[   52.339419] e1000 0000:00:03.0 eth0: Intel(R) PRO/1000 Network Connection
 
 Welcome to LinuxKit
 
@@ -36,42 +35,42 @@ Welcome to LinuxKit
 [   77.537104] ICMPv6: process `dhcpcd' is using deprecated sysctl (syscall) net.ipv6.neigh.eth0.retrans_time - use net.ipv6.neigh.eth0.retrans_time_ms instead
 getty: starting getty for ttyS0
 
-linuxkit-525400123456 login: root (automatic login)
+linuxkit-c2c0b18adffc login: root (automatic login)
 
 Welcome to LinuxKit!
 
 NOTE: This system is namespaced.
 The namespace you are currently in may not be the root.
 System services are namespaced; to access, use `ctr -n services.linuxkit ...`
-(ns: getty) linuxkit-525400123456:~# [   98.489339] bpfilter: Loaded bpfilter_umh pid 829
-[   98.525403] Started bpfilter
-[  103.913882] Initializing XFRM netlink socket
-[  104.024304] IPVS: ftp: loaded support on port[0] = 21
+(ns: getty) linuxkit-c2c0b18adffc:~# 
+(ns: getty) linuxkit-c2c0b18adffc:~# 
+(ns: getty) linuxkit-c2c0b18adffc:~# [   73.197837] bpfilter: Loaded bpfilter_umh pid 849
+[   73.217395] Started bpfilter
 
-(ns: getty) linuxkit-525400123456:~# 
+(ns: getty) linuxkit-c2c0b18adffc:~# [   76.719276] IPVS: ftp: loaded support on port[0] = 21
+[   77.437015] Initializing XFRM netlink socket
 
-(ns: getty) linuxkit-525400123456:~# ctr --namespace services.linuxkit tasks exe
+(ns: getty) linuxkit-c2c0b18adffc:~# 
+(ns: getty) linuxkit-c2c0b18adffc:~# ctr --namespace services.linuxkit tasks exe
 c --tty --exec-id sh docker /bin/ash -l
-linuxkit-525400123456:/# 
-linuxkit-525400123456:/# 
-linuxkit-525400123456:/# docker version
+linuxkit-c2c0b18adffc:/# docker version
 Client: Docker Engine - Community
- Version:           20.10.0
+ Version:           20.10.2
  API version:       1.41
  Go version:        go1.13.15
- Git commit:        7287ab3
- Built:             Tue Dec  8 18:54:00 2020
+ Git commit:        2291f61
+ Built:             Mon Dec 28 16:11:26 2020
  OS/Arch:           linux/amd64
  Context:           default
  Experimental:      true
 
 Server: Docker Engine - Community
  Engine:
-  Version:          20.10.0
+  Version:          20.10.2
   API version:      1.41 (minimum version 1.12)
   Go version:       go1.13.15
-  Git commit:       eeddea2
-  Built:            Tue Dec  8 18:58:04 2020
+  Git commit:       8891c58
+  Built:            Mon Dec 28 16:15:23 2020
   OS/Arch:          linux/amd64
   Experimental:     false
  containerd:
@@ -83,5 +82,4 @@ Server: Docker Engine - Community
  docker-init:
   Version:          0.19.0
   GitCommit:        de40ad0
-linuxkit-525400123456:/# 
 ```
