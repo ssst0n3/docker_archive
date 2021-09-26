@@ -68,6 +68,3 @@ Check versions provided @ [tags](https://github.com/ssst0n3/docker_archive/tags)
   * alias: cve-2021-21285
 * ubuntu-20.04_docker-ce-20.10.3_docker-ce-cli-20.10.3_containerd.io-1.4.3_runc-1.0.0-rc92
 * ubuntu-20.04_docker-ce-20.10.6_docker-ce-cli-20.10.6_containerd.io-1.4.4_runc-1.0.0-rc93
-
-## TODO:
-use linuxkit to build a slim linux
