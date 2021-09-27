@@ -1,22 +1,21 @@
-# docker archive: Provide many versions of images of docker and docker's components
+# docker archive: 提供大量docker及其组件的镜像
 
-[中文文档](./README-ZH.md)
+[english version](./README.md)
 
-You can get specify version of docker such as docker 19.03 by pull a container image.
+你可以通过pull容器镜像的形式，来获取特定版本的docker环境，例如docker19.03等。
 
-There will be a qemu in the docker image, and a docker 19.03 in qemu.
+在你pull下来的镜像中，会有一个qemu，qemu中又会有一个docker 19.03。
 
-Yep, this form is like Russian nesting dolls, but it's convenient for container security research.
+是的，这种形式有点像俄罗斯套娃，但对于容器安全研究来说，这种形式确实非常方便。
 
-## How-To
-See all versions of images [here](https://hub.docker.com/repository/docker/ssst0n3/docker_archive/tags?page=1&ordering=last_updated)
+## 使用说明
+你可以在[dockerhub](https://hub.docker.com/repository/docker/ssst0n3/docker_archive/tags?page=1&ordering=last_updated) 上看到所有版本的镜像。
 
-To each version docker, we will provide two types of images:
-* docker in ubuntu in qemu in docker
-* docker in [linuxkit](https://github.com/linuxkit/linuxkit) in qemu in docker
+对于每一个版本的docker，我们都会提供两种镜像
+* docker in ubuntu in qemu in docker: docker运行在ubuntu操作系统中
+* docker in linuxkit in qemu in docker: docker运行在[linuxkit](https://github.com/linuxkit/linuxkit) 操作系统中
 
 ### for docker in ubuntu in qemu in docker
-Pull one and run it
 ```
 $ docker network create test
 $ docker run --network=test -d -p 2222:22 ssst0n3/docker_archive:ubuntu-20.04_docker-ce-20.10.3_docker-ce-cli-20.10.3_containerd.io-1.4.3_runc-1.0.0-rc92
@@ -36,7 +35,7 @@ docker version
 ## tag template
 {operating system version}_{docker and it's components version}
 
-## List of currently supported versions
+## 当前支持的版本列表
 Check versions provided @ [tags](https://github.com/ssst0n3/docker_archive/tags)
 
 ### linuxkit(slim version)
@@ -48,18 +47,18 @@ Check versions provided @ [tags](https://github.com/ssst0n3/docker_archive/tags)
 * linuxkit_docker-19.03.14
 * linuxkit_docker-20.10.0
 * linuxkit_docker-20.10.2
-  * alias: cve-2021-21285_slim
+    * alias: cve-2021-21285_slim
 
 ### ubuntu
 * ubuntu-20.04_docker-ce-17.06.0
 * ubuntu-20.04_docker-ce-18.09.0_docker-ce-cli-18.09.0_containerd.io-1.2.6-3_runc-1.0.0-rc8
 * ubuntu-20.04_docker-ce-18.09.9_docker-ce-cli-18.09.9_containerd.io-1.2.2-3_runc-1.0.0-rc6
 * ubuntu-20.04_docker-ce-19.03.0_docker-ce-cli-19.03.0_containerd.io-1.2.6-3_runc-1.0.0-rc8
-  * alias: CVE-2019-14271
+    * alias: CVE-2019-14271
 * ubuntu-20.04_docker-ce-19.03.1_docker-ce-cli-19.03.1_containerd.io-1.2.6-3_runc-1.0.0-rc8
 * ubuntu-20.04_docker-ce-19.03.2_docker-ce-cli-19.03.2_containerd.io-1.2.6-3_runc-1.0.0-rc8
-  * alias: CVE-2019-16884
-    * cannot be built by linuxkit, because linux/kernel do not support apparmor
+    * alias: CVE-2019-16884
+        * cannot be built by linuxkit, because linux/kernel do not support apparmor
 * ubuntu-20.04_docker-ce-19.03.2_docker-ce-cli-19.03.2_containerd.io-1.2.10-3_runc-1.0.0-rc8-dev
 * ubuntu-20.04_docker-ce-19.03.5_docker-ce-cli-19.03.5_containerd.io-1.2.6.3_runc-1.0.0-rc8
 * ubuntu-20.04_docker-ce-19.03.12_docker-ce-cli-19.03.12_containerd.io-1.2.13_runc-1.0.0-rc10
@@ -69,6 +68,6 @@ Check versions provided @ [tags](https://github.com/ssst0n3/docker_archive/tags)
 * ubuntu-20.04_docker-ce-20.10.0_docker-ce-cli-20.10.0_containerd.io-1.4.3_runc-1.0.0-rc92
 * ubuntu-20.04_docker-ce-20.10.1_docker-ce-cli-20.10.1_containerd.io-1.4.3_runc-1.0.0-rc92
 * ubuntu-20.04_docker-ce-20.10.2_docker-ce-cli-20.10.2_containerd.io-1.4.3_runc-1.0.0-rc92
-  * alias: cve-2021-21285
+    * alias: cve-2021-21285
 * ubuntu-20.04_docker-ce-20.10.3_docker-ce-cli-20.10.3_containerd.io-1.4.3_runc-1.0.0-rc92
 * ubuntu-20.04_docker-ce-20.10.6_docker-ce-cli-20.10.6_containerd.io-1.4.4_runc-1.0.0-rc93
