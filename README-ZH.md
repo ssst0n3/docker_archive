@@ -36,7 +36,7 @@ docker version
 {operating system version}_{docker and it's components version}
 
 ## 当前支持的版本列表
-Check versions provided @ [tags](https://github.com/ssst0n3/docker_archive/tags)
+可以在 [tags页面](https://github.com/ssst0n3/docker_archive/tags) 查看 
 
 ### linuxkit(slim version)
 * linuxkit_docker-17.06.0
