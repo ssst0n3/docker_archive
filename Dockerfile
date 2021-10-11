@@ -1,6 +1,6 @@
 FROM ubuntu:20.04
-ADD https://repo.huaweicloud.com/ubuntu-cloud-images/releases/20.04/release-20201201/ubuntu-20.04-server-cloudimg-amd64.img /ubuntu-server-cloudimg.img
-# ADD http://cloud-images.ubuntu.com/hirsute/current/hirsute-server-cloudimg-amd64.img /ubuntu-server-cloudimg.img
+# ADD https://repo.huaweicloud.com/ubuntu-cloud-images/releases/16.04/release-20211001/ubuntu-16.04-server-cloudimg-amd64-disk1.img /ubuntu-server-cloudimg.img
+ADD https://cloud-images.ubuntu.com/xenial/current/xenial-server-cloudimg-amd64-disk1.img /ubuntu-server-cloudimg.img
 # COPY ./ubuntu-20.04-server-cloudimg-amd64.img ubuntu-20.04-server-cloudimg-amd64.img
 
 # install qemu, cloud-localds
