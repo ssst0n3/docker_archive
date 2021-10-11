@@ -13,6 +13,6 @@ Yep, this form is like Russian nesting dolls, but it's convenient for container 
 
 ## version
 
-`build_basic_ubuntu-20.04`
+`build_basic_ubuntu-16.04`
 
 This is basic build image to download vm image.
