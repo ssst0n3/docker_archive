@@ -1,6 +1,6 @@
 version: '3'
 services:
   vm:
-    image: ssst0n3/docker_archive:ubuntu-20.04_docker-ce-20.10.6_docker-ce-cli-20.10.6_containerd.io-1.4.4_runc-1.0.0-rc93
+    image: ssst0n3/docker_archive:ubuntu-16.04_kubeadm-1.9.3_kubelet-1.9.3_kubectl-1.9.3_kubernetes-cni-0.6.0_flannel-0.9.1_docker-ce-17.03.3
     ports:
         - "2222:22"
