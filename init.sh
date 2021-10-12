@@ -40,7 +40,7 @@ EOF
 setenforce 0
 sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
 
-yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
+yum install -y kubelet-1.22.2 kubeadm-1.22.2 kubectl-1.22.2 --disableexcludes=kubernetes
 
 systemctl enable --now kubelet
 # init cluster
@@ -48,9 +48,8 @@ kubeadm init --pod-network-cidr=192.168.0.0/16
 mkdir -p $HOME/.kube
 cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 chown $(id -u):$(id -g) $HOME/.kube/config
-kubectl create -f https://docs.projectcalico.org/manifests/tigera-operator.yaml
-kubectl create -f https://docs.projectcalico.org/manifests/custom-resources.yaml
-kubectl taint nodes --all node-role.kubernetes.io/master-
+kubectl create -f https://docs.projectcalico.org/archive/v3.20/manifests/tigera-operator.yaml
+kubectl create -f https://docs.projectcalico.org/archive/v3.20/manifests/custom-resources.yaml
 while true
 do
     sleep 1
@@ -60,3 +59,4 @@ do
     sleep 1
     if [ $(kubectl get pods -n kube-system |grep -v Running | wc -l) = 1 ]; then break; fi
 done
+kubectl taint nodes --all node-role.kubernetes.io/master-
