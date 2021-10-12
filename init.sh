@@ -2,23 +2,54 @@
 set -ex
 echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
 # install docker
-apt-get update
-apt-get install -y apt-transport-https ca-certificates curl gnupg lsb-release
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
-apt-get update
-apt-get install -y docker-ce=17.03.3~ce-0~ubuntu-xenial
-# install kube
-apt-get update && apt-get install -y apt-transport-https ca-certificates curl
-curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
-echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | tee /etc/apt/sources.list.d/kubernetes.list
-apt-get update && apt-get install -y kubernetes-cni=0.6.0-00 kubelet=1.9.3-00 kubeadm=1.9.3-00 kubectl=1.9.3-00  
+yum install -y yum-utils
+yum-config-manager \
+    --add-repo \
+    https://download.docker.com/linux/centos/docker-ce.repo
+yum install -y docker-ce-20.10.9 docker-ce-cli-20.10.9 containerd.io-1.4.11
+systemctl enable docker
+systemctl start docker
+# cgroup driver
+cat <<EOF | tee /etc/docker/daemon.json
+{
+  "exec-opts": ["native.cgroupdriver=systemd"],
+  "log-driver": "json-file",
+  "log-opts": {
+    "max-size": "100m"
+  },
+  "storage-driver": "overlay2"
+}
+EOF
+
+systemctl enable docker
+systemctl daemon-reload
+systemctl restart docker
+# install k8s
+cat <<EOF | tee /etc/yum.repos.d/kubernetes.repo
+[kubernetes]
+name=Kubernetes
+baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-\$basearch
+enabled=1
+gpgcheck=1
+repo_gpgcheck=1
+gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+exclude=kubelet kubeadm kubectl
+EOF
+
+# Set SELinux in permissive mode (effectively disabling it)
+setenforce 0
+sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
+
+yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
+
+systemctl enable --now kubelet
 # init cluster
-kubeadm init --pod-network-cidr=10.244.0.0/16 --kubernetes-version=1.9.3
-mkdir -p /root/.kube
-cp -i /etc/kubernetes/admin.conf /root/.kube/config
-KUBECONFIG=/etc/kubernetes/admin.conf
-kubectl apply -f https://raw.githubusercontent.com/flannel-io/flannel/v0.9.1/Documentation/kube-flannel.yml
+kubeadm init --pod-network-cidr=192.168.0.0/16
+mkdir -p $HOME/.kube
+cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+chown $(id -u):$(id -g) $HOME/.kube/config
+kubectl create -f https://docs.projectcalico.org/manifests/tigera-operator.yaml
+kubectl create -f https://docs.projectcalico.org/manifests/custom-resources.yaml
 kubectl taint nodes --all node-role.kubernetes.io/master-
 while true
 do
@@ -29,6 +60,3 @@ do
     sleep 1
     if [ $(kubectl get pods -n kube-system |grep -v Running | wc -l) = 1 ]; then break; fi
 done
-# check
-cat /etc/shadow
-kubectl get pods -n kube-system

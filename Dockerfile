@@ -1,4 +1,4 @@
-FROM ssst0n3/docker_archive:build_basic_ubuntu-16.04
+FROM ssst0n3/docker_archive:build_basic_centos-8-stream
 # cloud_init config
 COPY cloud.txt cloud.txt
 RUN cloud-localds /cloud.img cloud.txt
