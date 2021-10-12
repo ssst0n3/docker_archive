@@ -50,7 +50,7 @@ kubectl create -f https://docs.projectcalico.org/archive/v3.20/manifests/custom-
 while true
 do
     sleep 1
-    if [ $(kubectl get pods -n kube-system | wc -l) = 8 ]; then break; fi
+    if [ $(kubectl get pods -n kube-system | wc -l) = 12 ]; then break; fi
 done
 do
     sleep 1
