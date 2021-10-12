@@ -25,7 +25,7 @@ write_files:
     mkdir -p /root/.kube
     cp /etc/kubernetes/admin.conf /root/.kube/config
     cat /etc/kubernetes/admin.conf
-    KUBECONFIG=/etc/kubernetes/admin.conf
+    export KUBECONFIG=/etc/kubernetes/admin.conf
     kubectl apply -f https://raw.githubusercontent.com/flannel-io/flannel/v0.9.1/Documentation/kube-flannel.yml
     kubectl taint nodes --all node-role.kubernetes.io/master-
     while true
