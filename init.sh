@@ -51,11 +51,11 @@ kubectl create -f https://docs.projectcalico.org/archive/v3.20/manifests/custom-
 while true
 do
     sleep 1
-    if [ $(kubectl get pods -n kube-system | wc -l) = 12 ]; then break; fi
+    if [ $(kubectl get pods -A | wc -l) = 13 ]; then break; fi
 done
 while true
 do
     sleep 1
-    if [ $(kubectl get pods -n kube-system |grep -v Running | wc -l) = 1 ]; then break; fi
+    if [ $(kubectl get pods -A |grep -v Running | wc -l) = 1 ]; then break; fi
 done
 kubectl taint nodes --all node-role.kubernetes.io/master-
