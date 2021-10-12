@@ -1,6 +1,6 @@
 #!/bin/bash
 set -ex
-sed -i s/PasswordAuthentication no/PasswordAuthentication yes/g /etc/ssh/sshd_config
+sed -i "s/PasswordAuthentication no/PasswordAuthentication yes/g" /etc/ssh/sshd_config
 # install docker
 yum install -y yum-utils
 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
