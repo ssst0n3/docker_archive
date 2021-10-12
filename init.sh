@@ -45,9 +45,8 @@ yum install -y kubelet-1.22.2 kubeadm-1.22.2 kubectl-1.22.2 --disableexcludes=ku
 systemctl enable --now kubelet
 # init cluster
 kubeadm init --pod-network-cidr=192.168.0.0/16
-mkdir -p $HOME/.kube
-cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
-chown $(id -u):$(id -g) $HOME/.kube/config
+mkdir -p /root/.kube
+cp /etc/kubernetes/admin.conf /root/.kube/config
 kubectl create -f https://docs.projectcalico.org/archive/v3.20/manifests/tigera-operator.yaml
 kubectl create -f https://docs.projectcalico.org/archive/v3.20/manifests/custom-resources.yaml
 while true
