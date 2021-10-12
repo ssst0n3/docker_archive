@@ -23,7 +23,8 @@ write_files:
     # init cluster
     kubeadm init --pod-network-cidr=10.244.0.0/16 --kubernetes-version=1.9.3
     mkdir -p /root/.kube
-    cp -i /etc/kubernetes/admin.conf /root/.kube/config
+    cp /etc/kubernetes/admin.conf /root/.kube/config
+    cat /etc/kubernetes/admin.conf
     KUBECONFIG=/etc/kubernetes/admin.conf
     kubectl apply -f https://raw.githubusercontent.com/flannel-io/flannel/v0.9.1/Documentation/kube-flannel.yml
     kubectl taint nodes --all node-role.kubernetes.io/master-
