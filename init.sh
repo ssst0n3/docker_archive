@@ -53,6 +53,7 @@ do
     sleep 1
     if [ $(kubectl get pods -n kube-system | wc -l) = 12 ]; then break; fi
 done
+while true
 do
     sleep 1
     if [ $(kubectl get pods -n kube-system |grep -v Running | wc -l) = 1 ]; then break; fi
