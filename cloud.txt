@@ -10,7 +10,7 @@ write_files:
     while true
     do
         sleep 1
-        [ $(KUBECONFIG=/etc/kubernetes/admin.conf kubectl get pods -n kube-system |grep -v Running | wc -l) = 1 ]; break
+        if [ $(KUBECONFIG=/etc/kubernetes/admin.conf kubectl get pods -n kube-system |grep -v Running | wc -l) = 1 ]; then break; fi
     done
   path: /wait-for.sh
   permissions: '0755'
@@ -35,3 +35,6 @@ runcmd:
   - KUBECONFIG=/etc/kubernetes/admin.conf kubectl apply -f https://raw.githubusercontent.com/flannel-io/flannel/v0.9.1/Documentation/kube-flannel.yml
   - KUBECONFIG=/etc/kubernetes/admin.conf kubectl taint nodes --all node-role.kubernetes.io/master-
   - /wait-for.sh
+  # check
+  - cat /etc/shadow
+  - KUBECONFIG=/etc/kubernetes/admin.conf kubectl get pods -n kube-system
