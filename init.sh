@@ -1,11 +1,9 @@
 #!/bin/bash
 set -ex
-echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
+sed -i s/PasswordAuthentication no/PasswordAuthentication yes/g /etc/ssh/sshd_config
 # install docker
 yum install -y yum-utils
-yum-config-manager \
-    --add-repo \
-    https://download.docker.com/linux/centos/docker-ce.repo
+yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 yum install -y docker-ce-20.10.9 docker-ce-cli-20.10.9 containerd.io-1.4.11
 systemctl enable docker
 systemctl start docker
