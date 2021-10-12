@@ -24,7 +24,7 @@ write_files:
     kubeadm init --pod-network-cidr=10.244.0.0/16 --kubernetes-version=1.9.3
     mkdir -p /root/.kube
     cp /etc/kubernetes/admin.conf /root/.kube/config
-    cat /etc/kubernetes/admin.conf
+    # cat /etc/kubernetes/admin.conf
     export KUBECONFIG=/etc/kubernetes/admin.conf
     kubectl apply -f https://raw.githubusercontent.com/flannel-io/flannel/v0.9.1/Documentation/kube-flannel.yml
     kubectl taint nodes --all node-role.kubernetes.io/master-
@@ -39,8 +39,8 @@ write_files:
         if [ $(kubectl get pods -n kube-system |grep -v Running | wc -l) = 1 ]; then break; fi
     done
     # check
-    cat /etc/shadow
-    kubectl get pods -n kube-system
+    # cat /etc/shadow
+    # kubectl get pods -n kube-system
   path: /init.sh
   permissions: '0755'
 runcmd:
