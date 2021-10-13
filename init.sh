@@ -50,12 +50,12 @@ kubectl create -f https://docs.projectcalico.org/archive/v3.20/manifests/tigera-
 kubectl create -f https://docs.projectcalico.org/archive/v3.20/manifests/custom-resources.yaml
 while true
 do
-    sleep 1
+    sleep 5
     if [ $(kubectl get pods -A | wc -l) = 13 ]; then break; fi
 done
 while true
 do
-    sleep 1
+    sleep 5
     if [ $(kubectl get pods -A |grep -v Running | wc -l) = 1 ]; then break; fi
 done
 kubectl taint nodes --all node-role.kubernetes.io/master-
