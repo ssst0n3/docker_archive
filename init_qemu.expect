@@ -3,6 +3,7 @@ set timeout -1
 spawn qemu-system-x86_64 \
     -hda ubuntu-server-cloudimg.img \
     -hdb cloud.img \
+    -net nic -net user,hostname=host,hostfwd=tcp::22-:22 \
     -nographic \
     -smp 2 \
     -m 2048M
