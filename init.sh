@@ -42,7 +42,7 @@ yum install -y kubelet-1.22.2 kubeadm-1.22.2 kubectl-1.22.2 --disableexcludes=ku
 
 systemctl enable --now kubelet
 # init cluster
-kubeadm init --pod-network-cidr=192.168.0.0/16
+kubeadm init --node-name=host --pod-network-cidr=192.168.0.0/16
 mkdir -p /root/.kube
 cp /etc/kubernetes/admin.conf /root/.kube/config
 export KUBECONFIG=/etc/kubernetes/admin.conf
