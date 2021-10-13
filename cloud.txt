@@ -53,12 +53,11 @@ write_files:
     mkdir -p /root/.kube
     cp /etc/kubernetes/admin.conf /root/.kube/config
     export KUBECONFIG=/etc/kubernetes/admin.conf
-    kubectl create -f https://docs.projectcalico.org/archive/v3.20/manifests/tigera-operator.yaml
-    kubectl create -f https://docs.projectcalico.org/archive/v3.20/manifests/custom-resources.yaml
+    kubectl apply -f https://raw.githubusercontent.com/flannel-io/flannel/v0.14.0/Documentation/kube-flannel.yml
     while true
     do
         sleep 5
-        if [ $(kubectl get pods -A | wc -l) = 13 ]; then break; fi
+        if [ $(kubectl get pods -A | wc -l) = 9 ]; then break; fi
     done
     while true
     do
