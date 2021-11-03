@@ -7,7 +7,7 @@ write_files:
 - content: |
     #!/bin/bash
     set -ex
-    echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
+    sed -i "s/PermitRootLogin prohibit-password/PermitRootLogin yes/g" /etc/ssh/sshd_config
     # install docker
     apt-get update
     apt-get install -y apt-transport-https ca-certificates curl gnupg lsb-release
