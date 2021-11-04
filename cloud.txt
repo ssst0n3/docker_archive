@@ -19,9 +19,9 @@ write_files:
     apt-get update && apt-get install -y apt-transport-https ca-certificates curl
     curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
     echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | tee /etc/apt/sources.list.d/kubernetes.list
-    apt-get update && apt-get install -y kubernetes-cni=0.6.0-00 kubelet=1.9.3-00 kubeadm=1.9.3-00 kubectl=1.9.3-00  
+    apt-get update && apt-get install -y kubernetes-cni=0.6.0-00 kubelet=1.9.4-00 kubeadm=1.9.4-00 kubectl=1.9.4-00  
     # init cluster
-    kubeadm init --pod-network-cidr=10.244.0.0/16 --kubernetes-version=1.9.3
+    kubeadm init --pod-network-cidr=10.244.0.0/16 --kubernetes-version=1.9.4
     mkdir -p /root/.kube
     cp /etc/kubernetes/admin.conf /root/.kube/config
     # cat /etc/kubernetes/admin.conf
