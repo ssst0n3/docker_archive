@@ -18,3 +18,7 @@ Yep, this form is like Russian nesting dolls, but it's convenient for container 
 # kubelet --version
 Kubernetes v1.9.3
 ```
+
+## usage
+
+use `dmesg -n 1` to block too many logs
