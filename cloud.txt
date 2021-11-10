@@ -7,6 +7,22 @@ write_files:
 - content: |
     #!/bin/bash
     set -ex
+    systemctl restart kubelet
+    while true
+    do
+        sleep 5
+        if [ -f "/run/flannel/subnet.env" ]; then break; fi
+    done
+    while true
+    do
+        sleep 5
+        if [ $(kubectl get pods -n kube-system |grep -v Running | wc -l) = 1 ]; then break; fi
+    done
+  path: /wait-for.sh
+  permissions: '0755'
+- content: |
+    #!/bin/bash
+    set -ex
     sed -i "s/PermitRootLogin prohibit-password/PermitRootLogin yes/g" /etc/ssh/sshd_config
     # install docker
     apt-get update

@@ -28,6 +28,5 @@ Ubuntu 16.04.7 LTS ubuntu ttyS0
 ubuntu login: root
 Password: root
 
-root@ubuntu:~# systemctl restart kubelet
-root@ubuntu:~# watch -g kubectl get pods --all-namespaces
+root@ubuntu:~# /wait-for.sh
 ```
