@@ -18,7 +18,7 @@ write_files:
         sleep 5
         if [ $(kubectl get pods -n kube-system |grep -v Running | wc -l) = 1 ]; then break; fi
     done
-  path: /init.sh
+  path: /wait-for.sh
   permissions: '0755'
 - content: |
     #!/bin/bash
