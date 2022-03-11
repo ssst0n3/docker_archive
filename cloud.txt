@@ -45,7 +45,7 @@ write_files:
     apt-get install -y containerd.io=1.4.12-1
     mkdir -p /etc/containerd
     containerd config default | tee /etc/containerd/config.toml
-    // todo: enable systemdcgroup
+    sed -i '/\[plugins\."io\.containerd\.grpc\.v1\.cri"\.containerd\.runtimes\.runc\.options\]/a SystemdCgroup = true' /etc/containerd/config.toml
     systemctl restart containerd
     # install kube
     apt-get update && apt-get install -y apt-transport-https ca-certificates curl
