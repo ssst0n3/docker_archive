@@ -11,11 +11,6 @@ write_files:
     while true
     do
         sleep 5
-        if [ -f "/run/flannel/subnet.env" ]; then break; fi
-    done
-    while true
-    do
-        sleep 5
         if [ $(kubectl get pods -n kube-system |grep -v Running | wc -l) = 1 ]; then break; fi
     done
   path: /wait-for.sh
