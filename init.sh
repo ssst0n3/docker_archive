@@ -45,6 +45,6 @@ done
 while true
 do
     sleep 1
-    if [ $(kubectl get pods -n kube-system |grep -v Running | wc -l) = 1 ]; then break; fi
+    if [ $(kubectl get pods --all-namespaces -o jsonpath='{range .items[*].status.containerStatuses[*]}{.ready}{"\n"}{end}' | grep -v true | wc -l) = 0 ]; then break; fi
 done
 touch /etc/cloud/cloud-init.disabled
