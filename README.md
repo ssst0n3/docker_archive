@@ -25,8 +25,8 @@ containerd github.com/containerd/containerd v1.4.12.m 7b11cfaabd73bb80907dd23182
 ```
 docker run ssst0n3/docker_archive:ubuntu-20.04_kubernetes-1.23.4_containerd.io-1.4.12-1_calico-3.22.1
 ...
-Ubuntu 16.04.7 LTS ubuntu ttyS0
-
+Welcome to Ubuntu 20.04.1 LTS (GNU/Linux 5.4.0-56-generic x86_64)
+...
 ubuntu login: root
 Password: root
 
