@@ -1,6 +1,6 @@
 #!/bin/bash
 set -ex
-sed -i "s/PermitRootLogin prohibit-password/PermitRootLogin yes/g" /etc/ssh/sshd_config
+echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
 # install containerd
 cat <<EOF | tee /etc/modules-load.d/containerd.conf
 overlay
