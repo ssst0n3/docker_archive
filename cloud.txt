@@ -33,15 +33,16 @@ write_files:
     EOF
     sysctl --system
     apt-get update
-    apt-get install -y ca-certificates curl gnupg lsb-release
-    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
-    apt-get update
-    apt-get install -y containerd.io=1.4.12-1
+    apt-get install -y libseccomp2
+    export VERSION=1.6.0
+    wget https://github.com/containerd/containerd/releases/download/v${VERSION}/cri-containerd-cni-${VERSION}-linux-amd64.tar.gz
+    tar --no-overwrite-dir -C / -xzf cri-containerd-cni-${VERSION}-linux-amd64.tar.gz
+    systemctl daemon-reload
+    systemctl start containerd
     mkdir -p /etc/containerd
-    containerd config default | tee /etc/containerd/config.toml
-    sed -i '/\[plugins\."io\.containerd\.grpc\.v1\.cri"\.containerd\.runtimes\.runc\.options\]/a SystemdCgroup = true' /etc/containerd/config.toml
-    systemctl restart containerd
+    containerd config default | sudo tee /etc/containerd/config.toml
+    sed -i "s/SystemdCgroup = false/SystemdCgroup = true/g" /etc/containerd/config.toml
+    systemctl start containerd
     # install kube
     apt-get update && apt-get install -y apt-transport-https ca-certificates curl
     curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg

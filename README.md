@@ -12,13 +12,13 @@ Yep, this form is like Russian nesting dolls, but it's convenient for container 
 {operating system version}_{docker and it's components version}
 
 ## version
-`ubuntu-20.04_kubernetes-1.23.4_containerd.io-1.4.12-1_calico-3.22.1`
+`ubuntu-20.04_kubernetes-1.23.4_containerd.io-1.6.0_calico-3.22.1`
 
 ```
 # kubelet --version
 Kubernetes v1.23.4
 # containerd --version
-containerd github.com/containerd/containerd v1.4.12.m 7b11cfaabd73bb80907dd23182b9347b4245eb5d.m
+containerd github.com/containerd/containerd v1.6.0 39259a8f35919a0d02c9ecc2871ddd6ccf6a7c6e
 ```
 
 ## usage
