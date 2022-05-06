@@ -5,7 +5,7 @@ qemu-system-x86_64 \
 -net nic -net user,hostfwd=tcp::22-:22 \
 -smp 2 \
 -m 2048M \
--nographic
+-nographic $*
 
 
 # qemu-system-x86_64 \
