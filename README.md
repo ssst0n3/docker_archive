@@ -82,3 +82,17 @@ Check versions provided @ [tags](https://github.com/ssst0n3/docker_archive/tags)
 | ubuntu-16.04_kubeadm-1.9.3_kubelet-1.9.3_kubectl-1.9.3_kubernetes-cni-0.6.0_flannel-0.9.1_docker-ce-17.03.3 | CVE-2017-1002101 |
 | ubuntu-16.04_kubeadm-1.9.4_kubelet-1.9.4_kubectl-1.9.4_kubernetes-cni-0.6.0_flannel-0.9.1_docker-ce-17.03.3 |
 | centos-stream-8_kubeadm-1.22.2_kubernetes-1.22.2_kubernetes-cni-0.8.7_flannel-0.14.0_docker-ce-20.10.9_containerd.io-1.4.11 |
+
+## Known Issues
+
+### ssh stuck
+
+Ssh will be stuck when running some images, but some won't.
+
+https://github.com/ssst0n3/docker_archive/issues/10
+
+I don't known the exactly reason. If you met this issue, try this command instead
+```
+docker network create test
+docker run --network=test ...
+```
