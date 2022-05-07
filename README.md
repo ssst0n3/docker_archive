@@ -85,13 +85,12 @@ Check versions provided @ [tags](https://github.com/ssst0n3/docker_archive/tags)
 
 ## Known Issues
 
-### ssh stuck
+### ssh stuck https://github.com/ssst0n3/docker_archive/issues/10
 
 Ssh will be stuck when running some images, but some won't.
 
-https://github.com/ssst0n3/docker_archive/issues/10
-
 I don't known the exactly reason. If you met this issue, try this command instead
+
 ```
 docker network create test
 docker run --network=test ...
