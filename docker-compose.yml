@@ -3,4 +3,4 @@ services:
   vm:
     image: ssst0n3/docker_archive:ubuntu-20.04_docker-ce-18.06.1
     ports:
-        - "2222:22"
+        - "2223:22"

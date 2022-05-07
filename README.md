@@ -53,7 +53,8 @@ spec: 1.0.0
 ### with kvm
 
 ```
-docker run --privileged -d -p 2222:22 -ti ssst0n3/docker_archive:ubuntu-20.04_docker-ce-18.06.1 /start_vm.sh -enable-kvm
+docker network create test
+docker run --net=test --dev /dev/kvm -d -p 2222:22 -ti ssst0n3/docker_archive:ubuntu-20.04_docker-ce-18.06.1 /start_vm.sh -enable-kvm
 ssh -p 2222 root@127.0.0.1
 root@127.0.0.1's password: root
 root@ubuntu:~# docker version
@@ -61,7 +62,8 @@ root@ubuntu:~# docker version
 
 ### without kvm
 ```
-docker run -d -p 2222:22 -ti ssst0n3/docker_archive:ubuntu-20.04_docker-ce-18.06.1
+docker network create test
+docker run --net=test -d -p 2222:22 -ti ssst0n3/docker_archive:ubuntu-20.04_docker-ce-18.06.1
 ssh -p 2222 root@127.0.0.1
 root@127.0.0.1's password: root
 root@ubuntu:~# docker version
