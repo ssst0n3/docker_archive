@@ -45,7 +45,7 @@ Check versions provided @ [tags](https://github.com/ssst0n3/docker_archive/tags)
 | tag | alias | note |
 | --- | --- | --- | 
 | linuxkit_docker-17.06.0 | | |
-| linuxkit_docker-19.03.0 | cannot be used to reproduce CVE-2019-14271 because of static build |
+| linuxkit_docker-19.03.0 | | cannot be used to reproduce CVE-2019-14271 because of static build |
 | linuxkit_docker-19.03.0-rc3 |
 | linuxkit_docker-ce-19.03.2_docker-ce-cli-19.03.2_containerd-1.2.6_runc-1.0.0-rc8 |
 | linuxkit_docker-19.03.14 |
