@@ -1,5 +1,5 @@
 FROM ubuntu:22.04
-ADD http://cloud-images.ubuntu.com/jammy/20220414/jammy-server-cloudimg-amd64.img /ubuntu-server-cloudimg.img
+ADD http://cloud-images.ubuntu.com/jammy/20220609/jammy-server-cloudimg-amd64.img /ubuntu-server-cloudimg.img
 # ADD http://cloud-images.ubuntu.com/hirsute/current/hirsute-server-cloudimg-amd64.img /ubuntu-server-cloudimg.img
 # COPY ./ubuntu-20.04-server-cloudimg-amd64.img ubuntu-20.04-server-cloudimg-amd64.img
 
