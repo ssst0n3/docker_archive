@@ -3,7 +3,6 @@ FROM ssst0n3/docker_archive:build_basic_centos-8-stream
 COPY cloud.txt cloud.txt
 RUN cloud-localds /cloud.img cloud.txt
 
-# COPY start_vm.sh /start_vm.sh
 COPY init_qemu.expect /init_qemu.expect
 RUN /init_qemu.expect 
 
