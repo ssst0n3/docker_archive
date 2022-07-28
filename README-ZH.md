@@ -1,6 +1,6 @@
-# docker archive: 提供大量docker及其组件的镜像
+# docker archive: 提供不同版本的docker及其组件的镜像
 
-[english version](./README.md)
+[english version](./README.md), [如何贡献](./CONTRIBUTE-ZH.md)
 
 你可以通过pull容器镜像的形式，来获取特定版本的docker环境，例如docker19.03等。
 
