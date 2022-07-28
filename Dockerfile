@@ -5,3 +5,5 @@ ADD https://cloud.centos.org/centos/8-stream/x86_64/images/CentOS-Stream-Generic
 # RUN sed -i "s@http://.*.ubuntu.com@http://repo.huaweicloud.com@g" /etc/apt/sources.list
 RUN apt-get update && apt-get install -y qemu-system-x86 qemu-utils cloud-image-utils expect openssh-client && apt-get clean
 RUN qemu-img resize ubuntu-server-cloudimg.img 10G
+COPY init_qemu.expect /
+COPY shrunk.sh /
