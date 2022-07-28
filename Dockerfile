@@ -7,3 +7,5 @@ ADD https://repo.huaweicloud.com/ubuntu-cloud-images/releases/20.04/release-2020
 RUN sed -i "s@http://.*.ubuntu.com@http://repo.huaweicloud.com@g" /etc/apt/sources.list
 RUN apt-get update && apt-get install -y qemu-system-x86 qemu-utils cloud-image-utils expect openssh-client && apt-get clean
 RUN qemu-img resize ubuntu-server-cloudimg.img 10G
+COPY init_qemu.expect /
+COPY shrunk.sh /
