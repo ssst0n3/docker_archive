@@ -18,6 +18,46 @@ docker的一大优势在于，可以在基础镜像的基础上进行修改，�
 * Dockerfile: 镜像构建文件
 * cloud.txt: cloud-init配置文件，定义了将要在虚拟机启动时执行的命令
 
+下面我们分别解释这两个文件的内容：
+
+#### 1.1.1 Dockerfile
+
+以分支 `branch_ubuntu-22.04_docker-ce-20.10.17_docker-ce-cli-20.10.17_containerd.io-1.6.6-1_docker-compose-plugin-2.6.0` 为例，
+
+```Dockerfile
+FROM ssst0n3/docker_archive:build_basic_ubuntu-22.04-20220609
+# cloud_init config
+COPY cloud.txt cloud.txt
+RUN cloud-localds /cloud.img cloud.txt
+
+RUN /init_qemu.expect 
+RUN /shrunk.sh /ubuntu-server-cloudimg.img
+
+FROM ssst0n3/docker_archive:release_basic_ubuntu-20.04
+COPY --from=0 /ubuntu-server-cloudimg.img /
+```
+
+#### 1.1.2 cloud.txt
+
+
+
+```
+#cloud-config
+user: root
+password: root
+chpasswd: {expire: False}
+ssh_pwauth: True
+runcmd:
+  - echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
+  - sed -i "s@http://.*.ubuntu.com@http://repo.huaweicloud.com@g" /etc/apt/sources.list
+  - apt-get update
+  - apt-get -y install apt-transport-https ca-certificates curl gnupg-agent software-properties-common
+  - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+  - add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu jammy stable"
+  - apt-get update
+  - apt-get install -y docker-ce=5:20.10.17~3-0~ubuntu-jammy docker-ce-cli=5:20.10.17~3-0~ubuntu-jammy containerd.io=1.6.6-1 docker-compose-plugin=2.6.0~ubuntu-jammy
+```
+
 ## 2. 编译镜像
 
 ### 2.1 手动编译
