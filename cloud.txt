@@ -56,8 +56,10 @@ write_files:
     export KUBECONFIG=/etc/kubernetes/admin.conf
     # kubectl create -f https://docs.projectcalico.org/manifests/tigera-operator.yaml
     # kubectl create -f https://docs.projectcalico.org/manifests/custom-resources.yaml
-    kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.22.1/manifests/tigera-operator.yaml
-    kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.22.1/manifests/custom-resources.yaml
+    # kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.22.1/manifests/tigera-operator.yaml
+    # kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.22.1/manifests/custom-resources.yaml
+    kubectl create -f https://projectcalico.docs.tigera.io/archive/v3.22/manifests/tigera-operator.yaml
+    kubectl create -f https://projectcalico.docs.tigera.io/archive/v3.22/manifests/custom-resources.yaml
     kubectl taint nodes --all node-role.kubernetes.io/master-
     while true
     do
