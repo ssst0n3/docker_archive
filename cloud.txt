@@ -38,6 +38,7 @@ write_files:
     wget https://github.com/containerd/containerd/releases/download/v${VERSION}/cri-containerd-cni-${VERSION}-linux-amd64.tar.gz
     tar --no-overwrite-dir -C / -xzf cri-containerd-cni-${VERSION}-linux-amd64.tar.gz
     systemctl daemon-reload
+    systemctl enable containerd
     systemctl start containerd
     mkdir -p /etc/containerd
     containerd config default | sudo tee /etc/containerd/config.toml
