@@ -25,7 +25,7 @@ containerd github.com/containerd/containerd v1.6.0 39259a8f35919a0d02c9ecc2871dd
 
 **with kvm**
 ```
-docker run --dev /dev/kvm -d -p 2222:22 -ti ssst0n3/docker_archive:ubuntu-20.04_kubernetes-1.23.4_containerd.io-1.4.12-1_calico-3.22.1 /start_vm.sh -enable-kvm
+docker run --dev /dev/kvm -d -p 2222:22 -ti ssst0n3/docker_archive:ubuntu-20.04_kubernetes-1.23.4_containerd.io-1.6.0_calico-3.22.1 /start_vm.sh -enable-kvm
 ssh -p 2222 root@127.0.0.1
 root@127.0.0.1's password: root
 root@ubuntu:~# /wait-for.sh
@@ -33,7 +33,7 @@ root@ubuntu:~# /wait-for.sh
 
 **with out kvm**
 ```
-docker run ssst0n3/docker_archive:ubuntu-20.04_kubernetes-1.23.4_containerd.io-1.4.12-1_calico-3.22.1
+docker run ssst0n3/docker_archive:ubuntu-20.04_kubernetes-1.23.4_containerd.io-1.6.0_calico-3.22.1
 ...
 Welcome to Ubuntu 20.04.1 LTS (GNU/Linux 5.4.0-56-generic x86_64)
 ...
