@@ -82,6 +82,9 @@ Check versions provided @ [tags](https://github.com/ssst0n3/docker_archive/tags)
 | ubuntu-16.04_kubeadm-1.9.3_kubelet-1.9.3_kubectl-1.9.3_kubernetes-cni-0.6.0_flannel-0.9.1_docker-ce-17.03.3 | CVE-2017-1002101 |
 | ubuntu-16.04_kubeadm-1.9.4_kubelet-1.9.4_kubectl-1.9.4_kubernetes-cni-0.6.0_flannel-0.9.1_docker-ce-17.03.3 |
 | centos-stream-8_kubeadm-1.22.2_kubernetes-1.22.2_kubernetes-cni-0.8.7_flannel-0.14.0_docker-ce-20.10.9_containerd.io-1.4.11 |
+| ubuntu-20.04_kubernetes-1.23.4_containerd.io-1.4.12-1_calico-3.22.1 | CVE-2022-23648 |
+| ubuntu-20.04_kubernetes-1.23.4_containerd.io-1.5.9_calico-3.22.1 | | |
+| ubuntu-20.04_kubernetes-1.23.4_containerd.io-1.6.0_calico-3.22.1 | | [A known bug](https://github.com/ssst0n3/docker_archive/issues/15) |
 
 ## Known Issues
 
