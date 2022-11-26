@@ -1,4 +1,7 @@
-FROM ssst0n3/docker_archive:build_basic_ubuntu-20.04
+FROM ssst0n3/docker_archive:ubuntu-20.04_kubernetes-1.23.4_containerd.io-1.5.9_calico-3.22.1
+
+RUN apt-get update && apt-get install -y qemu-system-x86 qemu-utils cloud-image-utils expect openssh-client && apt-get clean
+
 # cloud_init config
 COPY cloud.txt cloud.txt
 RUN cloud-localds /cloud.img cloud.txt
