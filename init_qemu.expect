@@ -1,0 +1,20 @@
+#!/usr/bin/expect -f
+set timeout -1
+spawn qemu-system-x86_64 \
+    -hda ubuntu-server-cloudimg.img \
+    -hdb cloud.img \
+    -nographic \
+    -smp 2 \
+    -m 2048M
+
+expect -re {Cloud-init v. 22.2-0ubuntu1~22.04.1 finished at}
+
+send "\r"
+expect "login:"
+send "root\r"
+expect "assword:"
+send "c3e6cf9d-be8b-40b9\r"
+expect "#"
+send "shutdown now \r"
+
+interact
