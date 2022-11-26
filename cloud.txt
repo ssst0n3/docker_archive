@@ -34,7 +34,7 @@ write_files:
     sysctl --system
     apt-get update
     apt-get install -y libseccomp2
-    export VERSION=1.6.0
+    export VERSION=1.5.9
     wget https://github.com/containerd/containerd/releases/download/v${VERSION}/cri-containerd-cni-${VERSION}-linux-amd64.tar.gz
     tar --no-overwrite-dir -C / -xzf cri-containerd-cni-${VERSION}-linux-amd64.tar.gz
     systemctl daemon-reload
