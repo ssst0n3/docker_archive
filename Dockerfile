@@ -6,6 +6,9 @@ RUN apt-get update && apt-get install -y qemu-system-x86 qemu-utils cloud-image-
 COPY cloud.txt cloud.txt
 RUN cloud-localds /cloud.img cloud.txt
 
+COPY enable_cloud-init.expect /enable_cloud-init.expect
+RUN /enable_cloud-init.expect
+
 COPY init_qemu.expect /init_qemu.expect
 RUN /init_qemu.expect 
 
