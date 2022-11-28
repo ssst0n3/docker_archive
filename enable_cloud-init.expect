@@ -2,7 +2,6 @@
 set timeout -1
 spawn qemu-system-x86_64 \
     -hda ubuntu-server-cloudimg.img \
-    -hdb cloud.img \
     -nographic \
     -smp 2 \
     -m 2048M
@@ -14,6 +13,8 @@ expect "login:"
 send "root\r"
 expect "assword:"
 send "root\r"
+expect "#"
+send "rm /etc/cloud/cloud-init.disabled\r"
 expect "#"
 send "shutdown now \r"
 
