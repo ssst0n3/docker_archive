@@ -7,7 +7,6 @@ COPY cloud.txt cloud.txt
 RUN cloud-localds /cloud.img cloud.txt
 
 COPY init_qemu.expect /init_qemu.expect
-RUN /init_qemu.expect 
 
 RUN /init_qemu.expect 
 RUN /shrunk.sh /ubuntu-server-cloudimg.img
