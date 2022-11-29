@@ -8,16 +8,11 @@ write_files:
     #!/bin/bash
     set -x
     systemctl restart containerd
-    while true
-    do
-        sleep 5
-        if [ $(systemctl status containerd |grep "Active: active" | wc -l) = 1 ]; then break; fi
-    done
     systemctl restart kubelet
     while true
     do
         sleep 5
-        if [ $(systemctl status kubelet |grep "Active: active" | wc -l) = 1 ]; then break; fi
+        if [ $(kubectl get pods --all-namespaces | wc -l) != 0 ]; then break; fi
     done
     while true
     do
