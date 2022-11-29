@@ -6,6 +6,28 @@ ssh_pwauth: True
 write_files:
 - content: |
     #!/bin/bash
+    set -x
+    systemctl restart containerd
+    while true
+    do
+        if [ $(systemctl status containerd |grep "Active: active" | wc -l) = 1 ) ]; then break; fi
+        sleep 5
+    done
+    systemctl restart kubelet
+    while true
+    do
+        if [ $(systemctl status kubelet |grep "Active: active" | wc -l) = 1 ]; then break; fi
+        sleep 5
+    done
+    while true
+    do
+        sleep 5
+        if [ $(kubectl get pods --all-namespaces -o jsonpath='{range .items[*].status.containerStatuses[*]}{.ready}{"\n"}{end}' | grep -v true | wc -l) = 0 ]; then break; fi
+    done
+  path: /wait-for.sh
+  permissions: '0755'
+- content: |
+    #!/bin/bash
     set -ex
     export HOME=/root
     curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.16.0 TARGET_ARCH=x86_64 sh -
