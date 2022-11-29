@@ -10,14 +10,14 @@ write_files:
     systemctl restart containerd
     while true
     do
-        if [ $(systemctl status containerd |grep "Active: active" | wc -l) = 1 ]; then break; fi
         sleep 5
+        if [ $(systemctl status containerd |grep "Active: active" | wc -l) = 1 ]; then break; fi
     done
     systemctl restart kubelet
     while true
     do
-        if [ $(systemctl status kubelet |grep "Active: active" | wc -l) = 1 ]; then break; fi
         sleep 5
+        if [ $(systemctl status kubelet |grep "Active: active" | wc -l) = 1 ]; then break; fi
     done
     while true
     do
