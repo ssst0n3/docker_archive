@@ -31,7 +31,7 @@ write_files:
     systemctl start containerd
     systemctl start kubelet
     /wait-for.sh
-    kubectl taint nodes --all node-role.kubernetes.io/control-plane-
+    kubectl taint nodes --all node-role.kubernetes.io/master-
     istioctl x precheck
     istioctl install --verify --set profile=demo -y
     kubectl label namespace default istio-injection=enabled
