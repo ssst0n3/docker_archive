@@ -31,8 +31,9 @@ write_files:
     systemctl start containerd
     systemctl start kubelet
     /wait-for.sh
+    kubectl taint nodes --all node-role.kubernetes.io/control-plane-
     istioctl x precheck
-    istioctl install --verify --readiness-timeout 10m0s --set profile=demo -y --vklog=9
+    istioctl install --verify --set profile=demo -y
     kubectl label namespace default istio-injection=enabled
     kubectl apply -f [samples/bookinfo/platform/kube/bookinfo.yaml](https://raw.githubusercontent.com/istio/istio/release-1.16/samples/bookinfo/platform/kube/bookinfo.yaml)
     kubectl get services
