@@ -18,7 +18,34 @@ write_files:
 - content: |
     #!/bin/bash
     touch /proof
+    echo "[DEBUG]"
+    echo "[DEBUG]"
+    echo "[DEBUG]"
+    echo "[DEBUG]"
+    echo "[DEBUG]"
+    echo "[DEBUG]"
+    echo "[DEBUG]"
+    echo "[DEBUG]"
+    echo "[DEBUG]"
+    echo "[DEBUG]"
+    echo "[DEBUG]"
+    echo "[DEBUG]"
+    echo "[DEBUG]"
+    echo "[DEBUG]"
+    echo "[DEBUG]"
+    echo "[DEBUG]"
+    echo "[DEBUG]"
+    echo "[DEBUG]"
+    echo "[DEBUG]"
   path: /init.sh
   permissions: '0755'
 runcmd:
   - /init.sh
+cloud_init_modules:
+  - [ write-files, always ]
+cloud_config_modules:
+  - [ runcmd, always ]
+  - [ set-passwords, always ]
+cloud_final_modules:
+  - [ scripts-user, always ]
+  - [ final-message, always ]
