@@ -6,8 +6,7 @@ ssh_pwauth: True
 write_files:
 - content: |
     #!/bin/bash
-    set -ex
-
+    set -x
     build_namespace_arg() {
         namespace=$1
         if [ -z "$namespace" ]
