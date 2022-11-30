@@ -6,19 +6,39 @@ ssh_pwauth: True
 write_files:
 - content: |
     #!/bin/bash
-    set -x
-    systemctl restart containerd
-    systemctl restart kubelet
-    while true
-    do
-        sleep 5
-        if [ $(kubectl get pods --all-namespaces | wc -l) != 0 ]; then break; fi
-    done
-    while true
-    do
-        sleep 5
-        if [ $(kubectl get pods --all-namespaces -o jsonpath='{range .items[*].status.containerStatuses[*]}{.ready}{"\n"}{end}' | grep -v true | wc -l) = 0 ]; then break; fi
-    done
+    set -ex
+
+    build_namespace_arg() {
+        namespace=$1
+        if [ -z "$namespace" ]
+        then 
+      echo "--all-namespaces"
+        else
+            echo "-n $namespace"
+        fi
+    }
+
+    make_sure_pods_exists() {
+        ns_arg=$*
+        while true
+        do
+            if [ $(kubectl get pods $ns_arg | wc -l) != 0 ]; then break; fi
+            sleep 5
+        done
+    }
+
+    make_sure_all_pods_ready() {
+        ns_arg=$*
+        while true
+        do
+            if [ $(kubectl get pods $ns_arg -o jsonpath='{range .items[*].status.containerStatuses[*]}{.ready}{"\n"}{end}' | grep -v true | wc -l) = 0 ]; then break; fi
+            sleep 5
+        done
+    }
+
+    arg=$(build_namespace_arg $1)
+    make_sure_pods_exists $arg
+    make_sure_all_pods_ready $arg
   path: /wait-for.sh
   permissions: '0755'
 - content: |
@@ -36,10 +56,12 @@ write_files:
     istioctl install --verify --set profile=demo -y
     kubectl label namespace default istio-injection=enabled
     kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.16/samples/bookinfo/platform/kube/bookinfo.yaml
+    /wait-for.sh
     kubectl get services
     kubectl get pods
     kubectl exec "$(kubectl get pod -l app=ratings -o jsonpath='{.items[0].metadata.name}')" -c ratings -- curl -sS productpage:9080/productpage | grep -o "<title>.*</title>"
-    kubectl apply -f [samples/bookinfo/networking/bookinfo-gateway.yaml](https://raw.githubusercontent.com/istio/istio/release-1.16/samples/bookinfo/networking/bookinfo-gateway.yaml)
+    kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.16/samples/bookinfo/networking/bookinfo-gateway.yaml
+    /wait-for.sh
     istioctl analyze
     kubectl get svc istio-ingressgateway -n istio-system
     export INGRESS_PORT=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.spec.ports[?(@.name=="http2")].nodePort}')
