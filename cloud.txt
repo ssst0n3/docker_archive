@@ -46,7 +46,7 @@ write_files:
     #!/bin/bash
     set -ex
     export HOME=/root
-    curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.16.0 TARGET_ARCH=x86_64 sh -
+    curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.15.0 TARGET_ARCH=x86_64 sh -
     cd istio-*
     export PATH=$PWD/bin:$PATH
     systemctl start containerd
