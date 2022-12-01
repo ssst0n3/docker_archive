@@ -86,6 +86,12 @@ Check versions provided @ [tags](https://github.com/ssst0n3/docker_archive/tags)
 | ubuntu-20.04_kubernetes-1.23.4_containerd.io-1.5.9_calico-3.22.1 | | |
 | ubuntu-20.04_kubernetes-1.23.4_containerd.io-1.6.0_calico-3.22.1 | | [A known bug](https://github.com/ssst0n3/docker_archive/issues/15) |
 
+### istio
+
+| tag | alias | note |
+| --- | --- | --- | 
+| ubuntu-20.04_kubernetes-1.23.4_containerd.io-1.5.9_calico-3.22.1_istio-1.16.0 | | |
+
 ## Known Issues
 
 ### ssh stuck https://github.com/ssst0n3/docker_archive/issues/10
