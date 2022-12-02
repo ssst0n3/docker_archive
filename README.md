@@ -91,6 +91,8 @@ Check versions provided @ [tags](https://github.com/ssst0n3/docker_archive/tags)
 | tag | alias | note |
 | --- | --- | --- | 
 | ubuntu-20.04_kubernetes-1.23.4_containerd.io-1.5.9_calico-3.22.1_istio-1.16.0 | | |
+| ubuntu-20.04_kubernetes-1.23.4_containerd.io-1.5.9_calico-3.22.1_istio-1.15.0 | | |
+
 
 ## Known Issues
 
