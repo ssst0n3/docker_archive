@@ -91,9 +91,9 @@ Check versions provided @ [tags](https://github.com/ssst0n3/docker_archive/tags)
 | tag | alias | note |
 | --- | --- | --- | 
 | ubuntu-20.04_kubernetes-1.23.4_containerd.io-1.5.9_calico-3.22.1_istio-1.16.0 | | |
-| ubuntu-20.04_kubernetes-1.23.4_containerd.io-1.5.9_calico-3.22.1_istio-1.15.0 | | |
-| ubuntu-20.04_kubernetes-1.23.4_containerd.io-1.5.9_calico-3.22.1_istio-1.14.0 | | | 
-| ubuntu-20.04_kubernetes-1.23.4_containerd.io-1.5.9_calico-3.22.1_istio-1.13.0 | | | 
+| ubuntu-20.04_kubernetes-1.23.4_containerd.io-1.5.9_calico-3.22.1_istio-1.15.0 | | CVE-2022-39278 |
+| ubuntu-20.04_kubernetes-1.23.4_containerd.io-1.5.9_calico-3.22.1_istio-1.14.0 | | CVE-2022-31045,CVE-2022-29225,CVE-2022-29224,CVE-2022-29226,CVE-2022-29227,CVE-2022-29228,CVE-2022-39278 | 
+| ubuntu-20.04_kubernetes-1.23.4_containerd.io-1.5.9_calico-3.22.1_istio-1.13.0 | | CVE-2022-23635,CVE-2021-43824,CVE-2021-43825,CVE-2021-43826,CVE-2022-21654,CVE-2022-21655,CVE-2022-23606 | 
 
 ## Known Issues
 
