@@ -22,6 +22,34 @@ docker run --net=test --dev /dev/kvm -d -p 2222:22 -ti ssst0n3/docker_archive:ub
 ssh -p 2222 root@127.0.0.1
 root@127.0.0.1's password: root
 root@ubuntu:~# docker version
+Client: Docker Engine - Community
+ Version:           20.10.19
+ API version:       1.41
+ Go version:        go1.18.7
+ Git commit:        d85ef84
+ Built:             Thu Oct 13 16:46:58 2022
+ OS/Arch:           linux/amd64
+ Context:           default
+ Experimental:      true
+
+Server: Docker Engine - Community
+ Engine:
+  Version:          20.10.19
+  API version:      1.41 (minimum version 1.12)
+  Go version:       go1.18.7
+  Git commit:       c964641
+  Built:            Thu Oct 13 16:44:47 2022
+  OS/Arch:          linux/amd64
+  Experimental:     false
+ containerd:
+  Version:          1.6.14
+  GitCommit:        9ba4b250366a5ddde94bb7c9d1def331423aa323
+ runc:
+  Version:          1.1.4
+  GitCommit:        v1.1.4-0-g5fd4c4d
+ docker-init:
+  Version:          0.19.0
+  GitCommit:        de40ad0
 ```
 
 ### without kvm
@@ -49,9 +77,9 @@ Client:
  Debug Mode: false
  Plugins:
   app: Docker App (Docker Inc., v0.9.1-beta3)
-  buildx: Docker Buildx (Docker Inc., v0.8.2-docker)
-  compose: Docker Compose (Docker Inc., v2.6.0)
-  scan: Docker Scan (Docker Inc., v0.17.0)
+  buildx: Docker Buildx (Docker Inc., v0.9.1-docker)
+  compose: Docker Compose (Docker Inc., v2.14.1)
+  scan: Docker Scan (Docker Inc., v0.23.0)
 
 Server:
  Containers: 0
@@ -59,7 +87,7 @@ Server:
   Paused: 0
   Stopped: 0
  Images: 0
- Server Version: 20.10.17
+ Server Version: 20.10.19
  Storage Driver: overlay2
   Backing Filesystem: extfs
   Supports d_type: true
@@ -76,8 +104,8 @@ Server:
  Runtimes: io.containerd.runc.v2 io.containerd.runtime.v1.linux runc
  Default Runtime: runc
  Init Binary: docker-init
- containerd version: 10c12954828e7c7c9b6e0ea9b0c02b01407d3ae1
- runc version: v1.1.2-0-ga916309
+ containerd version: 9ba4b250366a5ddde94bb7c9d1def331423aa323
+ runc version: v1.1.4-0-g5fd4c4d
  init version: de40ad0
  Security Options:
   apparmor
@@ -91,7 +119,7 @@ Server:
  CPUs: 2
  Total Memory: 1.931GiB
  Name: ubuntu
- ID: NG5K:HVO7:I4AK:AYWZ:GPA3:LRWE:H3KC:KKZY:H5VL:MCF5:67U4:QADC
+ ID: CYX5:Z3KB:WM7Y:ZRYK:T3RK:ZJXA:OERK:QUX5:NGJY:CPTC:QAKL:ZDPO
  Docker Root Dir: /var/lib/docker
  Debug Mode: false
  Registry: https://index.docker.io/v1/
