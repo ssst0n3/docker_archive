@@ -129,3 +129,8 @@ Server:
   127.0.0.0/8
  Live Restore Enabled: false
 ```
+
+```
+root@ubuntu:~# git --version
+git version 2.34.1
+```
