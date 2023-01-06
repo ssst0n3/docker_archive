@@ -22,7 +22,34 @@ docker run --net=test --dev /dev/kvm -d -p 2222:22 -ti ssst0n3/docker_archive:ub
 ssh -p 2222 root@127.0.0.1
 root@127.0.0.1's password: root
 root@ubuntu:~# docker version
+Client: Docker Engine - Community
+ Version:           20.10.19
+ API version:       1.41
+ Go version:        go1.18.7
+ Git commit:        d85ef84
+ Built:             Thu Oct 13 16:46:58 2022
+ OS/Arch:           linux/amd64
+ Context:           default
+ Experimental:      true
 
+Server: Docker Engine - Community
+ Engine:
+  Version:          20.10.21
+  API version:      1.41 (minimum version 1.12)
+  Go version:       go1.18.7
+  Git commit:       3056208
+  Built:            Tue Oct 25 17:59:49 2022
+  OS/Arch:          linux/amd64
+  Experimental:     false
+ containerd:
+  Version:          1.6.14
+  GitCommit:        9ba4b250366a5ddde94bb7c9d1def331423aa323
+ runc:
+  Version:          1.1.4
+  GitCommit:        v1.1.4-0-g5fd4c4d
+ docker-init:
+  Version:          0.19.0
+  GitCommit:        de40ad0
 ```
 
 ### without kvm
