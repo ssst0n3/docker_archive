@@ -110,3 +110,10 @@ Ssh 可能在使用有些镜像时可能会卡住，但有些不会。
 docker network create test
 docker run --network=test ...
 ```
+
+### 虚拟机的窗口太小了
+
+可以使用ssh连接，或在虚拟机中执行以下命令
+```
+apt install -y xterm && resize
+```
