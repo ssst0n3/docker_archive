@@ -17,6 +17,8 @@ To each version docker, we will provide two types of images:
 
 ### for docker in ubuntu in qemu in docker
 Pull one and run it
+
+**ssh**
 ```
 $ docker network create test
 $ docker run --network=test -d -p 2222:22 ssst0n3/docker_archive:ubuntu-20.04_docker-ce-20.10.3_docker-ce-cli-20.10.3_containerd.io-1.4.3_runc-1.0.0-rc92
@@ -24,6 +26,12 @@ $ ssh -p 2222 root@127.0.0.1
 root@127.0.0.1's password: root
 root@ubuntu:~# docker version
 ...
+```
+
+**tty**
+```
+docker run -tid --name archive ssst0n3/docker_archive:ubuntu-20.04_docker-ce-20.10.3_docker-ce-cli-20.10.3_containerd.io-1.4.3_runc-1.0.0-rc92
+docker attach --detach-keys="ctrl-x" archive
 ```
 
 ### for docker in linuxkit in qemu in docker
