@@ -111,3 +111,10 @@ I don't known the exactly reason. If you met this issue, try this command instea
 docker network create test
 docker run --network=test ...
 ```
+
+### window size so small
+
+use ssh or execute commands below in the vm
+```
+apt install -y xterm && resize
+```
