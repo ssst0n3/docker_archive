@@ -18,7 +18,7 @@ Yep, this form is like Russian nesting dolls, but it's convenient for container 
 ### with kvm
 ```
 docker network create test
-docker run --net=test --dev /dev/kvm -d -p 2222:22 -ti ssst0n3/docker_archive:ubuntu-22.04_runc-1.1.4 /start_vm.sh -enable-kvm
+docker run --net=test --device /dev/kvm -d -p 2222:22 -ti ssst0n3/docker_archive:ubuntu-22.04_runc-1.1.4 /start_vm.sh -enable-kvm
 ssh -p 2222 root@127.0.0.1
 root@127.0.0.1's password: root
 root@ubuntu:~# runc --version
