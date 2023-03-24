@@ -49,9 +49,10 @@ Check versions provided @ [tags](https://github.com/ssst0n3/docker_archive/tags)
 
 ### runc
 
-| tag | alias | note |
-|-----|-------|------|
-|     |
+| tag                     | alias               | note |
+|-------------------------|---------------------|------|
+| ubuntu-22.04_runc-1.1.4 | CVE-2023-27561      |
+|                         | CVE-2023-27561_runc |
 
 ### docker
 #### linuxkit(slim version)
