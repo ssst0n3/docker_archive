@@ -1,7 +1,7 @@
 version: '3'
 services:
   vm:
-    image: ssst0n3/docker_archive:ubuntu-22.04_runc-1.1.4
+    image: ssst0n3/docker_archive:ubuntu-22.04_podman-4.4.3_runc-1.1.4
     ports:
         - "2222:22"
     # command: /start_vm.sh -enable-kvm
