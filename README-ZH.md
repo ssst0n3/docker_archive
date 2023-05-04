@@ -33,6 +33,11 @@ docker run -tid --name archive ssst0n3/docker_archive:ubuntu-20.04_docker-ce-20.
 docker attach --detach-keys="ctrl-x" archive
 ```
 
+**kvm**
+```
+docker run -ti --dev /dev/kvm ssst0n3/docker_archive:ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_runc-1.0.1 /start_vm.sh -enable-kvm
+```
+
 ### for docker in linuxkit in qemu in docker
 ```
 docker run -ti ssst0n3/docker_archive:linuxkit_docker-19.03.0
@@ -111,7 +116,7 @@ docker version
 
 ### ssh 连接失败 https://github.com/ssst0n3/docker_archive/issues/10
 
-Ssh 可能在使用有些镜像时可能会卡住，但有些不会。
+ssh 可能在使用有些镜像时可能会卡住，但有些不会。
 
 我还不知道具体的原因，如果你遇到了同样的问题，可以尝试使用新创建的网桥启动容器：
 

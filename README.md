@@ -34,6 +34,11 @@ docker run -tid --name archive ssst0n3/docker_archive:ubuntu-20.04_docker-ce-20.
 docker attach --detach-keys="ctrl-x" archive
 ```
 
+**kvm**
+```
+docker run -ti --dev /dev/kvm ssst0n3/docker_archive:ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_runc-1.0.1 /start_vm.sh -enable-kvm
+```
+
 ### for docker in linuxkit in qemu in docker
 ```
 docker run -ti ssst0n3/docker_archive:linuxkit_docker-19.03.0
@@ -125,7 +130,7 @@ Check versions provided @ [tags](https://github.com/ssst0n3/docker_archive/tags)
 
 ### ssh stuck https://github.com/ssst0n3/docker_archive/issues/10
 
-Ssh will be stuck when running some images, but some won't.
+ssh will be stuck when running some images, but some won't.
 
 I don't known the exactly reason. If you met this issue, try this command instead
 
