@@ -14,9 +14,12 @@ Yep, this form is like Russian nesting dolls, but it's convenient for container 
 ## run
 
 ```
-docker compose -f docker-compose.yml up -d
-# wait for vm start, or use docker logs -f <CONTAINERID> to watch the starting progress.
-ssh -p 2222 root@127.0.0.1
+$ docker compose -f docker-compose.yml up -d
+# // wait for vm start, or use docker logs -f <CONTAINERID> to watch the starting progress.
+$ ssh -p 2222 root@127.0.0.1
+root@127.0.0.1's password: root
+root@ubuntu:~# docker run --rm -ti --runtime kata-runtime ubuntu
+root@17d02623cea7:/#
 ```
 
 ## version
