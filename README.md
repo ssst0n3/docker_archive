@@ -11,9 +11,16 @@ Yep, this form is like Russian nesting dolls, but it's convenient for container 
 ## tag template
 {operating system version}_{docker and it's components version}
 
+## run
+
+```
+docker compose -f docker-compose.yml up -d
+# wait for vm start, or use docker logs -f <CONTAINERID> to watch the starting progress.
+ssh -p 2222 root@127.0.0.1
+```
+
 ## version
 `ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_kata-1.11.0`
-
 
 ```
 root@ubuntu:~# docker version
@@ -66,3 +73,35 @@ kata-runtime  : 1.11.0
    commit   : 23e554b316aa994c6f48c9b1bd84060629fd6361
    OCI specs: 1.0.1-dev
 ```
+
+## troubleshouting
+
+### 1. cannot run kata under vmware
+
+```
+time="2023-05-04T09:03:05Z" level=error msg="CPU property not found" arch=amd64 description=SSE4.1 na
+me=sse4_1 pid=2251 source=runtime type=flag
+time="2023-05-04T09:03:05Z" level=error msg="ERROR: System is not capable of running Kata Containers"
+ arch=amd64 name=kata-runtime pid=2251 source=runtime
+ERROR: System is not capable of running Kata Containers
+```
+
+* https://blog.csdn.net/kunyus/article/details/106986621
+* https://discuss.linuxcontainers.org/t/lxd-4-0-cannot-use-vm-errors/7312
+
+### 2. cannot set up guest memory 'dimm1'
+
+```
+root@ubuntu:~# docker run --runtime kata-runtime ubuntu
+Unable to find image 'ubuntu:latest' locally
+latest: Pulling from library/ubuntu
+dbf6a9befcde: Pull complete
+Digest: sha256:dfd64a3b4296d8c9b62aa3309984f8620b98d87e47492599ee20739e8eb54fbf
+Status: Downloaded newer image for ubuntu:latest
+docker: Error response from daemon: OCI runtime create failed: failed to launch qemu: exit status 1, error messages from qemu log: qemu-system-x86_64: -object memory-backend-ram,id=dimm1,size=2048M: cannot set up guest memory 'dimm1': Cannot allocate memory: unknown.
+ERRO[0015] error waiting for container: context canceled
+```
+
+Increase the memory value in the docker-compose.yml:
+
+`command: /start_vm.sh -m 4096M -cpu host -enable-kvm`

@@ -3,11 +3,20 @@ user: root
 password: root
 chpasswd: {expire: False}
 ssh_pwauth: True
+write_files:
+- content: |
+    #!/bin/bash
+    set -ex
+    wget https://github.com/kata-containers/runtime/releases/download/1.11.0/kata-static-1.11.0-x86_64.tar.xz
+    tar -xf kata-static-1.11.0-x86_64.tar.xz -C /
+    mkdir -p /etc/docker
+    touch /etc/docker/daemon.json
+    echo '{"runtimes": {"kata-runtime": {"path": "/opt/kata/bin/kata-runtime"}}}' >> /etc/docker/daemon.json
+    systemctl restart docker
+  path: /init.sh
+  permissions: '0755'
 runcmd:
-  - wget https://github.com/kata-containers/runtime/releases/download/1.11.0/kata-static-1.11.0-x86_64.tar.xz
-  - tar -xf kata-static-1.11.0-x86_64.tar.xz -C /
-  - mkdir -p /etc/docker/ && touch /etc/docker/daemon.json && echo '{"runtimes": {"kata-runtime": {"path": "/opt/kata/bin/kata-runtime"}}}' >> /etc/docker/daemon.json
-  - systemctl restart docker
+  - /init.sh
 cloud_init_modules:
   - [ write-files, always ]
 cloud_config_modules:
