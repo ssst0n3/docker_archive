@@ -59,6 +59,12 @@ Check versions provided @ [tags](https://github.com/ssst0n3/docker_archive/tags)
 | ubuntu-22.04_runc-1.1.4 | CVE-2023-27561      |
 |                         | CVE-2023-27561_runc |
 
+### kata
+
+| tag                     | alias               | note |
+|-------------------------|---------------------|------|
+| ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_kata-1.11.0 |
+
 ### docker
 #### linuxkit(slim version)
 
