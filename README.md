@@ -14,6 +14,9 @@ Yep, this form is like Russian nesting dolls, but it's convenient for container 
 ## run
 
 ```
+$ git clone https://github.com/ssst0n3/docker_archive.git
+$ cd docker_archive
+$ git checkout branch_ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_kata-1.11.0
 $ docker compose -f docker-compose.yml up -d
 # // wait for vm start, or use docker logs -f <CONTAINERID> to watch the starting progress.
 $ ssh -p 2222 root@127.0.0.1
