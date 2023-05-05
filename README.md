@@ -12,7 +12,7 @@ Yep, this form is like Russian nesting dolls, but it's convenient for container 
 {operating system version}_{docker and it's components version}
 
 ## version
-`ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_runc-1.0.1`
+`ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_kata-1.11.0`
 
 
 ```
@@ -58,4 +58,11 @@ commit: v1.0.1-0-g4144b63
 spec: 1.0.2-dev
 go: go1.15.14
 libseccomp: 2.4.3
+```
+
+```
+root@ubuntu:~# /opt/kata/bin/kata-runtime --version
+kata-runtime  : 1.11.0
+   commit   : 23e554b316aa994c6f48c9b1bd84060629fd6361
+   OCI specs: 1.0.1-dev
 ```
