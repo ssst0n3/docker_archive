@@ -63,6 +63,7 @@ docker version
 | tag                     | alias               | note |
 |-------------------------|---------------------|------|
 | ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_kata-1.11.0 |
+| ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_kata-1.11.1 |
 
 ### docker
 #### linuxkit(slim version)
