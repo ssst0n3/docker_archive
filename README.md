@@ -16,7 +16,7 @@ Yep, this form is like Russian nesting dolls, but it's convenient for container 
 ```
 $ git clone https://github.com/ssst0n3/docker_archive.git
 $ cd docker_archive
-$ git checkout branch_ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_kata-1.11.0
+$ git checkout branch_ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_kata-1.11.1
 $ docker compose -f docker-compose.yml up -d
 # // wait for vm start, or use docker logs -f <CONTAINERID> to watch the starting progress.
 $ ssh -p 2222 root@127.0.0.1
@@ -26,7 +26,7 @@ root@17d02623cea7:/#
 ```
 
 ## version
-`ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_kata-1.11.0`
+`ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_kata-1.11.1`
 
 ```
 root@ubuntu:~# docker version
@@ -75,8 +75,8 @@ libseccomp: 2.4.3
 
 ```
 root@ubuntu:~# /opt/kata/bin/kata-runtime --version
-kata-runtime  : 1.11.0
-   commit   : 23e554b316aa994c6f48c9b1bd84060629fd6361
+kata-runtime  : 1.11.1
+   commit   : 984ccea48a1badd2863a68f91c8d95e229898095
    OCI specs: 1.0.1-dev
 ```
 
