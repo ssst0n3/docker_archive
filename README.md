@@ -19,7 +19,7 @@ Yep, this form is like Russian nesting dolls, but it's convenient for container 
 $ git clone https://github.com/ssst0n3/docker_archive.git
 $ cd docker_archive
 $ git checkout branch_ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_kata-1.11.1
-$ docker compose -f docker-compose.yml up -d
+$ docker compose -p kata_1-11-1 -f docker-compose.yml up -d
 ```
 
 or 
@@ -37,7 +37,7 @@ services:
     devices:
       - "/dev/kvm:/dev/kvm"
 EOF
-$ docker compose up -d
+$ docker compose -p kata_1-11-1 up -d
 ```
 
 ### 2. Wait for vm starting
