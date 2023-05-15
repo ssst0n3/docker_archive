@@ -12,7 +12,6 @@ write_files:
     mkdir -p /etc/docker
     touch /etc/docker/daemon.json
     echo '{"runtimes": {"kata-runtime": {"path": "/opt/kata/bin/kata-runtime"}}}' >> /etc/docker/daemon.json
-    systemctl restart docker
     echo "complete"
   path: /init.sh
   permissions: '0755'
