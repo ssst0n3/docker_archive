@@ -99,3 +99,10 @@ runc version 1.0.0-rc8
 commit: 425e105d5a03fabd737a126ad93d62a9eeede87f
 spec: 1.0.1-dev
 ```
+
+```
+root@ubuntu:~# /opt/kata/bin/kata-runtime --version
+kata-runtime  : 1.10.4
+   commit   : dc550720a31582ced60d26cd7c64d746b1449864
+   OCI specs: 1.0.1-dev
+```
