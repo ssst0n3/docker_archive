@@ -12,13 +12,11 @@ write_files:
     mkdir -p /etc/docker
     touch /etc/docker/daemon.json
     echo '{"runtimes": {"kata-runtime": {"path": "/opt/kata/bin/kata-runtime"}}}' >> /etc/docker/daemon.json
-    echo "complete"
+    echo "/init.sh complete"
   path: /init.sh
   permissions: '0755'
 runcmd:
   - /init.sh
-final_message: |
-  cloud-init has finished
 cloud_init_modules:
   - [ write-files, always ]
 cloud_config_modules:
