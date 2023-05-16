@@ -7,8 +7,7 @@ spawn qemu-system-x86_64 \
     -smp 2 \
     -m 2048M
 
-# expect -re {Reached target.*Cloud-init target.*\.}
-expect -re {"/init.sh complete"}
+expect -re {Reached target.*Cloud-init target.*\.}
 
 send "\r"
 expect "login:"
