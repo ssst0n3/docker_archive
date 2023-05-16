@@ -9,7 +9,6 @@ write_files:
     set -ex
     wget -q https://github.com/kata-containers/runtime/releases/download/1.10.4/kata-static-1.10.4-x86_64.tar.xz
     tar -xf kata-static-1.10.4-x86_64.tar.xz -C /
-    ls -lah /opt/kata/bin/
     mkdir -p /etc/docker
     touch /etc/docker/daemon.json
     echo '{"runtimes": {"kata-runtime": {"path": "/opt/kata/bin/kata-runtime"}}}' >> /etc/docker/daemon.json
