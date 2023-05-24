@@ -6,12 +6,17 @@ ssh_pwauth: True
 write_files:
 - content: |
     #!/bin/bash
+    /root/go/bin/dlv --listen=:2345 --headless=true --api-version=2 --accept-multiclient --check-go-version=false exec /opt/kata/bin/kata-runtime -- $*
+  path: /opt/kata/bin/kata-runtime-debug
+  permissions: '0755'
+- content: |
+    #!/bin/bash
     set -ex
-    wget -q https://github.com/kata-containers/runtime/releases/download/1.10.4/kata-static-1.10.4-x86_64.tar.xz
-    tar -xf kata-static-1.10.4-x86_64.tar.xz -C /
-    mkdir -p /etc/docker
-    touch /etc/docker/daemon.json
-    echo '{"runtimes": {"kata-runtime": {"path": "/opt/kata/bin/kata-runtime"}}}' >> /etc/docker/daemon.json
+    wget https://go.dev/dl/go1.20.4.linux-amd64.tar.gz
+    rm -rf /usr/local/go && tar -C /usr/local -xzf go1.20.4.linux-amd64.tar.gz
+    export PATH=$PATH:/usr/local/go/bin
+    go install github.com/go-delve/delve/cmd/dlv@latest
+    echo '{"runtimes": {"kata-runtime": {"path": "/opt/kata/bin/kata-runtime"}, "kata-runtime-debug": {"path": "/opt/kata/bin/kata-runtime-debug"}}}' >> /etc/docker/daemon.json
     sync
     echo "/init.sh complete"
   path: /init.sh

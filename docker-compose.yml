@@ -1,9 +1,9 @@
 version: '3'
 services:
   vm:
-    image: ssst0n3/docker_archive:ubuntu-20.04_docker-ce-19.03.7_containerd.io-1.2.6.3_kata-1.10.4
+    image: ssst0n3/docker_archive:ubuntu-20.04_docker-ce-19.03.7_containerd.io-1.2.6.3_kata-1.10.4-debug
     ports:
       - "1104:22"
-    command: /start_vm.sh -m 2560M -cpu host -enable-kvm
+      - "2345:2345"
     devices:
       - "/dev/kvm:/dev/kvm"
