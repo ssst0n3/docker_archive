@@ -6,6 +6,9 @@ RUN apt update && apt install -y qemu-system-x86 qemu-utils cloud-image-utils ex
 COPY cloud.txt cloud.txt
 RUN cloud-localds /cloud.img cloud.txt
 
+COPY disable_auto-upgrades.expect /disable_auto-upgrades.expect
+RUN /disable_auto-upgrades.expect
+
 COPY enable_cloud-init.expect /enable_cloud-init.expect
 RUN /enable_cloud-init.expect
 
