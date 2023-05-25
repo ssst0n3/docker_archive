@@ -20,7 +20,7 @@ write_files:
     export GOENV=/root/.config/go/env
     export GOMODCACHE=/root/go/pkg/mod
     go install -v github.com/go-delve/delve/cmd/dlv@latest
-    echo '{"runtimes": {"kata-runtime": {"path": "/opt/kata/bin/kata-runtime"}, "kata-runtime-debug": {"path": "/opt/kata/bin/kata-runtime-debug"}}}' >> /etc/docker/daemon.json
+    echo '{"runtimes": {"kata-runtime": {"path": "/opt/kata/bin/kata-runtime"}, "kata-runtime-debug": {"path": "/opt/kata/bin/kata-runtime-debug"}}}' > /etc/docker/daemon.json
     sync
     echo "/init.sh complete"
   path: /init.sh
