@@ -1,6 +1,6 @@
 ---
 
-version: v0.1.0
+version: v0.1.1
 
 ---
 
@@ -130,3 +130,15 @@ virt-sparsify --compress $source shrunk.img
 mv shrunk.img $source
 ```
 
+## document
+
+### branch main
+
+| tag | alias | spec | note |
+| --- | --- | --- | --- |
+| `[tag](link)` | alias in lower format | vx.x.x | note |
+
+### branch release
+
+* how to use
+* troubleshouting [optional]
