@@ -16,11 +16,13 @@ write_files:
     rm -rf /usr/local/go && tar -C /usr/local -xzf go1.20.4.linux-amd64.tar.gz
     export PATH=$PATH:/usr/local/go/bin
     export GOPATH=/root/go
-    export GOCACHE=/root/.cache/go-build
+    export GOCACHE=/tmp/.cache/go-build
     export GOENV=/root/.config/go/env
-    export GOMODCACHE=/root/go/pkg/mod
+    export GOMODCACHE=/tmp/go/pkg/mod
     go install -v github.com/go-delve/delve/cmd/dlv@latest
     echo '{"runtimes": {"kata-runtime": {"path": "/opt/kata/bin/kata-runtime"}, "kata-runtime-debug": {"path": "/opt/kata/bin/kata-runtime-debug"}}}' > /etc/docker/daemon.json
+    rm /go1.20.4.linux-amd64.tar.gz /kata-static-1.10.4-x86_64.tar.xz
+    go 
     sync
     echo "/init.sh complete"
   path: /init.sh
