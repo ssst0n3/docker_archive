@@ -63,6 +63,7 @@ docker version
 | tag                     | alias               | note |
 |-------------------------|---------------------|------|
 | [ubuntu-20.04_docker-ce-19.03.7_containerd.io-1.2.6.3_kata-1.10.4](https://github.com/ssst0n3/docker_archive/tree/branch_ubuntu-20.04_docker-ce-19.03.7_containerd.io-1.2.6.3_kata-1.10.4) |
+| [ubuntu-20.04_docker-ce-19.03.7_containerd.io-1.2.6.3_kata-1.10.4-debug](https://github.com/ssst0n3/docker_archive/tree/branch_ubuntu-20.04_docker-ce-19.03.7_containerd.io-1.2.6.3_kata-1.10.4-debug) | | |
 | ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_kata-1.11.0 |
 | ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_kata-1.11.1 |
 
