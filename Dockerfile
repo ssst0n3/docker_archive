@@ -1,6 +1,6 @@
 FROM ssst0n3/docker_archive:ubuntu-20.04_docker-ce-19.03.7_containerd.io-1.2.6.3_kata-1.10.4
 
-RUN apt-get update && apt-get install -y qemu-system-x86 qemu-utils cloud-image-utils expect openssh-client && apt-get clean
+RUN apt update && apt install -y qemu-system-x86 qemu-utils cloud-image-utils expect openssh-client libguestfs-tools linux-image-generic && apt clean
 
 # cloud_init config
 COPY cloud.txt cloud.txt
