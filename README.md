@@ -57,7 +57,7 @@ root@ubuntu:~# docker version
 $ git clone https://github.com/ssst0n3/docker_archive.git
 $ cd docker_archive
 $ git checkout branch_ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_runc-1.0.1
-$ docker compose -p docker_19-03-11 -f docker-compose.yml up -d
+$ docker compose -f docker-compose.yml up -d
 ```
 
 or 
@@ -83,7 +83,7 @@ $ docker compose -p docker_19-03-11 up -d
 $ git clone https://github.com/ssst0n3/docker_archive.git
 $ cd docker_archive
 $ git checkout branch_ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_runc-1.0.1
-$ docker compose -p docker_19-03-11 -f docker-compose.kvm.yml up -d
+$ docker compose -f docker-compose.kvm.yml up -d
 ```
 
 or
