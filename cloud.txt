@@ -12,7 +12,7 @@ write_files:
   permissions: '0644'
 - content: |
     #!/bin/bash
-    wget https://github.com/kata-containers/runtime/releases/download/1.11.0/kata-static-1.11.0-x86_64.tar.xz
+    wget -q https://github.com/kata-containers/runtime/releases/download/1.11.0/kata-static-1.11.0-x86_64.tar.xz
     tar -xf kata-static-1.11.0-x86_64.tar.xz -C /
     rm kata-static-1.11.0-x86_64.tar.xz
   path: /tmp/install-kata.sh
