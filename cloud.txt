@@ -13,7 +13,6 @@ write_files:
 - content: |
     #!/bin/bash
     echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
-    ssh-keygen -A
     sync
   path: /tmp/sshd-config.sh
   permissions: '0755'
@@ -37,11 +36,3 @@ write_files:
   permissions: '0755'
 runcmd:
   - /tmp/init.sh
-cloud_init_modules:
-  - [ write-files, always ]
-cloud_config_modules:
-  - [ runcmd, always ]
-  - [ set-passwords, always ]
-cloud_final_modules:
-  - [ scripts-user, always ]
-  - [ final-message, always ]
