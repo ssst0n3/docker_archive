@@ -1,6 +1,6 @@
 ---
 
-version: v0.2.4
+version: v0.3.0
 
 ---
 
@@ -131,6 +131,14 @@ expect "#"
 send "shutdown now \r"
 
 interact
+```
+
+### project name
+
+.env
+
+```
+COMPOSE_PROJECT_NAME=pre_ubuntu-20.04
 ```
 
 ## Preliminary
