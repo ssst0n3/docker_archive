@@ -1,8 +1,8 @@
 ---
 
-spec-version: v0.2.3
+spec-version: v0.2.4
 hierarchy: release
-image-version: v0.1.0
+image-version: v0.1.2
 
 ---
 
@@ -121,6 +121,7 @@ root@ubuntu:~# docker version
 ## version
 
 * `ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_runc-1.0.1`
+* `ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_runc-1.0.1_v0.1.2`
 * `ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_runc-1.0.1_v0.1.1`
 * `ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_runc-1.0.1_v0.1.0`
 
