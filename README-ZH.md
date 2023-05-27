@@ -59,7 +59,7 @@ docker version
 
 | tag | alias | spec | note |
 | --- | --- | --- | --- |
-| [pre_ubuntu-20.04](https://github.com/ssst0n3/docker_archive/tree/pre_ubuntu-20.04) | pre_ubuntu-20.04_v0.1.0 | v0.2.2 |  |
+| [pre_ubuntu-20.04](https://github.com/ssst0n3/docker_archive/tree/pre_ubuntu-20.04) | | v0.2.2 |  |
 
 ### runc
 
@@ -100,11 +100,11 @@ docker version
 | ubuntu-20.04_docker-ce-18.09.9_docker-ce-cli-18.09.9_containerd.io-1.2.2-3_runc-1.0.0-rc6 |
 | ubuntu-20.04_docker-ce-19.03.0_docker-ce-cli-19.03.0_containerd.io-1.2.6-3_runc-1.0.0-rc8 | CVE-2019-14271 |
 | ubuntu-20.04_docker-ce-19.03.1_docker-ce-cli-19.03.1_containerd.io-1.2.6-3_runc-1.0.0-rc8 |
-| ubuntu-20.04_docker-ce-19.03.2_docker-ce-cli-19.03.2_containerd.io-1.2.6-3_runc-1.0.0-rc8 | CVE-2019-16884 | cannot be built by linuxkit, because linux/kernel do not support apparmor |
+| ubuntu-20.04_docker-ce-19.03.2_docker-ce-cli-19.03.2_containerd.io-1.2.6-3_runc-1.0.0-rc8 | CVE-2019-16884 | | cannot be built by linuxkit, because linux/kernel do not support apparmor |
 | ubuntu-20.04_docker-ce-19.03.2_docker-ce-cli-19.03.2_containerd.io-1.2.10-3_runc-1.0.0-rc8-dev |
 | ubuntu-20.04_docker-ce-19.03.5_docker-ce-cli-19.03.5_containerd.io-1.2.6.3_runc-1.0.0-rc8 |
 | [ubuntu-20.04_docker-ce-19.03.7_containerd.io-1.2.6.3_runc-1.0.0-rc8](https://github.com/ssst0n3/docker_archive/tree/branch_ubuntu-20.04_docker-ce-19.03.7_containerd.io-1.2.6.3_runc-1.0.0-rc8) |
-| [ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_runc-1.0.1](https://github.com/ssst0n3/docker_archive/tree/branch_ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_runc-1.0.1) | ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_runc-1.0.1_v0.1.0 | v0.2.2 |
+| [ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_runc-1.0.1](https://github.com/ssst0n3/docker_archive/tree/branch_ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_runc-1.0.1) | | v0.2.2 |
 | ubuntu-20.04_docker-ce-19.03.12_docker-ce-cli-19.03.12_containerd.io-1.2.13_runc-1.0.0-rc10 |
 | ubuntu-20.04_docker-ce-19.03.13_docker-ce-cli-19.03.13_containerd.io-1.3.7_runc-1.0.0-rc10 |
 | ubuntu-20.04_docker-ce-19.03.14_docker-ce-cli-19.03.14_containerd.io-1.3.9_runc-1.0.0-rc10 |
