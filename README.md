@@ -60,7 +60,7 @@ Check versions provided @ [tags](https://github.com/ssst0n3/docker_archive/tags)
 
 | tag | alias | spec | note |
 | --- | --- | --- | --- |
-| [pre_ubuntu-20.04](https://github.com/ssst0n3/docker_archive/tree/pre_ubuntu-20.04) | | v0.2.2 |  |
+| [pre_ubuntu-20.04](https://github.com/ssst0n3/docker_archive/tree/pre_ubuntu-20.04) | | v0.2.3 |  |
 
 ### runc
 
