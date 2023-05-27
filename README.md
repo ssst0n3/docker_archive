@@ -18,20 +18,52 @@ Yep, this form is like Russian nesting dolls, but it's convenient for container 
 
 ## run
 
+There are different ways to start up the environment.
+
+### 1. Get the compose file to start the environment
+
 ```
 $ git clone https://github.com/ssst0n3/docker_archive.git
 $ cd docker_archive
 $ git checkout branch_ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_kata-1.11.0
-$ docker compose -f docker-compose.yml up -d
-# // wait for vm start, or use docker logs -f <CONTAINERID> to watch the starting progress.
-$ ssh -p 2222 root@127.0.0.1
+$ docker compose -p kata_1-11-0 -f docker-compose.yml up -d
+```
+
+or
+
+```
+$ mkdir docker && cd docker
+$ cat > docker-compose.yml << EOF
+version: '3'
+services:
+  vm:
+    image: ssst0n3/docker_archive:ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_kata-1.11.0_v0.1.0
+    ports:
+      - "2222:22"
+    command: /start_vm.sh -m 2560M -cpu host -enable-kvm
+    devices:
+      - "/dev/kvm:/dev/kvm"
+    tty: true
+    stdin_open: true 
+EOF
+$ docker compose -p kata_1-11-0 up -d
+```
+
+### 2. Wait for vm starting
+Wait for vm starting. You can use docker logs -f to watch the starting progress.
+
+### 3. Enter the environemnt
+Then ssh into the vm with kata installed:
+
+```
+$ ssh -p 1110 root@127.0.0.1
 root@127.0.0.1's password: root
-root@ubuntu:~# docker run --rm -ti --runtime kata-runtime ubuntu
-root@17d02623cea7:/#
+root@ubuntu:~# docker version
 ```
 
 ## version
-`ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_kata-1.11.0`
+* `ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_kata-1.11.0`
+* `ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_kata-1.11.0_v0.1.0`
 
 ```
 root@ubuntu:~# docker version
