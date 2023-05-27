@@ -7,3 +7,5 @@ services:
     command: /start_vm.sh -enable-kvm
     devices:
       - "/dev/kvm:/dev/kvm"
+    tty: true
+    stdin_open: true
