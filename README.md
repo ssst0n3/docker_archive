@@ -1,6 +1,6 @@
 ---
 
-spec-version: v0.2.3
+spec-version: v0.3.0
 hierarchy: release
 image-version: v0.1.0
 
@@ -26,7 +26,7 @@ There are different ways to start up the environment.
 $ git clone https://github.com/ssst0n3/docker_archive.git
 $ cd docker_archive
 $ git checkout branch_ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_kata-1.11.0
-$ docker compose -p kata_1-11-0 -f docker-compose.yml up -d
+$ docker compose -f docker-compose.yml up -d
 ```
 
 or
