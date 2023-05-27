@@ -12,5 +12,9 @@ RUN apt update && apt install -y libguestfs-tools linux-image-generic && apt cle
 COPY shrunk.sh /shrunk.sh
 RUN /shrunk.sh /ubuntu-server-cloudimg.img
 
-FROM ssst0n3/docker_archive:release_basic_ubuntu-20.04
+FROM ubuntu:20.04
 COPY --from=0 /ubuntu-server-cloudimg.img /
+COPY shrunk.sh /shrunk.sh
+COPY init_qemu.expect /init_qemu.expect
+RUN apt update && apt install -y qemu-system-x86 qemu-utils cloud-image-utils expect openssh-client libguestfs-tools linux-image-generic libguestfs-tools linux-image-generic && apt clean
+
