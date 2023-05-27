@@ -51,6 +51,16 @@ docker version
 ## 当前支持的版本列表
 可以在 [tags页面](https://github.com/ssst0n3/docker_archive/tags) 查看 
 
+### basic images
+
+
+
+### preliminary images
+
+| tag | alias | spec | note |
+| --- | --- | --- | --- |
+| `[pre_ubuntu-20.04](https://github.com/ssst0n3/docker_archive/tree/pre_ubuntu-20.04)` | pre_ubuntu-20.04_v0.1.0 | v0.2.1 |  |
+
 ### runc
 
 | tag                     | alias               | note |
