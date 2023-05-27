@@ -10,3 +10,4 @@ RUN /shrunk.sh /ubuntu-server-cloudimg.img
 
 FROM ssst0n3/docker_archive:release_basic_ubuntu-20.04
 COPY --from=0 /ubuntu-server-cloudimg.img /
+COPY start_vm.sh /
