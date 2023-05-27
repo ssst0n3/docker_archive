@@ -1,6 +1,6 @@
 ---
 
-version: v0.2.3
+version: v0.2.4
 
 ---
 
@@ -145,7 +145,6 @@ sed -i s/1/0/g /etc/apt/apt.conf.d/20auto-upgrades
 
 ```
 echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
-ssh-keygen -A
 ```
 
 ### clean
