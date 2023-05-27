@@ -11,7 +11,7 @@
 ## 当前支持的版本列表
 可以在 [tags页面](https://github.com/ssst0n3/docker_archive/tags) 查看，
 
-或者在[这里](./images.md)查看所有的镜像列表。
+在[images.md](./images.md) 或 [dockerhub](https://hub.docker.com/repository/docker/ssst0n3/docker_archive/tags?page=1&ordering=last_updated)查看所有的镜像列表。
 
 ## 使用说明
 你可以在[dockerhub](https://hub.docker.com/repository/docker/ssst0n3/docker_archive/tags?page=1&ordering=last_updated) 上看到所有版本的镜像。
