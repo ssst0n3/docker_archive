@@ -1,6 +1,6 @@
 ---
 
-spec: v0.2.0
+spec: v0.2.1
 hierarchy: preliminary
 
 ---
