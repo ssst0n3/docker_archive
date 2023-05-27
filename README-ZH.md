@@ -8,6 +8,11 @@
 
 是的，这种形式有点像俄罗斯套娃，但对于容器安全研究来说，这种形式确实非常方便。
 
+## 当前支持的版本列表
+可以在 [tags页面](https://github.com/ssst0n3/docker_archive/tags) 查看，
+
+或者在[这里](./images.md)查看所有的镜像列表。
+
 ## 使用说明
 你可以在[dockerhub](https://hub.docker.com/repository/docker/ssst0n3/docker_archive/tags?page=1&ordering=last_updated) 上看到所有版本的镜像。
 
@@ -47,11 +52,6 @@ docker version
 
 ## tag template
 {operating system version}_{docker and it's components version}
-
-## 当前支持的版本列表
-可以在 [tags页面](https://github.com/ssst0n3/docker_archive/tags) 查看，
-
-或者在[这里](./images.md)查看所有的镜像列表。
 
 ## 已知问题
 

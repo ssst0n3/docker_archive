@@ -8,6 +8,11 @@ There will be a qemu in the docker image, and a docker 19.03 in qemu.
 
 Yep, this form is like Russian nesting dolls, but it's convenient for container security research.
 
+## List of currently supported versions
+Check versions provided @ [tags](https://github.com/ssst0n3/docker_archive/tags)
+
+Or see all images listed [here](./images.md).
+
 ## How-To
 See all versions of images [here](https://hub.docker.com/repository/docker/ssst0n3/docker_archive/tags?page=1&ordering=last_updated)
 
@@ -48,11 +53,6 @@ docker version
 
 ## tag template
 {operating system version}_{docker and it's components version}
-
-## List of currently supported versions
-Check versions provided @ [tags](https://github.com/ssst0n3/docker_archive/tags)
-
-Or see all images listed [here](./images.md).
 
 ## Known Issues
 
