@@ -18,8 +18,8 @@ write_files:
   permissions: '0755'
 - content: |
     #!/bin/bash
-    apt purge snapd
-    apt autoremove
+    apt purge -y snapd
+    apt autoremove -y
     apt clean
     sync
   path: /tmp/clean.sh
@@ -32,7 +32,7 @@ write_files:
     /tmp/clean.sh
     echo "init.sh complete"
     sync
-  path: /tmp/clean.sh
+  path: /tmp/init.sh
   permissions: '0755'
 runcmd:
   - /tmp/init.sh
