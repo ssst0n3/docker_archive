@@ -1,3 +1,10 @@
+---
+
+spec: v0.2.0
+hierarchy: preliminary
+
+---
+
 # docker archive
 
 Provide most versions of docker. 
