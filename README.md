@@ -1,6 +1,6 @@
 ---
 
-spec-version: v0.2.2
+spec-version: v0.2.3
 hierarchy: release
 image-version: v0.1.0
 
