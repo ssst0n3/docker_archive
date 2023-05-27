@@ -13,7 +13,7 @@ version: v0.2.1
 | Basic | mainly provide the clean vm image | [build_basic_ubuntu-20.04](https://github.com/ssst0n3/docker_archive/tree/build_basic_ubuntu-20.04) |
 | | | [release_basic_ubuntu-20.04](https://github.com/ssst0n3/docker_archive/tree/release_basic_ubuntu-20.04) |
 | Preliminary | doing some pre works such as disable auto-upgrades, slim the image, etc. | [pre_ubuntu-20.04](https://github.com/ssst0n3/docker_archive/tree/pre_ubuntu-20.04) |
-| Release | [branch_ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_runc-1.0.1](https://github.com/ssst0n3/docker_archive/tree/branch_ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_runc-1.0.1) |
+| Release | | [branch_ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_runc-1.0.1](https://github.com/ssst0n3/docker_archive/tree/branch_ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_runc-1.0.1) |
 
 ## Every Hierarchy
 
