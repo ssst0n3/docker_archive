@@ -13,6 +13,7 @@ COPY shrunk.sh /shrunk.sh
 RUN /shrunk.sh /ubuntu-server-cloudimg.img
 
 FROM ubuntu:20.04
+ENV DEBIAN_FRONTEND noninteractive
 COPY --from=0 /ubuntu-server-cloudimg.img /
 COPY shrunk.sh /shrunk.sh
 COPY init_qemu.expect /init_qemu.expect
