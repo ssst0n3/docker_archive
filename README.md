@@ -25,7 +25,7 @@ There are different ways to start up the environment.
 ```
 $ git clone https://github.com/ssst0n3/docker_archive.git
 $ cd docker_archive
-$ git checkout branch_ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_kata-1.11.0
+$ git checkout branch_ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_kata-1.11.0-debug
 $ docker compose -f docker-compose.yml up -d
 ```
 
@@ -37,16 +37,16 @@ $ cat > docker-compose.yml << EOF
 version: '3'
 services:
   vm:
-    image: ssst0n3/docker_archive:ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_kata-1.11.0_v0.1.0
+    image: ssst0n3/docker_archive:ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_kata-1.11.0-debug_v0.1.0
     ports:
-      - "2222:22"
+      - "11100:22"
     command: /start_vm.sh -m 2560M -cpu host -enable-kvm
     devices:
       - "/dev/kvm:/dev/kvm"
     tty: true
     stdin_open: true 
 EOF
-$ docker compose -p kata_1-11-0 up -d
+$ docker compose -p kata-1-11-0-debug up -d
 ```
 
 ### 2. Wait for vm starting
@@ -56,14 +56,22 @@ Wait for vm starting. You can use docker logs -f to watch the starting progress.
 Then ssh into the vm with kata installed:
 
 ```
-$ ssh -p 1110 root@127.0.0.1
+$ ssh -p 11100 root@127.0.0.1
 root@127.0.0.1's password: root
 root@ubuntu:~# docker version
 ```
 
+### 4. debug
+
+```
+root@ubuntu:~# docker run -ti --runtime kata-runtime-debug ubuntu
+```
+
+Debug in the IDE.
+
 ## version
-* `ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_kata-1.11.0`
-* `ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_kata-1.11.0_v0.1.0`
+* `ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_kata-1.11.0-debug`
+* `ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_kata-1.11.0-debug_v0.1.0`
 
 ```
 root@ubuntu:~# docker version
@@ -115,6 +123,13 @@ root@ubuntu:~# /opt/kata/bin/kata-runtime --version
 kata-runtime  : 1.11.0
    commit   : 23e554b316aa994c6f48c9b1bd84060629fd6361
    OCI specs: 1.0.1-dev
+```
+
+```
+root@ubuntu:~# /root/go/bin/dlv version
+Delve Debugger
+Version: 1.20.2
+Build: $Id: e0c278ad8e0126a312b553b8e171e81bcbd37f60 $
 ```
 
 ## troubleshouting

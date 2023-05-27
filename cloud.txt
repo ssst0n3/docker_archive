@@ -1,10 +1,18 @@
 #cloud-config
 write_files:
 - content: |
+    #!/bin/bash
+    /root/go/bin/dlv --listen=:2345 --headless=true --api-version=2 --accept-multiclient --check-go-version=false exec /opt/kata/bin/kata-runtime -- $*
+  path: /opt/kata/bin/kata-runtime-debug
+  permissions: '0755'
+- content: |
     {
       "runtimes": {
         "kata-runtime": {
           "path": "/opt/kata/bin/kata-runtime"
+        },
+        "kata-runtime-debug": {
+          "path": "/opt/kata/bin/kata-runtime-debug"
         }
       }
     }
@@ -12,15 +20,23 @@ write_files:
   permissions: '0644'
 - content: |
     #!/bin/bash
-    wget -q https://github.com/kata-containers/runtime/releases/download/1.11.0/kata-static-1.11.0-x86_64.tar.xz
-    tar -xf kata-static-1.11.0-x86_64.tar.xz -C /
-    rm kata-static-1.11.0-x86_64.tar.xz
-  path: /tmp/install-kata.sh
+    wget -q https://go.dev/dl/go1.20.4.linux-amd64.tar.gz
+    rm -rf /usr/local/go && tar -C /usr/local -xzf go1.20.4.linux-amd64.tar.gz
+    rm go1.20.4.linux-amd64.tar.gz
+    export PATH=$PATH:/usr/local/go/bin
+    export GOPATH=/root/go
+    export GOCACHE=/tmp/.cache/go-build
+    export GOENV=/root/.config/go/env
+    export GOMODCACHE=/tmp/go/pkg/mod
+    go install -v github.com/go-delve/delve/cmd/dlv@latest
+    go clean -testcache -cache -modcache
+    sync
+  path: /tmp/install-delve.sh
   permissions: '0755'
 - content: |
     #!/bin/bash
     set -ex
-    /tmp/install-kata.sh
+    /tmp/install-delve.sh
     sync
     echo "init.sh complete"
   path: /tmp/init.sh
