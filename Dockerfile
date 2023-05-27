@@ -1,4 +1,4 @@
-FROM ssst0n3/docker_archive:pre_ubuntu-20.04_v0.1.0
+FROM ssst0n3/docker_archive:pre_ubuntu-20.04_v0.1.1
 # cloud_init config
 COPY cloud.txt cloud.txt
 RUN cloud-localds /cloud.img cloud.txt
