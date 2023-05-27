@@ -8,3 +8,4 @@ services:
     devices:
       - "/dev/kvm:/dev/kvm"
     tty: true
+    stdin_open: true 

@@ -5,3 +5,4 @@ services:
     ports:
         - "19311:22"
     tty: true
+    stdin_open: true 
