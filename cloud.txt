@@ -31,8 +31,8 @@ write_files:
     /tmp/disable-auto-upgrades.sh
     /tmp/sshd-config.sh
     /tmp/clean.sh
+    sync    
     echo "init.sh complete"
-    sync
   path: /tmp/init.sh
   permissions: '0755'
 runcmd:
