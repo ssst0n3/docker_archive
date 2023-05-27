@@ -22,8 +22,8 @@ write_files:
     set -ex
     /tmp/install-docker.sh
     /tmp/clean.sh
-    echo "init.sh complete"
     sync
+    echo "init.sh complete"
   path: /tmp/init.sh
   permissions: '0755'
 runcmd:
