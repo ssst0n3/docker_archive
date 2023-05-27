@@ -13,6 +13,7 @@ write_files:
 - content: |
     #!/bin/bash
     echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
+    ssh-keygen -A
     sync
   path: /tmp/sshd-config.sh
   permissions: '0755'
