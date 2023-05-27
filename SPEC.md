@@ -1,6 +1,6 @@
 ---
 
-version: v0.2.0
+version: v0.2.1
 
 ---
 
@@ -12,12 +12,18 @@ version: v0.2.0
 | --- | --- | --- |
 | Basic | mainly provide the clean vm image | [build_basic_ubuntu-20.04](https://github.com/ssst0n3/docker_archive/tree/build_basic_ubuntu-20.04) |
 | | | [release_basic_ubuntu-20.04](https://github.com/ssst0n3/docker_archive/tree/release_basic_ubuntu-20.04) |
-| Preliminary | doing some pre works such as disable auto-upgrades, slim the image, etc. |  |
+| Preliminary | doing some pre works such as disable auto-upgrades, slim the image, etc. | [pre_ubuntu-20.04](https://github.com/ssst0n3/docker_archive/tree/pre_ubuntu-20.04) |
 | Release | [branch_ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_runc-1.0.1](https://github.com/ssst0n3/docker_archive/tree/branch_ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_runc-1.0.1) |
 
 ## Every Hierarchy
 
-## sync
+### container image version management
+
+tag: `os-version_container-software-version_image-version`
+
+The `os-version_container-software-version` is the alias of the newest `os-version_container-software-version_image-version`.
+
+### sync
 
 sync before shutdown.
 
@@ -48,9 +54,9 @@ send "shutdown now \r"
 interact
 ```
 
-## shrunk
+### shrunk
 
-### remove redundant files
+#### remove redundant files
 
 cloud.txt
 
@@ -76,7 +82,7 @@ cloud.txt
 ...
 ```
 
-### shrunk the image file
+#### shrunk the image file
 
 For each image:
 
@@ -106,14 +112,58 @@ virt-sparsify --compress $source shrunk.img
 mv shrunk.img $source
 ```
 
+#### shutdown when `init.sh complete`
+
+init_qemu.expect
+
+```
+...
+expect -re {init.sh complete}
+
+send "\r"
+expect "login:"
+send "root\r"
+expect "assword:"
+send "root\r"
+expect "#"
+send "sync\r"
+expect "#"
+send "shutdown now \r"
+
+interact
+```
+
 ## Preliminary
 
 ### disable auto-upgrades 
 
-Do it during basic image.
-
 ```
 sed -i s/1/0/g /etc/apt/apt.conf.d/20auto-upgrades
+```
+
+### sshd config
+
+```
+echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
+```
+
+### clean
+
+```
+apt purge -y snapd
+apt autoremove -y
+apt clean
+```
+
+### change passwd
+
+cloud.txt
+
+```
+user: root
+password: root
+chpasswd: {expire: False}
+ssh_pwauth: True
 ```
 
 ## document
@@ -126,5 +176,14 @@ sed -i s/1/0/g /etc/apt/apt.conf.d/20auto-upgrades
 
 ### branch release
 
-* how to use
-* troubleshouting [optional]
+```
+---
+
+spec: v0.2.1
+hierarchy: preliminary
+
+---
+
+## how to use
+## troubleshouting [optional]
+```
