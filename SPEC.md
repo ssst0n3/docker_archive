@@ -1,6 +1,6 @@
 ---
 
-version: v0.2.1
+version: v0.2.2
 
 ---
 
@@ -179,8 +179,9 @@ ssh_pwauth: True
 ```
 ---
 
-spec: v0.2.1
-hierarchy: preliminary
+spec-version: v0.2.2
+hierarchy: basic/preliminary/release
+image-version: v0.1.0
 
 ---
 
