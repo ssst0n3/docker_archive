@@ -20,7 +20,7 @@ write_files:
   permissions: '0644'
 - content: |
     #!/bin/bash
-    wget -o /usr/local/bin/dlv https://github.com/ssst0n3/container-debug-artifacts/releases/download/dlv-v1.20.2/dlv-v1.20.2
+    wget -O /usr/local/bin/dlv https://github.com/ssst0n3/container-debug-artifacts/releases/download/dlv-v1.20.2/dlv-v1.20.2
     chmod +x /usr/local/bin/dlv
     sync
   path: /tmp/install-delve.sh
