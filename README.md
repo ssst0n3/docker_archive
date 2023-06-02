@@ -25,7 +25,7 @@ There are different ways to start up the environment.
 #### 1.1 tty
 
 ```
-$ docker run -ti --name docker-ce-19.03.11 ssst0n3/docker_archive:ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_runc-1.0.1
+$ docker run -ti --name docker-ce-19.03.11 ssst0n3/docker_archive:ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_runc-1.0.1_v0.1.2
 ...
 Ubuntu 20.04.1 LTS ubuntu ttyS0
 
@@ -37,7 +37,7 @@ root@ubuntu:~# docker version
 #### 1.2 tty with detach
 
 ```
-$ docker run -tid --name docker-ce-19.03.11 ssst0n3/docker_archive:ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_runc-1.0.1
+$ docker run -tid --name docker-ce-19.03.11 ssst0n3/docker_archive:ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_runc-1.0.1_v0.1.2
 $ docker attach --detach-keys ctrl-x docker-ce-19.03.11
 ...
 Ubuntu 20.04.1 LTS ubuntu ttyS0
@@ -68,7 +68,7 @@ $ cat > docker-compose.yml << EOF
 version: '3'
 services:
   vm:
-    image: ssst0n3/docker_archive:ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_runc-1.0.1_v0.1.1
+    image: ssst0n3/docker_archive:ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_runc-1.0.1_v0.1.2
     ports:
         - "19311:22"
     tty: true
@@ -94,7 +94,7 @@ $ cat > docker-compose.yml << EOF
 version: '3'
 services:
   vm:
-    image: ssst0n3/docker_archive:ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_runc-1.0.1_v0.1.1
+    image: ssst0n3/docker_archive:ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_runc-1.0.1_v0.1.2
     ports:
       - "19311:22"
     command: /start_vm.sh -enable-kvm
