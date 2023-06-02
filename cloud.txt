@@ -1,15 +1,38 @@
 #cloud-config
-user: root
-password: root
-chpasswd: {expire: False}
-ssh_pwauth: True
+write_files:
+- content: |
+    #!/bin/bash
+    apt clean
+    sync
+  path: /tmp/clean.sh
+  permissions: '0755'
+- content: |
+    #!/bin/bash
+    apt-get update
+    apt-get -y install apt-transport-https ca-certificates curl gnupg-agent software-properties-common
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+    add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
+    apt-get update
+    apt-get install -y docker-ce=5:19.03.7~3-0~ubuntu-bionic docker-ce-cli=5:19.03.7~3-0~ubuntu-bionic containerd.io=1.2.6-3
+    sync
+  path: /tmp/install-docker.sh
+  permissions: '0755'
+- content: |
+    #!/bin/bash
+    set -ex
+    /tmp/install-docker.sh
+    /tmp/clean.sh
+    sync
+    echo "init.sh complete"
+  path: /tmp/init.sh
+  permissions: '0755'
 runcmd:
-  - echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
-  # - sed -i "s@http://.*.ubuntu.com@http://repo.huaweicloud.com@g" /etc/apt/sources.list
-  - apt-get update
-  # - apt-get install -y docker.io
-  - apt-get -y install apt-transport-https ca-certificates curl gnupg-agent software-properties-common
-  - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
-  - add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
-  - apt-get update
-  - apt-get install -y docker-ce=5:19.03.7~3-0~ubuntu-bionic docker-ce-cli=5:19.03.7~3-0~ubuntu-bionic containerd.io=1.2.6-3
+  - /tmp/init.sh
+cloud_init_modules:
+  - [ write-files, always ]
+cloud_config_modules:
+  - [ runcmd, always ]
+  - [ set-passwords, always ]
+cloud_final_modules:
+  - [ scripts-user, always ]
+  - [ final-message, always ]

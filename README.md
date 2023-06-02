@@ -1,3 +1,11 @@
+---
+
+spec-version: v0.3.0
+hierarchy: release
+image-version: v0.1.0
+
+---
+
 # docker archive
 
 Provide most versions of docker. 
@@ -8,9 +16,6 @@ There will be an qemu in the docker image, and a docker 19.03 in qemu.
 
 Yep, this form is like Russian nesting dolls, but it's convenient for container security research.
 
-## tag template
-{operating system version}_{docker and it's components version}
-
 ## run 
 
 There are different ways to start up the environment.
@@ -20,7 +25,7 @@ There are different ways to start up the environment.
 #### 1.1 tty
 
 ```
-$ docker run -ti --name docker-ce-19.03.7 ssst0n3/docker_archive:ubuntu-20.04_docker-ce-19.03.7_containerd.io-1.2.6.3_runc-1.0.0-rc8
+$ docker run -ti --name docker-ce-19.03.7 ssst0n3/docker_archive:ubuntu-20.04_docker-ce-19.03.7_containerd.io-1.2.6.3_runc-1.0.0-rc8_v0.1.0
 ...
 Ubuntu 20.04.1 LTS ubuntu ttyS0
 
@@ -32,7 +37,7 @@ root@ubuntu:~# docker version
 #### 1.2 tty with detach
 
 ```
-$ docker run -tid --name docker-ce-19.03.7 ssst0n3/docker_archive:ubuntu-20.04_docker-ce-19.03.7_containerd.io-1.2.6.3_runc-1.0.0-rc8
+$ docker run -tid --name docker-ce-19.03.7 ssst0n3/docker_archive:ubuntu-20.04_docker-ce-19.03.7_containerd.io-1.2.6.3_runc-1.0.0-rc8_v0.1.0
 $ docker attach --detach-keys ctrl-x docker-ce-19.03.7
 ...
 Ubuntu 20.04.1 LTS ubuntu ttyS0
@@ -52,7 +57,7 @@ root@ubuntu:~# docker version
 $ git clone https://github.com/ssst0n3/docker_archive.git
 $ cd docker_archive
 $ git checkout branch_ubuntu-20.04_docker-ce-19.03.7_containerd.io-1.2.6.3_runc-1.0.0-rc8
-$ docker compose -p docker_19-03-7 -f docker-compose.yml up -d
+$ docker compose -p docker-19-03-7 -f docker-compose.yml up -d
 ```
 
 or 
@@ -63,11 +68,13 @@ $ cat > docker-compose.yml << EOF
 version: '3'
 services:
   vm:
-    image: ssst0n3/docker_archive:ubuntu-20.04_docker-ce-19.03.7_containerd.io-1.2.6.3_runc-1.0.0-rc8
+    image: ssst0n3/docker_archive:ubuntu-20.04_docker-ce-19.03.7_containerd.io-1.2.6.3_runc-1.0.0-rc8_v0.1.0
     ports:
         - "19037:22"
+    tty: true
+    stdin_open: true 
 EOF
-$ docker compose -p docker_19-03-7 up -d
+$ docker compose -p docker-19-03-7 up -d
 ```
 
 ##### b) ssh with kvm
@@ -76,7 +83,7 @@ $ docker compose -p docker_19-03-7 up -d
 $ git clone https://github.com/ssst0n3/docker_archive.git
 $ cd docker_archive
 $ git checkout branch_ubuntu-20.04_docker-ce-19.03.7_containerd.io-1.2.6.3_runc-1.0.0-rc8
-$ docker compose -p docker_19-03-7 -f docker-compose.kvm.yml up -d
+$ docker compose -p docker-19-03-7 -f docker-compose.kvm.yml up -d
 ```
 
 or
@@ -87,14 +94,16 @@ $ cat > docker-compose.yml << EOF
 version: '3'
 services:
   vm:
-    image: ssst0n3/docker_archive:ubuntu-20.04_docker-ce-19.03.7_containerd.io-1.2.6.3_runc-1.0.0-rc8
+    image: ssst0n3/docker_archive:ubuntu-20.04_docker-ce-19.03.7_containerd.io-1.2.6.3_runc-1.0.0-rc8_v0.1.0
     ports:
         - "19037:22"
     command: /start_vm.sh -enable-kvm
     devices:
       - "/dev/kvm:/dev/kvm"
+    tty: true
+    stdin_open: true
 EOF
-$ docker compose -p docker_19-03-7 up -d
+$ docker compose -p docker-19-03-7 up -d
 ```
 
 #### Step2: Wait for vm starting
@@ -110,7 +119,8 @@ root@ubuntu:~# docker version
 ```
 
 ## version
-`ubuntu-20.04_docker-ce-19.03.7_containerd.io-1.2.6.3_runc-1.0.0-rc8`
+* `ubuntu-20.04_docker-ce-19.03.7_containerd.io-1.2.6.3_runc-1.0.0-rc8`
+* `ubuntu-20.04_docker-ce-19.03.7_containerd.io-1.2.6.3_runc-1.0.0-rc8_v0.1.0`
 
 ```
 root@ubuntu:~# docker version
