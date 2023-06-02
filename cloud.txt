@@ -1,20 +1,29 @@
 #cloud-config
-user: root
-password: root
-chpasswd: {expire: False}
-ssh_pwauth: True
 write_files:
+- content: |
+    {
+      "runtimes": {
+        "kata-runtime": {
+          "path": "/opt/kata/bin/kata-runtime"
+        }
+      }
+    }
+  path: /etc/docker/daemon.json
+  permissions: '0644'
+- content: |
+    #!/bin/bash
+    wget -q https://github.com/kata-containers/runtime/releases/download/1.11.1/kata-static-1.11.1-x86_64.tar.xz
+    tar -xf kata-static-1.11.1-x86_64.tar.xz -C /
+    rm kata-static-1.11.1-x86_64.tar.xz
+  path: /tmp/install-kata.sh
+  permissions: '0755'
 - content: |
     #!/bin/bash
     set -ex
-    wget https://github.com/kata-containers/runtime/releases/download/1.11.1/kata-static-1.11.1-x86_64.tar.xz
-    tar -xvf kata-static-1.11.1-x86_64.tar.xz -C /
-    mkdir -p /etc/docker
-    touch /etc/docker/daemon.json
-    echo '{"runtimes": {"kata-runtime": {"path": "/opt/kata/bin/kata-runtime"}}}' >> /etc/docker/daemon.json
-    systemctl restart docker
-    echo "complete"
-  path: /init.sh
+    /tmp/install-kata.sh
+    sync
+    echo "init.sh complete"
+  path: /tmp/init.sh
   permissions: '0755'
 runcmd:
   - /init.sh

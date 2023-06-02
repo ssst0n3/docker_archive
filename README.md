@@ -1,3 +1,11 @@
+---
+
+spec-version: v0.3.0
+hierarchy: release
+image-version: v0.1.0
+
+---
+
 # docker archive
 
 Provide most versions of docker. 
@@ -8,9 +16,6 @@ There will be an qemu in the docker image, and a docker 19.03 in qemu.
 
 Yep, this form is like Russian nesting dolls, but it's convenient for container security research.
 
-## tag template
-{operating system version}_{docker and it's components version}
-
 ## run
 
 ### 1. Get the compose file to start the environment
@@ -19,7 +24,7 @@ Yep, this form is like Russian nesting dolls, but it's convenient for container 
 $ git clone https://github.com/ssst0n3/docker_archive.git
 $ cd docker_archive
 $ git checkout branch_ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_kata-1.11.1
-$ docker compose -p kata_1-11-1 -f docker-compose.yml up -d
+$ docker compose -p kata-1-11-1 -f docker-compose.yml up -d
 ```
 
 or 
@@ -30,14 +35,16 @@ $ cat > docker-compose.yml << EOF
 version: '3'
 services:
   vm:
-    image: ssst0n3/docker_archive:ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_kata-1.11.1
+    image: ssst0n3/docker_archive:ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_kata-1.11.1_v0.1.0
     ports:
-      - "2222:22"
+      - "1111:22"
     command: /start_vm.sh -m 2560M -cpu host -enable-kvm
     devices:
       - "/dev/kvm:/dev/kvm"
+    tty: true
+    stdin_open: true 
 EOF
-$ docker compose -p kata_1-11-1 up -d
+$ docker compose -p kata-1-11-1 up -d
 ```
 
 ### 2. Wait for vm starting
@@ -48,14 +55,16 @@ Wait for vm starting. You can use docker logs -f <CONTAINERID> to watch the star
 Then ssh into the vm with kata installed:
 
 ```
-$ ssh -p 2222 root@127.0.0.1
+$ ssh -p 1111 root@127.0.0.1
 root@127.0.0.1's password: root
 root@ubuntu:~# docker run --rm -ti --runtime kata-runtime ubuntu
 root@17d02623cea7:/#
 ```
 
 ## version
-`ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_kata-1.11.1`
+* `ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_kata-1.11.1`
+* `ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_kata-1.11.1_v0.1.0`
+
 
 ```
 root@ubuntu:~# docker version
