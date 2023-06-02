@@ -26,7 +26,7 @@ write_files:
   path: /tmp/init.sh
   permissions: '0755'
 runcmd:
-  - /init.sh
+  - /tmp/init.sh
 cloud_init_modules:
   - [ write-files, always ]
 cloud_config_modules:
