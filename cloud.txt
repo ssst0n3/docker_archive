@@ -10,7 +10,7 @@ write_files:
     #!/bin/bash
     apt-get update
     apt install -y xterm gcc
-    apt install -y runc=1.1.4-0ubuntu1~22.04.1
+    apt install -y runc=1.1.4-0ubuntu1~22.04.3
     sync
   path: /tmp/install-runc.sh
   permissions: '0755'
