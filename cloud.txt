@@ -10,7 +10,10 @@ write_files:
     #!/bin/bash
     apt-get update
     apt install -y xterm gcc
-    apt install -y runc=1.1.4-0ubuntu1~22.04.3
+    # outdated: 
+    # apt install -y runc=1.1.4-0ubuntu1~22.04.1
+    wget -O /tmp/runc_1.1.4-0ubuntu1~22.04.1_amd64.deb http://launchpadlibrarian.net/648135547/runc_1.1.4-0ubuntu1~22.04.1_amd64.deb
+    dpkg -i /tmp/runc_1.1.4-0ubuntu1~22.04.1_amd64.deb
     sync
   path: /tmp/install-runc.sh
   permissions: '0755'
