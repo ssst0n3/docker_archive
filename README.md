@@ -1,3 +1,11 @@
+---
+
+spec-version: v0.3.0
+hierarchy: release
+image-version: v0.1.0
+
+---
+
 # docker archive
 
 Provide most versions of docker. 
@@ -8,11 +16,23 @@ There will be an qemu in the docker image, and a docker 19.03 in qemu.
 
 Yep, this form is like Russian nesting dolls, but it's convenient for container security research.
 
-## tag template
-{operating system version}_{docker or it's components version}
+## run 
 
-## version
-`ubuntu-22.04_runc-1.1.4`
+There are different ways to start up the environment.
+
+### 1. tty 
+
+#### 1.1 tty
+
+```
+$ docker run -ti --name runc-1-1-4 ssst0n3/docker_archive:ubuntu-22.04_runc-1.1.4_v0.1.0
+...
+Ubuntu 22.04.1 LTS ubuntu ttyS0
+
+ubuntu login: root
+Password: root
+root@ubuntu:~# runc --version
+```
 
 ## usage
 ### with kvm
@@ -40,3 +60,8 @@ or
 ```
 docker-compose up -d
 ```
+
+## version
+
+* `ubuntu-22.04_runc-1.1.4`
+* `ubuntu-22.04_runc-1.1.4_v0.1.0`
