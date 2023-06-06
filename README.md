@@ -2,7 +2,7 @@
 
 spec-version: v0.3.0
 hierarchy: preliminary
-image-version: v0.1.1
+image-version: v0.1.2
 
 ---
 
