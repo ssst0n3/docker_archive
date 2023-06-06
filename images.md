@@ -6,7 +6,8 @@
 
 | tag | alias | spec | note |
 | --- | --- | --- | --- |
-| [pre_ubuntu-20.04](https://github.com/ssst0n3/docker_archive/tree/pre_ubuntu-20.04) | | v0.3.0 |  |
+| [pre_ubuntu-20.04](https://github.com/ssst0n3/docker_archive/tree/pre_ubuntu-20.04) | | v0.3.0 | |
+| [pre_ubuntu-22.04](https://github.com/ssst0n3/docker_archive/tree/pre_ubuntu-22.04) | | v0.3.0 | |
 | [pre_operator](https://github.com/ssst0n3/docker_archive/tree/pre_operator) | | v0.3.0 | contains packages needed for instructions |
 
 ## runc
