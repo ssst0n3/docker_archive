@@ -12,9 +12,9 @@
 
 ## runc
 
-| tag                     | alias               | note |
-|-------------------------|---------------------|------|
-| ubuntu-22.04_runc-1.1.4 | CVE-2023-27561      |
+| tag                     | alias               | spec | note |
+|-------------------------|---------------------|------| --- |
+| [ubuntu-22.04_runc-1.1.4](https://github.com/ssst0n3/docker_archive/tree/branch_ubuntu-22.04_runc-1.1.4) | CVE-2023-27561 | v0.3.0 |
 |                         | CVE-2023-27561_runc |
 
 ## kata
