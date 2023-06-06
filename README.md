@@ -27,41 +27,106 @@ There are different ways to start up the environment.
 ```
 $ docker run -ti --name runc-1-1-4 ssst0n3/docker_archive:ubuntu-22.04_runc-1.1.4_v0.1.0
 ...
-Ubuntu 22.04.1 LTS ubuntu ttyS0
+Ubuntu 22.04 LTS ubuntu ttyS0
 
 ubuntu login: root
 Password: root
 root@ubuntu:~# runc --version
 ```
 
-## usage
-### with kvm
+#### 1.2 tty with detach
+
 ```
-docker run --device /dev/kvm -d -p 2222:22 -ti ssst0n3/docker_archive:ubuntu-22.04_runc-1.1.4 /start_vm.sh -enable-kvm
-ssh -p 2222 root@127.0.0.1
-root@127.0.0.1's password: root
+$ docker run -tid --name runc-1-1-4 ssst0n3/docker_archive:ubuntu-22.04_runc-1.1.4_v0.1.0
+$ docker attach --detach-keys ctrl-x runc-1-1-4
+...
+Ubuntu 22.04 LTS ubuntu ttyS0
+
+ubuntu login: root
+Password: root
 root@ubuntu:~# runc --version
-runc version 1.1.4-0ubuntu1~22.04.1
-spec: 1.0.2-dev
-go: go1.18.1
-libseccomp: 2.5.3
 ```
 
-### without kvm
+### 2. ssh
+
+#### Step1: Get the compose file to start the environment
+
+##### a) ssh without kvm
+
 ```
-docker run -d -p 2222:22 -ti ssst0n3/docker_archive:ubuntu-22.04_runc-1.1.4
-ssh -p 2222 root@127.0.0.1
-root@127.0.0.1's password: root
-root@ubuntu:~# runc --version
+$ git clone https://github.com/ssst0n3/docker_archive.git
+$ cd docker_archive
+$ git checkout branch_ubuntu-22.04_runc-1.1.4
+$ docker compose -f docker-compose.yml up -d
 ```
 
 or 
 
 ```
-docker-compose up -d
+$ mkdir docker && cd docker
+$ cat > docker-compose.yml << EOF
+version: '3'
+services:
+  vm:
+    image: ssst0n3/docker_archive:ubuntu-22.04_runc-1.1.4_v0.1.0
+    ports:
+        - "1140:22"
+    tty: true
+    stdin_open: true 
+EOF
+$ docker compose -p runc-1-1-4 up -d
+```
+
+##### b) ssh with kvm
+
+```
+$ git clone https://github.com/ssst0n3/docker_archive.git
+$ cd docker_archive
+$ git checkout branch_ubuntu-22.04_runc-1.1.4
+$ docker compose -f docker-compose.kvm.yml up -d
+```
+
+or
+
+```
+$ mkdir docker && cd docker
+$ cat > docker-compose.yml << EOF
+version: '3'
+services:
+  vm:
+    image: ssst0n3/docker_archive:ubuntu-22.04_runc-1.1.4_v0.1.0
+    ports:
+      - "1140:22"
+    command: /start_vm.sh -enable-kvm
+    devices:
+      - "/dev/kvm:/dev/kvm"
+    tty: true
+    stdin_open: true
+EOF
+$ docker compose -p runc-1-1-4 up -d
+```
+
+#### Step2: Wait for vm starting
+Wait for vm starting. You can use docker logs -f to watch the starting progress.
+
+#### Step3: Enter the environemnt
+Then ssh into the vm with kata installed:
+
+```
+$ ssh -p 1140 root@127.0.0.1
+root@127.0.0.1's password: root
+root@ubuntu:~# runc --version
 ```
 
 ## version
 
 * `ubuntu-22.04_runc-1.1.4`
 * `ubuntu-22.04_runc-1.1.4_v0.1.0`
+
+```
+root@ubuntu:~# runc --version
+runc version 1.1.4-0ubuntu1~22.04.3
+spec: 1.0.2-dev
+go: go1.18.1
+libseccomp: 2.5.3
+```
