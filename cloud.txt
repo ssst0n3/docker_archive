@@ -18,8 +18,11 @@ write_files:
         https://download.opensuse.org/repositories/devel:kubic:libcontainers:unstable/xUbuntu_$(lsb_release -rs)/ /" \
       | sudo tee /etc/apt/sources.list.d/devel:kubic:libcontainers:unstable.list > /dev/null
     apt-get update
-    apt-get -y install podman=4:4.4.3-0ubuntu22.04+obs72.1
-    apt clean
+    # outdated: 
+    # apt-get -y install podman=4:4.4.3-0ubuntu22.04+obs72.1
+    wget -O /tmp/podman_4.4.3-1_amd64.deb https://download.opensuse.org/repositories/home:/alvistack/xUbuntu_22.04/amd64/podman_4.4.3-1_amd64.deb
+    dpkg -i /tmp/podman_4.4.3-1_amd64.deb
+    sync
   path: /tmp/install-podman.sh
   permissions: '0755'
 - content: |
