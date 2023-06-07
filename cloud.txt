@@ -1,9 +1,11 @@
 #cloud-config
-user: root
-password: root
-chpasswd: {expire: False}
-ssh_pwauth: True
 write_files:
+- content: |
+    #!/bin/bash
+    apt clean
+    sync
+  path: /tmp/clean.sh
+  permissions: '0755'
 - content: |
     #!/bin/bash
     set -x
@@ -18,8 +20,19 @@ write_files:
     apt-get update
     apt-get -y install podman=4:4.4.3-0ubuntu22.04+obs72.1
     apt clean
-  path: /init.sh
+  path: /tmp/install-podman.sh
   permissions: '0755'
+- content: |
+    #!/bin/bash
+    set -ex
+    /tmp/install-runc.sh
+    /tmp/clean.sh
+    sync
+    echo "init.sh complete"
+  path: /tmp/init.sh
+  permissions: '0755'
+runcmd:
+  - /tmp/init.sh
 runcmd:
   - /init.sh
 cloud_init_modules:
