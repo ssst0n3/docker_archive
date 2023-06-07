@@ -25,7 +25,7 @@ write_files:
 - content: |
     #!/bin/bash
     set -ex
-    /tmp/install-runc.sh
+    /tmp/install-podman.sh
     /tmp/clean.sh
     sync
     echo "init.sh complete"
