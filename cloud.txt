@@ -20,8 +20,9 @@ write_files:
     apt-get update
     # outdated: 
     # apt-get -y install podman=4:4.4.3-0ubuntu22.04+obs72.1
-    wget -O /tmp/podman_4.4.3-1_amd64.deb https://download.opensuse.org/repositories/home:/alvistack/xUbuntu_22.04/amd64/podman_4.4.3-1_amd64.deb
-    apt install -y /tmp/podman_4.4.3-1_amd64.deb
+    # wget -O /tmp/podman_4.4.3-1_amd64.deb https://download.opensuse.org/repositories/home:/alvistack/xUbuntu_22.04/amd64/podman_4.4.3-1_amd64.deb
+    wget -O /tmp/podman_4:4.4.3-0ubuntu22.04+obs1.1_amd64.deb https://build.opensuse.org/build/home:ssst0n3:branches:devel:kubic:libcontainers:unstable/xUbuntu_22.04/x86_64/podman/podman_4:4.4.3-0ubuntu22.04+obs1.1_amd64.deb
+    apt install -y /tmp/podman_4:4.4.3-0ubuntu22.04+obs1.1_amd64.deb
     sync
   path: /tmp/install-podman.sh
   permissions: '0755'
