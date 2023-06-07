@@ -61,10 +61,10 @@
 | ubuntu-20.04_docker-ce-19.03.15_docker-ce-cli-19.03.15_containerd.io-1.4.3_runc-1.0.0-rc92                 |
 | ubuntu-20.04_docker-ce-20.10.0_docker-ce-cli-20.10.0_containerd.io-1.4.3_runc-1.0.0-rc92                   |
 | ubuntu-20.04_docker-ce-20.10.1_docker-ce-cli-20.10.1_containerd.io-1.4.3_runc-1.0.0-rc92                   |
-| ubuntu-20.04_docker-ce-20.10.2_docker-ce-cli-20.10.2_containerd.io-1.4.3_runc-1.0.0-rc92                   | cve-2021-21285     |
+| ubuntu-20.04_docker-ce-20.10.2_docker-ce-cli-20.10.2_containerd.io-1.4.3_runc-1.0.0-rc92                   | | cve-2021-21285     |
 | ubuntu-20.04_docker-ce-20.10.3_docker-ce-cli-20.10.3_containerd.io-1.4.3_runc-1.0.0-rc92                   |
 | ubuntu-20.04_docker-ce-20.10.6_docker-ce-cli-20.10.6_containerd.io-1.4.4_runc-1.0.0-rc93                   |
-| ubuntu-22.04_docker-ce-20.10.19_docker-ce-cli-20.10.19_containerd.io-1.6.14-1_docker-compose-plugin-2.14.1 | git_cve-2022-39253 |
+| ubuntu-22.04_docker-ce-20.10.19_docker-ce-cli-20.10.19_containerd.io-1.6.14-1_docker-compose-plugin-2.14.1 | | git_cve-2022-39253 |
 | ubuntu-22.04_docker-ce-20.10.20_docker-ce-cli-20.10.20_containerd.io-1.6.14-1_docker-compose-plugin-2.14.1 |                    |
 | ubuntu-22.04_docker-ce-20.10.21_docker-ce-cli-20.10.21_containerd.io-1.6.14-1_docker-compose-plugin-2.14.1 |                    |
 | ubuntu-22.04_docker-ce-20.10.22_docker-ce-cli-20.10.22_containerd.io-1.6.14-1_docker-compose-plugin-2.14.1 |                    |
