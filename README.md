@@ -125,7 +125,7 @@ root@ubuntu:~# runc --version
 
 ```
 root@ubuntu:~# runc --version
-runc version 1.1.4-0ubuntu1~22.04.3
+runc version 1.1.4-0ubuntu1~22.04.1
 spec: 1.0.2-dev
 go: go1.18.1
 libseccomp: 2.5.3
