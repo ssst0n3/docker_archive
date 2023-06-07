@@ -33,8 +33,6 @@ write_files:
   permissions: '0755'
 runcmd:
   - /tmp/init.sh
-runcmd:
-  - /init.sh
 cloud_init_modules:
   - [ write-files, always ]
 cloud_config_modules:
