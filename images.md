@@ -7,31 +7,31 @@
 | tag | version | alias | spec | note |
 | --- | --- | --- | --- | --- |
 | [pre_ubuntu-20.04](https://github.com/ssst0n3/docker_archive/tree/pre_ubuntu-20.04) | v0.1.2 | | v0.3.0 | |
-| [pre_ubuntu-22.04](https://github.com/ssst0n3/docker_archive/tree/pre_ubuntu-22.04) | v0.1.0 | v0.3.0 | |
-| [pre_operator](https://github.com/ssst0n3/docker_archive/tree/pre_operator) | | v0.3.0 | contains packages needed for instructions |
+| [pre_ubuntu-22.04](https://github.com/ssst0n3/docker_archive/tree/pre_ubuntu-22.04) | v0.1.0 | | v0.3.0 | |
+| [pre_operator](https://github.com/ssst0n3/docker_archive/tree/pre_operator) | v0.1.0 | | v0.3.0 | contains packages needed for instructions |
 
 ## runc
 
-| tag                     | alias               | spec | note |
-|-------------------------|---------------------|------| --- |
-| [ubuntu-22.04_runc-1.1.4](https://github.com/ssst0n3/docker_archive/tree/branch_ubuntu-22.04_runc-1.1.4) | CVE-2023-27561 | v0.3.0 |
-|                         | CVE-2023-27561_runc |
+| tag                     | version | alias               | spec | note |
+|-------------------------| --- | ---------------------|------| --- |
+| [ubuntu-22.04_runc-1.1.4](https://github.com/ssst0n3/docker_archive/tree/branch_ubuntu-22.04_runc-1.1.4) | v0.1.0 | CVE-2023-27561 | v0.3.0 |
+|                         | | CVE-2023-27561_runc |
 
 ## kata
 
-| tag                     | alias               | spec | note |
-|-------------------------|---------------------|------| --- |
+| tag                     | version | alias               | spec | note |
+|-------------------------| --- | ---------------------|------| --- |
 | [ubuntu-20.04_docker-ce-19.03.7_containerd.io-1.2.6.3_kata-1.10.4](https://github.com/ssst0n3/docker_archive/tree/branch_ubuntu-20.04_docker-ce-19.03.7_containerd.io-1.2.6.3_kata-1.10.4) |
 | [ubuntu-20.04_docker-ce-19.03.7_containerd.io-1.2.6.3_kata-1.10.4-debug](https://github.com/ssst0n3/docker_archive/tree/branch_ubuntu-20.04_docker-ce-19.03.7_containerd.io-1.2.6.3_kata-1.10.4-debug) | | |
-| [ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_kata-1.11.0](https://github.com/ssst0n3/docker_archive/tree/branch_ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_kata-1.11.0) | | v0.3.0 | 
-| [ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_kata-1.11.0-debug](https://github.com/ssst0n3/docker_archive/tree/branch_ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_kata-1.11.0-debug) | | v0.3.0 |
-| [ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_kata-1.11.1](https://github.com/ssst0n3/docker_archive/tree/branch_ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_kata-1.11.1) | | v0.3.0 |
+| [ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_kata-1.11.0](https://github.com/ssst0n3/docker_archive/tree/branch_ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_kata-1.11.0) | v0.1.0 | | v0.3.0 | 
+| [ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_kata-1.11.0-debug](https://github.com/ssst0n3/docker_archive/tree/branch_ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_kata-1.11.0-debug) | v0.1.1 | | v0.3.0 |
+| [ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_kata-1.11.1](https://github.com/ssst0n3/docker_archive/tree/branch_ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_kata-1.11.1) | v0.1.0 | | v0.3.0 |
 
 ## docker
 ### linuxkit(slim version)
 
-| tag                                                                              | alias               | note                                                               |
-|----------------------------------------------------------------------------------|---------------------|--------------------------------------------------------------------|
+| tag | alias | note |
+|---|---|---|
 | linuxkit_docker-17.06.0                                                          |                     |                                                                    |
 | linuxkit_docker-19.03.0                                                          |                     | cannot be used to reproduce CVE-2019-14271 because of static build |
 | linuxkit_docker-19.03.0-rc3                                                      |                     |                                                                    |
@@ -42,19 +42,19 @@
 
 ### ubuntu
 
-| tag | alias | spec | note |
-| --- | --- | --- | --- |
-| ubuntu-20.04_docker-ce-17.06.0                                                                             | 
-| ubuntu-20.04_docker-ce-18.06.1                                                                             | cve-2019-5736      | 
+| tag | version | alias | spec | note |
+| --- | --- | --- | --- | --- |
+| ubuntu-20.04_docker-ce-17.06.0 | 
+| ubuntu-20.04_docker-ce-18.06.1 | | cve-2019-5736      | 
 | ubuntu-20.04_docker-ce-18.09.0_docker-ce-cli-18.09.0_containerd.io-1.2.6-3_runc-1.0.0-rc8                  |
 | ubuntu-20.04_docker-ce-18.09.9_docker-ce-cli-18.09.9_containerd.io-1.2.2-3_runc-1.0.0-rc6                  |
-| ubuntu-20.04_docker-ce-19.03.0_docker-ce-cli-19.03.0_containerd.io-1.2.6-3_runc-1.0.0-rc8                  | CVE-2019-14271     |
+| ubuntu-20.04_docker-ce-19.03.0_docker-ce-cli-19.03.0_containerd.io-1.2.6-3_runc-1.0.0-rc8                  | | CVE-2019-14271     |
 | ubuntu-20.04_docker-ce-19.03.1_docker-ce-cli-19.03.1_containerd.io-1.2.6-3_runc-1.0.0-rc8                  |
-| ubuntu-20.04_docker-ce-19.03.2_docker-ce-cli-19.03.2_containerd.io-1.2.6-3_runc-1.0.0-rc8                  | CVE-2019-16884     || cannot be built by linuxkit, because linux/kernel do not support apparmor |
+| ubuntu-20.04_docker-ce-19.03.2_docker-ce-cli-19.03.2_containerd.io-1.2.6-3_runc-1.0.0-rc8                  | | CVE-2019-16884     || |
 | ubuntu-20.04_docker-ce-19.03.2_docker-ce-cli-19.03.2_containerd.io-1.2.10-3_runc-1.0.0-rc8-dev             |
 | ubuntu-20.04_docker-ce-19.03.5_docker-ce-cli-19.03.5_containerd.io-1.2.6.3_runc-1.0.0-rc8                  |
-| [ubuntu-20.04_docker-ce-19.03.7_containerd.io-1.2.6.3_runc-1.0.0-rc8](https://github.com/ssst0n3/docker_archive/tree/branch_ubuntu-20.04_docker-ce-19.03.7_containerd.io-1.2.6.3_runc-1.0.0-rc8) | | v0.3.0 |
-| [ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_runc-1.0.1](https://github.com/ssst0n3/docker_archive/tree/branch_ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_runc-1.0.1) | | v0.3.0 |
+| [ubuntu-20.04_docker-ce-19.03.7_containerd.io-1.2.6.3_runc-1.0.0-rc8](https://github.com/ssst0n3/docker_archive/tree/branch_ubuntu-20.04_docker-ce-19.03.7_containerd.io-1.2.6.3_runc-1.0.0-rc8) | v0.1.0 | | v0.3.0 |
+| [ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_runc-1.0.1](https://github.com/ssst0n3/docker_archive/tree/branch_ubuntu-20.04_docker-ce-19.03.11_containerd.io-1.4.9_runc-1.0.1) | v0.1.2 | | v0.3.0 |
 | ubuntu-20.04_docker-ce-19.03.12_docker-ce-cli-19.03.12_containerd.io-1.2.13_runc-1.0.0-rc10                |
 | ubuntu-20.04_docker-ce-19.03.13_docker-ce-cli-19.03.13_containerd.io-1.3.7_runc-1.0.0-rc10                 |
 | ubuntu-20.04_docker-ce-19.03.14_docker-ce-cli-19.03.14_containerd.io-1.3.9_runc-1.0.0-rc10                 |
