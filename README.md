@@ -8,9 +8,6 @@ There will be an qemu in the docker image, and a docker 19.03 in qemu.
 
 Yep, this form is like Russian nesting dolls, but it's convenient for container security research.
 
-## tag template
-{operating system version}_{docker or it's components version}
-
 ## version
 `ubuntu-22.04_podman-4.4.3_runc-1.1.4`
 
@@ -42,3 +39,8 @@ or
 ```
 docker-compose up -d
 ```
+
+## Note
+The podman v4.4.3 package is not available in the official repository.
+
+So i rebuild it at https://build.opensuse.org/package/show/home:ssst0n3/podman-v4.4.3 .
