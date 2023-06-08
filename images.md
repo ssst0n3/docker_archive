@@ -16,6 +16,7 @@
 |-------------------------| --- | ---------------------|------| --- |
 | [ubuntu-22.04_runc-1.1.4](https://github.com/ssst0n3/docker_archive/tree/branch_ubuntu-22.04_runc-1.1.4) | v0.1.0 | CVE-2023-27561 | v0.3.0 |
 |                         | | CVE-2023-27561_runc |
+| [ubuntu-20.04_runc-1.0.0-rc3](https://github.com/ssst0n3/docker_archive/tree/branch_ubuntu-20.04_runc-1.0.0-rc3) | v0.1.0 | | v0.3.0 |
 
 ## kata
 
