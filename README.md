@@ -124,5 +124,8 @@ root@ubuntu:~# runc --version
 * `ubuntu-20.04_runc-1.0.0-rc4_v0.1.0`
 
 ```
-
+root@ubuntu:~# runc --version
+runc version 1.0.0-rc4
+commit: -dirty
+spec: 1.0.0
 ```
