@@ -1,8 +1,8 @@
 version: '3'
 services:
   vm:
-    image: ssst0n3/docker_archive:ubuntu-20.04_runc-1.0.0-rc9_v0.1.0
+    image: ssst0n3/docker_archive:ubuntu-20.04_runc-1.0.0-rc95_v0.1.0
     ports:
-        - "1009:22"
+        - "10095:22"
     tty: true
     stdin_open: true 
