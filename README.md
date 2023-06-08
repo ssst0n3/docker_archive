@@ -124,5 +124,7 @@ root@ubuntu:~# runc --version
 * `ubuntu-20.04_runc-1.0.0-rc9_v0.1.0`
 
 ```
-
+root@ubuntu:~# runc --version
+runc version 1.0.0-rc9
+spec: 1.0.1-dev
 ```
