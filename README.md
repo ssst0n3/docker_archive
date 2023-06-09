@@ -18,5 +18,5 @@ Yep, this form is like Russian nesting dolls, but it's convenient for container 
 
 ## version
 
-* `pre_ubuntu-22.04`
-* `pre_ubuntu-22.04_v0.1.0`
+* `pre_ubuntu-16.04`
+* `pre_ubuntu-16.04_v0.1.0`

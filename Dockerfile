@@ -1,4 +1,4 @@
-FROM ssst0n3/docker_archive:build_basic_ubuntu-22.04-20220609
+FROM ssst0n3/docker_archive:build_basic_ubuntu-16.04
 
 # cloud_init config
 COPY cloud.txt cloud.txt
@@ -12,7 +12,7 @@ RUN apt update && apt install -y libguestfs-tools linux-image-generic && apt cle
 COPY shrunk.sh /shrunk.sh
 RUN /shrunk.sh /ubuntu-server-cloudimg.img
 
-FROM ubuntu:22.04
+FROM ubuntu:16.04
 ENV DEBIAN_FRONTEND noninteractive
 COPY --from=0 /ubuntu-server-cloudimg.img /
 COPY shrunk.sh /shrunk.sh
