@@ -125,7 +125,5 @@ root@ubuntu:~# runc --version
 
 ```
 root@ubuntu:~# runc --version
-runc version 1.0.0-rc1
-commit: -dirty
-spec: 1.0.0-rc5
+runc version spec: 1.0.0-rc1
 ```
