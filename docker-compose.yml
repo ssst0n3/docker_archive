@@ -1,7 +1,7 @@
 version: '3'
 services:
   vm:
-    image: ssst0n3/docker_archive:pre_ubuntu-16.04_v0.1.0
+    image: ssst0n3/docker_archive:pre_ubuntu-16.04_v0.1.1
     ports:
         - "1604:22"
     tty: true
