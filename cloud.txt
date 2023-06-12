@@ -8,8 +8,8 @@ write_files:
   permissions: '0755'
 - content: |
     #!/bin/bash
-    wget -O /tmp/runc_1.0.0~rc1-0ubuntu1~16.04_amd64.deb https://launchpad.net/ubuntu/+source/runc/1.0.0~rc1-0ubuntu1~16.04/+build/10751325/+files/runc_1.0.0~rc1-0ubuntu1~16.04_amd64.deb
-    apt install -y /tmp/runc_1.0.0~rc1-0ubuntu1~16.04_amd64.deb
+    wget -O /tmp/runc_0.1.1-0ubuntu1_amd64.deb https://launchpad.net/ubuntu/+source/runc/0.1.1-0ubuntu1/+build/9889777/+files/runc_0.1.1-0ubuntu1_amd64.deb
+    apt install -y /tmp/runc_0.1.1-0ubuntu1_amd64.deb
     sync
   path: /tmp/install-runc.sh
   permissions: '0755'
