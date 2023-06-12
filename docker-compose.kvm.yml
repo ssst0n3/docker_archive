@@ -1,7 +1,7 @@
 version: '3'
 services:
   vm:
-    image: ssst0n3/docker_archive:ubuntu-20.04_runc-1.0.0-rc1_v0.1.0
+    image: ssst0n3/docker_archive:ubuntu-16.04_runc-1.0.0-rc1_v0.1.0
     ports:
       - "1001:22"
     command: /start_vm.sh -enable-kvm
