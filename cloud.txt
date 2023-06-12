@@ -5,6 +5,10 @@ chpasswd: {expire: False}
 ssh_pwauth: True
 write_files:
 - content: |
+    datasource_list: [ None ]
+  path: /etc/cloud/cloud.cfg.d/99_overrides.cfg
+  permissions: '0644'
+- content: |
     #!/bin/bash
     sed -i s/1/0/g /etc/apt/apt.conf.d/20auto-upgrades
     sync
