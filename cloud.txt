@@ -5,7 +5,7 @@ chpasswd: {expire: False}
 ssh_pwauth: True
 write_files:
 - content: |
-    datasource_list: [ None ]
+    datasource_list: [ NoCloud, ConfigDrive, None ]
   path: /etc/cloud/cloud.cfg.d/99_overrides.cfg
   permissions: '0644'
 - content: |

@@ -2,7 +2,7 @@
 
 spec-version: v0.3.0
 hierarchy: preliminary
-image-version: v0.1.0
+image-version: v0.1.1
 
 ---
 
@@ -19,4 +19,5 @@ Yep, this form is like Russian nesting dolls, but it's convenient for container 
 ## version
 
 * `pre_ubuntu-16.04`
+* `pre_ubuntu-16.04_v0.1.1`
 * `pre_ubuntu-16.04_v0.1.0`
