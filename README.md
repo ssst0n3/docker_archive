@@ -25,9 +25,9 @@ There are different ways to start up the environment.
 #### 1.1 tty
 
 ```
-$ docker run -ti --name runc-1-0-0-rc1 ssst0n3/docker_archive:ubuntu-20.04_runc-1.0.0-rc1_v0.1.0
+$ docker run -ti --name runc-1-0-0-rc1 ssst0n3/docker_archive:ubuntu-16.04_runc-1.0.0-rc1_v0.1.0
 ...
-Ubuntu 20.04 LTS ubuntu ttyS0
+Ubuntu 16.04 LTS ubuntu ttyS0
 
 ubuntu login: root
 Password: root
@@ -37,10 +37,10 @@ root@ubuntu:~# runc --version
 #### 1.2 tty with detach
 
 ```
-$ docker run -tid --name runc-1-0-0-rc1 ssst0n3/docker_archive:ubuntu-20.04_runc-1.0.0-rc1_v0.1.0
+$ docker run -tid --name runc-1-0-0-rc1 ssst0n3/docker_archive:ubuntu-16.04_runc-1.0.0-rc1_v0.1.0
 $ docker attach --detach-keys ctrl-x runc-1-0-0-rc1
 ...
-Ubuntu 20.04 LTS ubuntu ttyS0
+Ubuntu 16.04 LTS ubuntu ttyS0
 
 ubuntu login: root
 Password: root
@@ -56,7 +56,7 @@ root@ubuntu:~# runc --version
 ```
 $ git clone https://github.com/ssst0n3/docker_archive.git
 $ cd docker_archive
-$ git checkout branch_ubuntu-20.04_runc-1.0.0-rc1
+$ git checkout branch_ubuntu-16.04_runc-1.0.0-rc1
 $ docker compose -f docker-compose.yml up -d
 ```
 
@@ -68,7 +68,7 @@ $ cat > docker-compose.yml << EOF
 version: '3'
 services:
   vm:
-    image: ssst0n3/docker_archive:ubuntu-20.04_runc-1.0.0-rc1_v0.1.0
+    image: ssst0n3/docker_archive:ubuntu-16.04_runc-1.0.0-rc1_v0.1.0
     ports:
         - "1001:22"
     tty: true
@@ -82,7 +82,7 @@ $ docker compose -p runc-1-0-0-rc1 up -d
 ```
 $ git clone https://github.com/ssst0n3/docker_archive.git
 $ cd docker_archive
-$ git checkout branch_ubuntu-20.04_runc-1.0.0-rc1
+$ git checkout branch_ubuntu-16.04_runc-1.0.0-rc1
 $ docker compose -f docker-compose.kvm.yml up -d
 ```
 
@@ -94,7 +94,7 @@ $ cat > docker-compose.yml << EOF
 version: '3'
 services:
   vm:
-    image: ssst0n3/docker_archive:ubuntu-20.04_runc-1.0.0-rc1_v0.1.0
+    image: ssst0n3/docker_archive:ubuntu-16.04_runc-1.0.0-rc1_v0.1.0
     ports:
       - "1001:22"
     command: /start_vm.sh -enable-kvm
@@ -120,8 +120,8 @@ root@ubuntu:~# runc --version
 
 ## version
 
-* `ubuntu-20.04_runc-1.0.0-rc1`
-* `ubuntu-20.04_runc-1.0.0-rc1_v0.1.0`
+* `ubuntu-16.04_runc-1.0.0-rc1`
+* `ubuntu-16.04_runc-1.0.0-rc1_v0.1.0`
 
 ```
 root@ubuntu:~# runc --version
