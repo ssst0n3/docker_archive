@@ -8,8 +8,8 @@ write_files:
   permissions: '0755'
 - content: |
     #!/bin/bash
-    wget -O /tmp/runc_0.1.0+dfsg-1_amd64.deb https://launchpad.net/ubuntu/+source/runc/0.1.0+dfsg-1/+build/9647057/+files/runc_0.1.0+dfsg-1_amd64.deb
-    apt install -y /tmp/runc_0.1.0+dfsg-1_amd64.deb
+    wget -O /usr/sbin/runc https://github.com/ssst0n3/container-debug-artifacts/releases/download/runc-v0.0.1/runc-v0.0.1
+    chmod +x /usr/sbin/runc
     sync
   path: /tmp/install-runc.sh
   permissions: '0755'
