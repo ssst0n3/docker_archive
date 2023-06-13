@@ -120,11 +120,9 @@ root@ubuntu:~# runc --version
 
 ## version
 
-* `ubuntu-16.04_runc-0.1.1`
-* `ubuntu-16.04_runc-0.1.1_v0.1.0`
+* `ubuntu-16.04_runc-0.1.0`
+* `ubuntu-16.04_runc-0.1.0_v0.1.0`
 
 ```
 root@ubuntu:~# runc --version
-runc version 0.1.1
-spec: 0.6.0-dev
 ```
