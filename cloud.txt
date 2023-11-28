@@ -1,14 +1,36 @@
 #cloud-config
-user: root
-password: root
-chpasswd: {expire: False}
-ssh_pwauth: True
+write_files:
+- content: |
+    #!/bin/bash
+    apt clean
+    sync
+  path: /tmp/clean.sh
+  permissions: '0755'
+- content: |
+    #!/bin/bash
+    apt-get update
+    apt install -y xterm curl
+    curl -fsSL https://get.docker.com -o get-docker.sh
+    CHANNEL=test sh get-docker.sh 25.0.0-beta.1
+    sync
+  path: /tmp/install-docker.sh
+  permissions: '0755'
+- content: |
+    #!/bin/bash
+    set -ex
+    /tmp/install-docker.sh
+    /tmp/clean.sh
+    sync
+    echo "init.sh complete"
+  path: /tmp/init.sh
+  permissions: '0755'
 runcmd:
-  - sed -i s/1/0/g /etc/apt/apt.conf.d/20auto-upgrades
-  - echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
-  - apt update
-  - apt install -y xterm
-  - apt install -y curl
-  - curl -fsSL https://get.docker.com -o get-docker.sh
-  - sudo CHANNEL=test sh get-docker.sh 25.0.0-beta.1
-  - apt clean
+  - /tmp/init.sh
+cloud_init_modules:
+  - [ write-files, always ]
+cloud_config_modules:
+  - [ runcmd, always ]
+  - [ set-passwords, always ]
+cloud_final_modules:
+  - [ scripts-user, always ]
+  - [ final-message, always ]
