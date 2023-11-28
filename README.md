@@ -96,154 +96,76 @@ $ cat > docker-compose.yml << EOF
 version: '3'
 services:
   vm:
-    image: ssst0n3/docker_archive:ubuntu-20.04_docker-ce-19.03.7_containerd.io-1.2.6.3_runc-1.0.0-rc8_v0.1.0
+    image: ssst0n3/docker_archive:ubuntu-22.04_docker-ce-25.0.0-beta.1_containerd.io-1.6.25_runc-1.1.10_v0.1.0
     ports:
-        - "19037:22"
-    command: /start_vm.sh -enable-kvm
+        - "25001:22"
+    command: /start_vm.sh -m 2560M -cpu host -enable-kvm
     devices:
       - "/dev/kvm:/dev/kvm"
     tty: true
     stdin_open: true
 EOF
-$ docker compose -p docker-19-03-7 up -d
+$ docker compose -p docker-25-0-0-beta-1 up -d
 ```
 
+#### Step2: Wait for vm starting
+Wait for vm starting. You can use docker logs -f to watch the starting progress.
 
 
+#### Step3: Enter the environemnt
+Then ssh into the vm with docker installed:
 
-
-
-
-
-
-
-
-
-
-
-## tag template
-{operating system version}_{docker and it's components version}
-
-## version
-`ubuntu-22.04_docker-ce-25.0.0-beta.1_containerd.io-1.6.25_runc-1.1.10`
-
-## usage
-### with kvm
 ```
-docker network create test
-docker run --net=test --dev /dev/kvm -d -p 2222:22 -ti ssst0n3/docker_archive:ubuntu-22.04_docker-ce-20.10.22_docker-ce-cli-20.10.22_containerd.io-1.6.14-1_docker-compose-plugin-2.14.1 /start_vm.sh -enable-kvm
-ssh -p 2222 root@127.0.0.1
+$ ssh -p 25001 root@127.0.0.1
 root@127.0.0.1's password: root
 root@ubuntu:~# docker version
+```
+
+## version
+* `ubuntu-22.04_docker-ce-25.0.0-beta.1_containerd.io-1.6.25_runc-1.1.10`
+* `ubuntu-22.04_docker-ce-25.0.0-beta.1_containerd.io-1.6.25_runc-1.1.10_v0.1.0`
+
+```
+root@ubuntu:~# docker version
 Client: Docker Engine - Community
- Version:           20.10.22
- API version:       1.41
- Go version:        go1.18.9
- Git commit:        3a2c30b
- Built:             Thu Dec 15 22:28:04 2022
+ Version:           25.0.0-beta.1
+ API version:       1.44
+ Go version:        go1.21.3
+ Git commit:        2b521e4
+ Built:             Mon Nov 13 16:49:38 2023
  OS/Arch:           linux/amd64
  Context:           default
- Experimental:      true
 
 Server: Docker Engine - Community
  Engine:
-  Version:          20.10.22
-  API version:      1.41 (minimum version 1.12)
-  Go version:       go1.18.9
-  Git commit:       42c8b31
-  Built:            Thu Dec 15 22:25:49 2022
+  Version:          25.0.0-beta.1
+  API version:      1.44 (minimum version 1.12)
+  Go version:       go1.21.3
+  Git commit:       6af7d6e
+  Built:            Mon Nov 13 16:49:38 2023
   OS/Arch:          linux/amd64
   Experimental:     false
  containerd:
-  Version:          1.6.14
-  GitCommit:        9ba4b250366a5ddde94bb7c9d1def331423aa323
+  Version:          1.6.25
+  GitCommit:        d8f198a4ed8892c764191ef7b3b06d8a2eeb5c7f
  runc:
-  Version:          1.1.4
-  GitCommit:        v1.1.4-0-g5fd4c4d
+  Version:          1.1.10
+  GitCommit:        v1.1.10-0-g18a0cb0
  docker-init:
   Version:          0.19.0
   GitCommit:        de40ad0
 ```
 
-### without kvm
 ```
-docker network create test
-docker run --net=test -d -p 2222:22 -ti ssst0n3/docker_archive:ubuntu-22.04_docker-ce-20.10.22_docker-ce-cli-20.10.22_containerd.io-1.6.14-1_docker-compose-plugin-2.14.1
-ssh -p 2222 root@127.0.0.1
-root@127.0.0.1's password: root
-root@ubuntu:~# docker version
-```
-
-or 
-
-```
-docker-compose up -d
-```
-
-## info
-```
-root@docker-archive:~# ssh -p 2222 127.0.0.1
-root@127.0.0.1's password: root
-root@ubuntu:~# docker info
-Client:
- Context:    default
- Debug Mode: false
- Plugins:
-  app: Docker App (Docker Inc., v0.9.1-beta3)
-  buildx: Docker Buildx (Docker Inc., v0.9.1-docker)
-  compose: Docker Compose (Docker Inc., v2.14.1)
-  scan: Docker Scan (Docker Inc., v0.23.0)
-
-Server:
- Containers: 0
-  Running: 0
-  Paused: 0
-  Stopped: 0
- Images: 0
- Server Version: 20.10.22
- Storage Driver: overlay2
-  Backing Filesystem: extfs
-  Supports d_type: true
-  Native Overlay Diff: true
-  userxattr: false
- Logging Driver: json-file
- Cgroup Driver: systemd
- Cgroup Version: 2
- Plugins:
-  Volume: local
-  Network: bridge host ipvlan macvlan null overlay
-  Log: awslogs fluentd gcplogs gelf journald json-file local logentries splunk syslog
- Swarm: inactive
- Runtimes: io.containerd.runc.v2 io.containerd.runtime.v1.linux runc
- Default Runtime: runc
- Init Binary: docker-init
- containerd version: 9ba4b250366a5ddde94bb7c9d1def331423aa323
- runc version: v1.1.4-0-g5fd4c4d
- init version: de40ad0
- Security Options:
-  apparmor
-  seccomp
-   Profile: default
-  cgroupns
- Kernel Version: 5.15.0-37-generic
- Operating System: Ubuntu 22.04 LTS
- OSType: linux
- Architecture: x86_64
- CPUs: 2
- Total Memory: 1.931GiB
- Name: ubuntu
- ID: U6KH:WOT5:MSI2:V6YT:3WIP:7CRK:Z2NK:UUHZ:G4TS:ZDXJ:U5OV:H3ZP
- Docker Root Dir: /var/lib/docker
- Debug Mode: false
- Registry: https://index.docker.io/v1/
- Labels:
- Experimental: false
- Insecure Registries:
-  127.0.0.0/8
- Live Restore Enabled: false
+root@ubuntu:~# containerd --version
+containerd containerd.io 1.6.25 d8f198a4ed8892c764191ef7b3b06d8a2eeb5c7f
 ```
 
 ```
-root@ubuntu:~# git --version
-git version 2.34.1
+root@ubuntu:~# runc -version
+runc version 1.1.10
+commit: v1.1.10-0-g18a0cb0
+spec: 1.0.2-dev
+go: go1.20.10
+libseccomp: 2.5.3
 ```
