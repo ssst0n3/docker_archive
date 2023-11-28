@@ -70,14 +70,52 @@ $ cat > docker-compose.yml << EOF
 version: '3'
 services:
   vm:
-    image: ssst0n3/docker_archive:ubuntu-20.04_docker-ce-19.03.7_containerd.io-1.2.6.3_runc-1.0.0-rc8_v0.1.0
+    image: ssst0n3/docker_archive:ubuntu-22.04_docker-ce-25.0.0-beta.1_containerd.io-1.6.25_runc-1.1.10_v0.1.0
     ports:
-        - "19037:22"
+        - "25001:22"
     tty: true
     stdin_open: true 
 EOF
+$ docker compose -p docker-25-0-0-beta-1 up -d
+```
+
+##### b) ssh with kvm
+
+```
+$ git clone https://github.com/ssst0n3/docker_archive.git
+$ cd docker_archive
+$ git checkout branch_ubuntu-22.04_docker-ce-25.0.0-beta.1_containerd.io-1.6.25_runc-1.1.10
+$ docker compose -f docker-compose.kvm.yml up -d
+```
+
+or
+
+```
+$ mkdir docker && cd docker
+$ cat > docker-compose.yml << EOF
+version: '3'
+services:
+  vm:
+    image: ssst0n3/docker_archive:ubuntu-20.04_docker-ce-19.03.7_containerd.io-1.2.6.3_runc-1.0.0-rc8_v0.1.0
+    ports:
+        - "19037:22"
+    command: /start_vm.sh -enable-kvm
+    devices:
+      - "/dev/kvm:/dev/kvm"
+    tty: true
+    stdin_open: true
+EOF
 $ docker compose -p docker-19-03-7 up -d
 ```
+
+
+
+
+
+
+
+
+
 
 
 
