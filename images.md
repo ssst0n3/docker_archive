@@ -79,6 +79,7 @@
 | ubuntu-22.04_docker-ce-20.10.20_docker-ce-cli-20.10.20_containerd.io-1.6.14-1_docker-compose-plugin-2.14.1 |                    |
 | ubuntu-22.04_docker-ce-20.10.21_docker-ce-cli-20.10.21_containerd.io-1.6.14-1_docker-compose-plugin-2.14.1 |                    |
 | ubuntu-22.04_docker-ce-20.10.22_docker-ce-cli-20.10.22_containerd.io-1.6.14-1_docker-compose-plugin-2.14.1 |                    |
+| [ubuntu-22.04_docker-ce-25.0.0-beta.1_containerd.io-1.6.25_runc-1.1.10](https://github.com/ssst0n3/docker_archive/tree/branch_ubuntu-22.04_docker-ce-25.0.0-beta.1_containerd.io-1.6.25_runc-1.1.10) | v0.1.0 | | v0.3.0 |
 
 ## podman
 
