@@ -25,9 +25,9 @@ There are different ways to start up the environment.
 #### 1.1 tty
 
 ```
-$ docker run -ti --name docker-ce-25.0.0-beta.1 ssst0n3/docker_archive:ubuntu-22.04_docker-ce-25.0.0-beta.1_containerd.io-1.6.25_runc-1.1.10_v0.1.0
+$ docker run -ti --name docker-ce-20-10-0-beta1 ssst0n3/docker_archive:ubuntu-20.04_docker-ce-20.10.0-beta1_containerd.io-1.6.25_runc-1.1.10_v0.1.0
 ...
-Ubuntu 22.04 LTS ubuntu ttyS0
+Ubuntu 20.04.1 LTS ubuntu ttyS0
 
 ubuntu login: root
 Password: root
@@ -37,10 +37,10 @@ root@ubuntu:~# docker version
 #### 1.2 tty with detach
 
 ```
-$ docker run -tid --name docker-ce-25.0.0-beta.1 ssst0n3/docker_archive:ubuntu-22.04_docker-ce-25.0.0-beta.1_containerd.io-1.6.25_runc-1.1.10_v0.1.0
-$ docker attach --detach-keys ctrl-x docker-ce-25.0.0-beta.1
+$ docker run -tid --name docker-ce-20-10-0-beta1 ssst0n3/docker_archive:ubuntu-20.04_docker-ce-20.10.0-beta1_containerd.io-1.6.25_runc-1.1.10_v0.1.0
+$ docker attach --detach-keys ctrl-x docker-ce-20-10-0-beta1
 ...
-Ubuntu 22.04 LTS ubuntu ttyS0
+Ubuntu 20.04.1 LTS ubuntu ttyS0
 
 ubuntu login: root
 Password: root
@@ -58,7 +58,7 @@ use ctrl-x to detach
 ```
 $ git clone https://github.com/ssst0n3/docker_archive.git
 $ cd docker_archive
-$ git checkout branch_ubuntu-22.04_docker-ce-25.0.0-beta.1_containerd.io-1.6.25_runc-1.1.10
+$ git checkout branch_ubuntu-20.04_docker-ce-20.10.0-beta1_containerd.io-1.6.25_runc-1.1.10
 $ docker compose -f docker-compose.yml up -d
 ```
 
@@ -70,13 +70,13 @@ $ cat > docker-compose.yml << EOF
 version: '3'
 services:
   vm:
-    image: ssst0n3/docker_archive:ubuntu-22.04_docker-ce-25.0.0-beta.1_containerd.io-1.6.25_runc-1.1.10_v0.1.0
+    image: ssst0n3/docker_archive:ubuntu-20.04_docker-ce-20.10.0-beta1_containerd.io-1.6.25_runc-1.1.10_v0.1.0
     ports:
-        - "25001:22"
+        - "20101:22"
     tty: true
     stdin_open: true 
 EOF
-$ docker compose -p docker-25-0-0-beta-1 up -d
+$ docker compose -p docker-20-10-0-beta1 up -d
 ```
 
 ##### b) ssh with kvm
@@ -84,7 +84,7 @@ $ docker compose -p docker-25-0-0-beta-1 up -d
 ```
 $ git clone https://github.com/ssst0n3/docker_archive.git
 $ cd docker_archive
-$ git checkout branch_ubuntu-22.04_docker-ce-25.0.0-beta.1_containerd.io-1.6.25_runc-1.1.10
+$ git checkout branch_ubuntu-20.04_docker-ce-20.10.0-beta1_containerd.io-1.6.25_runc-1.1.10
 $ docker compose -f docker-compose.kvm.yml up -d
 ```
 
@@ -96,16 +96,16 @@ $ cat > docker-compose.yml << EOF
 version: '3'
 services:
   vm:
-    image: ssst0n3/docker_archive:ubuntu-22.04_docker-ce-25.0.0-beta.1_containerd.io-1.6.25_runc-1.1.10_v0.1.0
+    image: ssst0n3/docker_archive:ubuntu-20.04_docker-ce-20.10.0-beta1_containerd.io-1.6.25_runc-1.1.10_v0.1.0
     ports:
-        - "25001:22"
+        - "20101:22"
     command: /start_vm.sh -m 2560M -cpu host -enable-kvm
     devices:
       - "/dev/kvm:/dev/kvm"
     tty: true
     stdin_open: true
 EOF
-$ docker compose -p docker-25-0-0-beta-1 up -d
+$ docker compose -p docker-20-10-0-beta1 up -d
 ```
 
 #### Step2: Wait for vm starting
@@ -116,33 +116,34 @@ Wait for vm starting. You can use docker logs -f to watch the starting progress.
 Then ssh into the vm with docker installed:
 
 ```
-$ ssh -p 25001 root@127.0.0.1
+$ ssh -p 20101 root@127.0.0.1
 root@127.0.0.1's password: root
 root@ubuntu:~# docker version
 ```
 
 ## version
-* `ubuntu-22.04_docker-ce-25.0.0-beta.1_containerd.io-1.6.25_runc-1.1.10`
-* `ubuntu-22.04_docker-ce-25.0.0-beta.1_containerd.io-1.6.25_runc-1.1.10_v0.1.0`
+* `ubuntu-20.04_docker-ce-20.10.0-beta1_containerd.io-1.6.25_runc-1.1.10`
+* `ubuntu-20.04_docker-ce-20.10.0-beta1_containerd.io-1.6.25_runc-1.1.10_v0.1.0`
 
 ```
 root@ubuntu:~# docker version
 Client: Docker Engine - Community
- Version:           25.0.0-beta.1
- API version:       1.44
- Go version:        go1.21.3
- Git commit:        2b521e4
- Built:             Mon Nov 13 16:49:38 2023
+ Version:           20.10.0-beta1
+ API version:       1.41
+ Go version:        go1.13.15
+ Git commit:        ac365d7
+ Built:             Tue Oct 13 18:15:22 2020
  OS/Arch:           linux/amd64
  Context:           default
+ Experimental:      true
 
 Server: Docker Engine - Community
  Engine:
-  Version:          25.0.0-beta.1
-  API version:      1.44 (minimum version 1.12)
-  Go version:       go1.21.3
-  Git commit:       6af7d6e
-  Built:            Mon Nov 13 16:49:38 2023
+  Version:          20.10.0-beta1
+  API version:      1.41 (minimum version 1.12)
+  Go version:       go1.13.15
+  Git commit:       9c15e82
+  Built:            Tue Oct 13 18:13:38 2020
   OS/Arch:          linux/amd64
   Experimental:     false
  containerd:
@@ -162,10 +163,10 @@ containerd containerd.io 1.6.25 d8f198a4ed8892c764191ef7b3b06d8a2eeb5c7f
 ```
 
 ```
-root@ubuntu:~# runc -version
+root@ubuntu:~# runc --version
 runc version 1.1.10
 commit: v1.1.10-0-g18a0cb0
 spec: 1.0.2-dev
 go: go1.20.10
-libseccomp: 2.5.3
+libseccomp: 2.5.1
 ```
