@@ -11,7 +11,7 @@ write_files:
     apt-get update
     apt install -y xterm curl
     curl -fsSL https://get.docker.com -o get-docker.sh
-    CHANNEL=test sh get-docker.sh --version 25.0.0-beta.1
+    CHANNEL=test sh get-docker.sh --version 24.0.7
     sync
   path: /tmp/install-docker.sh
   permissions: '0755'

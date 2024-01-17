@@ -1,9 +1,9 @@
 version: '3'
 services:
   vm:
-    image: ssst0n3/docker_archive:ubuntu-22.04_docker-ce-25.0.0-beta.1_containerd.io-1.6.25_runc-1.1.10_v0.1.0
+    image: ssst0n3/docker_archive:ubuntu-22.04_docker-ce-24.0.7_containerd.io-1.6.26_runc-1.1.10_v0.1.0
     ports:
-        - "25001:22"
+        - "24007:22"
     command: /start_vm.sh -m 2560M -cpu host -enable-kvm
     devices:
       - "/dev/kvm:/dev/kvm"
