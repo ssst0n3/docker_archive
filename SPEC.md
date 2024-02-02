@@ -1,6 +1,6 @@
 ---
 
-version: v0.3.0
+version: v0.3.1
 
 ---
 
@@ -22,6 +22,8 @@ version: v0.3.0
 tag: `os-version_container-software-version_image-version`
 
 The `os-version_container-software-version` is the alias of the newest `os-version_container-software-version_image-version`.
+
+software version comes from `apt list --installed`
 
 ### sync
 
