@@ -103,7 +103,7 @@ services:
     tty: true
     stdin_open: true
 EOF
-$ docker compose -p docker-19-03-7 up -d
+$ docker compose -p docker-17-03-0 up -d
 ```
 
 #### Step2: Wait for vm starting
