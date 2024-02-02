@@ -13,7 +13,7 @@ write_files:
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
     add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable"
     apt-get update
-    apt-get install -y docker-ce=17.03.0~ce-0~ubuntu-xenial
+    apt-get install -y docker-ce=17.06.0~ce-0~ubuntu
     sync
   path: /tmp/install-docker.sh
   permissions: '0755'
