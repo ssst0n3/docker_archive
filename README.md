@@ -56,8 +56,8 @@ root@ubuntu:~# docker version
 ```
 $ git clone https://github.com/ssst0n3/docker_archive.git
 $ cd docker_archive
-$ git checkout branch_ubuntu-20.04_docker-ce-19.03.7_containerd.io-1.2.6.3_runc-1.0.0-rc8
-$ docker compose -p docker-19-03-7 -f docker-compose.yml up -d
+$ git checkout branch_ubuntu-20.04_docker-ce-17.03.0
+$ docker compose -p docker-17-03-0 -f docker-compose.yml up -d
 ```
 
 or 
