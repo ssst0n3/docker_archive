@@ -25,7 +25,7 @@ There are different ways to start up the environment.
 #### 1.1 tty
 
 ```
-$ docker run -ti --name docker-ce-19.03.7 ssst0n3/docker_archive:ubuntu-20.04_docker-ce-19.03.7_containerd.io-1.2.6.3_runc-1.0.0-rc8_v0.1.0
+$ docker run -ti --name docker-ce-17.03.0 ssst0n3/docker_archive:ubuntu-20.04_docker-ce-17.03.0_v0.1.0
 ...
 Ubuntu 20.04.1 LTS ubuntu ttyS0
 
@@ -37,8 +37,8 @@ root@ubuntu:~# docker version
 #### 1.2 tty with detach
 
 ```
-$ docker run -tid --name docker-ce-19.03.7 ssst0n3/docker_archive:ubuntu-20.04_docker-ce-19.03.7_containerd.io-1.2.6.3_runc-1.0.0-rc8_v0.1.0
-$ docker attach --detach-keys ctrl-x docker-ce-19.03.7
+$ docker run -tid --name docker-ce-17.03.0 ssst0n3/docker_archive:ubuntu-20.04_docker-ce-17.03.0_v0.1.0
+$ docker attach --detach-keys ctrl-x docker-ce-17.03.0
 ...
 Ubuntu 20.04.1 LTS ubuntu ttyS0
 
