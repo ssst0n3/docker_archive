@@ -121,6 +121,8 @@ root@ubuntu:~# docker version
 ## version
 * `ubuntu-20.04_docker-ce-17.06.0`
 * `ubuntu-20.04_docker-ce-17.06.0_v0.1.0`
+* `cve-2024-21626-statedir`
+
 
 ```
 root@ubuntu:~# docker version
