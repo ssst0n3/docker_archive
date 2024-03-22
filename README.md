@@ -25,7 +25,7 @@ There are different ways to start up the environment.
 #### 1.1 tty
 
 ```
-$ docker run -ti --name docker-ce-19.03.5 ssst0n3/docker_archive:ubuntu-20.04_docker-ce-19.03.5_containerd.io-1.2.6.3_runc-1.0.0-rc8_v0.1.0
+$ docker run -ti --name docker-ce-19.03.5 ssst0n3/docker_archive:ubuntu-20.04_docker-ce-19.03.5_containerd.io-1.2.6-3_runc-1.0.0-rc8_v0.1.0
 ...
 Ubuntu 20.04.1 LTS ubuntu ttyS0
 
@@ -37,7 +37,7 @@ root@ubuntu:~# docker version
 #### 1.2 tty with detach
 
 ```
-$ docker run -tid --name docker-ce-19.03.5 ssst0n3/docker_archive:ubuntu-20.04_docker-ce-19.03.5_containerd.io-1.2.6.3_runc-1.0.0-rc8_v0.1.0
+$ docker run -tid --name docker-ce-19.03.5 ssst0n3/docker_archive:ubuntu-20.04_docker-ce-19.03.5_containerd.io-1.2.6-3_runc-1.0.0-rc8_v0.1.0
 $ docker attach --detach-keys ctrl-x docker-ce-19.03.5
 ...
 Ubuntu 20.04.1 LTS ubuntu ttyS0
@@ -56,7 +56,7 @@ root@ubuntu:~# docker version
 ```
 $ git clone https://github.com/ssst0n3/docker_archive.git
 $ cd docker_archive
-$ git checkout branch_ubuntu-20.04_docker-ce-19.03.5_containerd.io-1.2.6.3_runc-1.0.0-rc8
+$ git checkout branch_ubuntu-20.04_docker-ce-19.03.5_containerd.io-1.2.6-3_runc-1.0.0-rc8
 $ docker compose -p docker-19-03-5 -f docker-compose.yml up -d
 ```
 
@@ -68,7 +68,7 @@ $ cat > docker-compose.yml << EOF
 version: '3'
 services:
   vm:
-    image: ssst0n3/docker_archive:ubuntu-20.04_docker-ce-19.03.5_containerd.io-1.2.6.3_runc-1.0.0-rc8_v0.1.0
+    image: ssst0n3/docker_archive:ubuntu-20.04_docker-ce-19.03.5_containerd.io-1.2.6-3_runc-1.0.0-rc8_v0.1.0
     ports:
         - "19035:22"
     tty: true
@@ -82,7 +82,7 @@ $ docker compose -p docker-19-03-5 up -d
 ```
 $ git clone https://github.com/ssst0n3/docker_archive.git
 $ cd docker_archive
-$ git checkout branch_ubuntu-20.04_docker-ce-19.03.5_containerd.io-1.2.6.3_runc-1.0.0-rc8
+$ git checkout branch_ubuntu-20.04_docker-ce-19.03.5_containerd.io-1.2.6-3_runc-1.0.0-rc8
 $ docker compose -p docker-19-03-5 -f docker-compose.kvm.yml up -d
 ```
 
@@ -94,7 +94,7 @@ $ cat > docker-compose.yml << EOF
 version: '3'
 services:
   vm:
-    image: ssst0n3/docker_archive:ubuntu-20.04_docker-ce-19.03.5_containerd.io-1.2.6.3_runc-1.0.0-rc8_v0.1.0
+    image: ssst0n3/docker_archive:ubuntu-20.04_docker-ce-19.03.5_containerd.io-1.2.6-3_runc-1.0.0-rc8_v0.1.0
     ports:
         - "19035:22"
     command: /start_vm.sh -enable-kvm
@@ -119,8 +119,8 @@ root@ubuntu:~# docker version
 ```
 
 ## version
-* `ubuntu-20.04_docker-ce-19.03.5_containerd.io-1.2.6.3_runc-1.0.0-rc8`
-* `ubuntu-20.04_docker-ce-19.03.5_containerd.io-1.2.6.3_runc-1.0.0-rc8_v0.1.0`
+* `ubuntu-20.04_docker-ce-19.03.5_containerd.io-1.2.6-3_runc-1.0.0-rc8`
+* `ubuntu-20.04_docker-ce-19.03.5_containerd.io-1.2.6-3_runc-1.0.0-rc8_v0.1.0`
 
 ```
 root@ubuntu:~# docker version
