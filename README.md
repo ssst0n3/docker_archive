@@ -1,3 +1,11 @@
+---
+
+spec-version: v0.3.0
+hierarchy: release
+image-version: v0.1.0
+
+---
+
 # docker archive
 
 Provide most versions of docker. 
@@ -117,21 +125,21 @@ root@ubuntu:~# docker version
 ```
 root@ubuntu:~# docker version
 Client: Docker Engine - Community
- Version:           19.03.7
+ Version:           19.03.5
  API version:       1.40
- Go version:        go1.12.17
- Git commit:        7141c199a2
- Built:             Wed Mar  4 01:22:36 2020
+ Go version:        go1.12.12
+ Git commit:        633a0ea838
+ Built:             Wed Nov 13 07:29:52 2019
  OS/Arch:           linux/amd64
  Experimental:      false
 
 Server: Docker Engine - Community
  Engine:
-  Version:          19.03.7
+  Version:          19.03.5
   API version:      1.40 (minimum version 1.12)
-  Go version:       go1.12.17
-  Git commit:       7141c199a2
-  Built:            Wed Mar  4 01:21:08 2020
+  Go version:       go1.12.12
+  Git commit:       633a0ea838
+  Built:            Wed Nov 13 07:28:22 2019
   OS/Arch:          linux/amd64
   Experimental:     false
  containerd:
