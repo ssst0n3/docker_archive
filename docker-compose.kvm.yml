@@ -1,7 +1,7 @@
 version: '3'
 services:
   vm:
-    image: ssst0n3/docker_archive:ubuntu-20.04_docker-ce-17.03.0_v0.1.0
+    image: ssst0n3/docker_archive:ubuntu-16.04_docker-ce-17.03.0_v0.1.0
     ports:
         - "17030:22"
     command: /start_vm.sh -m 2560M -cpu host -enable-kvm
