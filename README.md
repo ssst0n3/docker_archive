@@ -2,7 +2,7 @@
 
 spec-version: v0.3.0
 hierarchy: release
-image-version: v0.1.0
+image-version: v0.2.0
 
 ---
 
@@ -25,7 +25,7 @@ There are different ways to start up the environment.
 #### 1.1 tty
 
 ```
-$ docker run -ti --name docker-ce-17.03.0 ssst0n3/docker_archive:ubuntu-16.04_docker-ce-17.03.0_v0.1.0
+$ docker run -ti --name docker-ce-17.03.0 ssst0n3/docker_archive:ubuntu-16.04_docker-ce-17.03.0_v0.2.0
 ubuntu login: root
 Password: root
 root@ubuntu:~# docker version
@@ -34,7 +34,7 @@ root@ubuntu:~# docker version
 #### 1.2 tty with detach
 
 ```
-$ docker run -tid --name docker-ce-17.03.0 ssst0n3/docker_archive:ubuntu-16.04_docker-ce-17.03.0_v0.1.0
+$ docker run -tid --name docker-ce-17.03.0 ssst0n3/docker_archive:ubuntu-16.04_docker-ce-17.03.0_v0.2.0
 $ docker attach --detach-keys ctrl-x docker-ce-17.03.0
 ubuntu login: root
 Password: root
@@ -62,7 +62,7 @@ $ cat > docker-compose.yml << EOF
 version: '3'
 services:
   vm:
-    image: ssst0n3/docker_archive:ubuntu-16.04_docker-ce-17.03.0_v0.1.0
+    image: ssst0n3/docker_archive:ubuntu-16.04_docker-ce-17.03.0_v0.2.0
     ports:
         - "17030:22"
     tty: true
@@ -88,7 +88,7 @@ $ cat > docker-compose.yml << EOF
 version: '3'
 services:
   vm:
-    image: ssst0n3/docker_archive:ubuntu-16.04_docker-ce-17.03.0_v0.1.0
+    image: ssst0n3/docker_archive:ubuntu-16.04_docker-ce-17.03.0_v0.2.0
     ports:
         - "17030:22"
     command: /start_vm.sh -m 2560M -cpu host -enable-kvm
@@ -114,7 +114,8 @@ root@ubuntu:~# docker version
 
 ## version
 * `ubuntu-16.04_docker-ce-17.03.0`
-* `ubuntu-16.04_docker-ce-17.03.0_v0.1.0`
+* `ubuntu-16.04_docker-ce-17.03.0_v0.1.0` (patched)
+* `ubuntu-16.04_docker-ce-17.03.0_v0.2.0` (without patch)
 
 ```
 root@ubuntu:~# docker version
