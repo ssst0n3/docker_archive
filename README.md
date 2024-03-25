@@ -135,12 +135,10 @@ Server:
  Built:        Tue Feb 28 08:01:32 2017
  OS/Arch:      linux/amd64
  Experimental: false
-
 root@ubuntu:~# docker-containerd --version
 containerd version 0.2.3 commit: 977c511eda0925a723debdc94d09459af49d082a
-
 root@ubuntu:~# docker-runc --version
 runc version 1.0.0-rc2
-commit: a01dafd48bc1c7cc12bdb01206f9fea7dd6feb70
+commit: c91b5bea4830a57eac7882d7455d59518cdf70ec-dirty
 spec: 1.0.0-rc2-dev
 ```
