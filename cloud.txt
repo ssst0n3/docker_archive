@@ -9,12 +9,8 @@ write_files:
 - content: |
     #!/bin/bash
     apt-get update
-    apt-get -y install apt-transport-https ca-certificates curl gnupg-agent software-properties-common
-    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
-    add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable"
-    apt-get update
-    apt-get install -y docker-ce=17.03.0~ce-0~ubuntu-xenial
-    wget https://github.com/ssst0n3/container-debug-artifacts/releases/download/runc/runc-v1.0.0-rc2-debug -O /usr/bin/docker-runc
+    wget http://launchpadlibrarian.net/302372126/docker.io_1.12.3-0ubuntu4~16.04.2_amd64.deb
+    dpkg -i docker.io_1.12.3-0ubuntu4~16.04.2_amd64.deb
     sync
   path: /tmp/install-docker.sh
   permissions: '0755'

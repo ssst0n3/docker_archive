@@ -2,7 +2,7 @@
 
 spec-version: v0.3.0
 hierarchy: release
-image-version: v0.2.0
+image-version: v0.1.0
 
 ---
 
