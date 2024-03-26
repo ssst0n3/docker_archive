@@ -11,6 +11,8 @@ write_files:
     apt-get update
     wget http://launchpadlibrarian.net/303217166/runc_1.0.0~rc1-0ubuntu2~16.04.1.1_amd64.deb
     dpkg -i runc_1.0.0~rc1-0ubuntu2~16.04.1.1_amd64.deb
+    wget http://launchpadlibrarian.net/285821342/containerd_0.2.3-0ubuntu1~16.04_amd64.deb
+    dpkg -i containerd_0.2.3-0ubuntu1~16.04_amd64.deb
     wget http://launchpadlibrarian.net/302372126/docker.io_1.12.3-0ubuntu4~16.04.2_amd64.deb
     dpkg -i docker.io_1.12.3-0ubuntu4~16.04.2_amd64.deb
     sync
