@@ -1,0 +1,13 @@
+version: '3'
+services:
+  vm:
+    image: ssst0n3/docker_archive:ubuntu-22.04_docker-ce-24.0.7_containerd.io-1.6.27_runc-1.1.11_v0.1.0
+    ports:
+        - "24007:22"
+        - "2345:2345"
+        - "2346:2346"
+    command: qemu-system-x86_64 -hda ubuntu-server-cloudimg.img -net nic -net user,hostfwd=tcp::22-:22,hostfwd=tcp::2345-:2345,hostfwd=tcp::2346-:2346 -smp 2 -m 2048M -nographic -enable-kvm
+    devices:
+      - "/dev/kvm:/dev/kvm"
+    tty: true
+    stdin_open: true
