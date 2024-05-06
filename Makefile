@@ -19,3 +19,12 @@ dqd: env
 	cp $(DIR)/vm.qcow2 dqd
 	docker build -t $(DQD_TAG) dqd
 	rm dqd/vm.qcow2
+
+clean: env
+	rm $(DIR)/vm.qcow2
+
+all: env
+	clean
+	ctr
+	vm
+	dqd
