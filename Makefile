@@ -23,8 +23,4 @@ dqd: env
 clean: env
 	rm $(DIR)/vm.qcow2
 
-all: env
-	clean
-	ctr
-	vm
-	dqd
+all: env clean ctr vm dqd
