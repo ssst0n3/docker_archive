@@ -1,0 +1,8 @@
+version: '3'
+services:
+  vm:
+    image: ssst0n3/docker_archive:ubuntu-22.04_runc-v1.1.12_containerd-v1.7.16_v0.1.0
+    ports:
+        - "17160:22"
+    tty: true
+    stdin_open: true 
