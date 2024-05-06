@@ -11,4 +11,4 @@ ctr: env
 
 D2VM := docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock --privileged -v $(PWD):/d2vm -w /d2vm linkacloud/d2vm:latest $*
 vm: env
-	@cd $(DIR) && $(D2VM) convert CTR_TAG -o vm.qcow2 -v
+	@cd $(DIR) && $(D2VM) convert $(CTR_TAG) -o vm.qcow2 -v
