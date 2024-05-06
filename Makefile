@@ -9,8 +9,6 @@ ctr: env
 	@echo "Building Docker image in directory $(DIR) with image name $(IMAGE) and version $(VERSION), TAG is $(CTR_TAG)"
 	@cd $(DIR) && docker build -t $(CTR_TAG) .
 
-d2vm:
-	docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock --privileged -v $(PWD):/d2vm -w /d2vm linkacloud/d2vm:latest $*
-
+d2vm=docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock --privileged -v $(PWD):/d2vm -w /d2vm linkacloud/d2vm:latest $*
 vm: env
-	@cd $(DIR) && d2vm convert CTR_TAG -o vm.qcow2 . -v
+	@cd $(DIR) && @$(d2vm) convert CTR_TAG -o vm.qcow2 . -v
