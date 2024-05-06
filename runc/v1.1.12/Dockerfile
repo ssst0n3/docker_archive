@@ -1,0 +1,4 @@
+FROM ssst0n3/docker_archive:ctr_ubuntu-22.04_v0.1.0
+
+ADD https://github.com/opencontainers/runc/releases/download/v1.1.12/runc.amd64
+RUN install -m 755 runc.amd64 /usr/local/sbin/runc
