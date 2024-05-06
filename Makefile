@@ -12,8 +12,9 @@ ctr: env
 
 D2VM := docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock --privileged -v $(PWD):/d2vm -w /d2vm linkacloud/d2vm:latest $*
 vm: env
-	$(D2VM) convert $(CTR_TAG) -o vm.qcow2 -v
-	@cd $(DIR) && virt-sparsify --compress vm.qcow2 dqd/vm.qcow2 && rm vm.qcow2
+	$(D2VM) convert $(CTR_TAG) -o $(DIR)/vm.qcow2 -v
+	cd $(DIR) && virt-sparsify --compress vm.qcow2 shrunk.qcow2 && mv shrunk.qcow2 vm.qcow2
 
 dqd: vm
+	cp $(DIR)/vm.qcow2 dqd
 	docker build -t $(DQD_TAG) dqd
