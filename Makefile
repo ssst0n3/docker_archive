@@ -6,7 +6,7 @@ D2VM := docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock --privi
 env:
 	$(eval include $(DIR)/.env)
 	$(eval export $(shell sed 's/=.*//' $(DIR)/.env))
-	$(eval CTR_TAG := $(REPO):$@_$(IMAGE)_$(VERSION))
+	$(eval CTR_TAG := $(REPO):ctr_$(IMAGE)_$(VERSION))
 	$(eval DQD_TAG := $(REPO):$(IMAGE)_$(VERSION))
 
 ctr: env
