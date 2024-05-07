@@ -10,7 +10,7 @@ docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
 ssh -p 11120 root@127.0.0.1
 ```
 
-```
+```shell
 root@localhost:~# runc --version
 runc version 1.1.12
 commit: v1.1.12-0-g51d5e946
@@ -21,7 +21,7 @@ libseccomp: 2.5.4
 
 ## build
 
-```
+```shell
 make all DIR=runc/v1.1.12
 ```
 
