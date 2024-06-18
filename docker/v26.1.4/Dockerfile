@@ -12,4 +12,9 @@ RUN apt-get update && \
 
 # install docker-ce
 RUN apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+    DEBIAN_FRONTEND=noninteractive apt-get install -y \
+    docker-ce=5:26.1.4-1~ubuntu.22.04~jammy \
+    docker-ce-cli=5:26.1.4-1~ubuntu.22.04~jammy \
+    containerd.io=1.6.33-1 \
+    docker-buildx-plugin=0.14.1-1~ubuntu.22.04~jammy \
+    docker-compose-plugin=2.27.1-1~ubuntu.22.04~jammy
