@@ -2,6 +2,7 @@
 
 REPO ?= ssst0n3/docker_archive
 D2VM := docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock --privileged -v $(PWD):/d2vm -w /d2vm linkacloud/d2vm:latest $*
+VIRT_SPARSIFY := docker run -it --rm -v "$(PWD)":"/data" -w "/data" bkahlert/libguestfs:edge virt-sparsify
 
 env:
 	$(eval include $(DIR)/.env)
@@ -15,7 +16,7 @@ ctr: env
 
 vm: env
 	$(D2VM) convert $(CTR_TAG) -o $(DIR)/vm.qcow2 -v
-	cd $(DIR) && virt-sparsify --compress vm.qcow2 shrunk.qcow2 && mv shrunk.qcow2 vm.qcow2
+	cd $(DIR) && $(VIRT_SPARSIFY) --compress vm.qcow2 shrunk.qcow2 && mv shrunk.qcow2 vm.qcow2
 
 dqd: env
 	cp $(DIR)/vm.qcow2 dqd
