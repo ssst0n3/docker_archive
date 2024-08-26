@@ -40,4 +40,5 @@ write_files:
   path: /tmp/init.sh
   permissions: '0755'
 runcmd:
-  - /tmp/init.sh
+  - sed -i '/PasswordAuthentication/d' /etc/ssh/sshd_config && echo "PasswordAuthentication yes" >> /etc/ssh/sshd_config
+  - echo "init.sh complete"

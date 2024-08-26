@@ -1,9 +1,9 @@
 version: '3'
 services:
   vm:
-    image: ssst0n3/docker_archive:pre_ubuntu-16.04_v0.1.1
+    image: ssst0n3/docker_archive:pre_ubuntu-12.04_v0.1.0
     ports:
-      - "1604:22"
+      - "1204:22"
     command: /start_vm.sh -enable-kvm
     devices:
       - "/dev/kvm:/dev/kvm"

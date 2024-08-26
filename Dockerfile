@@ -1,4 +1,4 @@
-FROM ssst0n3/docker_archive:build_basic_ubuntu-16.04
+FROM ssst0n3/docker_archive:build_basic_ubuntu-12.04
 
 # cloud_init config
 COPY cloud.txt cloud.txt
@@ -12,8 +12,9 @@ RUN apt update && apt install -y libguestfs-tools linux-image-generic && apt cle
 COPY shrunk.sh /shrunk.sh
 RUN /shrunk.sh /ubuntu-server-cloudimg.img
 
-FROM ubuntu:16.04
+FROM ubuntu:12.04
 ENV DEBIAN_FRONTEND noninteractive
+RUN sed -i 's/archive/old-releases/g' /etc/apt/sources.list
 COPY --from=0 /ubuntu-server-cloudimg.img /
 COPY shrunk.sh /shrunk.sh
 COPY init_qemu.expect /init_qemu.expect
