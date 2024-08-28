@@ -36,6 +36,7 @@ See all images listed in [dockerhub](https://hub.docker.com/repository/docker/ss
 | tag | version | alias |
 | --- | --- | --- |
 | [ubuntu-12.04](./ubuntu/12.04/) | v0.1.0 |
+| [ubuntu-16.04](./ubuntu/16.04/) | v0.1.0 |
 
 ## Known Issues
 
