@@ -16,12 +16,8 @@ ctr: env
 	@cd $(DIR) && docker build -t $(CTR_TAG) .
 
 vm: env
-	# $(D2VM) convert $(CTR_TAG) -p root -o $(DIR)/vm.qcow2 --append-to-cmdline='nosplash nomodeset --verbose text single' -v
-	$(D2VM) convert $(CTR_TAG) -p root -o $(DIR)/vm.qcow2 --append-to-cmdline='-v' -v
-	# $(D2VM) convert $(CTR_TAG) -p root -o $(DIR)/vm.qcow2 --bootloader=grub -v
-	# $(D2VM) convert $(CTR_TAG) -p root -o $(DIR)/vm.qcow2 --append-to-cmdline='init=/bin/bash' -v
-	# $(D2VM) convert $(CTR_TAG) -p root -o $(DIR)/vm.qcow2 -v
-	# cd $(DIR) && $(VIRT_SPARSIFY) --compress vm.qcow2 shrunk.qcow2 && mv -f shrunk.qcow2 vm.qcow2 && rm -f 1
+	$(D2VM) convert $(CTR_TAG) -p root -o $(DIR)/vm.qcow2 -v
+	cd $(DIR) && $(VIRT_SPARSIFY) --compress vm.qcow2 shrunk.qcow2 && mv -f shrunk.qcow2 vm.qcow2 && rm -f 1
 
 dqd: env
 	cp $(DIR)/vm.qcow2 dqd
