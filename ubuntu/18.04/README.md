@@ -1,6 +1,11 @@
 # docker v26.1.4
 
-* dqd: ssst0n3/docker_archive:ubuntu-18.04_v0.1.0
+* dqd: 
+	* ssst0n3/docker_archive:ubuntu-18.04 -> ssst0n3/docker_archive:ubuntu-18.04_v0.1.0
+	* ssst0n3/docker_archive:ubuntu-18.04_v0.1.0
+* ctr: 
+	* ssst0n3/docker_archive:ctr_ubuntu-18.04 -> ssst0n3/docker_archive:ctr_ubuntu-18.04_v0.1.0
+	* ssst0n3/docker_archive:ctr_ubuntu-18.04_v0.1.0
 
 ## usage
 
