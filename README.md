@@ -8,9 +8,10 @@ See all images listed in [dockerhub](https://hub.docker.com/repository/docker/ss
 
 ### vul
 
-| tag | version | alias |
-| --- | --- | --- |
-| [shocker_docker-v0.7.1](./vul/shocker_docker-v0.7.1/) | v0.1.0 |
+| tag | version | alias | note |
+| --- | --- | --- | --- |
+| [shocker_docker-v0.7.1](./vul/shocker_docker-v0.7.1/) | v0.1.0 | | use lxc as execdriver |
+| [shocker_docker-v0.7.2](./vul/shocker_docker-v0.7.2/) | v0.1.0 | | use lxc(dockerinit) as execdriver |
 
 ### docker
 
