@@ -4,6 +4,8 @@
 
 ## reproduce
 
+(docker v0.7.1 use registry v1, cannot pull image from dockerhub now.)
+
 ```shell
 root@localhost:~# ./poc.sh 
 + echo 'loading docker image, docker-v0.7.1 cannot pull images from registry v2 anymore.'
