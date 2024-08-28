@@ -1,4 +1,4 @@
-# docker v26.1.4
+# docker v18.04
 
 * dqd: 
 	* ssst0n3/docker_archive:ubuntu-18.04 -> ssst0n3/docker_archive:ubuntu-18.04_v0.1.0
