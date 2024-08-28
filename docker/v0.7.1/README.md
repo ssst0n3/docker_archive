@@ -32,5 +32,5 @@ make all DIR=docker/v0.7.1
 for developers:
 
 ```dockerfile
-FROM ssst0n3/docker_archive:ctr_v0.7.1_v0.1.0
+FROM ssst0n3/docker_archive:ctr_docker-v0.7.1_v0.1.0
 ```
