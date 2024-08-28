@@ -1,6 +1,11 @@
 # containerd v1.7.16
 
-* dqd: ssst0n3/docker_archive:ubuntu-22.04_runc-v1.1.12_containerd-v1.7.16_v0.1.0
+* dqd: 
+    * ssst0n3/docker_archive:ubuntu-22.04_runc-v1.1.12_containerd-v1.7.16 -> ssst0n3/docker_archive:ubuntu-22.04_runc-v1.1.12_containerd-v1.7.16_v0.1.0
+    * ssst0n3/docker_archive:ubuntu-22.04_runc-v1.1.12_containerd-v1.7.16_v0.1.0
+* ctr:
+    * ssst0n3/docker_archive:ctr_ubuntu-22.04_runc-v1.1.12_containerd-v1.7.16 -> ssst0n3/docker_archive:ctr_ubuntu-22.04_runc-v1.1.12_containerd-v1.7.16_v0.1.0
+    * ssst0n3/docker_archive:ctr_ubuntu-22.04_runc-v1.1.12_containerd-v1.7.16_v0.1.0
 
 ## usage
 
