@@ -1,6 +1,11 @@
 # shocker(docker v0.7.1)
 
-* dqd: ssst0n3/docker_archive:shocker_docker-v0.7.1_v0.1.0
+* dqd: 
+    * ssst0n3/docker_archive:shocker_docker-v0.7.1 -> ssst0n3/docker_archive:shocker_docker-v0.7.1_v0.1.0
+    * ssst0n3/docker_archive:shocker_docker-v0.7.1_v0.1.0
+* ctr: 
+    * ssst0n3/docker_archive:ctr_shocker_docker-v0.7.1 -> ssst0n3/docker_archive:ctr_shocker_docker-v0.7.1_v0.1.0
+    * ssst0n3/docker_archive:ctr_shocker_docker-v0.7.1_v0.1.0
 
 ## reproduce
 

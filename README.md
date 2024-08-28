@@ -8,7 +8,9 @@ See all images listed in [dockerhub](https://hub.docker.com/repository/docker/ss
 
 ### vul
 
-
+| tag | version | alias |
+| --- | --- | --- |
+| [shocker_docker-v0.7.1](./vul/shocker_docker-v0.7.1/) | v0.1.0 |
 
 ### docker
 
