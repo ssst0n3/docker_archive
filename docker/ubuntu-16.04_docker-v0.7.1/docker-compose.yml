@@ -1,8 +1,0 @@
-version: '3'
-services:
-  vm:
-    image: ssst0n3/docker_archive:ubuntu-16.04_docker-v0.7.1_v0.1.0
-    ports:
-        - "16710:22"
-    tty: true
-    stdin_open: true 
