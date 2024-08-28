@@ -1,6 +1,11 @@
 # ubuntu 12.04
 
-* dqd: ssst0n3/docker_archive:ubuntu-12.04_v0.1.0
+* dqd: 
+    * ssst0n3/docker_archive:ubuntu-12.04 -> ssst0n3/docker_archive:ubuntu-12.04
+    * ssst0n3/docker_archive:ubuntu-12.04_v0.1.0
+* ctr: 
+    * ssst0n3/docker_archive:ctr_ubuntu-12.04 -> ssst0n3/docker_archive:ctr_ubuntu-12.04_v0.1.0
+    * ssst0n3/docker_archive:ctr_ubuntu-12.04_v0.1.0
 
 ## usage
 
