@@ -31,7 +31,7 @@ root@localhost:~# cat /var/lib/docker/containers/d63d09347bc3175efc657538cc33843
 ## env
 
 ```shell
-cd vul/shocker_docker-v0.7.2
+cd vul/shocker/shocker_docker-v0.7.2
 docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
 ssh -p 12721 root@127.0.0.1
 ```
@@ -52,7 +52,7 @@ lxc version: 0.7.5
 ## build
 
 ```shell
-make all DIR=vul/shocker_docker-v0.7.2
+make all DIR=vul/shocker/shocker_docker-v0.7.2
 ```
 
 for developers:
