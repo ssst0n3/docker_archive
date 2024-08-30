@@ -6,3 +6,5 @@ RUN dpkg -i /tmp/lxc-docker-0.11.1_0.11.1_amd64.deb || echo 'pass'
 RUN apt-get update && apt-get install -f -y && \
     rm /var/lib/docker/devicemapper/devicemapper/data && \
     rm /var/lib/docker/devicemapper/devicemapper/metadata
+# install apparmor
+RUN apt-get install -y apparmor
