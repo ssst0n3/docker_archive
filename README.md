@@ -29,6 +29,7 @@ See all images listed in [dockerhub](https://hub.docker.com/repository/docker/ss
 | [docker-v0.11.1](./docker/v0.11.1/) | v0.1.0 | | native execdriver |
 | [docker-v0.11.1-lxc](./docker/v0.11.1-lxc/) | v0.1.0 | | lxc(dockerinit) execdriver |
 | [docker-v0.12.0](./docker/v0.12.0/) | v0.1.0 | | native execdriver |
+| [docker-v0.12.0-lxc](./docker/v0.12.0-lxc/) | v0.1.0 | | native execdriver |
 | [ubuntu-18.04_docker-v23.0.6_aufs](./docker/ubuntu-18.04_docker-v23.0.6_aufs/) | v0.1.0 |
 | [ubuntu-22.04_docker-v23.0.6](./docker/v23.0.6/) | v0.1.0 |
 | [ubuntu-22.04_docker-v26.1.4](./docker/v26.1.4/) | v0.1.0 |
