@@ -12,7 +12,7 @@
 (docker v0.11.1 use registry v1, cannot pull image from dockerhub now.)
 
 * There's the CAP_DAC_READ_SEARCH
-* There's no config.lxc.
+* There's no `lxc.cap.drop` in config.lxc.
 
 ```shell
 root@localhost:~# ./poc.sh 
