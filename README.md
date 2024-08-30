@@ -15,6 +15,7 @@ See all images listed in [dockerhub](https://hub.docker.com/repository/docker/ss
 | [shocker_docker-v0.9.0](./vul/shocker/shocker_docker-v0.9.0/) | v0.1.0 | | native execdriver |
 | [shocker_docker-v0.9.0-lxc](./vul/shocker/shocker_docker-v0.9.0-lxc/) | v0.1.0 | | lxc(dockerinit) execdriver |
 | [shocker_docker-v0.11.1](./vul/shocker/shocker_docker-v0.11.1/) | v0.1.0 | | native execdriver |
+| [shocker_docker-v0.11.1-lxc](./vul/shocker/shocker_docker-v0.11.1-lxc/) | v0.1.0 | | lxc(dockerinit) execdriver |
 
 ### docker
 
