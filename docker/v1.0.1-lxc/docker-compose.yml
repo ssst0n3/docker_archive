@@ -1,0 +1,8 @@
+version: '3'
+services:
+  vm:
+    image: ssst0n3/docker_archive:docker-v1.0.1-lxc_v0.1.0
+    ports:
+        - "14102:22"
+    tty: true
+    stdin_open: true 
