@@ -1,11 +1,11 @@
 # docker v22.04 dbg
 
 * dqd: 
-	* ssst0n3/docker_archive:ubuntu-22.04 -> ssst0n3/docker_archive:ubuntu-22.04_v0.1.0
-	* ssst0n3/docker_archive:ubuntu-22.04_v0.1.0
+	* ssst0n3/docker_archive:ubuntu-22.04-dbg -> ssst0n3/docker_archive:ubuntu-22.04-dbg_v0.1.0
+	* ssst0n3/docker_archive:ubuntu-22.04-dbg_v0.1.0
 * ctr: 
-	* ssst0n3/docker_archive:ctr_ubuntu-22.04 -> ssst0n3/docker_archive:ctr_ubuntu-22.04_v0.1.0
-	* ssst0n3/docker_archive:ctr_ubuntu-22.04_v0.1.0
+	* ssst0n3/docker_archive:ctr_ubuntu-22.04-dbg -> ssst0n3/docker_archive:ctr_ubuntu-22.04-dbg_v0.1.0
+	* ssst0n3/docker_archive:ctr_ubuntu-22.04-dbg_v0.1.0
 
 ## debug
 
