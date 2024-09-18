@@ -54,6 +54,7 @@ See all images listed in [dockerhub](https://hub.docker.com/repository/docker/ss
 | --- | --- | --- |
 | [ubuntu-22.04_runc-v1.1.12](./runc/v1.1.12/) | v0.1.0 |
 | [runc-v1.0.0-rc2](./runc/v1.0.0-rc2/) | v0.1.0 |
+| [runc-v1.0.0-rc2-dbg](./runc/v1.0.0-rc2-dbg/) | v0.1.0 |
 
 ### ubuntu
 
