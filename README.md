@@ -61,6 +61,7 @@ See all images listed in [dockerhub](https://hub.docker.com/repository/docker/ss
 | [runc-v1.1.8](./runc/v1.1.8/) | v0.1.0 |
 | [runc-v1.1.7](./runc/v1.1.7/) | v0.1.0 |
 | [runc-v1.1.6](./runc/v1.1.6/) | v0.1.0 |
+| [runc-v1.1.3](./runc/v1.1.3/) | v0.1.0 |
 | [runc-v1.1.0](./runc/v1.1.0/) | v0.1.0 |
 | [runc-v1.0.0-rc2](./runc/v1.0.0-rc2/) | v0.1.0 |
 | [runc-v1.0.0-rc2-dbg](./runc/v1.0.0-rc2-dbg/) | v0.1.0 |
