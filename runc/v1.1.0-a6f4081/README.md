@@ -31,11 +31,10 @@ BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
 PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
 VERSION_CODENAME=focal
 UBUNTU_CODENAME=focal
-
 root@localhost:~# runc --version
 runc version 1.1.0+dev
-commit: 7d09ba1-dirty
-spec: 1.1.0-rc.2
+commit: a6f4081-dirty
+spec: 1.1.0+dev
 go: go1.20.14
 libseccomp: 2.5.4
 ```
