@@ -54,6 +54,7 @@ See all images listed in [dockerhub](https://hub.docker.com/repository/docker/ss
 | --- | --- | --- | --- |
 | [runc-v1.2.0-rc.3](./runc/v1.2.0-rc.3/) | v0.1.0 |
 | [runc-v1.2.0-rc.1](./runc/v1.2.0-rc.1/) | v0.1.0 |
+| [runc-v1.1.0-d3d7f7d](./runc/v1.1.0-d3d7f7d/) | v0.1.0 |
 | [runc-v1.1.0-7d09ba1](./runc/v1.1.0-7d09ba1/) | v0.1.0 |
 | [runc-v1.1.14](./runc/v1.1.14/) | v0.1.0 |
 | [ubuntu-22.04_runc-v1.1.12](./runc/v1.1.12/) | v0.2.0 |
