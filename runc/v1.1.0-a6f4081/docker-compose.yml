@@ -1,0 +1,8 @@
+version: '3'
+services:
+  vm:
+    image: ssst0n3/docker_archive:runc-v1.1.0-a6f4081_v0.1.0
+    ports:
+        - "26408:22"
+    tty: true
+    stdin_open: true 
