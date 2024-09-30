@@ -1,0 +1,8 @@
+version: '3'
+services:
+  vm:
+    image: ssst0n3/docker_archive:runc-pr-3825_commit-7d09ba1_v0.1.0
+    ports:
+        - "38257:22"
+    tty: true
+    stdin_open: true 
