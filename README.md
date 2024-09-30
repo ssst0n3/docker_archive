@@ -87,6 +87,12 @@ See all images listed in [dockerhub](https://hub.docker.com/repository/docker/ss
 | [ubuntu-22.04-dbg](./ubuntu/22.04-dbg/) | v0.1.0 |
 | [ubuntu-24.04](./ubuntu/24.04/) | v0.1.0 |
 
+### issue
+
+| tag | version | alias |
+| --- | --- | --- |
+| [runc-issue-4047_commit-a6f4081](./issue/runc-issue-4047_commit-a6f4081/) | v0.1.0 |
+
 ## Known Issues
 
 ### ssh stuck https://github.com/ssst0n3/docker_archive/issues/10
