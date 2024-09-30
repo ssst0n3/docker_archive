@@ -1,0 +1,5 @@
+version: '3'
+services:
+  vm:
+    devices:
+      - "/dev/kvm:/dev/kvm"
