@@ -26,8 +26,6 @@ Continuing.
 KVM is not recommended for debugging kernel.
 
 ```shell
-cd ubuntu/22.04-dbg
-docker compose -f docker-compose.yml up -d
 ssh -p 22041 root@127.0.0.1
 ```
 
