@@ -1,0 +1,5 @@
+services:
+  vm:
+    command: /start.sh -enable-kvm
+    devices:
+      - "/dev/kvm:/dev/kvm"
