@@ -1,4 +1,4 @@
-## syntax=docker/dockerfile:1-labs
+# syntax=docker/dockerfile:1-labs
 FROM ssst0n3/docker_archive:ctr_containerd-v2.0.2_v0.1.0 AS static
 
 # ipv4 forwarding
@@ -44,12 +44,15 @@ RUN apt-get update && \
 
 FROM static AS kubeadm_init
 # kubeadm init
+COPY --from=kindest/node:v1.32.2 /kind/ /kind/
+COPY --from=kindest/node:v1.32.2 /etc/systemd/system/kubelet.service.d/11-kind.conf /etc/systemd/system/kubelet.service.d/11-kind.conf
 COPY kubeadm.conf /kind/
 COPY kubeadm-init.service /usr/lib/systemd/system/kubeadm-init.service
+RUN systemctl enable kubelet.service
 RUN systemctl enable kubeadm-init.service
 # RUN ln -s /etc/systemd/system/kubeadm-init.service /etc/systemd/system/multi-user.target.wants/
 ENV KUBECONFIG=/etc/kubernetes/admin.conf
-#RUN --security=insecure ["/sbin/init", "--log-target=kmsg"]
+RUN --security=insecure ["/sbin/init", "--log-target=kmsg"]
 
 # RUN apt install -y systemd
 # # COPY entrypoint /entrypoint
