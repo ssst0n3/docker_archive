@@ -1,4 +1,4 @@
-# syntax=docker/dockerfile:1-labs
+## syntax=docker/dockerfile:1-labs
 FROM ssst0n3/docker_archive:ctr_containerd-v2.0.2_v0.1.0 AS static
 
 # ipv4 forwarding
@@ -44,25 +44,31 @@ RUN apt-get update && \
 
 FROM static AS kubeadm_init
 # kubeadm init
-RUN apt install -y systemd
-# COPY entrypoint /entrypoint
-RUN find /lib/systemd/system/sysinit.target.wants/ -name "systemd-tmpfiles-setup.service" -delete \
-    && rm -f /lib/systemd/system/multi-user.target.wants/* \
-    && rm -f /etc/systemd/system/*.wants/* \
-    && rm -f /lib/systemd/system/local-fs.target.wants/* \
-    && rm -f /lib/systemd/system/sockets.target.wants/*udev* \
-    && rm -f /lib/systemd/system/sockets.target.wants/*initctl* \
-    && rm -f /lib/systemd/system/basic.target.wants/* \
-    && echo "ReadKMsg=no" >> /etc/systemd/journald.conf \
-    && ln -sf "$(which systemd)" /sbin/init
+COPY kubeadm.conf /kind/
+COPY kubeadm-init.service /usr/lib/systemd/system/kubeadm-init.service
+RUN systemctl enable kubeadm-init.service
+# RUN ln -s /etc/systemd/system/kubeadm-init.service /etc/systemd/system/multi-user.target.wants/
+ENV KUBECONFIG=/etc/kubernetes/admin.conf
+#RUN --security=insecure ["/sbin/init", "--log-target=kmsg"]
 
-RUN echo "Enabling / Disabling services ... " \
-    && systemctl enable kubelet.service \
-    && systemctl enable containerd.service \
-    && systemctl mask systemd-binfmt.service
-STOPSIGNAL SIGRTMIN+3
-RUN --security=insecure \
-    ["/sbin/init", "-log-target=kmsg", "--log-level=debug"]
+# RUN apt install -y systemd
+# # COPY entrypoint /entrypoint
+# RUN find /lib/systemd/system/sysinit.target.wants/ -name "systemd-tmpfiles-setup.service" -delete \
+#     && rm -f /lib/systemd/system/multi-user.target.wants/* \
+#     && rm -f /etc/systemd/system/*.wants/* \
+#     && rm -f /lib/systemd/system/local-fs.target.wants/* \
+#     && rm -f /lib/systemd/system/sockets.target.wants/*udev* \
+#     && rm -f /lib/systemd/system/sockets.target.wants/*initctl* \
+#     && rm -f /lib/systemd/system/basic.target.wants/* \
+#     && echo "ReadKMsg=no" >> /etc/systemd/journald.conf \
+#     && ln -sf "$(which systemd)" /sbin/init
+
+# RUN echo "Enabling / Disabling services ... " \
+#     && systemctl enable kubelet.service \
+#     && systemctl enable containerd.service \
+#     && systemctl mask systemd-binfmt.service
+# STOPSIGNAL SIGRTMIN+3
+# RUN apt update && apt install -y systemd && rm /sbin/init && ln -s "$(which systemd)" /sbin/init
 # ["/entrypoint", "/sbin/init", "-log-target=kmsg"]
 # RUN --security=insecure \
 #     systemctl start containerd && \
