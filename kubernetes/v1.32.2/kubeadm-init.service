@@ -1,0 +1,16 @@
+[Unit]
+Description=Initialize Kubernetes cluster with kubeadm
+After=network.target docker.service containerd.service
+Requires=network.target docker.service containerd.service
+
+[Service]
+Type=oneshot
+#ExecStart=/usr/bin/kubeadm init --config=/kind/kubeadm.conf --skip-token-print --v=6
+ExecStart=/bin/sh -c '/usr/bin/kubeadm init --config=/kind/kubeadm.conf --skip-token-print --v=6 | tee /dev/stderr'
+User=root
+RemainAfterExit=yes
+StandardOutput=journal+console
+StandardError=journal+console
+
+[Install]
+WantedBy=multi-user.target

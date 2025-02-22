@@ -1,0 +1,7 @@
+#!/bin/bash
+mount
+# mknod /dev/console c 5 1
+rm /dev/null
+touch /ssst0n3-log
+ln -s /ssst0n3-log /dev/null
+exec /usr/lib/systemd/systemd --log-target=/ssst0n3-log --log-level=debug
