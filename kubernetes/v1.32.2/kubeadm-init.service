@@ -1,16 +1,21 @@
 [Unit]
 Description=Initialize Kubernetes cluster with kubeadm
-After=network.target containerd.service
+After=multi-user.target network.target containerd.service
 Requires=network.target containerd.service
 
 [Service]
 Type=oneshot
-ExecStart=/usr/bin/kubeadm init --config=/kind/kubeadm.conf --skip-token-print --v=6
-#ExecStart=/bin/sh -c '/usr/bin/kubeadm init --config=/kind/kubeadm.conf --skip-token-print --v=6 | tee /dev/stderr'
+Environment="KUBECONFIG=/etc/kubernetes/admin.conf"
+ExecStartPre=/bin/sh -c 'IP=$(ip -4 addr show eth0 | grep -o "inet [0-9.]*" | cut -d" " -f2) && sed -i "s/172.17.0.2/$IP/g" /kind/kubeadm.conf'
+#ExecStart=/usr/bin/kubeadm init --config=/kind/kubeadm.conf --skip-token-print --v=6
+ExecStart=/bin/sh -c '/usr/bin/kubeadm init --config=/kind/kubeadm.conf --skip-token-print --v=6 > /dev/kmsg'
+ExecStartPost=/bin/sh -c 'kubectl get pods -A > /dev/kmsg 2>/dev/kmsg'
+ExecStartPost=/bin/sh -c 'systemctl exit 0'
+#ExecStartPost=/infect 
 User=root
 RemainAfterExit=yes
-StandardOutput=journal+console
-StandardError=journal+console
+StandardOutput=journal
+StandardError=journal
 
 [Install]
 WantedBy=multi-user.target

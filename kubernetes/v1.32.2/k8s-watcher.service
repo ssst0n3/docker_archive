@@ -1,0 +1,11 @@
+[Unit]
+Description=Stop target process after kubeadm-init
+After=kubeadm-init.service
+Requires=kubeadm-init.service
+
+[Service]
+Type=oneshot
+ExecStart=/bin/sh -c 'if [ "$(systemctl show -p Result kubeadm-init.service | cut -d= -f2)" = "success" ]; then kill -9 1; fi'
+
+[Install]
+WantedBy=multi-user.target

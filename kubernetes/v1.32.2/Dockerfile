@@ -28,31 +28,51 @@ RUN apt-get update && \
 # ADD https://raw.githubusercontent.com/gdraheim/docker-systemctl-images/f67d3a2a21a6b4f1b540a5ddae88101ba10f3633/files/docker/systemctl3.py /usr/bin/
 # RUN chmod +x /usr/bin/systemctl3.py && ln -s /usr/bin/systemctl3.py /usr/bin/systemctl
 
-# FROM dynamic AS preflight
-# # pull kubeadm image
+FROM dynamic AS preflight
+# pull kubeadm image
 # RUN --security=insecure systemctl start containerd && \
 #     kubeadm config images list --kubernetes-version v1.32.2 | xargs -n 1 ctr -n k8s.io images pull && \
 #     crictl images
-# # RUN --security=insecure containerd & \
-# #     sleep 5 && \
-# #     kubeadm config images list --kubernetes-version v1.32.2 | xargs -n 1 ctr -n k8s.io images pull && \
-# #     crictl images
+RUN --security=insecure containerd & \
+    sleep 5 && \
+    kubeadm config images list --kubernetes-version v1.32.2 | xargs -n 1 ctr -n k8s.io images pull && \
+    crictl images
 
 # # FROM busybox AS mknod
 # # RUN mknod /console c 5 1
 # # RUN --security=insecure ls -lah /console && echo 123 > /console
 
 FROM static AS kubeadm_init
+
+# handle network
+
+# configure snapshotter
+RUN mkdir -p /etc/containerd && \
+    containerd config default > /etc/containerd/config.toml && \
+    sed -i "s/snapshotter = 'overlayfs'/snapshotter = 'native'/" /etc/containerd/config.toml
+
 # kubeadm init
 COPY --from=kindest/node:v1.32.2 /kind/ /kind/
 COPY --from=kindest/node:v1.32.2 /etc/systemd/system/kubelet.service.d/11-kind.conf /etc/systemd/system/kubelet.service.d/11-kind.conf
 COPY kubeadm.conf /kind/
-COPY kubeadm-init.service /usr/lib/systemd/system/kubeadm-init.service
+COPY kubeadm-init.service /usr/lib/systemd/system/
+COPY infect /
+# COPY k8s-watcher.service /usr/lib/systemd/system/
 RUN systemctl enable kubelet.service
 RUN systemctl enable kubeadm-init.service
-# RUN ln -s /etc/systemd/system/kubeadm-init.service /etc/systemd/system/multi-user.target.wants/
+# RUN systemctl enable k8s-watcher.service
 ENV KUBECONFIG=/etc/kubernetes/admin.conf
 RUN --security=insecure ["/sbin/init", "--log-target=kmsg"]
+
+
+
+
+
+
+
+
+
+
 
 # RUN apt install -y systemd
 # # COPY entrypoint /entrypoint
