@@ -56,11 +56,11 @@ COPY --from=kindest/node:v1.32.2 /kind/ /kind/
 COPY --from=kindest/node:v1.32.2 /etc/systemd/system/kubelet.service.d/11-kind.conf /etc/systemd/system/kubelet.service.d/11-kind.conf
 COPY kubeadm.conf /kind/
 COPY kubeadm-init.service /usr/lib/systemd/system/
-COPY infect /
-# COPY k8s-watcher.service /usr/lib/systemd/system/
+
+COPY --from=kindest/node:v1.32.2 /kind/manifests/default-cni.yaml /kind/manifests/default-cni.yaml
+
 RUN systemctl enable kubelet.service
 RUN systemctl enable kubeadm-init.service
-# RUN systemctl enable k8s-watcher.service
 ENV KUBECONFIG=/etc/kubernetes/admin.conf
 RUN --security=insecure ["/sbin/init", "--log-target=kmsg"]
 

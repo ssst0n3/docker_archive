@@ -11,9 +11,13 @@ env:
 	$(eval CTR_TAG := $(REPO):ctr_$(IMAGE)_$(VERSION))
 	$(eval DQD_TAG := $(REPO):$(IMAGE)_$(VERSION))
 
+# ctr: env
+# 	@echo "Building Docker image in directory $(DIR) with image name $(IMAGE) and version $(VERSION), TAG is $(CTR_TAG)"
+# 	@cd $(DIR) && docker build -t $(CTR_TAG) .
+
 ctr: env
 	@echo "Building Docker image in directory $(DIR) with image name $(IMAGE) and version $(VERSION), TAG is $(CTR_TAG)"
-	@cd $(DIR) && docker build -t $(CTR_TAG) .
+	@cd $(DIR) && { [ -f build.sh ] && ./build.sh $(CTR_TAG) || docker build -t $(CTR_TAG) . ; }
 
 vm: env
 	$(D2VM) convert $(CTR_TAG) -p root -o $(DIR)/vm.qcow2 -v
