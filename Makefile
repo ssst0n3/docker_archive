@@ -8,21 +8,31 @@ VIRT_SPARSIFY := docker run -it --rm -v ./:/data -w /data bkahlert/libguestfs:ed
 env:
 	$(eval include $(DIR)/.env)
 	$(eval export $(shell sed 's/=.*//' $(DIR)/.env))
-	$(eval CTR_TAG := $(REPO):ctr_$(IMAGE)_$(VERSION))
-	$(eval DQD_TAG := $(REPO):$(IMAGE)_$(VERSION))
+	$(eval CTR_TAG := $(REPO):ctr_$(IMAGE))
+	$(eval CTR_TAG_VERSION := $(CTR_TAG)_$(VERSION))
+	$(eval DQD_TAG := $(REPO):$(IMAGE))
+	$(eval DQD_TAG_VERSION := $(DQD_TAG)_$(VERSION))
 
 ctr: env
-	@echo "Building Docker image in directory $(DIR) with image name $(IMAGE) and version $(VERSION), TAG is $(CTR_TAG)"
-	@cd $(DIR) && docker build -t $(CTR_TAG) .
+	@echo "Building Docker image in directory $(DIR) with image name $(IMAGE) and version $(VERSION), TAG is $(CTR_TAG_VERSION)"
+	@cd $(DIR) && docker build -t $(CTR_TAG_VERSION) .
 
 vm: env
-	$(D2VM) convert $(CTR_TAG) -p root -o $(DIR)/vm.qcow2 -v
+	$(D2VM) convert $(CTR_TAG_VERSION) -p root -o $(DIR)/vm.qcow2 -v
 	cd $(DIR) && $(VIRT_SPARSIFY) --compress vm.qcow2 shrunk.qcow2 && mv -f shrunk.qcow2 vm.qcow2 && rm -f 1
 
 dqd: env
 	cp $(DIR)/vm.qcow2 dqd
-	docker build -t $(DQD_TAG) dqd
+	docker build -t $(DQD_TAG_VERSION) dqd
 	rm -f dqd/vm.qcow2
+
+push: env
+	docker tag $(CTR_TAG_VERSION) $(CTR_TAG)
+	docker push $(CTR_TAG_VERSION)
+	docker push $(CTR_TAG)
+	docker tag $(DQD_TAG_VERSION) $(DQD_TAG)
+	docker push $(DQD_TAG_VERSION)
+	docker push $(DQD_TAG)
 
 clean: env
 	rm -f $(DIR)/vm.qcow2
@@ -30,6 +40,6 @@ clean: env
 all: env clean ctr vm dqd
 
 dbg: clean ctr
-	$(D2VM) convert $(CTR_TAG) --append-to-cmdline nokaslr -p root -o $(DIR)/vm.qcow2 -v
+	$(D2VM) convert $(CTR_TAG_VERSION) --append-to-cmdline nokaslr -p root -o $(DIR)/vm.qcow2 -v
 	cd $(DIR) && $(VIRT_SPARSIFY) --compress vm.qcow2 shrunk.qcow2 && mv -f shrunk.qcow2 vm.qcow2 && rm -f 1
-	cd $(DIR) && docker build -t $(DQD_TAG) -f Dockerfile.dbg .
+	cd $(DIR) && docker build -t $(DQD_TAG_VERSION) -f Dockerfile.dbg .
