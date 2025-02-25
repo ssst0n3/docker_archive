@@ -1,0 +1,2 @@
+#!/bin/bash
+sshpass -p root scp -P 12100 $1 root@127.0.0.1:
