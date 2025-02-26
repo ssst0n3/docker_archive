@@ -1,4 +1,3 @@
-version: '3'
 services:
   vm:
     image: ssst0n3/docker_archive:runc-v1.0.0-rc2_v0.1.0
