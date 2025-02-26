@@ -1,16 +1,16 @@
-# runc v1.0.0-rc93
+# runc v1.0.0-rc92
 
 * dqd
-    * ssst0n3/docker_archive:runc-v1.0.0-rc93 (-> ssst0n3/docker_archive:runc-v1.0.0-rc93_v0.1.0)
-    * ssst0n3/docker_archive:runc-v1.0.0-rc93_v0.1.0
+    * ssst0n3/docker_archive:runc-v1.0.0-rc92 (-> ssst0n3/docker_archive:runc-v1.0.0-rc92_v0.1.0)
+    * ssst0n3/docker_archive:runc-v1.0.0-rc92_v0.1.0
 * ctr
-    * ssst0n3/docker_archive:ctr_runc-v1.0.0-rc93 (-> ssst0n3/docker_archive:ctr_runc-v1.0.0-rc93_v0.1.0)
-    * ssst0n3/docker_archive:ctr_runc-v1.0.0-rc93_v0.1.0
+    * ssst0n3/docker_archive:ctr_runc-v1.0.0-rc92 (-> ssst0n3/docker_archive:ctr_runc-v1.0.0-rc92_v0.1.0)
+    * ssst0n3/docker_archive:ctr_runc-v1.0.0-rc92_v0.1.0
 
 ## usage
 
 ```shell
-cd runc/v1.0.0-rc93
+cd runc/v1.0.0-rc92
 docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
 ./ssh
 ```
@@ -31,10 +31,8 @@ PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-poli
 UBUNTU_CODENAME=noble
 LOGO=ubuntu-logo
 root@localhost:~# runc --version
-runc version 1.0.0-rc93
+runc version 1.0.0-rc92
 spec: 1.0.2-dev
-go: go1.14.14
-libseccomp: 2.5.1
 ```
 
 ```shell
@@ -54,11 +52,11 @@ Enter 'help' for a list of built-in commands.
 ## build
 
 ```shell
-make all DIR=runc/v1.0.0-rc93
+make all DIR=runc/v1.0.0-rc92
 ```
 
 for developers:
 
 ```dockerfile
-FROM ssst0n3/docker_archive:ctr_runc-v1.0.0-rc93_v0.1.0
+FROM ssst0n3/docker_archive:ctr_runc-v1.0.0-rc92_v0.1.0
 ```
