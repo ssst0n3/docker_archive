@@ -17,19 +17,18 @@ docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
 
 ```shell
 root@localhost:~# cat /etc/os-release 
-PRETTY_NAME="Ubuntu 24.04.1 LTS"
 NAME="Ubuntu"
-VERSION_ID="24.04"
-VERSION="24.04.1 LTS (Noble Numbat)"
-VERSION_CODENAME=noble
+VERSION="20.04.6 LTS (Focal Fossa)"
 ID=ubuntu
 ID_LIKE=debian
+PRETTY_NAME="Ubuntu 20.04.6 LTS"
+VERSION_ID="20.04"
 HOME_URL="https://www.ubuntu.com/"
 SUPPORT_URL="https://help.ubuntu.com/"
 BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
 PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
-UBUNTU_CODENAME=noble
-LOGO=ubuntu-logo
+VERSION_CODENAME=focal
+UBUNTU_CODENAME=focal
 root@localhost:~# runc --version
 runc version 1.0.0-rc9
 spec: 1.0.1-dev

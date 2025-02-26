@@ -1,4 +1,4 @@
-FROM ssst0n3/docker_archive:ctr_ubuntu-24.04_v0.1.0
+FROM ssst0n3/docker_archive:ctr_ubuntu-20.04_v0.1.0
 
 RUN apt update && apt install -y busybox-static vim jq && apt-get clean -y
 
