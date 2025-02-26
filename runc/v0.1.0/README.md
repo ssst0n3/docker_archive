@@ -1,16 +1,16 @@
-# runc v0.1.1
+# runc v0.1.0
 
 * dqd
-    * ssst0n3/docker_archive:runc-v0.1.1 (-> ssst0n3/docker_archive:runc-v0.1.1_v0.1.0)
-    * ssst0n3/docker_archive:runc-v0.1.1_v0.1.0
+    * ssst0n3/docker_archive:runc-v0.1.0 (-> ssst0n3/docker_archive:runc-v0.1.0_v0.1.0)
+    * ssst0n3/docker_archive:runc-v0.1.0_v0.1.0
 * ctr
-    * ssst0n3/docker_archive:ctr_runc-v0.1.1 (-> ssst0n3/docker_archive:ctr_runc-v0.1.1_v0.1.0)
-    * ssst0n3/docker_archive:ctr_runc-v0.1.1_v0.1.0
+    * ssst0n3/docker_archive:ctr_runc-v0.1.0 (-> ssst0n3/docker_archive:ctr_runc-v0.1.0_v0.1.0)
+    * ssst0n3/docker_archive:ctr_runc-v0.1.0_v0.1.0
 
 ## usage
 
 ```shell
-cd runc/v0.1.1
+cd runc/v0.1.0
 docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
 ./ssh
 ```
@@ -29,9 +29,9 @@ BUG_REPORT_URL="http://bugs.launchpad.net/ubuntu/"
 VERSION_CODENAME=xenial
 UBUNTU_CODENAME=xenial
 root@localhost:~# runc --version
-runc version 0.1.1
-commit: baf6536d6259209c3edfa2b22237af82942d3dfa
-spec: 0.6.0-dev
+runc version 0.1.0
+commit: 8e129e097220b2591edd59957c4ff08e064e14b9
+spec: 0.5.0
 ```
 
 ```shell
@@ -51,11 +51,11 @@ Enter 'help' for a list of built-in commands.
 ## build
 
 ```shell
-make all DIR=runc/v0.1.1
+make all DIR=runc/v0.1.0
 ```
 
 for developers:
 
 ```dockerfile
-FROM ssst0n3/docker_archive:ctr_runc-v0.1.1_v0.1.0
+FROM ssst0n3/docker_archive:ctr_runc-v0.1.0_v0.1.0
 ```
