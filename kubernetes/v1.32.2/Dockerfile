@@ -28,15 +28,15 @@ RUN apt-get update && \
 # ADD https://raw.githubusercontent.com/gdraheim/docker-systemctl-images/f67d3a2a21a6b4f1b540a5ddae88101ba10f3633/files/docker/systemctl3.py /usr/bin/
 # RUN chmod +x /usr/bin/systemctl3.py && ln -s /usr/bin/systemctl3.py /usr/bin/systemctl
 
-FROM dynamic AS preflight
-# pull kubeadm image
-# RUN --security=insecure systemctl start containerd && \
+# FROM dynamic AS preflight
+# # pull kubeadm image
+# # RUN --security=insecure systemctl start containerd && \
+# #     kubeadm config images list --kubernetes-version v1.32.2 | xargs -n 1 ctr -n k8s.io images pull && \
+# #     crictl images
+# RUN --security=insecure containerd & \
+#     sleep 5 && \
 #     kubeadm config images list --kubernetes-version v1.32.2 | xargs -n 1 ctr -n k8s.io images pull && \
 #     crictl images
-RUN --security=insecure containerd & \
-    sleep 5 && \
-    kubeadm config images list --kubernetes-version v1.32.2 | xargs -n 1 ctr -n k8s.io images pull && \
-    crictl images
 
 # # FROM busybox AS mknod
 # # RUN mknod /console c 5 1
@@ -63,7 +63,7 @@ RUN systemctl enable kubelet.service
 RUN systemctl enable kubeadm-init.service
 ENV KUBECONFIG=/etc/kubernetes/admin.conf
 RUN --security=insecure ["/sbin/init", "--log-target=kmsg"]
-
+RUN rm /usr/lib/systemd/system/kubeadm-init.service
 
 
 
