@@ -22,6 +22,13 @@ See all images listed in [dockerhub](https://hub.docker.com/repository/docker/ss
 | [shocker_docker-v1.0.1-lxc](./vul/shocker/shocker_docker-v1.0.1-lxc/) | v0.1.0 | | lxc(dockerinit) execdriver |
 | [shocker_docker-v26.1.4](./vul/shocker/shocker_docker-v26.1.4/) | v0.1.0 | | capadd |
 
+### kubenertes
+
+| tag | version | alias | note |
+| --- | --- | --- | --- |
+| [kubernetes-v1.32.2](./kubernetes/v1.32.2/) | v0.1.0 | |  |
+| [kubernetes-v1.32.2-calico](./kubernetes/v1.32.2--calico/) | v0.1.0 | |  |
+
 ### docker
 
 | tag | version | alias | note |
