@@ -1,6 +1,6 @@
 services:
   vm:
-    command: qemu-system-x86_64 -hda vm.qcow2 -smp 2 -m 2048M -nographic -enable-kvm -nic user,model=e1000,net=172.17.0.0/16,dhcpstart=172.17.0.2,hostfwd=tcp::22-:22
+    command: qemu-system-x86_64 -hda vm.qcow2 -smp 2 -m 2048M -nographic -enable-kvm -nic user,model=e1000,net=10.0.2.0/24,dhcpstart=10.0.2.17,hostfwd=tcp::22-:22
     # command: /start.sh -enable-kvm
     devices:
       - "/dev/kvm:/dev/kvm"

@@ -54,20 +54,22 @@ RUN mkdir -p /etc/containerd && \
 # kubeadm init
 COPY --from=kindest/node:v1.32.2 /kind/ /kind/
 COPY --from=kindest/node:v1.32.2 /etc/systemd/system/kubelet.service.d/11-kind.conf /etc/systemd/system/kubelet.service.d/11-kind.conf
+COPY --from=kindest/node:v1.32.2 /kind/manifests/default-cni.yaml /kind/manifests/default-cni.yaml
 COPY kubeadm.conf /kind/
 COPY kubeadm-init.service /usr/lib/systemd/system/
 
-COPY --from=kindest/node:v1.32.2 /kind/manifests/default-cni.yaml /kind/manifests/default-cni.yaml
-
-RUN systemctl enable kubelet.service
-RUN systemctl enable kubeadm-init.service
+RUN systemctl enable kubelet.service && \
+    systemctl enable kubeadm-init.service
 ENV KUBECONFIG=/etc/kubernetes/admin.conf
 RUN sed -i '/exit 1/d' /kind/bin/create-kubelet-cgroup-v2.sh
 RUN --security=insecure ["/sbin/init", "--log-target=kmsg"]
-RUN rm /usr/lib/systemd/system/kubeadm-init.service
 
-
-
+# finish
+COPY setup-hosts.service /etc/systemd/system/
+RUN mkdir -p /root/.kube && \
+    cp /etc/kubernetes/admin.conf /root/.kube/config && \
+    rm /usr/lib/systemd/system/kubeadm-init.service && \
+    systemctl enable setup-hosts.service
 
 
 
