@@ -15,56 +15,36 @@ RUN mkdir -p /opt/cni/bin && \
 
 # install kubeadm, kubelet, kubectl
 RUN apt-get update && \
-    apt-get install -y apt-transport-https ca-certificates curl gpg && \
+    apt-get install -y apt-transport-https ca-certificates curl gpg vim && \
     curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.32/deb/Release.key | gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg && \
     echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.32/deb/ /' | tee /etc/apt/sources.list.d/kubernetes.list && \
     apt-get update && \
-    apt-get install -y kubelet=1.32.2-1.1 kubeadm=1.32.2-1.1 kubectl=1.32.2-1.1 && \
+    apt-get install -y kubelet=1.32.3-1.1 kubeadm=1.32.3-1.1 kubectl=1.32.3-1.1 && \
     apt-mark hold kubelet kubeadm kubectl && \
     apt-get install -y kmod
-
-# FROM static AS dynamic
-# RUN mv /usr/bin/systemctl /usr/bin/systemctl.orig
-# ADD https://raw.githubusercontent.com/gdraheim/docker-systemctl-images/f67d3a2a21a6b4f1b540a5ddae88101ba10f3633/files/docker/systemctl3.py /usr/bin/
-# RUN chmod +x /usr/bin/systemctl3.py && ln -s /usr/bin/systemctl3.py /usr/bin/systemctl
-
-# FROM dynamic AS preflight
-# # pull kubeadm image
-# # RUN --security=insecure systemctl start containerd && \
-# #     kubeadm config images list --kubernetes-version v1.32.2 | xargs -n 1 ctr -n k8s.io images pull && \
-# #     crictl images
-# RUN --security=insecure containerd & \
-#     sleep 5 && \
-#     kubeadm config images list --kubernetes-version v1.32.2 | xargs -n 1 ctr -n k8s.io images pull && \
-#     crictl images
-
-# # FROM busybox AS mknod
-# # RUN mknod /console c 5 1
-# # RUN --security=insecure ls -lah /console && echo 123 > /console
-
-FROM static AS kubeadm_init
-
-# handle network
 
 # configure snapshotter
 RUN mkdir -p /etc/containerd && \
     containerd config default > /etc/containerd/config.toml && \
     sed -i "s/snapshotter = 'overlayfs'/snapshotter = 'native'/" /etc/containerd/config.toml
 
-# kubeadm init
-COPY --from=kindest/node:v1.32.2 /kind/ /kind/
-COPY --from=kindest/node:v1.32.2 /etc/systemd/system/kubelet.service.d/11-kind.conf /etc/systemd/system/kubelet.service.d/11-kind.conf
+COPY --from=kindest/node:v1.32.3 /kind/ /kind/
+COPY --from=kindest/node:v1.32.3 /etc/systemd/system/kubelet.service.d/11-kind.conf /etc/systemd/system/kubelet.service.d/11-kind.conf
 COPY kubeadm.conf /kind/
-COPY kubeadm-init.service /usr/lib/systemd/system/
 
-COPY --from=kindest/node:v1.32.2 /kind/manifests/default-cni.yaml /kind/manifests/default-cni.yaml
+# FROM static AS kubeadm_init
 
-RUN systemctl enable kubelet.service
-RUN systemctl enable kubeadm-init.service
-ENV KUBECONFIG=/etc/kubernetes/admin.conf
-RUN sed -i '/exit 1/d' /kind/bin/create-kubelet-cgroup-v2.sh
-RUN --security=insecure ["/sbin/init", "--log-target=kmsg"]
-RUN rm /usr/lib/systemd/system/kubeadm-init.service
+# # handle network
+
+# # configure snapshotter
+# RUN mkdir -p /etc/containerd && \
+#     containerd config default > /etc/containerd/config.toml && \
+#     sed -i "s/snapshotter = 'overlayfs'/snapshotter = 'native'/" /etc/containerd/config.toml
+
+
+# RUN systemctl enable kubelet.service
+# RUN systemctl enable kubeadm-init.service
+# ENV KUBECONFIG=/etc/kubernetes/admin.conf
 
 
 
