@@ -23,30 +23,32 @@ RUN apt-get update && \
     apt-mark hold kubelet kubeadm kubectl && \
     apt-get install -y kmod
 
-FROM static AS preflight
-# pull kubeadm image
-RUN --security=insecure containerd & \
-    containerd & \
-    sleep 5 && \
-    kubeadm config images list --kubernetes-version v1.32.2 | xargs -n 1 ctr -n k8s.io images pull && \
-    crictl images
+FROM static AS kubeadm_init
 
-FROM preflight AS kubeadm_init
+# handle network
+
+# configure snapshotter
+RUN mkdir -p /etc/containerd && \
+    containerd config default > /etc/containerd/config.toml && \
+    sed -i "s/snapshotter = 'overlayfs'/snapshotter = 'native'/" /etc/containerd/config.toml
+
 # kubeadm init
-RUN --security=insecure containerd & \
-    containerd & \
-    sleep 5 && \
-    kubeadm init --v=5
+COPY --from=kindest/node:v1.32.2 /kind/ /kind/
+COPY --from=kindest/node:v1.32.2 /etc/systemd/system/kubelet.service.d/11-kind.conf /etc/systemd/system/kubelet.service.d/11-kind.conf
+# COPY --from=kindest/node:v1.32.2 /kind/manifests/default-cni.yaml /kind/manifests/default-cni.yaml
+COPY service/kubeadm.conf /kind/
+COPY service/kubeadm-init.sh /
+COPY service/kubeadm-init.service /usr/lib/systemd/system/
+COPY service/setup-hosts.service /usr/lib/systemd/system/
 
-# # create cluster
-# RUN sh -c 'containerd &' && \
-#     sleep 5 && \
-#     kubeadm init --pod-network-cidr=192.168.0.0/16 --kubernetes-version=1.32.2 && \
-#     mkdir -p /root/.kube && \
-#     cp /etc/kubernetes/admin.conf /root/.kube/config
+RUN systemctl enable kubelet.service && \
+    systemctl enable kubeadm-init.service
+ENV KUBECONFIG=/etc/kubernetes/admin.conf
+RUN sed -i '/exit 1/d' /kind/bin/create-kubelet-cgroup-v2.sh
+RUN --security=insecure ["/sbin/init", "--log-target=kmsg"]
 
-# ENV KUBECONFIG=/etc/kubernetes/admin.conf
-
-# RUN kubectl taint nodes --all node-role.kubernetes.io/control-plane-
-
-# CMD []
+# finish
+RUN mkdir -p /root/.kube && \
+    cp /etc/kubernetes/admin.conf /root/.kube/config && \
+    rm /usr/lib/systemd/system/kubeadm-init.service /kubeadm-init.sh && \
+    systemctl enable setup-hosts.service
