@@ -6,7 +6,7 @@
   * ssst0n3/docker_archive:kubernetes-v1.32.3_v0.1.0
 * ctr:
   * ssst0n3/docker_archive:ctr_kubernetes-v1.32.3 -> ssst0n3/docker_archive:ctr_kubernetes-v1.32.3_v0.2.0
-  * ssst0n3/docker_archive:ctr_kubernetes-v1.32.3_v0.2.0: squash; rename hostname to k8s-control-plane
+  * ssst0n3/docker_archive:ctr_kubernetes-v1.32.3_v0.2.0: squash; use fuse-overlayfs to make image slim; rename hostname to k8s-control-plane
   * ssst0n3/docker_archive:ctr_kubernetes-v1.32.3_v0.1.0
 
 ## usage

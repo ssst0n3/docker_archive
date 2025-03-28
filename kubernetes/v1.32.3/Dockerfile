@@ -27,12 +27,28 @@ RUN apt-get update && \
 
 FROM static AS kubeadm_init
 
-# handle network
-
 # configure snapshotter
+## install fuse-overlayfs
+RUN apt update && \
+    apt install -y fuse-overlayfs && \
+    rm -rf /var/lib/apt/lists/*
+## install containerd-fuse-overlayfs
+ADD https://github.com/containerd/fuse-overlayfs-snapshotter/releases/download/v2.1.2/containerd-fuse-overlayfs-2.1.2-linux-amd64.tar.gz /tmp/fuse-overlayfs-snapshotter.tar.gz
+RUN tar -C /usr/local/bin -xzvf /tmp/fuse-overlayfs-snapshotter.tar.gz && \
+    rm /tmp/fuse-overlayfs-snapshotter.tar.gz
+# TOOD: copy from local
+COPY --from=kindest/node:v1.32.3 /etc/systemd/system/containerd-fuse-overlayfs.service /etc/systemd/system/containerd-fuse-overlayfs.service
+RUN systemctl enable containerd-fuse-overlayfs.service
+## setup containerd config
 RUN mkdir -p /etc/containerd && \
     containerd config default > /etc/containerd/config.toml && \
-    sed -i "s/snapshotter = 'overlayfs'/snapshotter = 'native'/" /etc/containerd/config.toml
+    sed -i "s/snapshotter = 'overlayfs'/snapshotter = 'fuse-overlayfs'/" /etc/containerd/config.toml
+RUN cat >> /etc/containerd/config.toml <<EOF
+[proxy_plugins]
+[proxy_plugins."fuse-overlayfs"]
+    type = "snapshot"
+    address = "/run/containerd-fuse-overlayfs.sock"
+EOF
 
 # kubeadm init
 COPY --from=kindest/node:v1.32.3 /kind/ /kind/
