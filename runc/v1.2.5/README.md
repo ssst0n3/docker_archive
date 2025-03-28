@@ -1,10 +1,12 @@
 # runc v1.2.5
 
 * dqd
-    * ssst0n3/docker_archive:runc-v1.2.5 (-> ssst0n3/docker_archive:runc-v1.2.5_v0.1.1)
+    * ssst0n3/docker_archive:runc-v1.2.5 (-> ssst0n3/docker_archive:runc-v1.2.5_v0.2.0)
+    * ssst0n3/docker_archive:runc-v1.2.5_v0.2.0
     * ssst0n3/docker_archive:runc-v1.2.5_v0.1.1
 * ctr
-    * ssst0n3/docker_archive:ctr_runc-v1.2.5 (-> ssst0n3/docker_archive:ctr_runc-v1.2.5_v0.1.1)
+    * ssst0n3/docker_archive:ctr_runc-v1.2.5 (-> ssst0n3/docker_archive:ctr_runc-v1.2.5_v0.2.0)
+    * ssst0n3/docker_archive:runc-v1.2.5_v0.2.0: squash
     * ssst0n3/docker_archive:ctr_runc-v1.2.5_v0.1.1
 
 ## usage
@@ -61,5 +63,5 @@ make all DIR=runc/v1.2.5
 for developers:
 
 ```dockerfile
-FROM ssst0n3/docker_archive:ctr_runc-v1.2.5_v0.1.1
+FROM ssst0n3/docker_archive:ctr_runc-v1.2.5_v0.2.0
 ```
