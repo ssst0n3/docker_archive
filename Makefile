@@ -12,13 +12,14 @@ env:
 	$(eval CTR_TAG_VERSION := $(CTR_TAG)_$(VERSION))
 	$(eval DQD_TAG := $(REPO):$(IMAGE))
 	$(eval DQD_TAG_VERSION := $(DQD_TAG)_$(VERSION))
+	$(eval SIZE ?= 10G )
 
 ctr: env
-	@echo "Building Docker image in directory $(DIR) with image name $(IMAGE) and version $(VERSION), TAG is $(CTR_TAG)"
+	@echo "Building Docker image in directory $(DIR) with image name $(IMAGE) and version $(VERSION), TAG is $(CTR_TAG), SIZE is $(SIZE)"
 	@cd $(DIR) && { [ -f build.sh ] && ./build.sh $(CTR_TAG_VERSION) || docker build -t $(CTR_TAG_VERSION) . ; }
 
 vm: env
-	$(D2VM) convert $(CTR_TAG_VERSION) -p root -o $(DIR)/vm.qcow2 -v
+	$(D2VM) convert $(CTR_TAG_VERSION) -s $(SIZE) -p root -o $(DIR)/vm.qcow2 -v
 	cd $(DIR) && $(VIRT_SPARSIFY) --compress vm.qcow2 shrunk.qcow2 && mv -f shrunk.qcow2 vm.qcow2 && rm -f 1
 
 dqd: env
