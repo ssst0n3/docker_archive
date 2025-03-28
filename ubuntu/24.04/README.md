@@ -1,10 +1,12 @@
 # docker v24.04
 
 * dqd: 
-	* ssst0n3/docker_archive:ubuntu-24.04 -> ssst0n3/docker_archive:ubuntu-24.04_v0.1.0
+	* ssst0n3/docker_archive:ubuntu-24.04 -> ssst0n3/docker_archive:ubuntu-24.04_v0.2.0
+	* ssst0n3/docker_archive:ubuntu-24.04_v0.2.0
 	* ssst0n3/docker_archive:ubuntu-24.04_v0.1.0
 * ctr: 
-	* ssst0n3/docker_archive:ctr_ubuntu-24.04 -> ssst0n3/docker_archive:ctr_ubuntu-24.04_v0.1.0
+	* ssst0n3/docker_archive:ctr_ubuntu-24.04 -> ssst0n3/docker_archive:ctr_ubuntu-24.04_v0.2.0
+	* ssst0n3/docker_archive:ctr_ubuntu-24.04_v0.2.0: installed common packages; squash
 	* ssst0n3/docker_archive:ctr_ubuntu-24.04_v0.1.0
 
 ## usage
@@ -43,5 +45,5 @@ make all DIR=ubuntu/24.04
 for developers:
 
 ```dockerfile
-FROM ssst0n3/docker_archive:ctr_ubuntu-24.04_v0.1.0
+FROM ssst0n3/docker_archive:ctr_ubuntu-24.04_v0.2.0
 ```
