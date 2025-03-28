@@ -2,9 +2,11 @@
 
 * dqd: 
     * ssst0n3/docker_archive:containerd-v2.0.3 -> ssst0n3/docker_archive:containerd-v2.0.3_v0.1.0
+    * ssst0n3/docker_archive:containerd-v2.0.3_v0.2.0
     * ssst0n3/docker_archive:containerd-v2.0.3_v0.1.0
 * ctr:
     * ssst0n3/docker_archive:ctr_containerd-v2.0.3 -> ssst0n3/docker_archive:ctr_containerd-v2.0.3_v0.1.0
+    * ssst0n3/docker_archive:ctr_containerd-v2.0.3_v0.2.0: squash
     * ssst0n3/docker_archive:ctr_containerd-v2.0.3_v0.1.0
 
 ## usage
@@ -38,5 +40,5 @@ make all DIR=containerd/v2.0.3
 for developers:
 
 ```dockerfile
-FROM ssst0n3/docker_archive:ctr_containerd-v2.0.3_v0.1.0
+FROM ssst0n3/docker_archive:ctr_containerd-v2.0.3_v0.2.0
 ```
