@@ -67,7 +67,7 @@ See all images listed in [dockerhub](https://hub.docker.com/repository/docker/ss
 | tag | version | alias | note |
 | --- | --- | --- | --- |
 | [runc-v1.2.6](./runc/v1.2.6/) | v0.1.0 |
-| [runc-v1.2.5](./runc/v1.2.5/) | v0.1.1 |
+| [runc-v1.2.5](./runc/v1.2.5/) | v0.2.0 |
 | [runc-v1.2.4](./runc/v1.2.4/) | v0.1.0 |
 | [runc-v1.2.3](./runc/v1.2.3/) | v0.1.0 |
 | [runc-v1.2.2](./runc/v1.2.2/) | v0.1.0 |
@@ -136,7 +136,7 @@ See all images listed in [dockerhub](https://hub.docker.com/repository/docker/ss
 | [ubuntu-20.04](./ubuntu/20.04/) | v0.1.0 |
 | [ubuntu-22.04](./ubuntu/22.04/) | v0.1.0 |
 | [ubuntu-22.04-dbg](./ubuntu/22.04-dbg/) | v0.1.0 |
-| [ubuntu-24.04](./ubuntu/24.04/) | v0.1.0 |
+| [ubuntu-24.04](./ubuntu/24.04/) | v0.2.0 |
 
 ### issue
 
