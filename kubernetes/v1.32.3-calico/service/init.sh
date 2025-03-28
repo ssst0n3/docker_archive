@@ -11,6 +11,9 @@ kubectl create -f custom-resources.yaml >>/dev/kmsg 2>&1
 # wait pods ready
 until kubectl wait --for=condition=Ready pod --all -A --timeout=5s; do sleep 1; done >>/dev/kmsg 2>&1
 
+# remove unused containers
+crictl rm $(crictl ps -a -q) >>/dev/kmsg 2>&1
+
 # prevent data lost
 sync
 

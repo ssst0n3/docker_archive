@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1-labs
-FROM ssst0n3/docker_archive:ctr_kubernetes-v1.32.3_v0.1.0
+FROM ssst0n3/docker_archive:ctr_kubernetes-v1.32.3_v0.2.0 AS build
 
 COPY service/init.sh /init.sh
 COPY service/init.service /usr/lib/systemd/system/
@@ -9,3 +9,6 @@ RUN --security=insecure ["/sbin/init", "--log-target=kmsg"]
 
 # finish
 RUN rm /usr/lib/systemd/system/init.service /init.sh
+
+FROM scratch AS release
+COPY --from=build / /
