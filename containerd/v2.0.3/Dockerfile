@@ -1,4 +1,4 @@
-FROM ssst0n3/docker_archive:ctr_runc-v1.2.5_v0.2.0
+FROM ssst0n3/docker_archive:ctr_runc-v1.2.5_v0.2.0 AS build
 
 # install containerd
 ADD https://github.com/containerd/containerd/releases/download/v2.0.3/containerd-2.0.3-linux-amd64.tar.gz /tmp/containerd.tar.gz
