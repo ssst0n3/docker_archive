@@ -12,29 +12,28 @@
 ## usage
 
 ```shell
-cd kubernetes/v1.32.3
-docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
-kubectl --kubeconfig=kubeconfig get pods -A
-./ssh
+$ cd kubernetes/v1.32.3
+$ docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
 ```
 
 ```shell
+$ kubectl --kubeconfig=kubeconfig get pods -A
+NAMESPACE     NAME                                        READY   STATUS    RESTARTS       AGE
+kube-system   coredns-668d6bf9bc-9n5l9                    0/1     Pending   0              9m44s
+kube-system   coredns-668d6bf9bc-m47jq                    0/1     Pending   0              9m44s
+kube-system   etcd-k8s-control-plane                      1/1     Running   1 (107s ago)   9m45s
+kube-system   kube-apiserver-k8s-control-plane            1/1     Running   3 (107s ago)   9m45s
+kube-system   kube-controller-manager-k8s-control-plane   1/1     Running   1 (107s ago)   9m45s
+kube-system   kube-proxy-mr87q                            1/1     Running   1 (107s ago)   9m44s
+kube-system   kube-scheduler-k8s-control-plane            1/1     Running   1 (107s ago)   9m45s
+```
+
+```shell
+$ ./ssh
 root@k8s-control-plane:~# kubectl version
 kClient Version: v1.32.3
 Kustomize Version: v5.5.0
 Server Version: v1.32.3
-root@k8s-control-plane:~# kubectl get pods -A
-NAMESPACE     NAME                                        READY   STATUS    RESTARTS      AGE
-kube-system   coredns-668d6bf9bc-9sp8s                    0/1     Pending   0             6m40s
-kube-system   coredns-668d6bf9bc-gqbd5                    0/1     Pending   0             6m40s
-kube-system   etcd-k8s-control-plane                      1/1     Running   1 (56s ago)   6m45s
-kube-system   kube-apiserver-k8s-control-plane            1/1     Running   3 (56s ago)   6m45s
-kube-system   kube-controller-manager-k8s-control-plane   1/1     Running   1 (56s ago)   6m45s
-kube-system   kube-proxy-sdvtm                            1/1     Running   1 (56s ago)   6m40s
-kube-system   kube-scheduler-k8s-control-plane            1/1     Running   1 (56s ago)   6m45s
-```
-
-```shell
 root@k8s-control-plane:~# containerd --version
 containerd github.com/containerd/containerd/v2 v2.0.3 06b99ca80cdbfbc6cc8bd567021738c9af2b36ce
 root@k8s-control-plane:~# runc --version
@@ -78,4 +77,4 @@ RUN --security=insecure ["/sbin/init", "--log-target=kmsg"]
 
 * use `dmesg -w` to see build logs.
 * use systemd service to execute commands
-* ssh root/root 10.0.2.17 to debug
+* ssh root/root 10.0.2.16 to debug

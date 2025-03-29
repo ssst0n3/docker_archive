@@ -3,7 +3,7 @@ services:
     image: ssst0n3/docker_archive:kubernetes-v1.32.3_v0.2.0
     environment:
       - "QEMU_NET=10.0.2.0/24"
-      - "QEMU_DHCPSTART=10.0.2.17"
+      - "QEMU_DHCPSTART=10.0.2.16"
       - "QEMU_HOSTFWD=hostfwd=tcp::6443-:6443"
     ports:
         - "13230:22"
