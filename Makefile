@@ -23,9 +23,9 @@ vm: env
 	cd $(DIR) && $(VIRT_SPARSIFY) --compress vm.qcow2 shrunk.qcow2 && mv -f shrunk.qcow2 vm.qcow2 && rm -f 1
 
 dqd: env
-	cp $(DIR)/vm.qcow2 dqd
-	docker build -t $(DQD_TAG_VERSION) dqd
-	rm -f dqd/vm.qcow2
+	cp $(DIR)/vm.qcow2 dqd/workspace
+	docker build -t $(DQD_TAG_VERSION) dqd/workspace
+	rm -f dqd/workspace/vm.qcow2
 
 push: env
 	docker tag $(CTR_TAG_VERSION) $(CTR_TAG)
