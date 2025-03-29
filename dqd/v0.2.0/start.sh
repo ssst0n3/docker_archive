@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 CMD="qemu-system-x86_64 \
     -hda vm.qcow2 \
@@ -6,27 +6,27 @@ CMD="qemu-system-x86_64 \
     -m 2048M \
     -nographic"
 
-CMD+=" -net nic -net user"
+CMD="$CMD -net nic -net user"
 
 # setup ip
 if [ -n "${QEMU_NET}" ]; then
-    CMD+=",net=${QEMU_NET}"
+    CMD="$CMD,net=${QEMU_NET}"
 fi
 
 if [ -n "${QEMU_DHCPSTART}" ]; then
-    CMD+=",dhcpstart=${QEMU_DHCPSTART}"
+    CMD="$CMD,dhcpstart=${QEMU_DHCPSTART}"
 fi
 
 # setup port forwarding
-CMD+=",hostfwd=tcp::22-:22"
+CMD="$CMD,hostfwd=tcp::22-:22"
 
 if [ -n "${QEMU_HOSTFWD}" ]; then
-    CMD+=",${QEMU_HOSTFWD}"
+    CMD="$CMD,${QEMU_HOSTFWD}"
 fi
 
 # setup kvm
 if [ -e /dev/kvm ]; then
-    CMD+=" -enable-kvm"
+    CMD="$CMD -enable-kvm"
 fi
 
 exec $CMD "$@"
