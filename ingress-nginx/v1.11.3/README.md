@@ -12,6 +12,7 @@
 ```shell
 cd ingress-nginx/v1.11.3
 docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
+kubectl --kubeconfig=kubeconfig get pods -A
 ./ssh
 ```
 
