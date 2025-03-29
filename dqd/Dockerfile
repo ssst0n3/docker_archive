@@ -6,7 +6,7 @@ CMD [ "/start.sh" ]
 FROM basic AS build
 COPY vm.qcow2 /
 
-# squash
-FROM scratch AS release
-COPY --from=build / /
-CMD [ "/start.sh" ]
+# # squash
+# FROM scratch AS release
+# COPY --from=build / /
+# CMD [ "/start.sh" ]
