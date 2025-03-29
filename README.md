@@ -22,6 +22,12 @@ See all images listed in [dockerhub](https://hub.docker.com/repository/docker/ss
 | [shocker_docker-v1.0.1-lxc](./vul/shocker/shocker_docker-v1.0.1-lxc/) | v0.1.0 | | lxc(dockerinit) execdriver |
 | [shocker_docker-v26.1.4](./vul/shocker/shocker_docker-v26.1.4/) | v0.1.0 | | capadd |
 
+### ingress-nginx
+
+| tag | version | alias | note |
+| --- | --- | --- | --- |
+| [ingress-nginx-v1.11.3](./ingress-nginx/v1.11.3/) | v0.1.0 | |  |
+
 ### kubenertes
 
 | tag | version | alias | note |
