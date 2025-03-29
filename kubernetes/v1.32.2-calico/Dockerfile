@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1-labs
-FROM ssst0n3/docker_archive:ctr_kubernetes-v1.32.2_v0.1.0
+FROM ssst0n3/docker_archive:ctr_kubernetes-v1.32.2_v0.2.0
 
 COPY service/init.sh /init.sh
 COPY service/init.service /usr/lib/systemd/system/
