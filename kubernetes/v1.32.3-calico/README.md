@@ -85,4 +85,4 @@ RUN --security=insecure ["/sbin/init", "--log-target=kmsg"]
 
 * use `dmesg -w` to see build logs.
 * use systemd service to execute commands
-* ssh root/root 10.0.2.17 to debug
+* ssh root/root 10.0.2.16 to debug
