@@ -1,6 +1,6 @@
 #!/bin/bash
 
-hostnamectl set-hostname kind-control-plane
+hostnamectl set-hostname k8s-control-plane
 IP=$(ip -4 addr show eth0 | grep -o "inet [0-9.]*" | cut -d" " -f2) && sed -i "s/172.17.0.2/$IP/g" /kind/kubeadm.conf
 
 # kubeadm init
