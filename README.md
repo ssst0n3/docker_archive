@@ -66,6 +66,7 @@ See all images listed in [dockerhub](https://hub.docker.com/repository/docker/ss
 
 | tag | version | alias |
 | --- | --- | --- |
+| [containerd-v2.0.4-fuse-overlayfs](./containerd/v2.0.4-fuse-overlayfs/) | v0.1.0 |
 | [containerd-v2.0.4](./containerd/v2.0.4/) | v0.1.0 |
 | [containerd-v2.0.3](./containerd/v2.0.3/) | v0.2.0 |
 | [containerd-v2.0.2](./containerd/v2.0.2/) | v0.1.0 |
