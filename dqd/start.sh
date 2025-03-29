@@ -6,15 +6,21 @@ CMD="qemu-system-x86_64 \
     -m 2048M \
     -nographic"
 
-if [ -n "${QEMU_NET}" ] && [ -n "${QEMU_DHCPSTART}" ]; then
-    CMD+=" -net nic -net user,net=${QEMU_NET},dhcpstart=${QEMU_DHCPSTART},hostfwd=tcp::22-:22,hostfwd=tcp::2345-:2345,hostfwd=tcp::2346-:2346"
-else
-    CMD+=" -net nic -net user,hostfwd=tcp::22-:22,hostfwd=tcp::2345-:2345,hostfwd=tcp::2346-:2346"
+CMD+=" -net nic -net user"
+if [ -n "${QEMU_NET}" ]; then
+    CMD+=",net=${QEMU_NET}"
+fi
+
+if [ -n "${QEMU_DHCPSTART}" ]; then
+    CMD+=",dhcpstart=${QEMU_DHCPSTART}"
+fi
+
+if [ -n "${QEMU_HOSTFWD}" ]; then
+    CMD+=",hostfwd=tcp::22-:22,${QEMU_HOSTFWD}"
 fi
 
 if [ -e /dev/kvm ]; then
     CMD+=" -enable-kvm"
 fi
 
-# 执行最终命令
 exec $CMD "$@"
