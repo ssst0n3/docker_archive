@@ -14,6 +14,7 @@
 ```shell
 cd kubernetes/v1.32.3-calico
 docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
+kubectl --kubeconfig=kubeconfig get pods -A
 ./ssh
 ```
 
