@@ -4,7 +4,9 @@ services:
     environment:
       - "QEMU_NET=10.0.2.0/24"
       - "QEMU_DHCPSTART=10.0.2.17"
+      - "QEMU_HOSTFWD=hostfwd=tcp::6443-:6443"
     ports:
         - "13230:22"
+        - "13231:6443"
     tty: true
     stdin_open: true 
