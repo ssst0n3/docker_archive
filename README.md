@@ -37,7 +37,7 @@ See all images listed in [dockerhub](https://hub.docker.com/repository/docker/ss
 | [kubernetes-v1.32.3-calico](./kubernetes/v1.32.3-calico/) | v0.2.0 | |  |
 | [kubernetes-v1.32.3](./kubernetes/v1.32.3/) | v0.2.0 | |  |
 | [kubernetes-v1.32.2-calico](./kubernetes/v1.32.2-calico/) | v0.1.0 | |  |
-| [kubernetes-v1.32.2](./kubernetes/v1.32.2/) | v0.1.0 | |  |
+| [kubernetes-v1.32.2](./kubernetes/v1.32.2/) | v0.2.0 | |  |
 
 ### docker
 
