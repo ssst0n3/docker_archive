@@ -1,4 +1,4 @@
-FROM ssst0n3/docker_archive:dqd_v0.1.0 AS build
+FROM ssst0n3/docker_archive:dqd_v0.2.0 AS build
 COPY vm.qcow2 /
 
 # # squash
