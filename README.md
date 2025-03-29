@@ -10,6 +10,7 @@ See all images listed in [dockerhub](https://hub.docker.com/repository/docker/ss
 
 | tag | version | alias | note |
 | --- | --- | --- | --- |
+| [cve-2025-1974](./vul/cve-2025-1974/) | v0.1.0 | ingress-nginx-v1.11.3 | |
 | [shocker_docker-v0.7.1](./vul/shocker/shocker_docker-v0.7.1/) | v0.1.0 | | lxc execdriver |
 | [shocker_docker-v0.7.2](./vul/shocker/shocker_docker-v0.7.2/) | v0.1.0 | | lxc(dockerinit) execdriver |
 | [shocker_docker-v0.9.0](./vul/shocker/shocker_docker-v0.9.0/) | v0.1.0 | | native execdriver |
