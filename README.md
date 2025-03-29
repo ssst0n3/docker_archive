@@ -27,7 +27,7 @@ See all images listed in [dockerhub](https://hub.docker.com/repository/docker/ss
 
 | tag | version | alias | note |
 | --- | --- | --- | --- |
-| [ingress-nginx-v1.11.3](./ingress-nginx/v1.11.3/) | v0.1.0 | |  |
+| [ingress-nginx-v1.11.3](./ingress-nginx/v1.11.3/) | v0.1.0 | cve-2025-1974 |  |
 
 ### kubenertes
 
