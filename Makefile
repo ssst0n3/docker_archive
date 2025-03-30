@@ -19,6 +19,7 @@ ctr: env
 	@cd $(DIR) && { [ -f build.sh ] && ./build.sh $(CTR_TAG_VERSION) || docker build -t $(CTR_TAG_VERSION) . ; }
 
 vm: env
+	# add -v to show verbose info
 	$(D2VM) convert $(CTR_TAG_VERSION) -s $(SIZE) -p root -o $(DIR)/vm.qcow2
 	cd $(DIR) && $(VIRT_SPARSIFY) --compress vm.qcow2 shrunk.qcow2 && mv -f shrunk.qcow2 vm.qcow2 && rm -f 1
 
