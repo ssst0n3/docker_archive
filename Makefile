@@ -19,7 +19,7 @@ ctr: env
 	@cd $(DIR) && { [ -f build.sh ] && ./build.sh $(CTR_TAG_VERSION) || docker build -t $(CTR_TAG_VERSION) . ; }
 
 vm: env
-	$(D2VM) convert $(CTR_TAG_VERSION) -s $(SIZE) -p root -o $(DIR)/vm.qcow2 -v
+	$(D2VM) convert $(CTR_TAG_VERSION) -s $(SIZE) -p root -o $(DIR)/vm.qcow2
 	cd $(DIR) && $(VIRT_SPARSIFY) --compress vm.qcow2 shrunk.qcow2 && mv -f shrunk.qcow2 vm.qcow2 && rm -f 1
 
 dqd: env
@@ -41,6 +41,6 @@ clean: env
 all: env clean ctr vm dqd
 
 dbg: clean ctr
-	$(D2VM) convert $(CTR_TAG_VERSION) --append-to-cmdline nokaslr -p root -o $(DIR)/vm.qcow2 -v
+	$(D2VM) convert $(CTR_TAG_VERSION) --append-to-cmdline nokaslr -p root -o $(DIR)/vm.qcow2
 	cd $(DIR) && $(VIRT_SPARSIFY) --compress vm.qcow2 shrunk.qcow2 && mv -f shrunk.qcow2 vm.qcow2 && rm -f 1
 	cd $(DIR) && docker build -t $(DQD_TAG_VERSION) -f Dockerfile.dbg .
