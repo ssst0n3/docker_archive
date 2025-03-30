@@ -6,5 +6,7 @@ services:
         - "10031:22"
         - "10032:2345"
         - "10033:2346"
+    environment:
+      - "QEMU_HOSTFWD=hostfwd=tcp::2345-:2345,hostfwd=tcp::2346-:2346"
     tty: true
     stdin_open: true 
