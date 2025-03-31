@@ -148,6 +148,12 @@ See all images listed in [dockerhub](https://hub.docker.com/repository/docker/ss
 | [ubuntu-22.04-dbg](./ubuntu/22.04-dbg/) | v0.1.0 |
 | [ubuntu-24.04](./ubuntu/24.04/) | v0.2.0 |
 
+### debian
+
+| tag | version | alias |
+| --- | --- | --- |
+| [debian-12.0](./debian/12.0/) | v0.1.0 | |
+
 ### issue
 
 | tag | version | alias |
