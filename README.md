@@ -62,6 +62,12 @@ See all images listed in [dockerhub](https://hub.docker.com/repository/docker/ss
 | [docker-v27.5.1](./docker/v27.5.1/) | v0.1.0 |
 | [docker-v28.0.0](./docker/v28.0.0/) | v0.1.0 |
 
+### nerdctl
+
+| tag | version | alias |
+| --- | --- | --- |
+| [nerdctl-v2.0.4](./nerdctl/v2.0.4/) | v0.1.0 |
+
 ### containerd
 
 | tag | version | alias |
