@@ -39,13 +39,13 @@ root@localhost:~# mkdir -p rootfs/bin/
 root@localhost:~# cp /bin/busybox rootfs/bin/
 root@localhost:~# ln -s /bin/busybox rootfs/bin/sh
 root@localhost:~# runc spec
-root@localhost:~# runc run container-1
+root@localhost:~# runc start container-1
 
 
-BusyBox v1.36.1 (Ubuntu 1:1.36.1-6ubuntu3.1) built-in shell (ash)
+BusyBox v1.22.1 (Ubuntu 1:1.22.0-15ubuntu1.4) built-in shell (ash)
 Enter 'help' for a list of built-in commands.
 
-~ # 
+/ #
 ```
 
 ## build
