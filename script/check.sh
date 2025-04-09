@@ -1,22 +1,33 @@
 #!/bin/bash
 
-# check image exists in registry
+trap 'echo "force kill all process"; kill -- -$$ 2>/dev/null; exit 1' SIGINT
 
 REPO="ssst0n3/docker_archive"
 
 check() {
-    local tag=$1
+    local tag="$1"
+    local output
+    output=$(timeout 10s docker manifest inspect "$tag" 2>&1)
+    local exit_code=$?
 
-    if docker manifest inspect "$tag" 2>&1 | grep -q 'no such manifest'; then
-        echo "$tag ❌"
-    else
+    if [[ $exit_code -eq 124 ]]; then
+        echo "$tag ⌛ TIMEOUT"
+        return
+    fi
+
+    if [[ $exit_code -eq 0 ]]; then
         echo "$tag ✔️"
+    else
+        case $output in
+            *"no such manifest"* | *"manifest unknown"*)
+                echo "$tag ❌ NOT EXISTS" ;;
+            *)
+                echo "$tag ⚠️ UNKNOWN ERROR: ${output:0:200}" ;;
+        esac
     fi
 }
 
-find . -type f -name ".env" | while read env_file; do
-    DIR=$(dirname $env_file)
-    echo $DIR
+while IFS= read -r -d '' env_file; do
     source "$env_file"
     CTR_TAG=$REPO:ctr_$IMAGE
     DQD_TAG=$REPO:$IMAGE
@@ -24,4 +35,7 @@ find . -type f -name ".env" | while read env_file; do
     check ${CTR_TAG}_${VERSION}
     check $DQD_TAG
     check ${DQD_TAG}_${VERSION}
-done
+done < <(find . -type f -name ".env" -print0)
+
+wait
+
