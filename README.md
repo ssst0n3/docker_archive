@@ -173,6 +173,7 @@ See all images listed in [dockerhub](https://hub.docker.com/repository/docker/ss
 
 | tag | version | alias |
 | --- | --- | --- |
+| [centos-9](./centos/9/) | v0.1.0 | |
 | [centos-8](./centos/8/) | v0.1.0 | |
 
 ### issue
