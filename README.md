@@ -169,6 +169,12 @@ See all images listed in [dockerhub](https://hub.docker.com/repository/docker/ss
 | --- | --- | --- |
 | [debian-12.0](./debian/12.0/) | v0.1.0 | |
 
+### centos
+
+| tag | version | alias |
+| --- | --- | --- |
+| [centos-8](./centos/8/) | v0.1.0 | |
+
 ### issue
 
 | tag | version | alias |
