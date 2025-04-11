@@ -79,6 +79,12 @@ See all images listed in [dockerhub](https://hub.docker.com/repository/docker/ss
 | [containerd-v2.0.2](./containerd/v2.0.2/) | v0.1.0 |
 | [ubuntu-22.04_runc-v1.1.12_containerd-v1.7.16](./containerd/v1.7.16/) | v0.1.0 |
 
+### buildkit
+
+| tag | version | alias | note |
+| --- | --- | --- | --- |
+| [buildkit-v0.20.2](./buildkit/v0.20.2/) | v0.1.0 |
+
 ### runc
 
 | tag | version | alias | note |
