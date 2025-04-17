@@ -43,6 +43,7 @@ See all images listed in [dockerhub](https://hub.docker.com/repository/docker/ss
 
 | tag | version | alias | note |
 | --- | --- | --- | --- |
+| [docker-v28.0.4](./docker/v28.0.4/) | v0.1.0 |
 | [docker-v28.0.4_centos-stream9](./docker/v28.0.4_centos-stream9/) | v0.1.0 |
 | [docker-v28.0.0](./docker/v28.0.0/) | v0.1.0 |
 | [docker-v27.5.1](./docker/v27.5.1/) | v0.1.0 |

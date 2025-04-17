@@ -16,6 +16,8 @@ $ ./ssh
 ```
 
 ```shell
+root@localhost:~# runc --version
+runc version 0.2
 root@localhost:~# cat /etc/os-release 
 NAME="Ubuntu"
 VERSION="16.04.7 LTS (Xenial Xerus)"
@@ -28,8 +30,6 @@ SUPPORT_URL="http://help.ubuntu.com/"
 BUG_REPORT_URL="http://bugs.launchpad.net/ubuntu/"
 VERSION_CODENAME=xenial
 UBUNTU_CODENAME=xenial
-root@localhost:~# runc --version
-runc version 0.2
 ```
 
 ```shell
