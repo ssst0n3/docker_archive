@@ -1,18 +1,21 @@
-# docker v28.0.4 with runc v1.2.5-debug
+# docker v28.0.4 debug
 
 * dqd:
-  * ssst0n3/docker_archive:docker-v28.0.4 -> ssst0n3/docker_archive:docker-v28.0.4_v0.1.0
-  * ssst0n3/docker_archive:docker-v28.0.4_v0.1.0
+  * ssst0n3/docker_archive:docker-28-0-4-debug -> ssst0n3/docker_archive:docker-28-0-4-debug_v0.1.0
+  * ssst0n3/docker_archive:docker-28-0-4-debug_v0.1.0
 * ctr:
-  * ssst0n3/docker_archive:ctr_docker-v28.0.4 -> ssst0n3/docker_archive:ctr_docker-v28.0.4_v0.1.0
-  * ssst0n3/docker_archive:ctr_docker-v28.0.4_v0.1.0
+  * ssst0n3/docker_archive:ctr_docker-28-0-4-debug -> ssst0n3/docker_archive:ctr_docker-28-0-4-debug_v0.1.0
+  * ssst0n3/docker_archive:ctr_docker-28-0-4-debug_v0.1.0
 
 ## usage
 
 ```shell
-$ cd docker/v28.0.4
+$ cd docker/v28.0.4-debug
 $ docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
 ```
+
+TODO: add usage for debug docker, runc
+
 
 ```shell
 $ ./ssh
@@ -65,11 +68,11 @@ Linux localhost.localdomain 6.8.0-58-generic #60-Ubuntu SMP PREEMPT_DYNAMIC Fri 
 ## build
 
 ```shell
-make all DIR=docker/v28.0.4
+make all DIR=docker/v28.0.4-debug
 ```
 
 for developers:
 
 ```dockerfile
-FROM ssst0n3/docker_archive:ctr_docker-v28.0.4_v0.1.0
+FROM ssst0n3/docker_archive:ctr_docker-v28.0.4-debug_v0.1.0
 ```

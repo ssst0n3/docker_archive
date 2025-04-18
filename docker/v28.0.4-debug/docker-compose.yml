@@ -1,0 +1,12 @@
+services:
+  vm:
+    image: ssst0n3/docker_archive:docker-v28.0.4-debug_v0.1.0
+    environment:
+        - "QEMU_HOSTFWD=hostfwd=tcp::2345-:2345,hostfwd=tcp::2346-:2346,hostfwd=tcp::2347-:2347"
+    ports:
+        - "28042:22"
+        - "28045:2345"
+        - "28046:2346"
+        - "28047:2347"
+    tty: true
+    stdin_open: true 
