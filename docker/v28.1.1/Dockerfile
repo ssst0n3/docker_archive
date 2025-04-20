@@ -11,8 +11,16 @@ RUN apt-get update && \
     tee /etc/apt/sources.list.d/docker.list > /dev/null 
 
 # install docker-ce
+#RUN apt-get update && \
+#    apt-cache madison docker-ce \
+#    containerd.io \
+#    docker-buildx-plugin \
+#    docker-compose-plugin
+
 RUN apt-get update && \
-    apt-cache madison docker-ce \
-    containerd.io \
-    docker-buildx-plugin \
-    docker-compose-plugin
+    DEBIAN_FRONTEND=noninteractive apt-get install -y \
+    docker-ce=5:28.1.1-1~ubuntu.24.04~noble \
+    docker-ce-cli=5:28.1.1-1~ubuntu.24.04~noble \
+    containerd.io=1.7.27-1 \
+    docker-buildx-plugin=0.23.0-1~ubuntu.24.04~noble \
+    docker-compose-plugin=2.35.1-1~ubuntu.24.04~noble
