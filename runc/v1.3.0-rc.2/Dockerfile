@@ -1,4 +1,4 @@
-ARG VERSION_RUNC=1.2.0
+ARG VERSION_RUNC=1.3.0-rc.2
 ARG URL_ARTIFACT_RUNC=https://github.com/opencontainers/runc/releases/download/v${VERSION_RUNC}/runc.amd64
 
 FROM ssst0n3/docker_archive:ctr_ubuntu-24.04_v0.1.0
