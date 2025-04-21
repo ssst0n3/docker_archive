@@ -17,7 +17,11 @@ $ ./ssh
 
 ```shell
 root@localhost:~# runc --version
-
+runc version 1.3.0-rc.1
+commit: v1.3.0-rc.1-0-ga00ce11e
+spec: 1.2.1
+go: go1.23.6
+libseccomp: 2.5.6
 root@localhost:~# cat /etc/os-release 
 PRETTY_NAME="Ubuntu 24.04.1 LTS"
 NAME="Ubuntu"
