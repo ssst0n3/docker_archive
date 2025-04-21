@@ -1,8 +1,13 @@
 ARG VERSION_RUNC=1.3.0-rc.1
-ARG URL_ARTIFACT_RUNC=https://github.com/opencontainers/runc/releases/download/v${VERSION_RUNC}/runc.amd64
+ARG CRIU_REPO=https://download.opensuse.org/repositories/devel:/tools:/criu/Debian_12
+ARG KEYFILE=/usr/share/keyrings/criu-repo-keyring.gpg
 
-FROM ssst0n3/docker_archive:ctr_ubuntu-24.04_v0.1.0
-ARG URL_ARTIFACT_RUNC
-RUN apt update && apt install -y busybox-static vim jq && apt-get clean -y
-ADD ${URL_ARTIFACT_RUNC} /tmp/runc.amd64
-RUN install -m 755 /tmp/runc.amd64 /usr/local/sbin/runc && rm /tmp/runc.amd64
+FROM ssst0n3/docker_archive:ctr_runc-v${VERSION_RUNC}_v0.1.0
+ARG CRIU_REPO
+ARG KEYFILE
+RUN wget -nv ${CRIU_REPO}/Release.key -O- | gpg --dearmor > ${KEYFILE} && \
+    echo "deb [signed-by=${KEYFILE}] ${CRIU_REPO}/ /" > /etc/apt/sources.list.d/criu.list && \
+    apt update && \
+    apt install -y criu=4.1-1 && \
+    apt-get clean -y && \
+    rm -rf /var/lib/apt/lists/*
