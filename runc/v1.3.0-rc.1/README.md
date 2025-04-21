@@ -63,3 +63,13 @@ for developers:
 ```dockerfile
 FROM ssst0n3/docker_archive:ctr_runc-v1.3.0-rc.1_v0.1.0
 ```
+
+```
+root@localhost:~# ps -ef |grep sleep |grep -v grep
+root         442       1  0 08:42 ?        00:00:00 /bin/sh -c sleep inf
+root@localhost:~# ls -lah /proc/442/ns/time
+lrwxrwxrwx 1 root root 0 Apr 21 08:42 /proc/442/ns/time -> 'time:[4026531834]'
+root@localhost:~# ls -lah /proc/1/ns/time
+lrwxrwxrwx 1 root root 0 Apr 21 08:42 /proc/1/ns/time -> 'time:[4026531834]'
+root@localhost:~#
+```
