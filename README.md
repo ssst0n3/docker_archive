@@ -80,6 +80,7 @@ See all images listed in [dockerhub](https://hub.docker.com/repository/docker/ss
 | [containerd-v2.0.3](./containerd/v2.0.3/) | v0.2.0 |
 | [containerd-v2.0.2](./containerd/v2.0.2/) | v0.1.0 |
 | [ubuntu-22.04_runc-v1.1.12_containerd-v1.7.16](./containerd/v1.7.16/) | v0.1.0 |
+| [containerd-v1.3.8](./containerd/v1.3.8/) | v0.1.0 |
 
 ### buildkit
 
