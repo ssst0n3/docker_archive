@@ -109,6 +109,32 @@ Server:
 SELinux status:                 disabled
 ```
 
+## advance
+
+### enable SELinux
+
+```shell
+$ ./ssh
+[root@localhost ~]# sestatus 
+SELinux status:                 disabled
+[root@localhost ~]# sed -i 's/^SELINUX=.*/SELINUX=enforcing/' /etc/selinux/config
+[root@localhost ~]# touch /.autorelabel
+[root@localhost ~]# reboot
+$ ./ssh
+[root@localhost ~]# sestatus 
+SELinux status:                 enabled
+SELinuxfs mount:                /sys/fs/selinux
+SELinux root directory:         /etc/selinux
+Loaded policy name:             targeted
+Current mode:                   enforcing
+Mode from config file:          enforcing
+Policy MLS status:              enabled
+Policy deny_unknown status:     allowed
+Memory protection checking:     actual (secure)
+Max kernel policy version:      33
+```
+
+
 ## build
 
 ```shell
