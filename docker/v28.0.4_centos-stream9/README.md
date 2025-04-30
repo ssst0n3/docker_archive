@@ -12,10 +12,23 @@
 ```shell
 $ cd docker/v28.0.4_centos-stream9
 $ docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
-$ ./ssh
 ```
 
 ```shell
+$ ./ssh
+[root@localhost ~]# docker run -ti hello-world
+Unable to find image 'hello-world:latest' locally
+latest: Pulling from library/hello-world
+e6590344b1a5: Pull complete 
+Digest: sha256:c41088499908a59aae84b0a49c70e86f4731e588a737f1637e73c8c09d995654
+Status: Downloaded newer image for hello-world:latest
+
+Hello from Docker!
+...
+```
+
+```shell
+$ ./ssh
 [root@localhost ~]# docker version
 Client: Docker Engine - Community
  Version:           28.0.4
@@ -44,7 +57,6 @@ Server: Docker Engine - Community
  docker-init:
   Version:          0.19.0
   GitCommit:        de40ad0
-
 [root@localhost ~]# docker info
 Client: Docker Engine - Community
  Version:    28.0.4
@@ -79,7 +91,7 @@ Server:
   Network: bridge host ipvlan macvlan null overlay
   Log: awslogs fluentd gcplogs gelf journald json-file local splunk syslog
  Swarm: inactive
- Runtimes: runc io.containerd.runc.v2
+ Runtimes: io.containerd.runc.v2 runc
  Default Runtime: runc
  Init Binary: docker-init
  containerd version: 05044ec0a9a75232cad458027ca83437aae3f4da
@@ -89,14 +101,14 @@ Server:
   seccomp
    Profile: builtin
   cgroupns
- Kernel Version: 5.14.0-575.el9.x86_64
+ Kernel Version: 5.14.0-580.el9.x86_64
  Operating System: CentOS Stream 9
  OSType: linux
  Architecture: x86_64
  CPUs: 2
  Total Memory: 1.917GiB
  Name: localhost.localdomain
- ID: 1e887c54-ea45-43d0-b4f7-ade941e63958
+ ID: 2d095a79-7092-4af5-977d-4371b359494b
  Docker Root Dir: /var/lib/docker
  Debug Mode: false
  Experimental: false
@@ -105,23 +117,7 @@ Server:
   127.0.0.0/8
  Live Restore Enabled: false
 
-[root@localhost ~]# sestatus 
-SELinux status:                 disabled
-```
-
-## advance
-
-### enable SELinux
-
-```shell
-$ ./ssh
-[root@localhost ~]# sestatus 
-SELinux status:                 disabled
-[root@localhost ~]# sed -i 's/^SELINUX=.*/SELINUX=enforcing/' /etc/selinux/config
-[root@localhost ~]# touch /.autorelabel
-[root@localhost ~]# reboot
-$ ./ssh
-[root@localhost ~]# sestatus 
+[root@localhost ~]# sestatus
 SELinux status:                 enabled
 SELinuxfs mount:                /sys/fs/selinux
 SELinux root directory:         /etc/selinux
@@ -132,6 +128,19 @@ Policy MLS status:              enabled
 Policy deny_unknown status:     allowed
 Memory protection checking:     actual (secure)
 Max kernel policy version:      33
+```
+
+## advance
+
+### disable SELinux
+
+```shell
+$ ./ssh
+[root@localhost ~]# sed -i 's/^SELINUX=.*/SELINUX=disabled/' /etc/selinux/config
+[root@localhost ~]# reboot
+$ ./ssh
+[root@localhost ~]# sestatus
+SELinux status:                 disabled
 ```
 
 

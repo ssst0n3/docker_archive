@@ -21,5 +21,5 @@ RUN dnf -y install \
     docker-buildx-plugin-0.22.0-1.el9 \
     docker-compose-plugin-2.34.0-1.el9 && \
     systemctl enable docker
-# disable SELinux by /etc/selinux/config
-RUN sed -i 's/^SELINUX=.*/SELINUX=disabled/' /etc/selinux/config
+# relabel to prevent SELinux issues
+RUN touch /.autorelabel
