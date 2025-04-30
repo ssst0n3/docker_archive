@@ -77,6 +77,8 @@ $ goland ~/research_target/runc/runc-v1.2.5
 
 ## 2. debug
 
+https://github.com/user-attachments/assets/4350a29e-08a9-468c-a95f-cb881e9a96c3
+
 ### 2.1 Setup Debug Configuration
 
 * Run->Edit Configurations->+(Add New Configuration)->Go Remote
