@@ -37,6 +37,8 @@ $ git clone --depth 1 --branch v28.0.4 https://github.com/moby/moby.git ${DIR}/d
 ### 2.2 start the env
 
 ```shell
+$ git clone https://github.com/ssst0n3/docker_archive
+$ cd docker_archive/docker/v28.0.4-debug/
 $ docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
 ```
 
