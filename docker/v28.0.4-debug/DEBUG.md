@@ -52,7 +52,7 @@ Click the button `Debug 'docker'`
 
 # debug runc
 
-
+https://github.com/user-attachments/assets/4350a29e-08a9-468c-a95f-cb881e9a96c3
 
 ## 1. open source code id IDE
 
@@ -76,8 +76,6 @@ $ goland ~/research_target/runc/runc-v1.2.5
 * Uncheck the checkbox 'Enable Go modules integration'
 
 ## 2. debug
-
-https://github.com/user-attachments/assets/4350a29e-08a9-468c-a95f-cb881e9a96c3
 
 ### 2.1 Setup Debug Configuration
 
