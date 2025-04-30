@@ -1,5 +1,7 @@
 # debug docker
 
+https://github.com/user-attachments/assets/39033a93-8e94-4844-b948-2349024a285b
+
 ## 1. open source code id IDE
 
 ### 1.1 clone the repo
