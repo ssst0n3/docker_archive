@@ -14,11 +14,31 @@ $ cd docker/v28.0.4-debug
 $ docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
 ```
 
-TODO: add usage for debug docker, runc
+### debug
 
+[DEBUG.md](./DEBUG.md)
+
+### env information
 
 ```shell
 $ ./ssh
+root@localhost:~# systemctl status docker
+● docker.service - Docker Application Container Engine
+     Loaded: loaded (/usr/lib/systemd/system/docker.service; enabled; preset: enabled)
+     Active: activating (start) since Wed 2025-04-30 03:50:21 UTC; 22s ago
+TriggeredBy: ● docker.socket
+       Docs: https://docs.docker.com
+   Main PID: 429 (dlv)
+      Tasks: 9
+     Memory: 326.0M (peak: 326.3M)
+        CPU: 823ms
+     CGroup: /system.slice/docker.service
+             ├─429 dlv --listen=:2345 --headless=true --api-version=2 --accept-multiclient exec /root/dockerd-debug -- -H unix:///run/docker.sock --containerd=/run/containerd/containerd.sock
+             └─434 /root/dockerd-debug -H unix:///run/docker.sock --containerd=/run/containerd/containerd.sock
+
+Apr 30 03:50:21 localhost.localdomain systemd[1]: Starting docker.service - Docker Application Container Engine...
+Apr 30 03:50:21 localhost.localdomain dlv[429]: API server listening at: [::]:2345
+Apr 30 03:50:21 localhost.localdomain dlv[429]: 2025-04-30T03:50:21Z warn layer=rpc Listening for remote connections (connections are not authenticated nor encrypted)
 root@localhost:~# docker version
 Client: Docker Engine - Community
  Version:           28.0.4
