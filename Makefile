@@ -2,7 +2,7 @@
 
 REPO ?= ssst0n3/docker_archive
 # D2VM := docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock --privileged -v $(PWD):/d2vm -w /d2vm linkacloud/d2vm:latest $*
-D2VM := docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock --privileged -v $(PWD):/d2vm -w /d2vm ssst0n3/d2vm:v0.2.4 $*
+D2VM := docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock --privileged -v $(PWD):/d2vm -w /d2vm ssst0n3/d2vm:v0.3.1 $*
 VIRT_SPARSIFY := docker run -it --rm -v $(PWD)/$(DIR):/data -w /data --env PUID=$(shell id -u) --env PGID=$(shell id -u) bkahlert/libguestfs:edge virt-sparsify
 
 env:
