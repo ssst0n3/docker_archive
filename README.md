@@ -76,6 +76,7 @@ See all images listed in [dockerhub](https://hub.docker.com/repository/docker/ss
 
 | tag | version | alias |
 | --- | --- | --- |
+| [nerdctl-v2.0.4_runc-v1.2.5-debug](./nerdctl/v2.0.4_runc-v1.2.5-debug/) | v0.1.0 |
 | [nerdctl-v2.0.4](./nerdctl/v2.0.4/) | v0.1.0 |
 
 ### containerd
