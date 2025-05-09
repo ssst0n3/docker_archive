@@ -38,7 +38,7 @@ mkdir -p "$(dirname "$output_file")"
 
 # Find all .env files in the current working directory and its subdirectories,
 # even if the script is executed from a different directory.
-find . -type f -name ".env" | while IFS= read -r env_file; do
+find . -type f -name ".env" | sort | while IFS= read -r env_file; do
     # Get the directory containing the .env file.
     dir=$(dirname "$env_file")
     
