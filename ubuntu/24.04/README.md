@@ -1,11 +1,13 @@
 # docker v24.04
 
 * dqd: 
-	* ssst0n3/docker_archive:ubuntu-24.04 -> ssst0n3/docker_archive:ubuntu-24.04_v0.2.0
+	* ssst0n3/docker_archive:ubuntu-24.04 -> ssst0n3/docker_archive:ubuntu-24.04_v0.3.0
+	* ssst0n3/docker_archive:ubuntu-24.04_v0.3.0
 	* ssst0n3/docker_archive:ubuntu-24.04_v0.2.0
 	* ssst0n3/docker_archive:ubuntu-24.04_v0.1.0
 * ctr: 
-	* ssst0n3/docker_archive:ctr_ubuntu-24.04 -> ssst0n3/docker_archive:ctr_ubuntu-24.04_v0.2.0
+	* ssst0n3/docker_archive:ctr_ubuntu-24.04 -> ssst0n3/docker_archive:ctr_ubuntu-24.04_v0.3.0
+	* ssst0n3/docker_archive:ctr_ubuntu-24.04_v0.3.0: install built-in ssh key
 	* ssst0n3/docker_archive:ctr_ubuntu-24.04_v0.2.0: installed common packages; squash
 	* ssst0n3/docker_archive:ctr_ubuntu-24.04_v0.1.0
 
@@ -19,12 +21,12 @@ docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
 
 ```shell
 root@localhost:~# uname -a
-Linux localhost.localdomain 6.8.0-45-generic #45-Ubuntu SMP PREEMPT_DYNAMIC Fri Aug 30 12:02:04 UTC 2024 x86_64 x86_64 x86_64 GNU/Linux
+Linux localhost.localdomain 6.8.0-59-generic #61-Ubuntu SMP PREEMPT_DYNAMIC Fri Apr 11 23:16:11 UTC 2025 x86_64 x86_64 x86_64 GNU/Linux
 root@localhost:~# cat /etc/os-release 
-PRETTY_NAME="Ubuntu 24.04.1 LTS"
+PRETTY_NAME="Ubuntu 24.04.2 LTS"
 NAME="Ubuntu"
 VERSION_ID="24.04"
-VERSION="24.04.1 LTS (Noble Numbat)"
+VERSION="24.04.2 LTS (Noble Numbat)"
 VERSION_CODENAME=noble
 ID=ubuntu
 ID_LIKE=debian
@@ -45,5 +47,5 @@ make all DIR=ubuntu/24.04
 for developers:
 
 ```dockerfile
-FROM ssst0n3/docker_archive:ctr_ubuntu-24.04_v0.2.0
+FROM ssst0n3/docker_archive:ctr_ubuntu-24.04_v0.3.0
 ```
