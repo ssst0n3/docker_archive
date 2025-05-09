@@ -1,0 +1,11 @@
+Host nerdctl-v2.0.4
+    Hostname 127.0.0.1
+    Port 20400
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+
+Host ubuntu-24.04
+    Hostname 127.0.0.1
+    Port 24040
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive

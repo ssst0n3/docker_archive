@@ -4,6 +4,52 @@ See all images listed in [dockerhub](https://hub.docker.com/repository/docker/ss
 
 ## How-To
 
+### 1. quick-start
+
+```shell
+$ git clone https://github.com/ssst0n3/docker_archive
+$ cd docker_archive/docker/v28.1.1
+$ docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
+$ ./ssh
+root@localhost:~# docker version
+Client: Docker Engine - Community
+ Version:           28.1.1
+ API version:       1.49
+ Go version:        go1.23.8
+ Git commit:        4eba377
+ Built:             Fri Apr 18 09:52:14 2025
+ OS/Arch:           linux/amd64
+ Context:           default
+
+Server: Docker Engine - Community
+ Engine:
+  Version:          28.1.1
+  API version:      1.49 (minimum version 1.24)
+  Go version:       go1.23.8
+  Git commit:       01f442b
+  Built:            Fri Apr 18 09:52:14 2025
+  OS/Arch:          linux/amd64
+  Experimental:     false
+ containerd:
+  Version:          1.7.27
+  GitCommit:        05044ec0a9a75232cad458027ca83437aae3f4da
+ runc:
+  Version:          1.2.5
+  GitCommit:        v1.2.5-0-g59923ef
+ docker-init:
+  Version:          0.19.0
+  GitCommit:        de40ad0
+```
+
+### 2. install built-in ssh config
+
+```shell
+$ ./script/install_ssh_config.sh
+$ ssh docker-v28.1.1
+root@localhost:~# docker version
+...
+```
+
 ## Images
 
 ### vul
