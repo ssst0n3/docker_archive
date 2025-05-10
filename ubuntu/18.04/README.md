@@ -1,21 +1,23 @@
 # docker v18.04
 
 * dqd: 
-	* ssst0n3/docker_archive:ubuntu-18.04 -> ssst0n3/docker_archive:ubuntu-18.04_v0.1.0
+	* ssst0n3/docker_archive:ubuntu-18.04 -> ssst0n3/docker_archive:ubuntu-18.04_v0.2.0
+	* ssst0n3/docker_archive:ubuntu-18.04_v0.2.0
 	* ssst0n3/docker_archive:ubuntu-18.04_v0.1.0
 * ctr: 
-	* ssst0n3/docker_archive:ctr_ubuntu-18.04 -> ssst0n3/docker_archive:ctr_ubuntu-18.04_v0.1.0
+	* ssst0n3/docker_archive:ctr_ubuntu-18.04 -> ssst0n3/docker_archive:ctr_ubuntu-18.04_v0.2.0
+	* ssst0n3/docker_archive:ctr_ubuntu-18.04_v0.2.0: install the built-in ssh key
 	* ssst0n3/docker_archive:ctr_ubuntu-18.04_v0.1.0
 
 ## usage
 
 ```shell
-cd ubuntu/18.04
-docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
-ssh -p 18040 root@127.0.0.1
+$ cd ubuntu/18.04
+$ docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
 ```
 
 ```shell
+$ ssh ubuntu-18.04
 root@localhost:~# uname -a
 Linux localhost.localdomain 4.15.0-213-generic #224-Ubuntu SMP Mon Jun 19 13:30:12 UTC 2023 x86_64 x86_64 x86_64 GNU/Linux
 root@localhost:~# cat /etc/os-release 
@@ -31,40 +33,40 @@ BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
 PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
 VERSION_CODENAME=bionic
 UBUNTU_CODENAME=bionic
-root@localhost:~# cat /proc/filesystems 
-nodev	sysfs
-nodev	rootfs
-nodev	ramfs
-nodev	bdev
-nodev	proc
-nodev	cpuset
-nodev	cgroup
-nodev	cgroup2
-nodev	tmpfs
-nodev	devtmpfs
-nodev	configfs
-nodev	debugfs
-nodev	tracefs
-nodev	securityfs
-nodev	sockfs
-nodev	dax
-nodev	bpf
-nodev	pipefs
-nodev	hugetlbfs
-nodev	devpts
-	ext3
-	ext2
-	ext4
-	squashfs
-	vfat
-nodev	ecryptfs
-	fuseblk
-nodev	fuse
-nodev	fusectl
-nodev	pstore
-nodev	mqueue
-nodev	autofs
-nodev	aufs
+root@localhost:~# cat /proc/filesystems
+nodev   sysfs
+nodev   rootfs
+nodev   ramfs
+nodev   bdev
+nodev   proc
+nodev   cpuset
+nodev   cgroup
+nodev   cgroup2
+nodev   tmpfs
+nodev   devtmpfs
+nodev   configfs
+nodev   debugfs
+nodev   tracefs
+nodev   securityfs
+nodev   sockfs
+nodev   dax
+nodev   bpf
+nodev   pipefs
+nodev   hugetlbfs
+nodev   devpts
+        ext3
+        ext2
+        ext4
+        squashfs
+        vfat
+nodev   ecryptfs
+        fuseblk
+nodev   fuse
+nodev   fusectl
+nodev   pstore
+nodev   mqueue
+nodev   autofs
+nodev   aufs
 ```
 
 ## build
@@ -76,5 +78,5 @@ make all DIR=ubuntu/18.04
 for developers:
 
 ```dockerfile
-FROM ssst0n3/docker_archive:ctr_ubuntu-18.04_v0.1.0
+FROM ssst0n3/docker_archive:ctr_ubuntu-18.04_v0.2.0
 ```
