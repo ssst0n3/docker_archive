@@ -1,21 +1,23 @@
 # ubuntu 16.04
 
 * dqd: 
-    * ssst0n3/docker_archive:ubuntu-16.04 -> ssst0n3/docker_archive:ubuntu-16.04_v0.1.0
+    * ssst0n3/docker_archive:ubuntu-16.04 -> ssst0n3/docker_archive:ubuntu-16.04_v0.2.0
+    * ssst0n3/docker_archive:ubuntu-16.04_v0.2.0
     * ssst0n3/docker_archive:ubuntu-16.04_v0.1.0
 * ctr: 
-    * ssst0n3/docker_archive:ctr_ubuntu-16.04 -> ssst0n3/docker_archive:ctr_ubuntu-16.04_v0.1.0
+    * ssst0n3/docker_archive:ctr_ubuntu-16.04 -> ssst0n3/docker_archive:ctr_ubuntu-16.04_v0.2.0
+    * ssst0n3/docker_archive:ctr_ubuntu-16.04_v0.2.0: install the built-in ssh key
     * ssst0n3/docker_archive:ctr_ubuntu-16.04_v0.1.0
 
 ## usage
 
 ```shell
-cd ubuntu/16.04
-docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
-ssh -p 16040 root@127.0.0.1
+$ cd ubuntu/16.04
+$ docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
 ```
 
 ```shell
+$ ssh ubuntu-16.04
 root@localhost:~# uname -a
 Linux localhost.localdomain 4.4.0-210-generic #242-Ubuntu SMP Fri Apr 16 09:57:56 UTC 2021 x86_64 x86_64 x86_64 GNU/Linux
 root@localhost:~# cat /etc/os-release 
@@ -41,5 +43,5 @@ make all DIR=ubuntu/16.04
 for developers:
 
 ```dockerfile
-FROM ssst0n3/docker_archive:ctr_ubuntu-16.04_v0.1.0
+FROM ssst0n3/docker_archive:ctr_ubuntu-16.04_v0.2.0
 ```
