@@ -225,7 +225,7 @@ root@localhost:~# docker version
 | [ubuntu-18.04](./ubuntu/18.04/) | v0.2.0 |
 | [ubuntu-16.04](./ubuntu/16.04/) | v0.2.0 |
 | [ubuntu-14.04](./ubuntu/14.04/) | v0.2.0 |
-| [ubuntu-12.04](./ubuntu/12.04/) | v0.1.0 |
+| [ubuntu-12.04](./ubuntu/12.04/) | v0.2.0 |
 
 ### debian
 

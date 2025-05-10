@@ -13,7 +13,10 @@
 #     Hostname 127.0.0.1
 #     Port <HOST_PORT>
 #     User root
-#     IdentityFile ~/.ssh/keys/docker_archive
+#     IdentityFile <value>
+#
+# If the .env file contains the IDENTIFY_FILE variable, its value will be used as the
+# IdentityFile. Otherwise, the default value ~/.ssh/keys/docker_archive is used.
 #
 # The output file is always ../ssh_config/config relative to the script’s directory,
 # no matter where the script is executed from.
@@ -23,6 +26,7 @@
 # - The docker-compose.yml file includes a port mapping line like:
 #       - "13239:22" or - 13239:22 (with or without quotes)
 # - The host port is the number before the colon in the mapping "host_port:22".
+# - The .env file may optionally include a line such as: IDENTIFY_FILE=/path/to/key
 
 # Determine the directory where this script is located.
 script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
@@ -57,9 +61,14 @@ find . -type f -name ".env" | sort | while IFS= read -r env_file; do
         continue
     fi
 
+    # Extract the IDENTIFY_FILE variable from the .env file if set, otherwise use the default.
+    identity_file=$(grep '^IDENTITY_FILE=' "$env_file" | head -n1 | cut -d'=' -f2- | tr -d '"')
+    if [ -z "$identity_file" ]; then
+        identity_file="~/.ssh/keys/docker_archive"
+    fi
+
     # Look for the port mapping in docker-compose.yml for container port 22.
     # Matches lines such as: - "13239:22" or - 13239:22
-    # port_line=$(grep -E '^[[:space:]]*-[[:space:]]*"?[0-9]+:22"?[[:space:]]*$' "$dc_file")
     port_line=$(sed -n 's/.*"\([0-9]\+\):22".*/\1/p' "$dc_file")
     if [ -z "$port_line" ]; then
         echo "No mapping for container port 22 found in $dc_file, skipping directory $dir."
@@ -79,11 +88,11 @@ find . -type f -name ".env" | sort | while IFS= read -r env_file; do
         echo "    Hostname 127.0.0.1"
         echo "    Port $host_port"
         echo "    User root"
-        echo "    IdentityFile ~/.ssh/keys/docker_archive"
+        echo "    IdentityFile $identity_file"
         echo ""
     } >> "$output_file"
 
-    echo "Added configuration for [$image] with ssh port: $host_port."
+    echo "Added configuration for [$image] with ssh port: $host_port, identify_file: $identity_file"
 done
 
 echo "SSH configuration generated in: $output_file"

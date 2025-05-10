@@ -692,7 +692,7 @@ Host ubuntu-12.04
     Hostname 127.0.0.1
     Port 12040
     User root
-    IdentityFile ~/.ssh/keys/docker_archive
+    IdentityFile ~/.ssh/keys/docker_archive_ecdsa-sha2-nistp256
 
 Host ubuntu-14.04
     Hostname 127.0.0.1
