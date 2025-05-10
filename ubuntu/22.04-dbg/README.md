@@ -1,10 +1,12 @@
 # docker v22.04 dbg
 
 * dqd: 
-	* ssst0n3/docker_archive:ubuntu-22.04-dbg -> ssst0n3/docker_archive:ubuntu-22.04-dbg_v0.1.0
+	* ssst0n3/docker_archive:ubuntu-22.04-dbg -> ssst0n3/docker_archive:ubuntu-22.04-dbg_v0.2.0
+	* ssst0n3/docker_archive:ubuntu-22.04-dbg_v0.2.0
 	* ssst0n3/docker_archive:ubuntu-22.04-dbg_v0.1.0
 * ctr: 
-	* ssst0n3/docker_archive:ctr_ubuntu-22.04-dbg -> ssst0n3/docker_archive:ctr_ubuntu-22.04-dbg_v0.1.0
+	* ssst0n3/docker_archive:ctr_ubuntu-22.04-dbg -> ssst0n3/docker_archive:ctr_ubuntu-22.04-dbg_v0.2.0
+	* ssst0n3/docker_archive:ctr_ubuntu-22.04-dbg_v0.2.0: bump base image to v0.2.0
 	* ssst0n3/docker_archive:ctr_ubuntu-22.04-dbg_v0.1.0
 
 ## debug
@@ -12,6 +14,7 @@
 ### 1. gdb in docker (recommend)
 
 ```
+$ docker compose up -d
 $ docker exec -ti ubuntu-22-04-dbg-vm-1 bash
 root@276954a1c0af:/# gdb /vmlinux
 (gdb) target remote :1234
@@ -25,20 +28,17 @@ Continuing.
 
 KVM is not recommended for debugging kernel.
 
-```shell
-ssh -p 22041 root@127.0.0.1
-```
-
 vm:
 
 ```shell
+$ ./ssh
 root@localhost:~# uname -a
-Linux localhost.localdomain 5.15.0-119-generic #129-Ubuntu SMP Fri Aug 2 19:25:20 UTC 2024 x86_64 x86_64 x86_64 GNU/Linux
+Linux localhost.localdomain 5.15.0-139-generic #149-Ubuntu SMP Fri Apr 11 22:06:13 UTC 2025 x86_64 x86_64 x86_64 GNU/Linux
 root@localhost:~# cat /etc/os-release 
-PRETTY_NAME="Ubuntu 22.04.4 LTS"
+PRETTY_NAME="Ubuntu 22.04.5 LTS"
 NAME="Ubuntu"
 VERSION_ID="22.04"
-VERSION="22.04.4 LTS (Jammy Jellyfish)"
+VERSION="22.04.5 LTS (Jammy Jellyfish)"
 VERSION_CODENAME=jammy
 ID=ubuntu
 ID_LIKE=debian
@@ -53,11 +53,11 @@ ctr:
 
 ```shell
 $ docker exec -ti ubuntu-22-04-dbg-vm-1 bash
-root@7a8888107cad:/# dpkg -l |grep linux
-ii  linux-image-5.15.0-119-generic                 5.15.0-119.129                          amd64        Signed kernel image generic
-ii  linux-image-5.15.0-119-generic-dbgsym          5.15.0-119.129                          amd64        Signed kernel image generic
-ii  linux-image-unsigned-5.15.0-119-generic-dbgsym 5.15.0-119.129                          amd64        Linux kernel debug image for version 5.15.0 on 64 bit x86 SMP
-ii  linux-source-5.15.0                            5.15.0-119.129                          all          Linux kernel source for version 5.15.0 with Ubuntu patches
+root@bbed7ea6e45e:/# dpkg -l |grep linux
+ii  linux-image-5.15.0-139-generic                 5.15.0-139.149                          amd64        Signed kernel image generic
+ii  linux-image-5.15.0-139-generic-dbgsym          5.15.0-139.149                          amd64        Signed kernel image generic
+ii  linux-image-unsigned-5.15.0-139-generic-dbgsym 5.15.0-139.149                          amd64        Linux kernel debug image for version 5.15.0 on 64 bit x86 SMP
+ii  linux-source-5.15.0                            5.15.0-139.149                          all          Linux kernel source for version 5.15.0 with Ubuntu patches
 ...
 ```
 
@@ -72,7 +72,7 @@ for developers:
 Dockerfile.dbg
 
 ```dockerfile
-FROM ssst0n3/docker_archive:ctr_ubuntu-22.04-dbg_v0.1.0
+FROM ssst0n3/docker_archive:ctr_ubuntu-22.04-dbg_v0.2.0
 ```
 
 Dockerfile: as your need

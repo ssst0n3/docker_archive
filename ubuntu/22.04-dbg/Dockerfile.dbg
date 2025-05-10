@@ -1,6 +1,8 @@
 FROM ubuntu:22.04 as basic
 COPY start.sh /start.sh
-RUN apt-get update && apt-get install -y qemu-system-x86 binutils gdb && apt-get clean
+RUN apt-get update && \
+    apt-get install -y qemu-system-x86 binutils gdb && \
+    apt-get clean
 
 FROM basic
 COPY vm.qcow2 /
@@ -8,11 +10,14 @@ COPY vm.qcow2 /
 RUN apt update && apt install ubuntu-dbgsym-keyring
 COPY ddebs.list /etc/apt/sources.list.d
 
+# apt-cache madison linux-image-$(uname -r)
 # linux-image: linux-image-$(readlink -m /boot/vmlinuz | sed 's/.*vmlinuz-//')-dbgsym
-RUN apt update && apt install -y linux-image-5.15.0-119-generic=5.15.0-119.129 \
-    linux-image-5.15.0-119-generic-dbgsym=5.15.0-119.129 \
-    linux-source-5.15.0=5.15.0-119.129
+RUN apt update && apt install -y linux-image-5.15.0-139-generic=5.15.0-139.149 \
+    linux-image-5.15.0-139-generic-dbgsym=5.15.0-139.149 \
+    linux-source-5.15.0=5.15.0-139.149
 
 RUN cd /usr/lib/debug/boot/ && ln -s vmlinux* vmlinux && ln -s /usr/lib/debug/boot/vmlinux / && \
     cd /usr/src/ && tar xvf linux-source-*.tar.bz2 && \
-    mkdir -p /build/linux-3OY0c7 && ln -s /usr/src/linux-source-5.15.0 /build/linux-3OY0c7/linux-5.15.0
+    BUILD_ID=$(readelf --debug-dump=info /usr/lib/debug/boot/vmlinux-5.15.0-139-generic | awk -F": " '/DW_AT_comp_dir/{print $NF; exit}') && \
+    mkdir -p /build/linux-${BUILD_ID} && \
+    ln -s /usr/src/linux-source-5.15.0 /build/linux-${BUILD_ID}/linux-5.15.0
