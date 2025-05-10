@@ -1,26 +1,26 @@
 # docker v20.04
 
 * dqd: 
-	* ssst0n3/docker_archive:ubuntu-20.04 -> ssst0n3/docker_archive:ubuntu-20.04_v0.1.0
+	* ssst0n3/docker_archive:ubuntu-20.04 -> ssst0n3/docker_archive:ubuntu-20.04_v0.2.0
+	* ssst0n3/docker_archive:ubuntu-20.04_v0.2.0
 	* ssst0n3/docker_archive:ubuntu-20.04_v0.1.0
 * ctr: 
-	* ssst0n3/docker_archive:ctr_ubuntu-20.04 -> ssst0n3/docker_archive:ctr_ubuntu-20.04_v0.1.0
+	* ssst0n3/docker_archive:ctr_ubuntu-20.04 -> ssst0n3/docker_archive:ctr_ubuntu-20.04_v0.2.0
+	* ssst0n3/docker_archive:ctr_ubuntu-20.04_v0.2.0: install the built-in ssh key
 	* ssst0n3/docker_archive:ctr_ubuntu-20.04_v0.1.0
 
 ## usage
 
 ```shell
-cd ubuntu/20.04
-docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
-./ssh
+$ cd ubuntu/20.04
+$ docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
+$ ./ssh
 ```
 
 ```shell
-root@localhost:~# cat /etc/*release
-DISTRIB_ID=Ubuntu
-DISTRIB_RELEASE=20.04
-DISTRIB_CODENAME=focal
-DISTRIB_DESCRIPTION="Ubuntu 20.04.6 LTS"
+root@localhost:~# uname -a
+Linux localhost.localdomain 5.4.0-215-generic #235-Ubuntu SMP Fri Apr 11 21:55:32 UTC 2025 x86_64 x86_64 x86_64 GNU/Linux
+root@localhost:~# cat /etc/os-release 
 NAME="Ubuntu"
 VERSION="20.04.6 LTS (Focal Fossa)"
 ID=ubuntu
@@ -44,5 +44,5 @@ make all DIR=ubuntu/20.04
 for developers:
 
 ```dockerfile
-FROM ssst0n3/docker_archive:ctr_ubuntu-20.04_v0.1.0
+FROM ssst0n3/docker_archive:ctr_ubuntu-20.04_v0.2.0
 ```

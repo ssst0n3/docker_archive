@@ -221,7 +221,7 @@ root@localhost:~# docker version
 | [ubuntu-24.04](./ubuntu/24.04/) | v0.3.0 |
 | [ubuntu-22.04-dbg](./ubuntu/22.04-dbg/) | v0.2.0 |
 | [ubuntu-22.04](./ubuntu/22.04/) | v0.2.0 |
-| [ubuntu-20.04](./ubuntu/20.04/) | v0.1.0 |
+| [ubuntu-20.04](./ubuntu/20.04/) | v0.2.0 |
 | [ubuntu-18.04](./ubuntu/18.04/) | v0.1.0 |
 | [ubuntu-16.04](./ubuntu/16.04/) | v0.1.0 |
 | [ubuntu-14.04](./ubuntu/14.04/) | v0.1.0 |
