@@ -1,6 +1,6 @@
 services:
   vm:
-    image: ssst0n3/docker_archive:runc-v1.0.0-rc8_v0.1.0
+    image: ssst0n3/docker_archive:runc-v1.0.0-rc8_v0.2.0
     ports:
         - "10080:22"
     tty: true

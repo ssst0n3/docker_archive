@@ -200,7 +200,7 @@ root@localhost:~# docker version
 | [runc-v1.0.0-rc90](./runc/v1.0.0-rc90/) | v0.1.0 |
 | [runc-v1.0.0-rc10](./runc/v1.0.0-rc10/) | v0.2.0 |
 | [runc-v1.0.0-rc9](./runc/v1.0.0-rc9/) | v0.1.0 | | ubuntu20.04 |
-| [runc-v1.0.0-rc8](./runc/v1.0.0-rc8/) | v0.1.0 | | ubuntu20.04 |
+| [runc-v1.0.0-rc8](./runc/v1.0.0-rc8/) | v0.2.0 | | ubuntu20.04 |
 | [runc-v1.0.0-rc7](./runc/v1.0.0-rc7/) | v0.2.0 | | ubuntu20.04; Bug: [#2043](https://github.com/opencontainers/runc/pull/2043) |
 | [runc-v1.0.0-rc6](./runc/v1.0.0-rc6/) | v0.2.0 | | ubuntu20.04 |
 | [runc-v1.0.0-rc5](./runc/v1.0.0-rc5/) | v0.2.0 | | ubuntu20.04 |
