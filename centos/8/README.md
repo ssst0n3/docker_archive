@@ -1,10 +1,12 @@
 # centos 8
 
 * dqd: 
-	* ssst0n3/docker_archive:centos-8 -> ssst0n3/docker_archive:centos-8_v0.1.0
+	* ssst0n3/docker_archive:centos-8 -> ssst0n3/docker_archive:centos-8_v0.2.0
+	* ssst0n3/docker_archive:centos-8_v0.2.0
 	* ssst0n3/docker_archive:centos-8_v0.1.0
 * ctr: 
-	* ssst0n3/docker_archive:ctr_centos-8 -> ssst0n3/docker_archive:ctr_centos-8_v0.1.0
+	* ssst0n3/docker_archive:ctr_centos-8 -> ssst0n3/docker_archive:ctr_centos-8_v0.2.0
+	* ssst0n3/docker_archive:ctr_centos-8_v0.2.0: install the built-in ssh key
 	* ssst0n3/docker_archive:ctr_centos-8_v0.1.0
 
 ## usage
@@ -37,32 +39,32 @@ CENTOS_MANTISBT_PROJECT_VERSION="8"
     State: running
      Jobs: 0 queued
    Failed: 0 units
-    Since: Thu 2025-04-10 07:54:37 UTC; 1min 40s ago
+    Since: Mon 2025-05-12 08:09:32 UTC; 1min 31s ago
    CGroup: /
            ├─init.scope
            │ └─1 /usr/lib/systemd/systemd --switched-root --system --deserialize 17
            └─system.slice
              ├─systemd-udevd.service
-             │ └─517 /usr/lib/systemd/systemd-udevd
+             │ └─506 /usr/lib/systemd/systemd-udevd
              ├─system-serial\x2dgetty.slice
              │ └─serial-getty@ttyS0.service
-             │   └─572 /sbin/agetty -o -p -- \u --keep-baud 115200,38400,9600 ttyS0 vt220
+             │   └─560 /sbin/agetty -o -p -- \u --keep-baud 115200,38400,9600 ttyS0 vt220
              ├─systemd-journald.service
-             │ └─480 /usr/lib/systemd/systemd-journald
+             │ └─467 /usr/lib/systemd/systemd-journald
              ├─sshd.service
-             │ ├─599 /usr/sbin/sshd -D -oCiphers=aes256-gcm@openssh.com,chacha20-poly1305@openssh.com,aes256-ctr,aes256-cbc,aes128-gcm@openssh.com,aes128-ctr,aes128-cbc -oMACs=hmac-sha2-256-etm@openssh.com,hmac-sha1-etm@openssh.com,umac->
-             │ ├─607 sshd: root [priv]
-             │ ├─609 sshd: root@pts/0
-             │ ├─610 -bash
-             │ ├─636 systemctl status
-             │ └─637 less
+             │ ├─591 /usr/sbin/sshd -D -oCiphers=aes256-gcm@openssh.com,chacha20-poly1305@openssh.com,aes256-ctr,aes256-cbc,aes128-gcm@openssh.com,aes128-ctr,aes128-cbc -oMACs=hmac-sha2-256-etm@openssh.com,hmac-sha1-etm@openssh.com,umac->
+             │ ├─599 sshd: root [priv]
+             │ ├─601 sshd: root@pts/0
+             │ ├─602 -bash
+             │ ├─626 systemctl status
+             │ └─627 less
              ├─NetworkManager.service
-             │ └─540 /usr/sbin/NetworkManager --no-daemon
+             │ └─525 /usr/sbin/NetworkManager --no-daemon
              ├─dbus.service
-             │ └─536 /usr/bin/dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+             │ └─522 /usr/bin/dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
              └─system-getty.slice
                └─getty@tty1.service
-                 └─573 /sbin/agetty -o -p -- \u --noclear tty1 linux
+                 └─559 /sbin/agetty -o -p -- \u --noclear tty1 linux
 ```
 
 ## build
@@ -74,5 +76,5 @@ make all DIR=centos/8
 for developers:
 
 ```dockerfile
-FROM ssst0n3/docker_archive:ctr_centos-8_v0.1.0
+FROM ssst0n3/docker_archive:ctr_centos-8_v0.2.0
 ```
