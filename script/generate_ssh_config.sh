@@ -14,6 +14,8 @@
 #     Port <HOST_PORT>
 #     User root
 #     IdentityFile <value>
+#     StrictHostKeyChecking no
+#     UserKnownHostsFile /dev/null
 #
 # If the .env file contains the IDENTIFY_FILE variable, its value will be used as the
 # IdentityFile. Otherwise, the default value ~/.ssh/keys/docker_archive is used.
@@ -89,6 +91,8 @@ find . -type f -name ".env" | sort | while IFS= read -r env_file; do
         echo "    Port $host_port"
         echo "    User root"
         echo "    IdentityFile $identity_file"
+        echo "    StrictHostKeyChecking no"
+        echo "    UserKnownHostsFile /dev/null"
         echo ""
     } >> "$output_file"
 
