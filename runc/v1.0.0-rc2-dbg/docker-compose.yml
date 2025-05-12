@@ -1,12 +1,11 @@
-version: '3'
 services:
   vm:
-    image: ssst0n3/docker_archive:runc-v1.0.0-rc2-dbg_v0.1.0
+    image: ssst0n3/docker_archive:runc-v1.0.0-rc2-dbg_v0.2.0
     ports:
-        - "10021:22"
-        - "10022:2345"
-        - "10023:2346"
+        - "10022:22"
+        - "10026:2346"
+        - "10027:2347"
     environment:
-      - "QEMU_HOSTFWD=hostfwd=tcp::2345-:2345,hostfwd=tcp::2346-:2346"
+        - "QEMU_HOSTFWD=hostfwd=tcp::2346-:2346,hostfwd=tcp::2347-:2347"
     tty: true
     stdin_open: true 
