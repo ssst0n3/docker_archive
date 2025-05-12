@@ -1,25 +1,39 @@
 # runc v1.0.0-rc3
 
 * dqd
-    * ssst0n3/docker_archive:runc-v1.0.0-rc3 (-> ssst0n3/docker_archive:runc-v1.0.0-rc3_v0.1.0)
+    * ssst0n3/docker_archive:runc-v1.0.0-rc3 -> ssst0n3/docker_archive:runc-v1.0.0-rc3_v0.2.0
+    * ssst0n3/docker_archive:runc-v1.0.0-rc3_v0.2.0
     * ssst0n3/docker_archive:runc-v1.0.0-rc3_v0.1.0
 * ctr
-    * ssst0n3/docker_archive:ctr_runc-v1.0.0-rc3 (-> ssst0n3/docker_archive:ctr_runc-v1.0.0-rc3_v0.1.0)
+    * ssst0n3/docker_archive:ctr_runc-v1.0.0-rc3 -> ssst0n3/docker_archive:ctr_runc-v1.0.0-rc3_v0.2.0
+    * ssst0n3/docker_archive:ctr_runc-v1.0.0-rc3_v0.2.0: bump the base image
     * ssst0n3/docker_archive:ctr_runc-v1.0.0-rc3_v0.1.0
 
 ## usage
 
 ```shell
-cd runc/v1.0.0-rc3
-docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
-ssh -p 10030 root@127.0.0.1
+$ cd runc/v1.0.0-rc3
+$ docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
 ```
 
 ```shell
+$ ./ssh
 root@localhost:~# runc --version
 runc version 1.0.0-rc3
 commit: -dirty
 spec: 1.0.0-rc5
+root@localhost:~# cat /etc/os-release 
+NAME="Ubuntu"
+VERSION="16.04.7 LTS (Xenial Xerus)"
+ID=ubuntu
+ID_LIKE=debian
+PRETTY_NAME="Ubuntu 16.04.7 LTS"
+VERSION_ID="16.04"
+HOME_URL="http://www.ubuntu.com/"
+SUPPORT_URL="http://help.ubuntu.com/"
+BUG_REPORT_URL="http://bugs.launchpad.net/ubuntu/"
+VERSION_CODENAME=xenial
+UBUNTU_CODENAME=xenial
 ```
 
 ```shell
@@ -45,5 +59,5 @@ make all DIR=runc/v1.0.0-rc3
 for developers:
 
 ```dockerfile
-FROM ssst0n3/docker_archive:ctr_runc-v1.0.0-rc3_v0.1.0
+FROM ssst0n3/docker_archive:ctr_runc-v1.0.0-rc3_v0.2.0
 ```
