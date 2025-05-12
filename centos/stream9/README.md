@@ -1,10 +1,12 @@
 # centos stream9
 
 * dqd: 
-	* ssst0n3/docker_archive:centos-stream9 -> ssst0n3/docker_archive:centos-stream9_v0.1.0
+	* ssst0n3/docker_archive:centos-stream9 -> ssst0n3/docker_archive:centos-stream9_v0.2.0
+	* ssst0n3/docker_archive:centos-stream9_v0.2.0
 	* ssst0n3/docker_archive:centos-stream9_v0.1.0
 * ctr: 
-	* ssst0n3/docker_archive:ctr_centos-stream9 -> ssst0n3/docker_archive:ctr_centos-stream9_v0.1.0
+	* ssst0n3/docker_archive:ctr_centos-stream9 -> ssst0n3/docker_archive:ctr_centos-stream9_v0.2.0
+	* ssst0n3/docker_archive:ctr_centos-stream9_v0.2.0: install the built-in ssh keys
 	* ssst0n3/docker_archive:ctr_centos-stream9_v0.1.0
 
 ## usage
@@ -17,7 +19,7 @@ $ ./ssh
 
 ```shell
 [root@localhost ~]# uname -a
-Linux localhost.localdomain 5.14.0-575.el9.x86_64 #1 SMP PREEMPT_DYNAMIC Tue Mar 25 17:50:19 UTC 2025 x86_64 x86_64 x86_64 GNU/Linux
+Linux localhost.localdomain 5.14.0-582.el9.x86_64 #1 SMP PREEMPT_DYNAMIC Wed Apr 30 18:29:08 UTC 2025 x86_64 x86_64 x86_64 GNU/Linux
 [root@localhost ~]# cat /etc/os-release 
 NAME="CentOS Stream"
 VERSION="9"
@@ -33,52 +35,54 @@ HOME_URL="https://centos.org/"
 BUG_REPORT_URL="https://issues.redhat.com/"
 REDHAT_SUPPORT_PRODUCT="Red Hat Enterprise Linux 9"
 REDHAT_SUPPORT_PRODUCT_VERSION="CentOS Stream"
-[root@localhost ~]# systemctl status
+[root@localhost ~]# systemctl status 
 ● localhost.localdomain
     State: running
-    Units: 207 loaded (incl. loaded aliases)
+    Units: 209 loaded (incl. loaded aliases)
      Jobs: 0 queued
    Failed: 0 units
-    Since: Thu 2025-04-10 09:18:32 UTC; 2min 49s ago
-  systemd: 252-51.el9
+    Since: Mon 2025-05-12 08:49:08 UTC; 40s ago
+  systemd: 252-53.el9
    CGroup: /
            ├─init.scope
            │ └─1 /usr/lib/systemd/systemd --switched-root --system --deserialize 31
            ├─system.slice
+           │ ├─NetworkManager-dispatcher.service
+           │ │ └─612 /usr/libexec/nm-dispatcher
            │ ├─NetworkManager.service
            │ │ └─511 /usr/sbin/NetworkManager --no-daemon
            │ ├─dbus-broker.service
-           │ │ ├─491 /usr/bin/dbus-broker-launch --scope system --audit
-           │ │ └─510 dbus-broker --log 4 --controller 9 --machine-id 14da52cb0b0d44378d647e4092edc692 --max-bytes 536870912 --max-fds 4096 --max-matches 131072 --audit
+           │ │ ├─505 /usr/bin/dbus-broker-launch --scope system --audit
+           │ │ └─510 dbus-broker --log 4 --controller 9 --machine-id e820efac9a4b48e2b63512ea604c5e41 --max-bytes 536870912 --max-fds 4096 --max-matches 131072 --audit
            │ ├─sshd.service
-           │ │ └─564 "sshd: /usr/sbin/sshd -D [listener] 0 of 10-100 startups"
+           │ │ └─550 "sshd: /usr/sbin/sshd -D [listener] 0 of 10-100 startups"
            │ ├─system-getty.slice
            │ │ └─getty@tty1.service
-           │ │   └─555 /sbin/agetty -o "-p -- \\u" --noclear - linux
+           │ │   └─552 /sbin/agetty -o "-p -- \\u" --noclear - linux
            │ ├─system-serial\x2dgetty.slice
            │ │ └─serial-getty@ttyS0.service
-           │ │   └─556 /sbin/agetty -o "-p -- \\u" --keep-baud 115200,57600,38400,9600 - vt220
+           │ │   └─554 /sbin/agetty -o "-p -- \\u" --keep-baud 115200,57600,38400,9600 - vt220
            │ ├─systemd-hostnamed.service
-           │ │ └─642 /usr/lib/systemd/systemd-hostnamed
+           │ │ └─541 /usr/lib/systemd/systemd-hostnamed
            │ ├─systemd-journald.service
            │ │ └─463 /usr/lib/systemd/systemd-journald
            │ ├─systemd-logind.service
-           │ │ └─516 /usr/lib/systemd/systemd-logind
+           │ │ └─518 /usr/lib/systemd/systemd-logind
            │ └─systemd-udevd.service
            │   └─udev
            │     └─488 /usr/lib/systemd/systemd-udevd
            └─user.slice
              └─user-0.slice
-               ├─session-3.scope
-               │ ├─623 "sshd: root [priv]"
-               │ ├─637 "sshd: root@pts/0"
-               │ ├─638 -bash
-               │ ├─656 systemctl status
-               │ └─657 more
+               ├─session-1.scope
+               │ ├─580 "sshd: root [priv]"
+               │ ├─593 "sshd: root@pts/0"
+               │ ├─594 -bash
+               │ ├─617 systemctl status
+               │ └─618 more
                └─user@0.service
                  └─init.scope
-                   ├─628 /usr/lib/systemd/systemd --user
-                   └─630 "(sd-pam)"
+                   ├─584 /usr/lib/systemd/systemd --user
+                   └─586 "(sd-pam)"
 ```
 
 ## build
@@ -90,5 +94,5 @@ make all DIR=centos/stream9
 for developers:
 
 ```dockerfile
-FROM ssst0n3/docker_archive:ctr_centos-stream9_v0.1.0
+FROM ssst0n3/docker_archive:ctr_centos-stream9_v0.2.0
 ```

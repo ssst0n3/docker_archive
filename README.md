@@ -237,7 +237,7 @@ root@localhost:~# docker version
 
 | tag | version | alias |
 | --- | --- | --- |
-| [centos-9](./centos/9/) | v0.1.0 | |
+| [centos-9](./centos/9/) | v0.2.0 | |
 | [centos-8](./centos/8/) | v0.2.0 | |
 
 ### issue
