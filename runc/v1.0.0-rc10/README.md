@@ -1,23 +1,25 @@
 # runc v1.0.0-rc10
 
 * dqd
-    * ssst0n3/docker_archive:runc-v1.0.0-rc10 (-> ssst0n3/docker_archive:runc-v1.0.0-rc10_v0.2.0)
-    * ssst0n3/docker_archive:runc-v1.0.0-rc10_v0.2.0: use ubuntu20.04 as base image
+    * ssst0n3/docker_archive:runc-v1.0.0-rc10 -> ssst0n3/docker_archive:runc-v1.0.0-rc10_v0.3.0
+    * ssst0n3/docker_archive:runc-v1.0.0-rc10_v0.3.0
+    * ssst0n3/docker_archive:runc-v1.0.0-rc10_v0.2.0
     * ssst0n3/docker_archive:runc-v1.0.0-rc10_v0.1.0
 * ctr
-    * ssst0n3/docker_archive:ctr_runc-v1.0.0-rc10 (-> ssst0n3/docker_archive:ctr_runc-v1.0.0-rc10_v0.2.0)
-    * ssst0n3/docker_archive:ctr_runc-v1.0.0-rc10_v0.2.0
+    * ssst0n3/docker_archive:ctr_runc-v1.0.0-rc10 -> ssst0n3/docker_archive:ctr_runc-v1.0.0-rc10_v0.3.0
+    * ssst0n3/docker_archive:ctr_runc-v1.0.0-rc10_v0.3.0: bump the base image
+    * ssst0n3/docker_archive:ctr_runc-v1.0.0-rc10_v0.2.0: use ubuntu20.04 as the base image
     * ssst0n3/docker_archive:ctr_runc-v1.0.0-rc10_v0.1.0
 
 ## usage
 
 ```shell
-cd runc/v1.0.0-rc10
-docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
-./ssh
+$ cd runc/v1.0.0-rc10
+$ docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
 ```
 
 ```shell
+$ ./ssh
 root@localhost:~# runc --version
 runc version 1.0.0-rc10
 spec: 1.0.1-dev
@@ -59,5 +61,5 @@ make all DIR=runc/v1.0.0-rc10
 for developers:
 
 ```dockerfile
-FROM ssst0n3/docker_archive:ctr_runc-v1.0.0-rc10_v0.2.0
+FROM ssst0n3/docker_archive:ctr_runc-v1.0.0-rc10_v0.3.0
 ```
