@@ -1,41 +1,43 @@
 # runc v1.1.0
 
 * dqd
-    * ssst0n3/docker_archive:runc-v1.1.0 (-> ssst0n3/docker_archive:runc-v1.1.0_v0.1.0)
+    * ssst0n3/docker_archive:runc-v1.1.0 -> ssst0n3/docker_archive:runc-v1.1.0_v0.2.0
+    * ssst0n3/docker_archive:runc-v1.1.0_v0.2.0
     * ssst0n3/docker_archive:runc-v1.1.0_v0.1.0
 * ctr
-    * ssst0n3/docker_archive:ctr_runc-v1.1.0 (-> ssst0n3/docker_archive:ctr_runc-v1.1.0_v0.1.0)
+    * ssst0n3/docker_archive:ctr_runc-v1.1.0 -> ssst0n3/docker_archive:ctr_runc-v1.1.0_v0.2.0
+    * ssst0n3/docker_archive:ctr_runc-v1.1.0_v0.2.0: bump the base image
     * ssst0n3/docker_archive:ctr_runc-v1.1.0_v0.1.0
 
 ## usage
 
 ```shell
-cd runc/v1.1.0
-docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
-./ssh
+$ cd runc/v1.1.0
+$ docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
 ```
 
 ```shell
-root@localhost:~# cat /etc/os-release 
-NAME="Ubuntu"
-VERSION="20.04.6 LTS (Focal Fossa)"
-ID=ubuntu
-ID_LIKE=debian
-PRETTY_NAME="Ubuntu 20.04.6 LTS"
-VERSION_ID="20.04"
-HOME_URL="https://www.ubuntu.com/"
-SUPPORT_URL="https://help.ubuntu.com/"
-BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
-PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
-VERSION_CODENAME=focal
-UBUNTU_CODENAME=focal
-
+$ ./ssh
 root@localhost:~# runc --version
 runc version 1.1.0
 commit: v1.1.0-0-g067aaf85
 spec: 1.0.2-dev
 go: go1.17.6
 libseccomp: 2.5.3
+root@localhost:~# cat /etc/os-release 
+PRETTY_NAME="Ubuntu 24.04.2 LTS"
+NAME="Ubuntu"
+VERSION_ID="24.04"
+VERSION="24.04.2 LTS (Noble Numbat)"
+VERSION_CODENAME=noble
+ID=ubuntu
+ID_LIKE=debian
+HOME_URL="https://www.ubuntu.com/"
+SUPPORT_URL="https://help.ubuntu.com/"
+BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
+PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
+UBUNTU_CODENAME=noble
+LOGO=ubuntu-logo
 ```
 
 ```shell
@@ -46,10 +48,10 @@ root@localhost:~# runc spec
 root@localhost:~# runc run container-1
 
 
-BusyBox v1.30.1 (Ubuntu 1:1.30.1-7ubuntu3.1) built-in shell (ash)
+BusyBox v1.36.1 (Ubuntu 1:1.36.1-6ubuntu3.1) built-in shell (ash)
 Enter 'help' for a list of built-in commands.
 
-/ # 
+~ # 
 ```
 
 ## build
@@ -61,5 +63,5 @@ make all DIR=runc/v1.1.0
 for developers:
 
 ```dockerfile
-FROM ssst0n3/docker_archive:ctr_runc-v1.1.0_v0.1.0
+FROM ssst0n3/docker_archive:ctr_runc-v1.1.0_v0.2.0
 ```
