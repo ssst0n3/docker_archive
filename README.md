@@ -205,10 +205,10 @@ root@localhost:~# docker version
 | [runc-v1.0.0-rc6](./runc/v1.0.0-rc6/) | v0.1.0 | | ubuntu20.04 |
 | [runc-v1.0.0-rc5](./runc/v1.0.0-rc5/) | v0.1.0 | | ubuntu20.04 |
 | [runc-v1.0.0-rc4](./runc/v1.0.0-rc4/) | v0.1.0 | | ubuntu20.04 |
-| [runc-v1.0.0-rc3](./runc/v1.0.0-rc3/) | v0.1.0 |
 | [runc-v1.0.0-rc3-dbg](./runc/v1.0.0-rc3-dbg/) | v0.1.0 |
-| [runc-v1.0.0-rc2](./runc/v1.0.0-rc2/) | v0.1.0 |
+| [runc-v1.0.0-rc3](./runc/v1.0.0-rc3/) | v0.1.0 |
 | [runc-v1.0.0-rc2-dbg](./runc/v1.0.0-rc2-dbg/) | v0.1.0 |
+| [runc-v1.0.0-rc2](./runc/v1.0.0-rc2/) | v0.2.0 | | ubuntu16.04 |
 | [runc-v1.0.0-rc1](./runc/v1.0.0-rc1/) | v0.2.0 | | ubuntu16.04 |
 | [runc-v0.1.1](./runc/v0.1.1/) | v0.2.0 | | ubuntu16.04 |
 | [runc-v0.1.0](./runc/v0.1.0/) | v0.2.0 | | ubuntu16.04 |
