@@ -44,10 +44,10 @@ root@localhost:~# runc spec
 root@localhost:~# runc run container-1
 
 
-BusyBox v1.36.1 (Ubuntu 1:1.36.1-6ubuntu3.1) built-in shell (ash)
+BusyBox v1.30.1 (Ubuntu 1:1.30.1-4ubuntu6.5) built-in shell (ash)
 Enter 'help' for a list of built-in commands.
 
-~ # 
+/ # 
 ```
 
 ## build
