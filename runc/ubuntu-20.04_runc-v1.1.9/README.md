@@ -1,27 +1,42 @@
 # runc v1.1.9 (ubuntu 20.04)
 
 * dqd
-    * ssst0n3/docker_archive:ubuntu-20.04_runc-v1.1.9 (-> ssst0n3/docker_archive:ubuntu-20.04_runc-v1.1.9_v0.1.0)
+    * ssst0n3/docker_archive:ubuntu-20.04_runc-v1.1.9 -> ssst0n3/docker_archive:ubuntu-20.04_runc-v1.1.9_v0.2.0
+    * ssst0n3/docker_archive:ubuntu-20.04_runc-v1.1.9_v0.2.0
     * ssst0n3/docker_archive:ubuntu-20.04_runc-v1.1.9_v0.1.0
 * ctr
-    * ssst0n3/docker_archive:ctr_ubuntu-20.04_runc-v1.1.9 (-> ssst0n3/docker_archive:ctr_ubuntu-20.04_runc-v1.1.9_v0.1.0)
+    * ssst0n3/docker_archive:ctr_ubuntu-20.04_runc-v1.1.9 -> ssst0n3/docker_archive:ctr_ubuntu-20.04_runc-v1.1.9_v0.2.0
+    * ssst0n3/docker_archive:ctr_ubuntu-20.04_runc-v1.1.9_v0.2.0: bump the base image
     * ssst0n3/docker_archive:ctr_ubuntu-20.04_runc-v1.1.9_v0.1.0
 
 ## usage
 
 ```shell
-cd runc/ubuntu-20.04_runc-v1.1.9
-docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
-./ssh
+$ cd runc/ubuntu-20.04_runc-v1.1.9
+$ docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
 ```
 
 ```shell
+$ ./ssh
 root@localhost:~# runc --version
 runc version 1.1.9
 commit: v1.1.9-0-gccaecfcb
 spec: 1.0.2-dev
 go: go1.20.3
 libseccomp: 2.5.4
+root@localhost:~# cat /etc/os-release 
+NAME="Ubuntu"
+VERSION="20.04.6 LTS (Focal Fossa)"
+ID=ubuntu
+ID_LIKE=debian
+PRETTY_NAME="Ubuntu 20.04.6 LTS"
+VERSION_ID="20.04"
+HOME_URL="https://www.ubuntu.com/"
+SUPPORT_URL="https://help.ubuntu.com/"
+BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
+PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
+VERSION_CODENAME=focal
+UBUNTU_CODENAME=focal
 ```
 
 ```shell
@@ -32,7 +47,7 @@ root@localhost:~# runc spec
 root@localhost:~# runc run container-1
 
 
-BusyBox v1.22.1 (Ubuntu 1:1.22.0-15ubuntu1.4) built-in shell (ash)
+BusyBox v1.30.1 (Ubuntu 1:1.30.1-4ubuntu6.5) built-in shell (ash)
 Enter 'help' for a list of built-in commands.
 
 / # 
@@ -47,5 +62,5 @@ make all DIR=runc/ubuntu-20.04_runc-v1.1.9
 for developers:
 
 ```dockerfile
-FROM ssst0n3/docker_archive:ctr_ubuntu-20.04_runc-v1.1.9_v0.1.0
+FROM ssst0n3/docker_archive:ctr_ubuntu-20.04_runc-v1.1.9_v0.2.0
 ```
