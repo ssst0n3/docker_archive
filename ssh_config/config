@@ -750,7 +750,7 @@ Host runc-v1.1.11
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
 
-Host ubuntu-22.04_runc-v1.1.12
+Host runc-v1.1.12
     Hostname 127.0.0.1
     Port 11120
     User root
@@ -937,6 +937,14 @@ Host runc-v1.3.0-rc.1
 Host runc-v1.3.0-rc.2
     Hostname 127.0.0.1
     Port 13020
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
+Host runc-v1.3.0
+    Hostname 127.0.0.1
+    Port 13000
     User root
     IdentityFile ~/.ssh/keys/docker_archive
     StrictHostKeyChecking no
