@@ -19,8 +19,11 @@ $ docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
 ```shell
 $ ./ssh
 root@localhost:~# runc --version
-runc version 1.0.0-rc10
-spec: 1.0.1-dev
+runc version 1.1.2
+commit: v1.1.2-0-ga916309f
+spec: 1.0.2-dev
+go: go1.17.10
+libseccomp: 2.5.3
 root@localhost:~# cat /etc/os-release 
 PRETTY_NAME="Ubuntu 24.04.2 LTS"
 NAME="Ubuntu"

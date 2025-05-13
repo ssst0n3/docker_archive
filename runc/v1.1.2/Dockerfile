@@ -1,4 +1,4 @@
-ARG VERSION_RUNC=1.0.0-rc90
+ARG VERSION_RUNC=1.1.2
 ARG VERSION_UBUNTU=24.04
 ARG VERSION_BASE_IMAGE=0.3.0
 ARG URL_ARTIFACT_RUNC=https://github.com/opencontainers/runc/releases/download/v${VERSION_RUNC}/runc.amd64
