@@ -149,7 +149,7 @@ root@localhost:~# docker version
 
 | tag | version | alias | note |
 | --- | --- | --- | --- |
-| [buildkit-v0.20.2](./buildkit/v0.20.2/) | v0.1.0 |
+| [buildkit-v0.20.2](./buildkit/v0.20.2/) | v0.2.0 |
 
 ### runc
 
