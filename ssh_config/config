@@ -6,6 +6,14 @@ Host buildkit-v0.20.2
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
 
+Host buildkit-v0.21.0-rc1
+    Hostname 127.0.0.1
+    Port 21010
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
 Host centos-8
     Hostname 127.0.0.1
     Port 18000
