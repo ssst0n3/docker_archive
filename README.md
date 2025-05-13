@@ -155,7 +155,7 @@ root@localhost:~# docker version
 
 | tag | version | alias | note |
 | --- | --- | --- | --- |
-| [runc-v1.2.6](./runc/v1.2.6/) | v0.1.0 |
+| [runc-v1.2.6](./runc/v1.2.6/) | v0.2.0 | | ubuntu24.04 |
 | [runc-v1.2.5](./runc/v1.2.5/) | v0.3.0 | | ubuntu24.04 |
 | [runc-v1.2.4](./runc/v1.2.4/) | v0.2.0 | | ubuntu24.04 |
 | [runc-v1.2.3](./runc/v1.2.3/) | v0.2.0 | | ubuntu24.04 |
