@@ -1,7 +1,6 @@
-version: '3'
 services:
   vm:
-    image: ssst0n3/docker_archive:runc-v1.2.0-rc.1_v0.1.0
+    image: ssst0n3/docker_archive:runc-v1.2.0-rc.1_v0.2.0
     ports:
         - "12010:22"
     tty: true
