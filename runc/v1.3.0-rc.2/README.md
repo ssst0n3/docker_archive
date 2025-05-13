@@ -1,10 +1,12 @@
 # runc v1.3.0-rc.2
 
 * dqd
-    * ssst0n3/docker_archive:runc-v1.3.0-rc.2 (-> ssst0n3/docker_archive:runc-v1.3.0-rc.2_v0.1.0)
+    * ssst0n3/docker_archive:runc-v1.3.0-rc.2 -> ssst0n3/docker_archive:runc-v1.3.0-rc.2_v0.2.0
+    * ssst0n3/docker_archive:runc-v1.3.0-rc.2_v0.2.0
     * ssst0n3/docker_archive:runc-v1.3.0-rc.2_v0.1.0
 * ctr
-    * ssst0n3/docker_archive:ctr_runc-v1.3.0-rc.2 (-> ssst0n3/docker_archive:ctr_runc-v1.3.0-rc.2_v0.1.0)
+    * ssst0n3/docker_archive:ctr_runc-v1.3.0-rc.2 -> ssst0n3/docker_archive:ctr_runc-v1.3.0-rc.2_v0.2.0
+    * ssst0n3/docker_archive:ctr_runc-v1.3.0-rc.2_v0.2.0: bump the base image
     * ssst0n3/docker_archive:ctr_runc-v1.3.0-rc.2_v0.1.0
 
 ## usage
@@ -12,10 +14,10 @@
 ```shell
 $ cd runc/v1.3.0-rc.2
 $ docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
-$ ./ssh
 ```
 
 ```shell
+$ ./ssh
 root@localhost:~# runc --version
 runc version 1.3.0-rc.2
 commit: v1.3.0-rc.2-0-g159c67f8
@@ -23,10 +25,10 @@ spec: 1.2.1
 go: go1.23.7
 libseccomp: 2.5.6
 root@localhost:~# cat /etc/os-release 
-PRETTY_NAME="Ubuntu 24.04.1 LTS"
+PRETTY_NAME="Ubuntu 24.04.2 LTS"
 NAME="Ubuntu"
 VERSION_ID="24.04"
-VERSION="24.04.1 LTS (Noble Numbat)"
+VERSION="24.04.2 LTS (Noble Numbat)"
 VERSION_CODENAME=noble
 ID=ubuntu
 ID_LIKE=debian
@@ -61,5 +63,5 @@ make all DIR=runc/v1.3.0-rc.2
 for developers:
 
 ```dockerfile
-FROM ssst0n3/docker_archive:ctr_runc-v1.3.0-rc.2_v0.1.0
+FROM ssst0n3/docker_archive:ctr_runc-v1.3.0-rc.2_v0.2.0
 ```
