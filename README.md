@@ -172,7 +172,7 @@ root@localhost:~# docker version
 | [runc-v1.1.0-7d09ba1](./runc/v1.1.0-7d09ba1/) | v0.1.0 | | PR#3825 |
 | [runc-v1.1.15](./runc/v1.1.15/) | v0.1.0 |
 | [runc-v1.1.14](./runc/v1.1.14/) | v0.1.0 |
-| [runc-v1.1.13](./runc/v1.1.13/) | v0.1.0 |
+| [runc-v1.1.13](./runc/v1.1.13/) | v0.2.0 | | ubuntu24.04 |
 | [runc-v1.1.12](./runc/v1.1.12/) | v0.3.0 | | ubuntu24.04 |
 | [runc-v1.1.11](./runc/v1.1.11/) | v0.2.0 | | ubuntu24.04 |
 | [runc-v1.1.10](./runc/v1.1.10/) | v0.2.0 | | ubuntu24.04 |
