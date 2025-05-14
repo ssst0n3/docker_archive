@@ -62,7 +62,7 @@ Host containerd-v1.3.8
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
 
-Host ubuntu-22.04_runc-v1.1.12_containerd-v1.7.16
+Host containerd-v1.7.16
     Hostname 127.0.0.1
     Port 17160
     User root
