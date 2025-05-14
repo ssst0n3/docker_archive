@@ -470,6 +470,14 @@ Host nerdctl-v2.0.5
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
 
+Host nerdctl-v2.1.1
+    Hostname 127.0.0.1
+    Port 21100
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
 Host podman-v5.4.0
     Hostname 127.0.0.1
     Port 54000
