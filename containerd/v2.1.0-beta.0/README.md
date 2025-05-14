@@ -1,7 +1,7 @@
 # containerd v2.1.0-beta.0
 
 * dqd: 
-    * ssst0n3/docker_archive:containerd-v2.1.0-beta.0 -> ssst0n3/docker_archive:containerd-v2.1.0-beta.0_v0..0
+    * ssst0n3/docker_archive:containerd-v2.1.0-beta.0 -> ssst0n3/docker_archive:containerd-v2.1.0-beta.0_v0.1.0
     * ssst0n3/docker_archive:containerd-v2.1.0-beta.0_v0.1.0
 * ctr:
     * ssst0n3/docker_archive:ctr_containerd-v2.1.0-beta.0 -> ssst0n3/docker_archive:ctr_containerd-v2.1.0-beta.0_v0.1.0
