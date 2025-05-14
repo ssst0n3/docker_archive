@@ -1,6 +1,6 @@
 services:
   vm:
-    image: ssst0n3/docker_archive:containerd-v2.0.4_v0.1.0
+    image: ssst0n3/docker_archive:containerd-v2.0.4_v0.2.0
     ports:
         - "20400:22"
     tty: true
