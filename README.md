@@ -138,6 +138,7 @@ root@localhost:~# docker version
 
 | tag | version | alias |
 | --- | --- | --- |
+| [containerd-v2.1.0-rc.0](./containerd/v2.1.0-rc.0/) | v0.1.0 |
 | [containerd-v2.0.5](./containerd/v2.0.5/) | v0.1.0 |
 | [containerd-v2.1.0-beta.1](./containerd/v2.1.0-beta.1/) | v0.1.0 |
 | [containerd-v2.1.0-beta.0](./containerd/v2.1.0-beta.0/) | v0.1.0 |
