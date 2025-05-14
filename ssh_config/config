@@ -102,6 +102,14 @@ Host containerd-v2.0.4
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
 
+Host containerd-v2.0.5
+    Hostname 127.0.0.1
+    Port 20500
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
 Host containerd-v2.1.0-beta.0
     Hostname 127.0.0.1
     Port 21000
@@ -113,6 +121,14 @@ Host containerd-v2.1.0-beta.0
 Host containerd-v2.1.0-beta.1
     Hostname 127.0.0.1
     Port 21010
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
+Host containerd-v2.1.0-rc.0
+    Hostname 127.0.0.1
+    Port 21000
     User root
     IdentityFile ~/.ssh/keys/docker_archive
     StrictHostKeyChecking no
