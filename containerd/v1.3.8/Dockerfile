@@ -1,11 +1,12 @@
 # https://github.com/containerd/containerd/blob/v1.3.8/vendor.conf#L33
 ARG VERSION_RUNC=1.0.0-rc10
 ARG VERSION_CONTAINERD=1.3.8
-ARG IMAGE_RUNC=ssst0n3/docker_archive:ctr_runc-v${VERSION_RUNC}_v0.2.0
+ARG VERSION_IMAGE=0.3.0
+ARG IMAGE_RUNC=ssst0n3/docker_archive:ctr_runc-v${VERSION_RUNC}
 ARG URL_ARTIFACT_CONTAINERD=https://github.com/containerd/containerd/releases/download/v${VERSION_CONTAINERD}/containerd-${VERSION_CONTAINERD}-linux-amd64.tar.gz
 ARG URL_ARTIFACT_SYSTEMD=https://raw.githubusercontent.com/containerd/containerd/refs/tags/v${VERSION_CONTAINERD}/containerd.service
 
-FROM ${IMAGE_RUNC}
+FROM ${IMAGE_RUNC}_v${VERSION_IMAGE}
 ARG URL_ARTIFACT_CONTAINERD
 ARG URL_ARTIFACT_SYSTEMD
 # install containerd
