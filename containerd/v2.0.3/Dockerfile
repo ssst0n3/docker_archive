@@ -1,13 +1,18 @@
-FROM ssst0n3/docker_archive:ctr_runc-v1.2.5_v0.2.0 AS build
+# https://github.com/containerd/containerd/blob/v2.0.3/script/setup/runc-version
+ARG VERSION_RUNC=1.2.5
+ARG VERSION_CONTAINERD=2.0.3
+ARG VERSION_IMAGE=0.3.0
+ARG IMAGE_RUNC=ssst0n3/docker_archive:ctr_runc-v${VERSION_RUNC}
+ARG URL_ARTIFACT_CONTAINERD=https://github.com/containerd/containerd/releases/download/v${VERSION_CONTAINERD}/containerd-${VERSION_CONTAINERD}-linux-amd64.tar.gz
+ARG URL_ARTIFACT_SYSTEMD=https://raw.githubusercontent.com/containerd/containerd/refs/tags/v${VERSION_CONTAINERD}/containerd.service
 
+FROM ${IMAGE_RUNC}_v${VERSION_IMAGE}
+ARG URL_ARTIFACT_CONTAINERD
+ARG URL_ARTIFACT_SYSTEMD
 # install containerd
-ADD https://github.com/containerd/containerd/releases/download/v2.0.3/containerd-2.0.3-linux-amd64.tar.gz /tmp/containerd.tar.gz
+ADD ${URL_ARTIFACT_CONTAINERD} /tmp/containerd.tar.gz
 RUN tar Cxzvf /usr/local /tmp/containerd.tar.gz \
     && rm /tmp/containerd.tar.gz
 
 # config systemd
-ADD https://raw.githubusercontent.com/containerd/containerd/main/containerd.service /usr/local/lib/systemd/system/containerd.service
-
-# squash
-FROM scratch AS release
-COPY --from=build / /
+ADD ${URL_ARTIFACT_SYSTEMD} /usr/local/lib/systemd/system/containerd.service
