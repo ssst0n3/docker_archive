@@ -462,6 +462,14 @@ Host nerdctl-v2.0.4_runc-v1.2.5-debug
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
 
+Host nerdctl-v2.0.5
+    Hostname 127.0.0.1
+    Port 20500
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
 Host podman-v5.4.0
     Hostname 127.0.0.1
     Port 54000
