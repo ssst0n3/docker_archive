@@ -6,6 +6,8 @@ script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # Get the parent directory of the script directory
 parent_dir="$(dirname "$script_dir")"
 
+total_artifacts=0
+
 # Iterate through each first-level subdirectory in the parent directory
 for project in "$parent_dir"/*/; do
   # Check if the file is indeed a directory
@@ -18,6 +20,10 @@ for project in "$parent_dir"/*/; do
       # Extract the project name (the last part of the directory path)
       project_name=$(basename "$project")
       echo "$project_name: $artifact_count"
+      total_artifacts=$((total_artifacts + artifact_count))
     fi
   fi
 done
+
+echo "---------"
+echo "Total: $total_artifacts"
