@@ -1,10 +1,12 @@
 # nerdctl v2.0.4
 
 * dqd: 
-    * ssst0n3/docker_archive:nerdctl-v2.0.4 -> ssst0n3/docker_archive:nerdctl-v2.0.4_v0.1.0
+    * ssst0n3/docker_archive:nerdctl-v2.0.4 -> ssst0n3/docker_archive:nerdctl-v2.0.4_v0.2.0
+    * ssst0n3/docker_archive:nerdctl-v2.0.4_v0.2.0
     * ssst0n3/docker_archive:nerdctl-v2.0.4_v0.1.0
 * ctr:
-    * ssst0n3/docker_archive:ctr_nerdctl-v2.0.4 -> ssst0n3/docker_archive:ctr_nerdctl-v2.0.4_v0.1.0
+    * ssst0n3/docker_archive:ctr_nerdctl-v2.0.4 -> ssst0n3/docker_archive:ctr_nerdctl-v2.0.4_v0.2.0
+    * ssst0n3/docker_archive:ctr_nerdctl-v2.0.4_v0.2.0: bump the base image
     * ssst0n3/docker_archive:ctr_nerdctl-v2.0.4_v0.1.0
 
 ## usage
@@ -20,7 +22,7 @@ root@localhost:~# nerdctl run hello-world
 
 Hello from Docker!
 ...
-root@localhost:~# root@localhost:~# echo 'FROM hello-world' > Dockerfile
+root@localhost:~# echo 'FROM hello-world' > Dockerfile
 root@localhost:~# nerdctl build -t foo .
 root@localhost:~# nerdctl images
 REPOSITORY     TAG       IMAGE ID        CREATED               PLATFORM       SIZE       BLOB SIZE
@@ -53,5 +55,5 @@ make all DIR=nerdctl/v2.0.4
 for developers:
 
 ```dockerfile
-FROM ssst0n3/docker_archive:ctr_nerdctl-v2.0.4_v0.1.0
+FROM ssst0n3/docker_archive:ctr_nerdctl-v2.0.4_v0.2.0
 ```

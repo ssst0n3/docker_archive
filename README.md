@@ -132,7 +132,7 @@ root@localhost:~# docker version
 | tag | version | alias |
 | --- | --- | --- |
 | [nerdctl-v2.0.4_runc-v1.2.5-debug](./nerdctl/v2.0.4_runc-v1.2.5-debug/) | v0.1.0 |
-| [nerdctl-v2.0.4](./nerdctl/v2.0.4/) | v0.1.0 |
+| [nerdctl-v2.0.4](./nerdctl/v2.0.4/) | v0.2.0 |
 
 ### containerd
 
