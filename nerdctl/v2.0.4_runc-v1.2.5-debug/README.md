@@ -1,16 +1,30 @@
 # nerdctl v2.0.4
 
 * dqd: 
-    * ssst0n3/docker_archive:nerdctl-v2.0.4 -> ssst0n3/docker_archive:nerdctl-v2.0.4_v0.1.0
+    * ssst0n3/docker_archive:nerdctl-v2.0.4 -> ssst0n3/docker_archive:nerdctl-v2.0.4_v0.2.0
+    * ssst0n3/docker_archive:nerdctl-v2.0.4_v0.2.0
     * ssst0n3/docker_archive:nerdctl-v2.0.4_v0.1.0
 * ctr:
-    * ssst0n3/docker_archive:ctr_nerdctl-v2.0.4 -> ssst0n3/docker_archive:ctr_nerdctl-v2.0.4_v0.1.0
+    * ssst0n3/docker_archive:ctr_nerdctl-v2.0.4 -> ssst0n3/docker_archive:ctr_nerdctl-v2.0.4_v0.2.0
+    * ssst0n3/docker_archive:ctr_nerdctl-v2.0.4_v0.2.0: bump the base image
     * ssst0n3/docker_archive:ctr_nerdctl-v2.0.4_v0.1.0
 
 ## usage
 
+### debug
+
 ```shell
-$ cd nerdctl/v2.0.4
+root@localhost:~# ln -sf /root/runc.debug /usr/local/sbin/runc
+root@localhost:~# runc --version
+API server listening at: [::]:2346
+2025-05-14T08:08:00Z warn layer=rpc Listening for remote connections (connections are not authenticated nor encrypted)
+...
+```
+
+### basic usage
+
+```shell
+$ cd nerdctl/v2.0.4_runc-v1.2.5-debug
 $ docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
 ```
 
@@ -20,7 +34,7 @@ root@localhost:~# nerdctl run hello-world
 
 Hello from Docker!
 ...
-root@localhost:~# root@localhost:~# echo 'FROM hello-world' > Dockerfile
+root@localhost:~# echo 'FROM hello-world' > Dockerfile
 root@localhost:~# nerdctl build -t foo .
 root@localhost:~# nerdctl images
 REPOSITORY     TAG       IMAGE ID        CREATED               PLATFORM       SIZE       BLOB SIZE
@@ -47,11 +61,11 @@ libseccomp: 2.5.5
 ## build
 
 ```shell
-make all DIR=nerdctl/v2.0.4
+make all DIR=nerdctl/v2.0.4_runc-v1.2.5-debug
 ```
 
 for developers:
 
 ```dockerfile
-FROM ssst0n3/docker_archive:ctr_nerdctl-v2.0.4_v0.1.0
+FROM ssst0n3/docker_archive:ctr_nerdctl-v2.0.4_runc-v1.2.5-debug_v0.1.0
 ```

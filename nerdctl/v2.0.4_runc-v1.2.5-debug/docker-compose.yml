@@ -1,6 +1,6 @@
 services:
   vm:
-    image: ssst0n3/docker_archive:nerdctl-v2.0.4_runc-v1.2.5-debug_v0.1.0
+    image: ssst0n3/docker_archive:nerdctl-v2.0.4_runc-v1.2.5-debug_v0.2.0
     environment:
         - "QEMU_HOSTFWD=hostfwd=tcp::2346-:2346,hostfwd=tcp::2347-:2347"
     ports:
