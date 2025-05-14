@@ -32,9 +32,10 @@
 
 # Determine the directory where this script is located.
 script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+project_dir="$(dirname "$script_dir")"
 
 # Define the absolute output file path relative to the script's location.
-output_file="$script_dir/../ssh_config/config"
+output_file="$project_dir/ssh_config/config"
 
 # Create the output directory if it doesn't exist.
 mkdir -p "$(dirname "$output_file")"
@@ -44,7 +45,7 @@ mkdir -p "$(dirname "$output_file")"
 
 # Find all .env files in the current working directory and its subdirectories,
 # even if the script is executed from a different directory.
-find . -type f -name ".env" | sort | while IFS= read -r env_file; do
+find $project_dir -type f -name ".env" | sort | while IFS= read -r env_file; do
     # Get the directory containing the .env file.
     dir=$(dirname "$env_file")
     
