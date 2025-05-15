@@ -462,6 +462,14 @@ Host kubernetes-v1.32.3
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
 
+Host nerdctl-v0.7.0-beta.0
+    Hostname 127.0.0.1
+    Port 17000
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
 Host nerdctl-v1.7.4
     Hostname 127.0.0.1
     Port 17400
