@@ -1,10 +1,10 @@
-ARG VERSION_NERDCTL=0.7.0-beta.0
-# https://github.com/containerd/nerdctl/blob/v0.7.0-beta.0/Dockerfile#L4
-ARG VERSION_CONTAINERD=1.5.0-beta.2
-# https://github.com/containerd/nerdctl/blob/v0.7.0-beta.0/Dockerfile#L11
-ARG VERSION_BUILDKIT=0.8.2
-# https://github.com/containerd/nerdctl/blob/v0.7.0-beta.0/Dockerfile#L6
-ARG VERSION_CNI=0.8.2
+ARG VERSION_NERDCTL=0.5.0
+# https://github.com/containerd/nerdctl/blob/v0.5.0/Dockerfile#L4
+ARG VERSION_CONTAINERD=1.4.3
+# https://github.com/containerd/nerdctl/blob/v0.5.0/Dockerfile#L8
+ARG VERSION_BUILDKIT=0.8.1
+# https://github.com/containerd/nerdctl/blob/v0.5.0/Dockerfile#L6
+ARG VERSION_CNI=0.9.0
 ARG VERSION_IMAGE_CONTAINERD=0.1.0
 ARG IMAGE_CONTAINERD=ssst0n3/docker_archive:ctr_containerd-v${VERSION_CONTAINERD}
 ARG URL_ARTIFACT_NERDCTL=https://github.com/containerd/nerdctl/releases/download/v${VERSION_NERDCTL}/nerdctl-${VERSION_NERDCTL}-linux-amd64.tar.gz
