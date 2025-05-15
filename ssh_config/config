@@ -62,6 +62,14 @@ Host containerd-v1.3.8
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
 
+Host containerd-v1.5.0-beta.2
+    Hostname 127.0.0.1
+    Port 15020
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
 Host containerd-v1.7.13
     Hostname 127.0.0.1
     Port 17130
