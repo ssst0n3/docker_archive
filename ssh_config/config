@@ -382,14 +382,6 @@ Host ingress-nginx-v1.11.3
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
 
-Host ingress-nginx-v1.11.3
-    Hostname 127.0.0.1
-    Port 11130
-    User root
-    IdentityFile ~/.ssh/keys/docker_archive
-    StrictHostKeyChecking no
-    UserKnownHostsFile /dev/null
-
 Host ingress-nginx-v1.11.4
     Hostname 127.0.0.1
     Port 11140

@@ -17,7 +17,7 @@
 #     StrictHostKeyChecking no
 #     UserKnownHostsFile /dev/null
 #
-# If the .env file contains the IDENTIFY_FILE variable, its value will be used as the
+# If the .env file contains the IDENTITY_FILE variable, its value will be used as the
 # IdentityFile. Otherwise, the default value ~/.ssh/keys/docker_archive is used.
 #
 # The output file is always ../ssh_config/config relative to the script’s directory,
@@ -28,7 +28,7 @@
 # - The docker-compose.yml file includes a port mapping line like:
 #       - "13239:22" or - 13239:22 (with or without quotes)
 # - The host port is the number before the colon in the mapping "host_port:22".
-# - The .env file may optionally include a line such as: IDENTIFY_FILE=/path/to/key
+# - The .env file may optionally include a line such as: IDENTITY_FILE=/path/to/key
 
 # Determine the directory where this script is located.
 script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
@@ -40,12 +40,8 @@ output_file="$project_dir/ssh_config/config"
 # Create the output directory if it doesn't exist.
 mkdir -p "$(dirname "$output_file")"
 
-# Clear the output file.
-> "$output_file"
-
-# Find all .env files in the current working directory and its subdirectories,
-# even if the script is executed from a different directory.
-find $project_dir -type f -name ".env" | sort | while IFS= read -r env_file; do
+# Process each .env file found in the project directory and its subdirectories
+find "$project_dir" -type f -name ".env" | sort | while IFS= read -r env_file; do
     # Get the directory containing the .env file.
     dir=$(dirname "$env_file")
     
@@ -64,7 +60,7 @@ find $project_dir -type f -name ".env" | sort | while IFS= read -r env_file; do
         continue
     fi
 
-    # Extract the IDENTIFY_FILE variable from the .env file if set, otherwise use the default.
+    # Extract the IDENTITY_FILE variable from the .env file if set, otherwise use the default.
     identity_file=$(grep '^IDENTITY_FILE=' "$env_file" | head -n1 | cut -d'=' -f2- | tr -d '"')
     if [ -z "$identity_file" ]; then
         identity_file="~/.ssh/keys/docker_archive"
@@ -85,19 +81,40 @@ find $project_dir -type f -name ".env" | sort | while IFS= read -r env_file; do
         continue
     fi
 
-    # Append the SSH configuration entry to the output file.
+    # Construct the full configuration block as a multiline string.
+    new_config=$(cat <<EOF
+Host $image
+    Hostname 127.0.0.1
+    Port $host_port
+    User root
+    IdentityFile $identity_file
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+EOF
+)
+
+    # Check if an identical configuration block already exists in the output file.
+    # Using awk with RS="" to treat blank lines as record separators.
+    if [ -s "$output_file" ]; then
+        if awk -v block="$new_config" 'BEGIN { RS=""; ORS="\n\n" }
+        {
+            # Remove any trailing newlines for reliable comparison.
+            sub(/\n+$/, "", $0)
+            if ($0 == block) { found=1; exit }
+        }
+        END { exit(found ? 0 : 1) }' "$output_file"; then
+            # echo "Full configuration for [$image] already exists, skipping."
+            continue
+        fi
+    fi
+
+    # Append the SSH configuration block to the output file.
     {
-        echo "Host $image"
-        echo "    Hostname 127.0.0.1"
-        echo "    Port $host_port"
-        echo "    User root"
-        echo "    IdentityFile $identity_file"
-        echo "    StrictHostKeyChecking no"
-        echo "    UserKnownHostsFile /dev/null"
+        echo "$new_config"
         echo ""
     } >> "$output_file"
 
-    echo "Added configuration for [$image] with ssh port: $host_port, identify_file: $identity_file"
+    echo "Added configuration for [$image] with ssh port: $host_port, identity_file: $identity_file"
 done
 
 echo "SSH configuration generated in: $output_file"
