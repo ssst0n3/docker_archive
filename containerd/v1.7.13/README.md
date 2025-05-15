@@ -38,5 +38,5 @@ make all DIR=containerd/v1.7.13
 for developers:
 
 ```dockerfile
-FROM ssst0n3/docker_archive:ctr_ubuntu-22.04_runc-v1.1.12_containerd-v1.7.13_v0.1.0
+FROM ssst0n3/docker_archive:ctr_containerd-v1.7.13_v0.1.0
 ```
