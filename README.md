@@ -156,6 +156,7 @@ root@localhost:~# docker version
 | [containerd-v1.7.16](./containerd/v1.7.16/) | v0.2.0 |
 | [containerd-v1.7.13](./containerd/v1.7.13/) | v0.1.0 |
 | [containerd-v1.5.0-beta.2](./containerd/v1.5.0-beta.2/) | v0.1.0 |
+| [containerd-v1.4.3](./containerd/v1.4.3/) | v0.1.0 |
 | [containerd-v1.3.8](./containerd/v1.3.8/) | v0.2.0 |
 
 ### buildkit
