@@ -1,12 +1,14 @@
-ARG VERSION_DOCKER=5:19.03.13~3-0~ubuntu-focal
-ARG VERSION_CONTAINERD_IO=1.3.7-1
+ARG VERSION_DOCKER=19.03.13
+ARG VERSION_CONTAINERD_IO=1.3.7
+ARG VERSION_PKG_DOCKER=5:${VERSION_DOCKER}~3-0~ubuntu-focal
+ARG VERSION_PKG_CONTAINERD_IO=${VERSION_CONTAINERD_IO}-1
 ARG VERSION_UBUNTU=20.04
 ARG VERSION_BASE_IMAGE=0.2.0
 ARG BASE_IMAGE=ssst0n3/docker_archive:ctr_ubuntu-${VERSION_UBUNTU}
 
 FROM ${BASE_IMAGE}_v${VERSION_BASE_IMAGE}
-ARG VERSION_DOCKER
-ARG VERSION_CONTAINERD_IO
+ARG VERSION_PKG_DOCKER
+ARG VERSION_PKG_CONTAINERD_IO
 # Add Docker's official GPG key; Add the repository to Apt sources:
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y ca-certificates curl && \
@@ -26,6 +28,6 @@ RUN apt-get update && \
 
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y \
-    docker-ce=${VERSION_DOCKER} \
-    docker-ce-cli=${VERSION_DOCKER} \
-    containerd.io=${VERSION_CONTAINERD_IO}
+    docker-ce=${VERSION_PKG_DOCKER} \
+    docker-ce-cli=${VERSION_PKG_DOCKER} \
+    containerd.io=${VERSION_PKG_CONTAINERD_IO}
