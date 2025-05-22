@@ -1253,3 +1253,11 @@ Host docker-v19.03.13-e2e
     IdentityFile ~/.ssh/keys/docker_archive
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
+Host docker-v19.03.13_containerd-v1.3.7-debug
+    Hostname 127.0.0.1
+    Port 19312
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+

@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+target=$(basename "$0")
+case "$target" in
+    containerd-shim-runc-v1)
+        port=2343
+        ;;
+    containerd-shim-runc-v2)
+        port=2344
+        ;;
+    containerd-shim)
+        port=2345
+        ;;
+    containerd)
+        port=2346
+        ;;
+    ctr)
+        port=2347
+        ;;
+    *)
+        echo "unknown target: $target"
+        exit 1
+        ;;
+esac
+
+exec dlv --listen=":${port}" \
+         --headless=true \
+         --api-version=2 \
+         --accept-multiclient \
+         exec "/root/bin/${target}-debug" -- "$@"
