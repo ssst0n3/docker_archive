@@ -108,6 +108,7 @@ root@localhost:~# docker version
 | [ubuntu-22.04_docker-v26.1.4](./docker/v26.1.4/) | v0.1.0 |
 | [ubuntu-22.04_docker-v23.0.6](./docker/v23.0.6/) | v0.1.0 |
 | [docker-v19.03.13-e2e](./docker/v19.03.13-e2e/) | v0.1.0 | | ubuntu20.04 |
+| [docker-v19.03.13_containerd-v1.3.7-debug](./docker/v19.03.13_containerd-v1.3.7-debug/) | v0.1.0 | | ubuntu20.04 |
 | [docker-v19.03.13](./docker/v19.03.13/) | v0.1.0 | | ubuntu20.04 |
 | [ubuntu-18.04_docker-v23.0.6_aufs](./docker/ubuntu-18.04_docker-v23.0.6_aufs/) | v0.1.0 |
 | [docker-v1.0.1-lxc](./docker/v1.0.1-lxc/) | v0.1.0 | | lxc(dockerinit) execdriver |

@@ -1,0 +1,14 @@
+services:
+  vm:
+    image: ssst0n3/docker_archive:docker-v19.03.13_containerd-v1.3.7-debug_v0.1.0
+    environment:
+        - "QEMU_HOSTFWD=hostfwd=tcp::2343-:2343,hostfwd=tcp::2344-:2344,hostfwd=tcp::2345-:2345,hostfwd=tcp::2346-:2346,hostfwd=tcp::2347-:2347"
+    ports:
+        - "19312:22"
+        - "19313:2343"
+        - "19314:2344"
+        - "19315:2345"
+        - "19316:2346"
+        - "19317:2347"
+    tty: true
+    stdin_open: true 
