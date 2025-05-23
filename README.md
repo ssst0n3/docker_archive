@@ -57,6 +57,7 @@ root@localhost:~# docker version
 | tag | version | alias | note |
 | --- | --- | --- | --- |
 | [cve-2025-1974](./vul/cve-2025-1974/) | v0.1.0 | ingress-nginx-v1.11.3 | |
+| [cve-2020-15257](./vul/cve-2020-15257/) | v0.1.0 | docker-v19.03.13 | |
 | [shocker_docker-v0.7.1](./vul/shocker/shocker_docker-v0.7.1/) | v0.1.0 | | lxc execdriver |
 | [shocker_docker-v0.7.2](./vul/shocker/shocker_docker-v0.7.2/) | v0.1.0 | | lxc(dockerinit) execdriver |
 | [shocker_docker-v0.9.0](./vul/shocker/shocker_docker-v0.9.0/) | v0.1.0 | | native execdriver |
