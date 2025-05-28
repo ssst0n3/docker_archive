@@ -10,15 +10,63 @@
 ## usage
 
 ```shell
-$ cd docker/v19.03.13_containerd-v1.3.7-debug
+$ cd docker/v19.03.13-debug
 $ docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
 ```
 
+### debug-ports
+
+- 19311: runc main
+- 19312: runc init
+- 19313: dockerd 
+- 19314: docker; not avaiable now, preservce
+- 19315: containerd
+- 19316: containerd-shim
+- 19317: containerd-shim-runc-v1
+- 19328: containerd-shim-runc-v2
+- 19329: ctr
+
+### containerd debug
+
 ```shell
-root@localhost:~# ln -sf /root/bin/containerd.debug /usr/bin/containerd-shim
-root@localhost:~# containerd-shim 
+$ ./ssh
+root@localhost:~# systemctl stop containerd
+root@localhost:~# ln -sf /usr/local/bin/debug.sh /usr/bin/containerd
+root@localhost:~# ln -sf /usr/local/bin/debug.sh /usr/bin/containerd-shim
+root@localhost:~# containerd -c /etc/containerd/config.toml -l debug
 API server listening at: [::]:2345
+INFO[2025-05-27T07:06:50.900884370Z] starting containerd                           revision=8d1927372a8eba375f8d44a0b756c59052e3ca6f.m version=v1.3.7-5-g8d19273.m
+...
 ```
+
+### docker debug
+
+```shell
+$ ./ssh
+root@localhost:~# systemctl stop docker
+root@localhost:~# ln -sf /usr/local/bin/debug.sh /usr/bin/dockerd
+root@localhost:~# dockerd -D
+API server listening at: [::]:2343
+INFO[2025-05-27T07:01:40.801135849Z] Starting up 
+...
+```
+
+### runc debug
+
+runc main
+
+```shell
+$ ./ssh
+root@localhost:~# ln -sf /usr/local/bin/debug.sh /usr/bin/runc
+```
+
+```shell
+$ ./ssh
+root@localhost:~# ps -ef |grep runc |grep init
+root@localhost:~# attach.sh [PID]
+```
+
+### env
 
 ```shell
 $ ./ssh
@@ -70,11 +118,11 @@ Linux localhost.localdomain 5.4.0-216-generic #236-Ubuntu SMP Fri Apr 11 19:53:2
 ## build
 
 ```shell
-make all DIR=docker/v19.03.13_containerd-v1.3.7-debug
+make all DIR=docker/v19.03.13-debug
 ```
 
 for developers:
 
 ```dockerfile
-FROM ssst0n3/docker_archive:ctr_docker-v19.03.13_containerd-v1.3.7-debug_v0.1.0
+FROM ssst0n3/docker_archive:ctr_docker-v19.03.13-debug_v0.1.0
 ```
