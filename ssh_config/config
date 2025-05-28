@@ -1262,3 +1262,11 @@ Host docker-v19.03.13-debug
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
 
+Host containerd-v2.1.1
+    Hostname 127.0.0.1
+    Port 21100
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
