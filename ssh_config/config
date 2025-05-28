@@ -1246,25 +1246,17 @@ Host nerdctl-v0.5.0
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
 
-Host docker-v19.03.13-e2e
-    Hostname 127.0.0.1
-    Port 19313
-    User root
-    IdentityFile ~/.ssh/keys/docker_archive
-    StrictHostKeyChecking no
-    UserKnownHostsFile /dev/null
-
-Host docker-v19.03.13_containerd-v1.3.7-debug
-    Hostname 127.0.0.1
-    Port 19312
-    User root
-    IdentityFile ~/.ssh/keys/docker_archive
-    StrictHostKeyChecking no
-    UserKnownHostsFile /dev/null
-
 Host cve-2020-15257
     Hostname 127.0.0.1
     Port 19313
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
+Host docker-v19.03.13-debug
+    Hostname 127.0.0.1
+    Port 19310
     User root
     IdentityFile ~/.ssh/keys/docker_archive
     StrictHostKeyChecking no
