@@ -1,0 +1,15 @@
+services:
+  vm:
+    image: ssst0n3/docker_archive:containerd-v2.1.0-debug_v0.1.0
+    environment:
+        - "QEMU_HOSTFWD=hostfwd=tcp::2343-:2343,hostfwd=tcp::2344-:2344,hostfwd=tcp::2345-:2345,hostfwd=tcp::2346-:2346,hostfwd=tcp::2347-:2347,hostfwd=tcp::2348-:2348"
+    ports:
+        - "21002:22"
+        - "21003:2343" # runc main
+        - "21004:2344" # runc init
+        - "21005:2345" # ctr 
+        - "21006:2346" # containerd
+        - "21007:2347" # containerd-stress
+        - "21008:2348" # containerd-shim-runc-v2
+    tty: true
+    stdin_open: true
