@@ -1270,3 +1270,11 @@ Host containerd-v2.1.1
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
 
+Host containerd-v2.1.0-debug
+    Hostname 127.0.0.1
+    Port 21002
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
