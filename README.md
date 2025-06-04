@@ -134,6 +134,7 @@ root@localhost:~# docker version
 
 | tag | version | alias | note |
 | --- | --- | --- | --- |
+| [nerdctl-v2.1.2](./nerdctl/v2.1.2/) | v0.1.0 | |
 | [nerdctl-v2.1.1](./nerdctl/v2.1.1/) | v0.1.0 | |
 | nerdctl-v2.1.0 | - | - | bug [#4241](https://github.com/containerd/nerdctl/issues/4241) |
 | [nerdctl-v2.0.5](./nerdctl/v2.0.5/) | v0.1.0 |

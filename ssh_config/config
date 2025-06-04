@@ -1278,3 +1278,11 @@ Host containerd-v2.1.0-debug
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
 
+Host nerdctl-v2.1.2
+    Hostname 127.0.0.1
+    Port 21200
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
