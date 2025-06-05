@@ -1,0 +1,17 @@
+[Unit]
+Description=Ensure dynamic IP for eth0 is mapped to k8s-control-plane in /etc/hosts
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash -c '\
+  IP=$(ip -4 addr show eth0 | awk "/inet/ {print \$2}" | cut -d/ -f1 | head -n1); \
+  if [ -z "$IP" ]; then echo "Error: Failed to get IP"; exit 1; fi; \
+  sed -i "/[[:space:]]k8s-control-plane$/d" /etc/hosts; \
+  echo "$IP k8s-control-plane" >> /etc/hosts'
+User=root
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
