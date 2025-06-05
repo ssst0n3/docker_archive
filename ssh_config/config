@@ -1286,3 +1286,11 @@ Host nerdctl-v2.1.2
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
 
+Host cve-2025-47290
+    Hostname 127.0.0.1
+    Port 47290
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
