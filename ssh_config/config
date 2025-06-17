@@ -1326,3 +1326,11 @@ Host runc-v1.3.0-rc.1_criu
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
 
+Host runc-v1.3.0-rc.2_criu
+    Hostname 127.0.0.1
+    Port 13021
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
