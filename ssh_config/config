@@ -1334,3 +1334,11 @@ Host runc-v1.3.0-rc.2_criu
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
 
+Host containerd-v2.1.1-debug
+    Hostname 127.0.0.1
+    Port 21102
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+

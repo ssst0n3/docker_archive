@@ -153,6 +153,7 @@ root@localhost:~# docker version
 
 | tag | version | alias |
 | --- | --- | --- |
+| [containerd-v2.1.1-debug](./containerd/v2.1.1-debug/) | v0.1.0 |
 | [containerd-v2.1.1](./containerd/v2.1.1/) | v0.1.0 |
 | [containerd-v2.1.0-debug](./containerd/v2.1.0-debug/) | v0.1.0 |
 | [containerd-v2.1.0](./containerd/v2.1.0/) | v0.1.0 |
