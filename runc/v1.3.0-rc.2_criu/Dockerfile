@@ -10,7 +10,7 @@ FROM ${BASE_IMAGE}
 ARG CRIU_REPO
 ARG KEYFILE
 RUN apt update && \
-    apt install -y gpg && \
+    apt install -y gpg xz-utils && \
     wget -nv $CRIU_REPO/Release.key -O- | gpg --dearmor > "$KEYFILE" && \
     echo "deb [signed-by=$KEYFILE] $CRIU_REPO/ /" > /etc/apt/sources.list.d/criu.list && \
     apt update && \
