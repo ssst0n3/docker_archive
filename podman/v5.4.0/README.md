@@ -53,6 +53,12 @@ API Version:  5.4.0
 Go Version:   go1.23.4 (Red Hat 1.23.4-1.el9)
 Built:        Tue Mar 18 14:41:15 2025
 OS/Arch:      linux/amd64
+[root@localhost ~]# crun --version
+crun version 1.21
+commit: 10269840aa07fb7e6b7e1acff6198692d8ff5c88
+rundir: /run/user/0/crun
+spec: 1.0.0
++SYSTEMD +SELINUX +APPARMOR +CAP +SECCOMP +EBPF +CRIU +YAJL
 [root@localhost ~]# cat /etc/os-release 
 NAME="CentOS Stream"
 VERSION="9"
