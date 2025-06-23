@@ -1366,3 +1366,11 @@ Host debian-11.0_runc-v1.2.6_criu-v3.14
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
 
+Host debian-11.0_runc-v1.3.0-rc.1
+    Hostname 127.0.0.1
+    Port 11301
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
