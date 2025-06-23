@@ -191,6 +191,7 @@ root@localhost:~# docker version
 | [runc-v1.3.0-rc.2](./runc/v1.3.0-rc.2/) | v0.2.0 | | ubuntu24.04 |
 | [runc-v1.3.0-rc.1_criu](./runc/v1.3.0-rc.1_criu/) | v0.1.0 | | ubuntu24.04 |
 | [runc-v1.3.0-rc.1](./runc/v1.3.0-rc.1/) | v0.2.0 | | ubuntu24.04 |
+| [debian-11.0_runc-v1.2.6_criu-v3.14](./runc/debian-11.0_runc-v1.2.6_criu-v3.14/) | v0.1.0 | | debian-11.0 |
 | [debian-11.0_runc-v1.2.6](./runc/debian-11.0_runc-v1.2.6/) | v0.1.0 | | debian-11.0 |
 | [runc-v1.2.6](./runc/v1.2.6/) | v0.2.0 | | ubuntu24.04 |
 | [runc-v1.2.5](./runc/v1.2.5/) | v0.3.0 | | ubuntu24.04 |
