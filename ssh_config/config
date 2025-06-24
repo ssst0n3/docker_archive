@@ -1406,3 +1406,11 @@ Host centos-stream9_runc-v1.3.0-rc.1
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
 
+Host centos-stream9_runc-v1.3.0-rc.1_selinux
+    Hostname 127.0.0.1
+    Port 13191
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
