@@ -116,6 +116,7 @@ root@localhost:~# docker version
 | [docker-v19.03.13-debug](./docker/v19.03.13-debug/) | v0.1.0 | | ubuntu20.04 |
 | [docker-v19.03.13](./docker/v19.03.13/) | v0.1.0 | | ubuntu20.04 |
 | [ubuntu-18.04_docker-v23.0.6_aufs](./docker/ubuntu-18.04_docker-v23.0.6_aufs/) | v0.1.0 |
+| [docker-v1.12.2](./docker/v1.12.2/) | v0.1.0 | |  |
 | [docker-v1.0.1-lxc](./docker/v1.0.1-lxc/) | v0.1.0 | | lxc(dockerinit) execdriver |
 | [docker-v1.0.1](./docker/v1.0.1/) | v0.1.0 | | native execdriver |
 | [docker-v1.0.0-lxc](./docker/v1.0.0-lxc/) | v0.1.0 | | lxc(dockerinit) execdriver |
