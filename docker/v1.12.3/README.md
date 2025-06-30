@@ -1,40 +1,40 @@
-# docker v1.12.2
+# docker v1.12.3
 
 * dqd:
-    * ssst0n3/docker_archive:docker-v1.12.2 -> ssst0n3/docker_archive:docker-v1.12.2_v0.1.0
-    * ssst0n3/docker_archive:docker-v1.12.2_v0.1.0
+    * ssst0n3/docker_archive:docker-v1.12.3 -> ssst0n3/docker_archive:docker-v1.12.3_v0.1.0
+    * ssst0n3/docker_archive:docker-v1.12.3_v0.1.0
 * ctr:
-    * ssst0n3/docker_archive:ctr_docker-v1.12.2 -> ssst0n3/docker_archive:ctr_docker-v1.12.2_v0.1.0
-    * ssst0n3/docker_archive:ctr_docker-v1.12.2_v0.1.0
+    * ssst0n3/docker_archive:ctr_docker-v1.12.3 -> ssst0n3/docker_archive:ctr_docker-v1.12.3_v0.1.0
+    * ssst0n3/docker_archive:ctr_docker-v1.12.3_v0.1.0
 
 ## usage
 
 ```shell
-$ cd docker/v1.12.2
+$ cd docker/v1.12.3
 $ docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
 $ ./ssh
 ```
 
 ```shell
 root@localhost:~# docker --version
-Docker version 1.12.2, build bb80604
+Docker version 1.12.3, build 6b644ec
 root@localhost:~# docker-containerd --version
-containerd version 0.2.4 commit: 0366d7e9693c930cf18c0f50cc16acec064e96c5
+containerd version 0.2.4 commit: b818e749726ba18e430bb825396c85408dfaf2a4
 root@localhost:~# docker-runc --version
 runc version 1.0.0-rc2
-commit: 02f8fa7863dd3f82909a73e2061897828460d52f
+commit: f59ba3cdd76fdc08c004f42aa915996f6f420899
 spec: 1.0.0-rc2-dev
 root@localhost:~# docker info
-Containers: 0
+Containers: 1
  Running: 0
  Paused: 0
- Stopped: 0
-Images: 0
-Server Version: 1.12.2
+ Stopped: 1
+Images: 1
+Server Version: 1.12.3
 Storage Driver: aufs
  Root Dir: /var/lib/docker/aufs
  Backing Filesystem: extfs
- Dirs: 0
+ Dirs: 6
  Dirperm1 Supported: true
 Logging Driver: json-file
 Cgroup Driver: cgroupfs
@@ -52,7 +52,7 @@ Architecture: x86_64
 CPUs: 2
 Total Memory: 1.953 GiB
 Name: localhost.localdomain
-ID: ED3X:JKLF:3XAQ:UM7L:Q54N:KZUU:7F27:GEFO:BWSN:ZUON:JQRU:V4J4
+ID: X72N:OH35:SWDQ:T2XL:CQXC:5BNH:R5H4:SS2B:KTZM:ERZB:VBIM:KFDG
 Docker Root Dir: /var/lib/docker
 Debug Mode (client): false
 Debug Mode (server): false
@@ -70,11 +70,11 @@ uid=0(root) gid=0(root) groups=0(root)
 ## build
 
 ```shell
-make all DIR=docker/v1.12.2
+make all DIR=docker/v1.12.3
 ```
 
 for developers:
 
 ```dockerfile
-FROM ssst0n3/docker_archive:ctr_docker-v1.12.2_v0.1.0
+FROM ssst0n3/docker_archive:ctr_docker-v1.12.3_v0.1.0
 ```
