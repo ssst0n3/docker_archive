@@ -59,6 +59,7 @@ root@localhost:~# docker version
 | [cve-2025-47290](./vul/cve-2025-47290/) | v0.1.0 | containerd-v2.1.0 | |
 | [cve-2025-1974](./vul/cve-2025-1974/) | v0.1.0 | ingress-nginx-v1.11.3 | |
 | [cve-2020-15257](./vul/cve-2020-15257/) | v0.1.0 | docker-v19.03.13 | |
+| [cve-2016-8867](./vul/cve-2016-8867/) | v0.1.0 | docker-v1.12.2 | |
 | [shocker_docker-v0.7.1](./vul/shocker/shocker_docker-v0.7.1/) | v0.1.0 | | lxc execdriver |
 | [shocker_docker-v0.7.2](./vul/shocker/shocker_docker-v0.7.2/) | v0.1.0 | | lxc(dockerinit) execdriver |
 | [shocker_docker-v0.9.0](./vul/shocker/shocker_docker-v0.9.0/) | v0.1.0 | | native execdriver |
@@ -116,7 +117,7 @@ root@localhost:~# docker version
 | [docker-v19.03.13-debug](./docker/v19.03.13-debug/) | v0.1.0 | | ubuntu20.04 |
 | [docker-v19.03.13](./docker/v19.03.13/) | v0.1.0 | | ubuntu20.04 |
 | [ubuntu-18.04_docker-v23.0.6_aufs](./docker/ubuntu-18.04_docker-v23.0.6_aufs/) | v0.1.0 |
-| [docker-v1.12.2](./docker/v1.12.2/) | v0.1.0 | |  |
+| [docker-v1.12.2](./docker/v1.12.2/) | v0.1.0 | cve-2016-8867 |  |
 | [docker-v1.0.1-lxc](./docker/v1.0.1-lxc/) | v0.1.0 | | lxc(dockerinit) execdriver |
 | [docker-v1.0.1](./docker/v1.0.1/) | v0.1.0 | | native execdriver |
 | [docker-v1.0.0-lxc](./docker/v1.0.0-lxc/) | v0.1.0 | | lxc(dockerinit) execdriver |

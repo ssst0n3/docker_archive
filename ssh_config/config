@@ -1421,9 +1421,18 @@ Host containerd-v0.2.4
     IdentityFile ~/.ssh/keys/docker_archive
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
+
 Host docker-v1.12.2
     Hostname 127.0.0.1
     Port 11220
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
+Host cve-2016-8867
+    Hostname 127.0.0.1
+    Port 8867
     User root
     IdentityFile ~/.ssh/keys/docker_archive
     StrictHostKeyChecking no
