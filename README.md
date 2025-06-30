@@ -119,6 +119,7 @@ root@localhost:~# docker version
 | [ubuntu-18.04_docker-v23.0.6_aufs](./docker/ubuntu-18.04_docker-v23.0.6_aufs/) | v0.1.0 |
 | [docker-v1.12.3](./docker/v1.12.3/) | v0.1.0 |
 | [docker-v1.12.2](./docker/v1.12.2/) | v0.1.0 | cve-2016-8867 |  |
+| [docker-v1.12.1](./docker/v1.12.1/) | v0.1.0 |
 | [docker-v1.0.1-lxc](./docker/v1.0.1-lxc/) | v0.1.0 | | lxc(dockerinit) execdriver |
 | [docker-v1.0.1](./docker/v1.0.1/) | v0.1.0 | | native execdriver |
 | [docker-v1.0.0-lxc](./docker/v1.0.0-lxc/) | v0.1.0 | | lxc(dockerinit) execdriver |
