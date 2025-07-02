@@ -1478,3 +1478,11 @@ Host docker-v1.12.6
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
 
+Host docker-v17.06.0
+    Hostname 127.0.0.1
+    Port 17060
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
