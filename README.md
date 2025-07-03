@@ -123,6 +123,7 @@ root@localhost:~# docker version
 | [docker-v1.12.4](./docker/v1.12.4/) | v0.1.0 |
 | [docker-v1.12.3](./docker/v1.12.3/) | v0.1.0 |
 | [docker-v1.12.2](./docker/v1.12.2/) | v0.1.0 | cve-2016-8867 |  |
+| [docker-v1.12.2-rc3](./docker/v1.12.2-rc3/) | v0.1.0 | | also cve-2016-8867 vulnerable |
 | [docker-v1.12.1](./docker/v1.12.1/) | v0.1.0 |
 | [docker-v1.0.1-lxc](./docker/v1.0.1-lxc/) | v0.1.0 | | lxc(dockerinit) execdriver |
 | [docker-v1.0.1](./docker/v1.0.1/) | v0.1.0 | | native execdriver |
