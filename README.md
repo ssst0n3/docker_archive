@@ -122,6 +122,7 @@ root@localhost:~# docker version
 | [docker-v1.12.5](./docker/v1.12.5/) | v0.1.0 |
 | [docker-v1.12.4](./docker/v1.12.4/) | v0.1.0 |
 | [docker-v1.12.3](./docker/v1.12.3/) | v0.1.0 |
+| [docker-v1.12.3-rc1](./docker/v1.12.3-rc1/) | v0.1.0 | | fix cve-2016-8867 |
 | [docker-v1.12.2](./docker/v1.12.2/) | v0.1.0 | cve-2016-8867 |  |
 | [docker-v1.12.2-rc3](./docker/v1.12.2-rc3/) | v0.1.0 | | also cve-2016-8867 vulnerable |
 | [docker-v1.12.2-rc2](./docker/v1.12.2-rc2/) | v0.1.0 | |  |
