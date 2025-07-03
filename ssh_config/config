@@ -1502,3 +1502,11 @@ Host docker-v1.12.2-rc2
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
 
+Host docker-v1.12.3-rc1
+    Hostname 127.0.0.1
+    Port 11231
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
