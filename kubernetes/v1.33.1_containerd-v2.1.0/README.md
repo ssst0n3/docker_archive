@@ -68,7 +68,7 @@ make all DIR=kubernetes/v1.33.1_containerd-v2.1.0
 ### for developers
 
 ```dockerfile
-FROM ssst0n3/docker_archive:ctr_v1.33.1_containerd-v2.1.0_v0.1.0
+FROM ssst0n3/docker_archive:ctr_kubernetes-v1.33.1_containerd-v2.1.0_v0.1.0
 ...
 RUN --security=insecure ["/sbin/init", "--log-target=kmsg"]
 ```
