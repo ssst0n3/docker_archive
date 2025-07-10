@@ -28,6 +28,8 @@ kube-system   kube-scheduler-kubernetes-1-33-1            1/1     Running   1 (2
 
 ```shell
 $ ./ssh
+root@kubernetes-1-33-1:~# helm version
+version.BuildInfo{Version:"v3.18.3", GitCommit:"6838ebcf265a3842d1433956e8a622e3290cf324", GitTreeState:"clean", GoVersion:"go1.24.4"}
 root@kubernetes-1-33-1:~# kubectl version
 Client Version: v1.33.1
 Kustomize Version: v5.6.0
