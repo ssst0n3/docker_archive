@@ -1,11 +1,11 @@
 # kubernetes v1.32.3 with calico
 
 * dqd:
-  * ssst0n3/docker_archive:kubernetes-v1.32.3-calico -> ssst0n3/docker_archive:kubernetes-v1.32.3-calico_v0.1.0
+  * ssst0n3/docker_archive:kubernetes-v1.32.3-calico -> ssst0n3/docker_archive:kubernetes-v1.32.3-calico_v0.2.0
   * ssst0n3/docker_archive:kubernetes-v1.32.3-calico_v0.2.0
   * ssst0n3/docker_archive:kubernetes-v1.32.3-calico_v0.1.0
 * ctr:
-  * ssst0n3/docker_archive:ctr_kubernetes-v1.32.3-calico -> ssst0n3/docker_archive:ctr_kubernetes-v1.32.3-calico_v0.1.0
+  * ssst0n3/docker_archive:ctr_kubernetes-v1.32.3-calico -> ssst0n3/docker_archive:ctr_kubernetes-v1.32.3-calico_v0.2.0
   * ssst0n3/docker_archive:ctr_kubernetes-v1.32.3-calico_v0.2.0: squash
   * ssst0n3/docker_archive:ctr_kubernetes-v1.32.3-calico_v0.1.0
 
