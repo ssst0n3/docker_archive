@@ -94,7 +94,6 @@ root@localhost:~# docker version
 | --- | --- | --- | --- |
 | [kubernetes-v1.33.1-calico](./kubernetes/v1.33.1-calico/) | v0.1.0 | |  |
 | [kubernetes-v1.33.1](./kubernetes/v1.33.1/) | v0.1.0 | |  |
-| [kubernetes-v1.33.1_containerd-v2.1.0](./kubernetes/v1.33.1_containerd-v2.1.0/) | v0.1.0 | |  |
 | [kubernetes-v1.32.3-calico](./kubernetes/v1.32.3-calico/) | v0.2.0 | |  |
 | [kubernetes-v1.32.3](./kubernetes/v1.32.3/) | v0.2.0 | |  |
 | [kubernetes-v1.32.2-calico](./kubernetes/v1.32.2-calico/) | v0.2.0 | |  |

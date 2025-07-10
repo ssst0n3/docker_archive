@@ -1,2 +1,0 @@
-#!/bin/bash
-sshpass -p root ssh -o StrictHostKeyChecking=no -p 13310 root@127.0.0.1

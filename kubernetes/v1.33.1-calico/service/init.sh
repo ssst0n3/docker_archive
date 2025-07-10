@@ -5,15 +5,9 @@ until kubectl wait --for=condition=Ready pod --all -A --field-selector=metadata.
 
 # install network addon
 # https://docs.tigera.io/calico/3.30/getting-started/kubernetes/requirements#kubernetes-requirements
-echo "Applying Tigera Operator manifest..." >> /dev/kmsg
-kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.30.1/manifests/tigera-operator.yaml >>/dev/kmsg 2>&1
-echo "Waiting for Custom Resource Definitions (CRDs) to be established..." >> /dev/kmsg
-until kubectl wait --for condition=established crd/installations.operator.tigera.io --timeout=5s; do sleep 1; done >>/dev/kmsg 2>&1 
-echo "Waiting for Tigera Operator deployment to become available..." >> /dev/kmsg
-until kubectl wait deployment -n tigera-operator tigera-operator --for=condition=available --timeout=5s; do sleep 1; done >>/dev/kmsg 2>&1
-echo "Applying Calico custom resource configuration..." >> /dev/kmsg
-kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.30.1/manifests/custom-resources.yaml >>/dev/kmsg 2>&1
-echo "Calico installation process initiated successfully." >> /dev/kmsg
+helm repo add projectcalico https://docs.tigera.io/calico/charts >>/dev/kmsg 2>&1
+kubectl create namespace tigera-operator >>/dev/kmsg 2>&1
+helm install calico projectcalico/tigera-operator --version v3.30.1 --namespace tigera-operator >>/dev/kmsg 2>&1
 
 # wait pods ready
 echo "Waiting for all pods ready" >> /dev/kmsg

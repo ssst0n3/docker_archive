@@ -17,42 +17,44 @@ $ docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
 ```shell
 $ kubectl --kubeconfig=kubeconfig get pods -A
 NAMESPACE          NAME                                        READY   STATUS    RESTARTS        AGE
-calico-apiserver   calico-apiserver-756f76b55d-2bfdm           1/1     Running   1 (3m27s ago)   14m
-calico-apiserver   calico-apiserver-756f76b55d-9bwcr           1/1     Running   1 (3m27s ago)   14m
-calico-system      calico-kube-controllers-55d4bb6759-8jjr7    1/1     Running   1 (3m27s ago)   14m
-calico-system      calico-node-6h69f                           1/1     Running   1 (3m27s ago)   14m
-calico-system      calico-typha-c4856f78d-tnqlq                1/1     Running   1 (3m27s ago)   14m
-calico-system      csi-node-driver-gs9jj                       2/2     Running   2 (3m27s ago)   14m
-calico-system      goldmane-86cd9d999d-7l47v                   1/1     Running   1 (3m27s ago)   14m
-calico-system      whisker-d788d88c4-59nmz                     2/2     Running   2 (3m27s ago)   12m
-kube-system        coredns-674b8bbfcf-l87fg                    1/1     Running   1 (3m27s ago)   34d
-kube-system        coredns-674b8bbfcf-zp9d4                    1/1     Running   1 (3m27s ago)   34d
-kube-system        etcd-k8s-control-plane                      1/1     Running   2 (3m27s ago)   34d
-kube-system        kube-apiserver-k8s-control-plane            1/1     Running   2 (3m27s ago)   34d
-kube-system        kube-controller-manager-k8s-control-plane   1/1     Running   2 (3m27s ago)   34d
-kube-system        kube-proxy-q6rb5                            1/1     Running   2 (3m27s ago)   34d
-kube-system        kube-scheduler-k8s-control-plane            1/1     Running   2 (3m27s ago)   34d
-tigera-operator    tigera-operator-68f7c7984d-tjc4g            1/1     Running   1 (3m27s ago)   14m
+calico-apiserver   calico-apiserver-789bcb55b-cckpl            1/1     Running   1 (2m29s ago)   14m
+calico-apiserver   calico-apiserver-789bcb55b-w4zqk            1/1     Running   1 (2m29s ago)   14m
+calico-system      calico-kube-controllers-945bcc5f8-p8czx     1/1     Running   1 (2m29s ago)   14m
+calico-system      calico-node-zf9qf                           1/1     Running   1 (2m29s ago)   14m
+calico-system      calico-typha-7dccd7876b-4596t               1/1     Running   1 (2m29s ago)   14m
+calico-system      csi-node-driver-vj6n9                       2/2     Running   2 (2m29s ago)   14m
+calico-system      goldmane-86cd9d999d-74dfv                   1/1     Running   1 (2m29s ago)   14m
+calico-system      whisker-699cdc85cb-gwsjm                    2/2     Running   2 (2m29s ago)   11m
+kube-system        coredns-674b8bbfcf-bz69g                    1/1     Running   1 (2m29s ago)   3h36m
+kube-system        coredns-674b8bbfcf-f2k2f                    1/1     Running   1 (2m29s ago)   3h36m
+kube-system        etcd-kubernetes-1-33-1                      1/1     Running   2 (2m29s ago)   3h36m
+kube-system        kube-apiserver-kubernetes-1-33-1            1/1     Running   3 (2m29s ago)   3h36m
+kube-system        kube-controller-manager-kubernetes-1-33-1   1/1     Running   2 (2m29s ago)   3h36m
+kube-system        kube-proxy-s4qzw                            1/1     Running   2 (2m29s ago)   3h36m
+kube-system        kube-scheduler-kubernetes-1-33-1            1/1     Running   2 (2m29s ago)   3h36m
+tigera-operator    tigera-operator-68f7c7984d-vknxx            1/1     Running   1 (2m29s ago)   14m
 ```
 
 
 ```shell
 $ ./ssh
-root@k8s-control-plane:~# kubectl version
+root@kubernetes-1-33-1:~# helm version
+version.BuildInfo{Version:"v3.18.3", GitCommit:"6838ebcf265a3842d1433956e8a622e3290cf324", GitTreeState:"clean", GoVersion:"go1.24.4"}
+root@kubernetes-1-33-1:~# kubectl version
 Client Version: v1.33.1
 Kustomize Version: v5.6.0
 Server Version: v1.33.1
-root@k8s-control-plane:~# containerd --version
+root@kubernetes-1-33-1:~# containerd --version
 containerd github.com/containerd/containerd/v2 v2.1.0 061792f0ecf3684fb30a3a0eb006799b8c6638a7
-root@k8s-control-plane:~# runc --version
+root@kubernetes-1-33-1:~# runc --version
 runc version 1.3.0
 commit: v1.3.0-0-g4ca628d1
 spec: 1.2.1
 go: go1.23.8
 libseccomp: 2.5.6
-root@k8s-control-plane:~# uname -a
-Linux k8s-control-plane 6.8.0-63-generic #66-Ubuntu SMP PREEMPT_DYNAMIC Fri Jun 13 20:25:30 UTC 2025 x86_64 x86_64 x86_64 GNU/Linux
-root@k8s-control-plane:~# cat /etc/os-release
+root@kubernetes-1-33-1:~# uname -a
+Linux kubernetes-1-33-1 6.8.0-63-generic #66-Ubuntu SMP PREEMPT_DYNAMIC Fri Jun 13 20:25:30 UTC 2025 x86_64 x86_64 x86_64 GNU/Linux
+root@kubernetes-1-33-1:~# cat /etc/os-release
 PRETTY_NAME="Ubuntu 24.04.2 LTS"
 NAME="Ubuntu"
 VERSION_ID="24.04"
