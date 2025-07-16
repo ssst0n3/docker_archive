@@ -116,6 +116,7 @@ root@localhost:~# docker version
 | [docker-v27.1.0](./docker/v27.1.0/) | v0.1.0 |
 | [ubuntu-22.04_docker-v26.1.4](./docker/v26.1.4/) | v0.1.0 |
 | [ubuntu-22.04_docker-v23.0.6](./docker/v23.0.6/) | v0.1.0 |
+| [docker-v20.10.24](./docker/v20.10.24/) | v0.1.0 |
 | [docker-v20.10.19](./docker/v20.10.19/) | v0.1.0 |
 | [docker-v19.03.13-debug](./docker/v19.03.13-debug/) | v0.1.0 | | ubuntu20.04 |
 | [docker-v19.03.13](./docker/v19.03.13/) | v0.1.0 | | ubuntu20.04 |
