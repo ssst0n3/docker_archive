@@ -1542,3 +1542,11 @@ Host docker-v20.10.19
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
 
+Host cve-2022-39253
+    Hostname 127.0.0.1
+    Port 39253
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
