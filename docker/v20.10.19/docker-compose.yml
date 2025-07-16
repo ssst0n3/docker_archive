@@ -1,0 +1,7 @@
+services:
+  vm:
+    image: ssst0n3/docker_archive:docker-v20.10.19_v0.1.0
+    ports:
+        - "21019:22"
+    tty: true
+    stdin_open: true 
