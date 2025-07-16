@@ -145,6 +145,7 @@ root@localhost:~# docker version
 
 | tag | version | alias |
 | --- | --- | --- |
+| [podman-v5.5.1-debug](./podman/v5.5.1-debug/) | v0.1.0 |
 | [podman-v5.5.1](./podman/v5.5.1/) | v0.1.0 |
 | [podman-v5.4.0](./podman/v5.4.0/) | v0.1.0 |
 

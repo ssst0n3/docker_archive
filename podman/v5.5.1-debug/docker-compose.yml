@@ -1,0 +1,12 @@
+services:
+  vm:
+    image: ssst0n3/docker_archive:podman-v5.5.1-debug_v0.1.0
+    # Use host cpu to fix: "Fatal glibc error: CPU does not support x86-64-v2"
+    environment:
+        - "QEMU_HOSTFWD=hostfwd=tcp::2341-:2341"
+    command: /start.sh -cpu host
+    ports:
+        - "55101:22"
+        - "55102:2341"
+    tty: true
+    stdin_open: true 
