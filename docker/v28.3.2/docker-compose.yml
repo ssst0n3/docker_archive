@@ -1,0 +1,7 @@
+services:
+  vm:
+    image: ssst0n3/docker_archive:docker-v28.3.2_v0.1.0
+    ports:
+        - "28320:22"
+    tty: true
+    stdin_open: true 

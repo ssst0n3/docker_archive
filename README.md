@@ -104,6 +104,7 @@ root@localhost:~# docker version
 
 | tag | version | alias | note |
 | --- | --- | --- | --- |
+| [docker-v28.3.2](./docker/v28.3.2/) | v0.1.0 |
 | [docker-v28.2.2_containerd-v2.1.0](./docker/v28.2.2_containerd-v2.1.0/) | v0.1.0 |
 | [docker-v28.2.2](./docker/v28.2.2/) | v0.1.0 |
 | [docker-v28.1.1](./docker/v28.1.1/) | v0.1.0 |
