@@ -1574,3 +1574,11 @@ Host nvidia-container-toolkit-v1.17.6
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
 
+Host cve-2025-23266
+    Hostname 127.0.0.1
+    Port 23266
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
