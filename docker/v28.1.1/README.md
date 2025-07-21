@@ -1,10 +1,12 @@
 # docker v28.1.1
 
 * dqd:
-  * ssst0n3/docker_archive:docker-v28.1.1 -> ssst0n3/docker_archive:docker-v28.1.1_v0.1.0
+  * ssst0n3/docker_archive:docker-v28.1.1 -> ssst0n3/docker_archive:docker-v28.1.1_v0.2.0
+  * ssst0n3/docker_archive:docker-v28.1.1_v0.2.0
   * ssst0n3/docker_archive:docker-v28.1.1_v0.1.0
 * ctr:
-  * ssst0n3/docker_archive:ctr_docker-v28.1.1 -> ssst0n3/docker_archive:ctr_docker-v28.1.1_v0.1.0
+  * ssst0n3/docker_archive:ctr_docker-v28.1.1 -> ssst0n3/docker_archive:ctr_docker-v28.1.1_v0.2.0
+  * ssst0n3/docker_archive:ctr_docker-v28.1.1_v0.2.0: bump the base image
   * ssst0n3/docker_archive:ctr_docker-v28.1.1_v0.1.0
 
 ## usage
@@ -44,11 +46,11 @@ Server: Docker Engine - Community
  docker-init:
   Version:          0.19.0
   GitCommit:        de40ad0
-root@localhost:~# cat /etc/os-release 
-PRETTY_NAME="Ubuntu 24.04.1 LTS"
+root@localhost:~# cat /etc/os-release
+PRETTY_NAME="Ubuntu 24.04.2 LTS"
 NAME="Ubuntu"
 VERSION_ID="24.04"
-VERSION="24.04.1 LTS (Noble Numbat)"
+VERSION="24.04.2 LTS (Noble Numbat)"
 VERSION_CODENAME=noble
 ID=ubuntu
 ID_LIKE=debian
@@ -59,7 +61,7 @@ PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-poli
 UBUNTU_CODENAME=noble
 LOGO=ubuntu-logo
 root@localhost:~# uname -a
-Linux localhost.localdomain 6.8.0-58-generic #60-Ubuntu SMP PREEMPT_DYNAMIC Fri Mar 14 18:29:48 UTC 2025 x86_64 x86_64 x86_64 GNU/Linux
+Linux localhost.localdomain 6.8.0-64-generic #67-Ubuntu SMP PREEMPT_DYNAMIC Sun Jun 15 20:23:31 UTC 2025 x86_64 x86_64 x86_64 GNU/Linux
 ```
 
 ## build
@@ -71,5 +73,5 @@ make all DIR=docker/v28.1.1
 for developers:
 
 ```dockerfile
-FROM ssst0n3/docker_archive:ctr_docker-v28.1.1_v0.1.0
+FROM ssst0n3/docker_archive:ctr_docker-v28.1.1_v0.2.0
 ```
