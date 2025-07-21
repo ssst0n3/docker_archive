@@ -1558,3 +1558,19 @@ Host docker-v20.10.24
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
 
+Host docker-v28.3.2
+    Hostname 127.0.0.1
+    Port 28320
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
+Host nvidia-container-toolkit-v1.17.6
+    Hostname 127.0.0.1
+    Port 11760
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+

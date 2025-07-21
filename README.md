@@ -100,6 +100,13 @@ root@localhost:~# docker version
 | [kubernetes-v1.32.2-calico](./kubernetes/v1.32.2-calico/) | v0.2.0 | |  |
 | [kubernetes-v1.32.2](./kubernetes/v1.32.2/) | v0.2.0 | |  |
 
+
+### nvidia-container-toolkit
+
+| tag | version | alias | note |
+| --- | --- | --- | --- |
+| [nvidia-container-toolkit-v1.17.6](./nvidia-container-toolkit/v1.17.6/) | v0.1.0 | |  |
+
 ### docker
 
 | tag | version | alias | note |
