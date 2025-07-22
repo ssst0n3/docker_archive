@@ -107,6 +107,7 @@ root@localhost:~# docker version
 | tag | version | alias | note |
 | --- | --- | --- | --- |
 | [nvidia-container-toolkit-v1.17.6](./nvidia-container-toolkit/v1.17.6/) | v0.1.0 | |  |
+| [nvidia-container-toolkit-v1.17.5](./nvidia-container-toolkit/v1.17.5/) | v0.1.0 | |  |
 
 ### docker
 
