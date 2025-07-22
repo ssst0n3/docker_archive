@@ -120,6 +120,7 @@ root@localhost:~# docker version
 | [docker-v28.0.4_centos-stream9](./docker/v28.0.4_centos-stream9/) | v0.1.0 |
 | [docker-v28.0.4-debug](./docker/v28.0.4-debug/) | v0.1.0 |
 | [docker-v28.0.4](./docker/v28.0.4/) | v0.1.0 |
+| [docker-v28.0.1](./docker/v28.0.1/) | v0.1.0 |
 | [docker-v28.0.0](./docker/v28.0.0/) | v0.1.0 |
 | [docker-v27.5.1](./docker/v27.5.1/) | v0.1.0 |
 | [docker-v27.1.0](./docker/v27.1.0/) | v0.1.0 |

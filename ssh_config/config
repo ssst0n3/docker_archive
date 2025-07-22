@@ -1582,3 +1582,11 @@ Host cve-2025-23266
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
 
+Host docker-v28.0.1
+    Hostname 127.0.0.1
+    Port 28010
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
