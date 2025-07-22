@@ -1,0 +1,11 @@
+services:
+  vm:
+    image: ssst0n3/docker_archive:nvidia-container-toolkit-v1.17.6_v0.1.0
+    environment:
+        - "QEMU_HOSTFWD=hostfwd=tcp::2345-:2345,hostfwd=tcp::2346-:2346"
+    ports:
+        - "11762:22"
+        - "11765:2345"
+        - "11766:2346"
+    tty: true
+    stdin_open: true 
