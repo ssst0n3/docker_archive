@@ -1,17 +1,22 @@
-# nvidia-container-toolkit v1.17.6
+# nvidia-container-toolkit v1.17.6 debug
 
 * dqd:
-  * ssst0n3/docker_archive:nvidia-container-toolkit-v1.17.6 -> ssst0n3/docker_archive:nvidia-container-toolkit-v1.17.6_v0.1.0
-  * ssst0n3/docker_archive:nvidia-container-toolkit-v1.17.6_v0.1.0
+  * ssst0n3/docker_archive:nvidia-container-toolkit-v1.17.6-debug -> ssst0n3/docker_archive:nvidia-container-toolkit-v1.17.6-debug_v0.1.0
+  * ssst0n3/docker_archive:nvidia-container-toolkit-v1.17.6-debug_v0.1.0
 * ctr:
-  * ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.17.6 -> ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.17.6_v0.1.0
-  * ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.17.6_v0.1.0
+  * ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.17.6-debug -> ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.17.6-debug_v0.1.0
+  * ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.17.6-debug_v0.1.0
 
 ## usage
 
 ```shell
-$ cd nvidia-container-toolkit/v1.17.6
+$ cd nvidia-container-toolkit/v1.17.6-debug
 $ docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
+```
+
+```shell
+$ ./ssh
+root@localhost:~# ln -sf /root/runc.debug /usr/bin/runc
 ```
 
 ```shell
@@ -128,11 +133,11 @@ Linux localhost.localdomain 6.8.0-64-generic #67-Ubuntu SMP PREEMPT_DYNAMIC Sun 
 ## build
 
 ```shell
-make all DIR=nvidia-container-toolkit/v1.17.6
+make all DIR=nvidia-container-toolkit/v1.17.6-debug
 ```
 
 for developers:
 
 ```dockerfile
-FROM ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.17.6_v0.1.0
+FROM ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.17.6-debug_v0.1.0
 ```

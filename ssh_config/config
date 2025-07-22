@@ -1598,7 +1598,7 @@ Host nvidia-container-toolkit-v1.17.5
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
 
-Host nvidia-container-toolkit-v1.17.6
+Host nvidia-container-toolkit-v1.17.6-debug
     Hostname 127.0.0.1
     Port 11762
     User root

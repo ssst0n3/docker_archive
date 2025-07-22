@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-exec dlv --listen=:2346 \
+exec dlv --listen=:2345 \
           --headless=true \
           --api-version=2 \
           --accept-multiclient \
