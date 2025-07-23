@@ -56,7 +56,7 @@ root@localhost:~# docker version
 
 | tag | version | alias | note |
 | --- | --- | --- | --- |
-| [cve-2025-23266](./vul/cve-2025-23266/) | v0.1.0 | nvidia-container-toolkit-v1.17.6 | |
+| [cve-2025-23266](./vul/cve-2025-23266/) | v0.2.0 | nvidia-container-toolkit-v1.17.6 | |
 | [cve-2025-47290](./vul/cve-2025-47290/) | v0.1.0 | containerd-v2.1.0 | |
 | [cve-2025-1974](./vul/cve-2025-1974/) | v0.1.0 | ingress-nginx-v1.11.3 | |
 | [cve-2022-39253](./vul/cve-2022-39253/) | v0.1.0 |
@@ -106,7 +106,7 @@ root@localhost:~# docker version
 
 | tag | version | alias | note |
 | --- | --- | --- | --- |
-| [nvidia-container-toolkit-v1.17.6_docker-v27.5.1](./nvidia-container-toolkit/v1.17.6_docker-v27.5.1/) | v0.1.0 | |  |
+| [nvidia-container-toolkit-v1.17.6_docker-v27.5.1](./nvidia-container-toolkit/v1.17.6_docker-v27.5.1/) | v0.2.0 | |  |
 | [nvidia-container-toolkit-v1.17.6-debug](./nvidia-container-toolkit/v1.17.6-debug/) | v0.1.0 | |  |
 | [nvidia-container-toolkit-v1.17.6](./nvidia-container-toolkit/v1.17.6/) | v0.1.0 | |  |
 | [nvidia-container-toolkit-v1.17.5](./nvidia-container-toolkit/v1.17.5/) | v0.1.0 | |  |

@@ -42,4 +42,8 @@ RUN nvidia-ctk runtime configure --runtime=docker
 
 FROM nvidia-container-toolkit
 ARG HOSTNAME
+RUN apt update && \
+    apt install -y netcat-traditional && \
+    apt clean && \
+    rm -rf /var/lib/apt/lists/*
 RUN echo ${HOSTNAME} > /etc/hostname
