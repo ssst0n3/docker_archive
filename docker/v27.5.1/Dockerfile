@@ -1,5 +1,19 @@
-FROM ssst0n3/docker_archive:ctr_ubuntu-24.04_v0.1.0
+ARG VERSION_DOCKER=27.5.1
+# https://github.com/moby/moby/blob/v27.5.1/Dockerfile#L199
+ARG VERSION_CONTAINERD=1.7.25
+# https://github.com/moby/moby/blob/v27.5.1/Dockerfile#L15
+ARG VERSION_BUILDX=0.20.0
+# https://github.com/moby/moby/blob/v27.5.1/Dockerfile#L16
+ARG VERSION_COMPOSE=2.32.4
+ARG VERSION_UBUNTU=24.04
+ARG VERSION_IMAGE=0.3.0
+ARG BASE_IMAGE=ssst0n3/docker_archive:ctr_ubuntu-${VERSION_UBUNTU}
 
+FROM ${BASE_IMAGE}_v${VERSION_IMAGE}
+ARG VERSION_DOCKER
+ARG VERSION_CONTAINERD
+ARG VERSION_BUILDX
+ARG VERSION_COMPOSE
 # Add Docker's official GPG key; Add the repository to Apt sources:
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y ca-certificates curl && \
@@ -18,8 +32,8 @@ RUN apt-get update && \
 # RUN apt-cache madison docker-compose-plugin
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y \
-    docker-ce=5:27.5.1-1~ubuntu.24.04~noble \
-    docker-ce-cli=5:27.5.1-1~ubuntu.24.04~noble \
-    containerd.io=1.7.25-1 \
-    docker-buildx-plugin=0.20.0-1~ubuntu.24.04~noble \
-    docker-compose-plugin=2.32.4-1~ubuntu.24.04~noble
+    docker-ce=5:${VERSION_DOCKER}-1~ubuntu.24.04~noble \
+    docker-ce-cli=5:${VERSION_DOCKER}-1~ubuntu.24.04~noble \
+    containerd.io=${VERSION_CONTAINERD}-1 \
+    docker-buildx-plugin=${VERSION_BUILDX}-1~ubuntu.24.04~noble \
+    docker-compose-plugin=${VERSION_COMPOSE}-1~ubuntu.24.04~noble

@@ -1,49 +1,82 @@
 # docker v27.5.1
 
 * dqd:
-  * ssst0n3/docker_archive:docker-v27.5.1 -> ssst0n3/docker_archive:docker-v27.5.1_v0.1.0
+  * ssst0n3/docker_archive:docker-v27.5.1 -> ssst0n3/docker_archive:docker-v27.5.1_v0.2.0
+  * ssst0n3/docker_archive:docker-v27.5.1_v0.2.0
   * ssst0n3/docker_archive:docker-v27.5.1_v0.1.0
 * ctr:
   * ssst0n3/docker_archive:ctr_docker-v27.5.1 -> ssst0n3/docker_archive:ctr_docker-v27.5.1_v0.1.0
+  * ssst0n3/docker_archive:ctr_docker-v27.5.1_v0.2.0: bump the base image; update the depencies version
   * ssst0n3/docker_archive:ctr_docker-v27.5.1_v0.1.0
 
 ## usage
 
 ```shell
-cd docker/v27.5.1
-docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
-ssh -p 27510 root@127.0.0.1
+$ cd docker/v27.5.1
+$ docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
+$ ./ssh
 ```
 
 ```shell
-root@localhost:~# docker version
+root@localhost:~# docker info
 Client: Docker Engine - Community
- Version:           27.5.1
- API version:       1.47
- Go version:        go1.22.11
- Git commit:        9f9e405
- Built:             Wed Jan 22 13:41:48 2025
- OS/Arch:           linux/amd64
- Context:           default
+ Version:    27.5.1
+ Context:    default
+ Debug Mode: false
+ Plugins:
+  buildx: Docker Buildx (Docker Inc.)
+    Version:  v0.20.0
+    Path:     /usr/libexec/docker/cli-plugins/docker-buildx
+  compose: Docker Compose (Docker Inc.)
+    Version:  v2.32.4
+    Path:     /usr/libexec/docker/cli-plugins/docker-compose
 
-Server: Docker Engine - Community
- Engine:
-  Version:          27.5.1
-  API version:      1.47 (minimum version 1.24)
-  Go version:       go1.22.11
-  Git commit:       4c9b3b0
-  Built:            Wed Jan 22 13:41:48 2025
-  OS/Arch:          linux/amd64
-  Experimental:     false
- containerd:
-  Version:          1.7.25
-  GitCommit:        bcc810d6b9066471b0b6fa75f557a15a1cbf31bb
- runc:
-  Version:          1.2.4
-  GitCommit:        v1.2.4-0-g6c52b3f
- docker-init:
-  Version:          0.19.0
-  GitCommit:        de40ad0
+Server:
+ Containers: 0
+  Running: 0
+  Paused: 0
+  Stopped: 0
+ Images: 0
+ Server Version: 27.5.1
+ Storage Driver: overlay2
+  Backing Filesystem: extfs
+  Supports d_type: true
+  Using metacopy: false
+  Native Overlay Diff: true
+  userxattr: false
+ Logging Driver: json-file
+ Cgroup Driver: systemd
+ Cgroup Version: 2
+ Plugins:
+  Volume: local
+  Network: bridge host ipvlan macvlan null overlay
+  Log: awslogs fluentd gcplogs gelf journald json-file local splunk syslog
+ Swarm: inactive
+ Runtimes: io.containerd.runc.v2 runc
+ Default Runtime: runc
+ Init Binary: docker-init
+ containerd version: bcc810d6b9066471b0b6fa75f557a15a1cbf31bb
+ runc version: v1.2.4-0-g6c52b3f
+ init version: de40ad0
+ Security Options:
+  apparmor
+  seccomp
+   Profile: builtin
+  cgroupns
+ Kernel Version: 6.8.0-64-generic
+ Operating System: Ubuntu 24.04.2 LTS
+ OSType: linux
+ Architecture: x86_64
+ CPUs: 2
+ Total Memory: 1.922GiB
+ Name: localhost.localdomain
+ ID: 34670afe-e369-4f8d-b103-da4ed19ea60c
+ Docker Root Dir: /var/lib/docker
+ Debug Mode: false
+ Experimental: false
+ Insecure Registries:
+  127.0.0.0/8
+ Live Restore Enabled: false
 ```
 
 ## build
@@ -55,5 +88,5 @@ make all DIR=docker/v27.5.1
 for developers:
 
 ```dockerfile
-FROM ssst0n3/docker_archive:ctr_docker-v27.5.1_v0.1.0
+FROM ssst0n3/docker_archive:ctr_docker-v27.5.1_v0.2.0
 ```
