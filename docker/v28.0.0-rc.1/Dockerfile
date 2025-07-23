@@ -1,15 +1,17 @@
-ARG VERSION_DOCKER=28.0.1
-# https://github.com/moby/moby/blob/v28.0.1/Dockerfile#L205
+ARG HOSTNAME=docker-28-0-0-rc-1
+ARG VERSION_DOCKER=28.0.0~rc.1
+# https://github.com/moby/moby/blob/v28.0.0-rc.1/Dockerfile#L202
 ARG VERSION_CONTAINERD=1.7.25
-# https://github.com/moby/moby/blob/v28.0.1/Dockerfile#L18
-ARG VERSION_BUILDX=0.20.1
-# https://github.com/moby/moby/blob/v28.0.1/Dockerfile#L19
+# https://github.com/moby/moby/blob/v28.0.0-rc.1/Dockerfile#L15
+ARG VERSION_BUILDX=0.20.0
+# https://github.com/moby/moby/blob/v28.0.0-rc.1/Dockerfile#L16
 ARG VERSION_COMPOSE=2.32.4
 ARG VERSION_UBUNTU=24.04
 ARG VERSION_IMAGE=0.3.0
 ARG BASE_IMAGE=ssst0n3/docker_archive:ctr_ubuntu-${VERSION_UBUNTU}
 
 FROM ${BASE_IMAGE}_v${VERSION_IMAGE}
+ARG HOSTNAME
 ARG VERSION_DOCKER
 ARG VERSION_CONTAINERD
 ARG VERSION_BUILDX
@@ -36,3 +38,4 @@ RUN apt-get update && \
     containerd.io=${VERSION_CONTAINERD}-1 \
     docker-buildx-plugin=${VERSION_BUILDX}-1~ubuntu.24.04~noble \
     docker-compose-plugin=${VERSION_COMPOSE}-1~ubuntu.24.04~noble
+RUN echo ${HOSTNAME} > /etc/hostname
