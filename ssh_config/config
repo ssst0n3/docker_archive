@@ -1734,3 +1734,11 @@ Host nvidia-container-toolkit-v1.17.2
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
 
+Host nvidia-container-toolkit-v1.17.3
+    Hostname 127.0.0.1
+    Port 11730
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
