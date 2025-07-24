@@ -132,6 +132,7 @@ root@localhost:~# docker version
 | [docker-v28.0.0-rc.1](./docker/v28.0.0-rc.1/) | v0.1.0 |
 | [docker-v27.5.1](./docker/v27.5.1/) | v0.2.0 |
 | [docker-v27.1.0](./docker/v27.1.0/) | v0.1.0 |
+| [docker-v27.0.3](./docker/v27.0.3/) | v0.1.0 |
 | [ubuntu-22.04_docker-v26.1.4](./docker/v26.1.4/) | v0.1.0 |
 | [ubuntu-22.04_docker-v23.0.6](./docker/v23.0.6/) | v0.1.0 |
 | [docker-v20.10.24](./docker/v20.10.24/) | v0.1.0 |
