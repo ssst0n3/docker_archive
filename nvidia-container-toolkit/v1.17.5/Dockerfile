@@ -1,6 +1,7 @@
+ARG HOSTNAME=nvidia-container-toolkit-1-17-5
 ARG VERSION_NCT=1.17.5
-ARG VERSION_NCT_PKG=1.17.5-1
-ARG VERSION_FAKE_NVIDIA=0.5.0
+ARG VERSION_NCT_PKG=${VERSION_NCT}-1
+ARG VERSION_FAKE_NVIDIA=0.6.0
 ARG VERSION_DOCKER=28.0.1
 ARG VERSION_KERNEL=6.8.0-64-generic
 ARG VERSION_IMAGE=0.1.0
@@ -30,7 +31,8 @@ RUN curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | \
     gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg && \
     curl -s -L https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list | \
     sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' | \
-    tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
+    tee /etc/apt/sources.list.d/nvidia-container-toolkit.list && \
+    sed -i -e '/experimental/ s/^#//g' /etc/apt/sources.list.d/nvidia-container-toolkit.list
 RUN apt-get update && \
     apt-get install -y \
       nvidia-container-toolkit=${VERSION_NCT_PKG} \
@@ -38,3 +40,7 @@ RUN apt-get update && \
       libnvidia-container-tools=${VERSION_NCT_PKG} \
       libnvidia-container1=${VERSION_NCT_PKG}
 RUN nvidia-ctk runtime configure --runtime=docker
+
+FROM nvidia-container-toolkit
+ARG HOSTNAME
+RUN echo ${HOSTNAME} > /etc/hostname
