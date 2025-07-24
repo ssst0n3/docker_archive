@@ -1,10 +1,12 @@
 # nvidia-container-toolkit v1.17.5
 
 * dqd:
-  * ssst0n3/docker_archive:nvidia-container-toolkit-v1.17.5 -> ssst0n3/docker_archive:nvidia-container-toolkit-v1.17.5_v0.1.0
+  * ssst0n3/docker_archive:nvidia-container-toolkit-v1.17.5 -> ssst0n3/docker_archive:nvidia-container-toolkit-v1.17.5_v0.2.0
+  * ssst0n3/docker_archive:nvidia-container-toolkit-v1.17.5_v0.2.0
   * ssst0n3/docker_archive:nvidia-container-toolkit-v1.17.5_v0.1.0
 * ctr:
-  * ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.17.5 -> ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.17.5_v0.1.0
+  * ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.17.5 -> ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.17.5_v0.2.0
+  * ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.17.5_v0.2.0: setup the hostname
   * ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.17.5_v0.1.0
 
 ## usage
@@ -16,7 +18,7 @@ $ docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
 
 ```shell
 $ ./ssh
-root@localhost:~# docker run -ti --runtime=nvidia --gpus=all busybox
+root@nvidia-container-toolkit-1-17-5:~# docker run -ti --runtime=nvidia --gpus=all busybox
 Unable to find image 'busybox:latest' locally
 latest: Pulling from library/busybox
 90b9666d4aed: Pull complete 
@@ -27,22 +29,25 @@ Status: Downloaded newer image for busybox:latest
 
 ```shell
 $ ./ssh
-root@localhost:~# lsmod |grep fake
+root@nvidia-container-toolkit-1-17-5:~# nvidia-container-toolkit --version
+NVIDIA Container Runtime Hook version 1.17.5
+commit: f785e908a7f72149f8912617058644fd84e38cde
+root@nvidia-container-toolkit-1-17-5:~# lsmod |grep fake
 fake_nvidia_driver     12288  0
-root@localhost:~# ls -lah /usr/local/lib/libnvidia-ml.so.1
--rwxr-xr-x 1 root root 22K Jul 22 06:28 /usr/local/lib/libnvidia-ml.so.1
-root@localhost:~# systemctl status fake-nvidia-mknod
+root@nvidia-container-toolkit-1-17-5:~# ls -lah /usr/local/lib/libnvidia-ml.so.1
+-rwxr-xr-x 1 root root 22K Jul 24 09:32 /usr/local/lib/libnvidia-ml.so.1
+root@nvidia-container-toolkit-1-17-5:~# systemctl status fake-nvidia-mknod
 ○ fake-nvidia-mknod.service - Create device nodes for fake nvidia driver
      Loaded: loaded (/etc/systemd/system/fake-nvidia-mknod.service; enabled; preset: enabled)
-     Active: inactive (dead) since Tue 2025-07-22 06:34:34 UTC; 41s ago
-    Process: 633 ExecStart=/usr/local/bin/fake-nvidia-mknod.sh (code=exited, status=0/SUCCESS)
-   Main PID: 633 (code=exited, status=0/SUCCESS)
+     Active: inactive (dead) since Thu 2025-07-24 09:36:28 UTC; 45s ago
+    Process: 635 ExecStart=/usr/local/bin/fake-nvidia-mknod.sh (code=exited, status=0/SUCCESS)
+   Main PID: 635 (code=exited, status=0/SUCCESS)
         CPU: 7ms
 
-Jul 22 06:34:34 localhost.localdomain systemd[1]: Starting fake-nvidia-mknod.service - Create device nodes for fake nvidia driver...
-Jul 22 06:34:34 localhost.localdomain systemd[1]: fake-nvidia-mknod.service: Deactivated successfully.
-Jul 22 06:34:34 localhost.localdomain systemd[1]: Finished fake-nvidia-mknod.service - Create device nodes for fake nvidia driver.
-root@localhost:~# nvidia-container-cli info
+Jul 24 09:36:28 nvidia-container-toolkit-1-17-5 systemd[1]: Starting fake-nvidia-mknod.service - Create device nodes for fake nvidia driver...
+Jul 24 09:36:28 nvidia-container-toolkit-1-17-5 systemd[1]: fake-nvidia-mknod.service: Deactivated successfully.
+Jul 24 09:36:28 nvidia-container-toolkit-1-17-5 systemd[1]: Finished fake-nvidia-mknod.service - Create device nodes for fake nvidia driver.
+root@nvidia-container-toolkit-1-17-5:~# nvidia-container-cli info
 NVRM version:   535.104.05
 CUDA version:   12.2
 
@@ -77,52 +82,66 @@ Brand:          Tesla
 GPU UUID:       GPU-3-FAKE-UUID
 Bus Location:   00000000:00:00.0
 Architecture:   7.5
-root@localhost:~# docker version
+root@nvidia-container-toolkit-1-17-5:~# docker info
 Client: Docker Engine - Community
- Version:           28.0.1
- API version:       1.48
- Go version:        go1.23.6
- Git commit:        068a01e
- Built:             Wed Feb 26 10:41:12 2025
- OS/Arch:           linux/amd64
- Context:           default
+ Version:    28.0.1
+ Context:    default
+ Debug Mode: false
+ Plugins:
+  buildx: Docker Buildx (Docker Inc.)
+    Version:  v0.20.1
+    Path:     /usr/libexec/docker/cli-plugins/docker-buildx
+  compose: Docker Compose (Docker Inc.)
+    Version:  v2.32.4
+    Path:     /usr/libexec/docker/cli-plugins/docker-compose
 
-Server: Docker Engine - Community
- Engine:
-  Version:          28.0.1
-  API version:      1.48 (minimum version 1.24)
-  Go version:       go1.23.6
-  Git commit:       bbd0a17
-  Built:            Wed Feb 26 10:41:12 2025
-  OS/Arch:          linux/amd64
-  Experimental:     false
- containerd:
-  Version:          1.7.25
-  GitCommit:        bcc810d6b9066471b0b6fa75f557a15a1cbf31bb
- runc:
-  Version:          1.2.4
-  GitCommit:        v1.2.4-0-g6c52b3f
- docker-init:
-  Version:          0.19.0
-  GitCommit:        de40ad0
-root@localhost:~# containerd --version
-containerd containerd.io 1.7.25 bcc810d6b9066471b0b6fa75f557a15a1cbf31bb
-root@localhost:~# cat /etc/os-release
-PRETTY_NAME="Ubuntu 24.04.2 LTS"
-NAME="Ubuntu"
-VERSION_ID="24.04"
-VERSION="24.04.2 LTS (Noble Numbat)"
-VERSION_CODENAME=noble
-ID=ubuntu
-ID_LIKE=debian
-HOME_URL="https://www.ubuntu.com/"
-SUPPORT_URL="https://help.ubuntu.com/"
-BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
-PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
-UBUNTU_CODENAME=noble
-LOGO=ubuntu-logo
-root@localhost:~# uname -a
-Linux localhost.localdomain 6.8.0-64-generic #67-Ubuntu SMP PREEMPT_DYNAMIC Sun Jun 15 20:23:31 UTC 2025 x86_64 x86_64 x86_64 GNU/Linux
+Server:
+ Containers: 1
+  Running: 0
+  Paused: 0
+  Stopped: 1
+ Images: 1
+ Server Version: 28.0.1
+ Storage Driver: overlay2
+  Backing Filesystem: extfs
+  Supports d_type: true
+  Using metacopy: false
+  Native Overlay Diff: true
+  userxattr: false
+ Logging Driver: json-file
+ Cgroup Driver: systemd
+ Cgroup Version: 2
+ Plugins:
+  Volume: local
+  Network: bridge host ipvlan macvlan null overlay
+  Log: awslogs fluentd gcplogs gelf journald json-file local splunk syslog
+ Swarm: inactive
+ Runtimes: io.containerd.runc.v2 nvidia runc
+ Default Runtime: runc
+ Init Binary: docker-init
+ containerd version: bcc810d6b9066471b0b6fa75f557a15a1cbf31bb
+ runc version: v1.2.4-0-g6c52b3f
+ init version: de40ad0
+ Security Options:
+  apparmor
+  seccomp
+   Profile: builtin
+  cgroupns
+ Kernel Version: 6.8.0-64-generic
+ Operating System: Ubuntu 24.04.2 LTS
+ OSType: linux
+ Architecture: x86_64
+ CPUs: 2
+ Total Memory: 1.922GiB
+ Name: nvidia-container-toolkit-1-17-5
+ ID: b654d216-c687-4559-aa6b-0310db323f7f
+ Docker Root Dir: /var/lib/docker
+ Debug Mode: false
+ Experimental: false
+ Insecure Registries:
+  ::1/128
+  127.0.0.0/8
+ Live Restore Enabled: false
 ```
 
 ## build
@@ -134,5 +153,5 @@ make all DIR=nvidia-container-toolkit/v1.17.5
 for developers:
 
 ```dockerfile
-FROM ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.17.5_v0.1.0
+FROM ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.17.5_v0.2.0
 ```
