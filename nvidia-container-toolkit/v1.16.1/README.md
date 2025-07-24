@@ -1,22 +1,22 @@
-# nvidia-container-toolkit v1.16.0
+# nvidia-container-toolkit v1.16.1
 
 * dqd:
-  * ssst0n3/docker_archive:nvidia-container-toolkit-v1.16.0 -> ssst0n3/docker_archive:nvidia-container-toolkit-v1.16.0_v0.1.0
-  * ssst0n3/docker_archive:nvidia-container-toolkit-v1.16.0_v0.1.0
+  * ssst0n3/docker_archive:nvidia-container-toolkit-v1.16.1 -> ssst0n3/docker_archive:nvidia-container-toolkit-v1.16.1_v0.1.0
+  * ssst0n3/docker_archive:nvidia-container-toolkit-v1.16.1_v0.1.0
 * ctr:
-  * ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.16.0 -> ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.16.0_v0.1.0
-  * ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.16.0_v0.1.0
+  * ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.16.1 -> ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.16.1_v0.1.0
+  * ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.16.1_v0.1.0
 
 ## usage
 
 ```shell
-$ cd nvidia-container-toolkit/v1.16.0
+$ cd nvidia-container-toolkit/v1.16.1
 $ docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
 ```
 
 ```shell
 $ ./ssh
-root@nvidia-container-toolkit-1-16-0:~# docker run -ti --runtime=nvidia --gpus=all busybox
+root@nvidia-container-toolkit-1-16-1:~# docker run -ti --runtime=nvidia --gpus=all busybox
 Unable to find image 'busybox:latest' locally
 latest: Pulling from library/busybox
 90b9666d4aed: Pull complete 
@@ -27,25 +27,25 @@ Status: Downloaded newer image for busybox:latest
 
 ```shell
 $ ./ssh
-root@nvidia-container-toolkit-1-16-0:~# nvidia-container-toolkit --version
-NVIDIA Container Runtime Hook version 1.16.0
-commit: c5c124b88298f520a94e4d6046ab02f643d65436
-root@nvidia-container-toolkit-1-16-0:~# lsmod |grep fake
+root@nvidia-container-toolkit-1-16-1:~# nvidia-container-toolkit --version
+NVIDIA Container Runtime Hook version 1.16.1
+commit: a470818ba7d9166be282cd0039dd2fc9b0a34d73
+root@nvidia-container-toolkit-1-16-1:~# lsmod |grep fake
 fake_nvidia_driver     12288  0
-root@nvidia-container-toolkit-1-16-0:~# ls -lah /usr/local/lib/libnvidia-ml.so.1
--rwxr-xr-x 1 root root 22K Jul 24 06:55 /usr/local/lib/libnvidia-ml.so.1
-root@nvidia-container-toolkit-1-16:~# systemctl status fake-nvidia-mknod
+root@nvidia-container-toolkit-1-16-1:~# ls -lah /usr/local/lib/libnvidia-ml.so.1
+-rwxr-xr-x 1 root root 22K Jul 24 07:16 /usr/local/lib/libnvidia-ml.so.1
+root@nvidia-container-toolkit-1-16-1:~# systemctl status fake-nvidia-mknod
 ○ fake-nvidia-mknod.service - Create device nodes for fake nvidia driver
      Loaded: loaded (/etc/systemd/system/fake-nvidia-mknod.service; enabled; preset: enabled)
-     Active: inactive (dead) since Thu 2025-07-24 06:59:23 UTC; 44s ago
-    Process: 619 ExecStart=/usr/local/bin/fake-nvidia-mknod.sh (code=exited, status=0/SUCCESS)
-   Main PID: 619 (code=exited, status=0/SUCCESS)
-        CPU: 7ms
+     Active: inactive (dead) since Thu 2025-07-24 07:25:39 UTC; 51s ago
+    Process: 655 ExecStart=/usr/local/bin/fake-nvidia-mknod.sh (code=exited, status=0/SUCCESS)
+   Main PID: 655 (code=exited, status=0/SUCCESS)
+        CPU: 8ms
 
-Jul 24 06:59:23 nvidia-container-toolkit-1-16.0 systemd[1]: Starting fake-nvidia-mknod.service - Create device nodes for fake nvidia driver...
-Jul 24 06:59:23 nvidia-container-toolkit-1-16.0 systemd[1]: fake-nvidia-mknod.service: Deactivated successfully.
-Jul 24 06:59:23 nvidia-container-toolkit-1-16.0 systemd[1]: Finished fake-nvidia-mknod.service - Create device nodes for fake nvidia driver.
-root@nvidia-container-toolkit-1-16-0:~# nvidia-container-cli info
+Jul 24 07:25:39 nvidia-container-toolkit-1-16-1 systemd[1]: Starting fake-nvidia-mknod.service - Create device nodes for fake nvidia driver...
+Jul 24 07:25:39 nvidia-container-toolkit-1-16-1 systemd[1]: fake-nvidia-mknod.service: Deactivated successfully.
+Jul 24 07:25:39 nvidia-container-toolkit-1-16-1 systemd[1]: Finished fake-nvidia-mknod.service - Create device nodes for fake nvidia driver.
+root@nvidia-container-toolkit-1-16-1:~# nvidia-container-cli info
 NVRM version:   535.104.05
 CUDA version:   12.2
 
@@ -80,17 +80,17 @@ Brand:          Tesla
 GPU UUID:       GPU-3-FAKE-UUID
 Bus Location:   00000000:00:00.0
 Architecture:   7.5
-root@nvidia-container-toolkit-1-16-0:~# docker info
+root@nvidia-container-toolkit-1-16-1:~# docker info
 Client: Docker Engine - Community
- Version:    27.0.3
+ Version:    27.1.0
  Context:    default
  Debug Mode: false
  Plugins:
   buildx: Docker Buildx (Docker Inc.)
-    Version:  v0.24.0
+    Version:  v0.16.1
     Path:     /usr/libexec/docker/cli-plugins/docker-buildx
   compose: Docker Compose (Docker Inc.)
-    Version:  v2.28.1
+    Version:  v2.29.0
     Path:     /usr/libexec/docker/cli-plugins/docker-compose
 
 Server:
@@ -99,7 +99,7 @@ Server:
   Paused: 0
   Stopped: 1
  Images: 1
- Server Version: 27.0.3
+ Server Version: 27.1.0
  Storage Driver: overlay2
   Backing Filesystem: extfs
   Supports d_type: true
@@ -117,7 +117,7 @@ Server:
  Runtimes: io.containerd.runc.v2 nvidia runc
  Default Runtime: runc
  Init Binary: docker-init
- containerd version: ae71819c4f5e67bb4d5ae76a6b735f29cc25774e
+ containerd version: 8fc6bcff51318944179630522a095cc9dbf9f353
  runc version: v1.1.13-0-g58aa920
  init version: de40ad0
  Security Options:
@@ -131,8 +131,8 @@ Server:
  Architecture: x86_64
  CPUs: 2
  Total Memory: 1.922GiB
- Name: nvidia-container-toolkit-1-16.0
- ID: 6545bb60-aa37-4ec3-a452-c6f1e57cf147
+ Name: nvidia-container-toolkit-1-16-1
+ ID: be7040e2-bb00-41fd-bce3-96d551a23fdb
  Docker Root Dir: /var/lib/docker
  Debug Mode: false
  Experimental: false
@@ -144,11 +144,11 @@ Server:
 ## build
 
 ```shell
-make all DIR=nvidia-container-toolkit/v1.16.0
+make all DIR=nvidia-container-toolkit/v1.16.1
 ```
 
 for developers:
 
 ```dockerfile
-FROM ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.16.0_v0.1.0
+FROM ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.16.1_v0.1.0
 ```
