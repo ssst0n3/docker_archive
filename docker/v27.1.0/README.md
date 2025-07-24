@@ -1,49 +1,94 @@
 # docker v27.1.0
 
 * dqd:
-  * ssst0n3/docker_archive:docker-v27.1.0 -> ssst0n3/docker_archive:docker-v27.1.0_v0.1.0
+  * ssst0n3/docker_archive:docker-v27.1.0 -> ssst0n3/docker_archive:docker-v27.1.0_v0.2.0
+  * ssst0n3/docker_archive:docker-v27.1.0_v0.2.0
   * ssst0n3/docker_archive:docker-v27.1.0_v0.1.0
 * ctr:
-  * ssst0n3/docker_archive:ctr_docker-v27.1.0 -> ssst0n3/docker_archive:ctr_docker-v27.1.0_v0.1.0
+  * ssst0n3/docker_archive:ctr_docker-v27.1.0 -> ssst0n3/docker_archive:ctr_docker-v27.1.0_v0.2.0
+  * ssst0n3/docker_archive:ctr_docker-v27.1.0_v0.2.0: bump the base image
   * ssst0n3/docker_archive:ctr_docker-v27.1.0_v0.1.0
 
 ## usage
 
 ```shell
-cd docker/v27.1.0
-docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
-ssh -p 27100 root@127.0.0.1
+$ cd docker/v27.1.0
+$ docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
+$ ./ssh
 ```
 
 ```shell
-root@localhost:~# docker version
-Client: Docker Engine - Community
- Version:           27.1.0
- API version:       1.46
- Go version:        go1.21.12
- Git commit:        6312585
- Built:             Fri Jul 19 17:42:42 2024
- OS/Arch:           linux/amd64
- Context:           default
+root@docker-27-1-0:~# docker run -ti hello-world
+Unable to find image 'hello-world:latest' locally
+latest: Pulling from library/hello-world
+e6590344b1a5: Pull complete 
+Digest: sha256:ec153840d1e635ac434fab5e377081f17e0e15afab27beb3f726c3265039cfff
+Status: Downloaded newer image for hello-world:latest
 
-Server: Docker Engine - Community
- Engine:
-  Version:          27.1.0
-  API version:      1.46 (minimum version 1.24)
-  Go version:       go1.21.12
-  Git commit:       a21b1a2
-  Built:            Fri Jul 19 17:42:42 2024
-  OS/Arch:          linux/amd64
-  Experimental:     false
- containerd:
-  Version:          1.7.20
-  GitCommit:        8fc6bcff51318944179630522a095cc9dbf9f353
- runc:
-  Version:          1.1.13
-  GitCommit:        v1.1.13-0-g58aa920
- docker-init:
-  Version:          0.19.0
-  GitCommit:        de40ad0
+Hello from Docker!
+...
+```
+
+```shell
+root@docker-27-1-0:~# docker info
+Client: Docker Engine - Community
+ Version:    27.1.0
+ Context:    default
+ Debug Mode: false
+ Plugins:
+  buildx: Docker Buildx (Docker Inc.)
+    Version:  v0.16.1
+    Path:     /usr/libexec/docker/cli-plugins/docker-buildx
+  compose: Docker Compose (Docker Inc.)
+    Version:  v2.29.0
+    Path:     /usr/libexec/docker/cli-plugins/docker-compose
+
+Server:
+ Containers: 1
+  Running: 0
+  Paused: 0
+  Stopped: 1
+ Images: 1
+ Server Version: 27.1.0
+ Storage Driver: overlay2
+  Backing Filesystem: extfs
+  Supports d_type: true
+  Using metacopy: false
+  Native Overlay Diff: true
+  userxattr: false
+ Logging Driver: json-file
+ Cgroup Driver: systemd
+ Cgroup Version: 2
+ Plugins:
+  Volume: local
+  Network: bridge host ipvlan macvlan null overlay
+  Log: awslogs fluentd gcplogs gelf journald json-file local splunk syslog
+ Swarm: inactive
+ Runtimes: io.containerd.runc.v2 runc
+ Default Runtime: runc
+ Init Binary: docker-init
+ containerd version: 8fc6bcff51318944179630522a095cc9dbf9f353
+ runc version: v1.1.13-0-g58aa920
+ init version: de40ad0
+ Security Options:
+  apparmor
+  seccomp
+   Profile: builtin
+  cgroupns
+ Kernel Version: 6.8.0-64-generic
+ Operating System: Ubuntu 24.04.2 LTS
+ OSType: linux
+ Architecture: x86_64
+ CPUs: 2
+ Total Memory: 1.922GiB
+ Name: docker-27-1-0
+ ID: f67b4d10-b77f-4a40-b501-ebe1e6bc5b5b
+ Docker Root Dir: /var/lib/docker
+ Debug Mode: false
+ Experimental: false
+ Insecure Registries:
+  127.0.0.0/8
+ Live Restore Enabled: false
 ```
 
 ## build
@@ -55,5 +100,5 @@ make all DIR=docker/v27.1.0
 for developers:
 
 ```dockerfile
-FROM ssst0n3/docker_archive:ctr_docker-v27.1.0_v0.1.0
+FROM ssst0n3/docker_archive:ctr_docker-v27.1.0_v0.2.0
 ```
