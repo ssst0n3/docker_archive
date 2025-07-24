@@ -1686,3 +1686,11 @@ Host docker-v27.3.1
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
 
+Host nvidia-container-toolkit-v1.16.2
+    Hostname 127.0.0.1
+    Port 11620
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
