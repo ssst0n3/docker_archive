@@ -1,0 +1,45 @@
+ARG HOSTNAME=nvidia-container-toolkit-1-17-0-rc-1
+ARG VERSION_NCT_PKG=1.17.0~rc.1-1
+ARG VERSION_FAKE_NVIDIA=0.6.0
+ARG VERSION_DOCKER=27.3.1
+ARG VERSION_KERNEL=6.8.0-64-generic
+ARG VERSION_IMAGE=0.1.0
+ARG BASE_IMAGE=ssst0n3/docker_archive:ctr_docker-v${VERSION_DOCKER}
+ARG URL_ARTIFACT_FAKE=https://github.com/ssst0n3/fake-nvidia/archive/refs/tags/v${VERSION_FAKE_NVIDIA}.tar.gz
+
+FROM ${BASE_IMAGE}_v${VERSION_IMAGE} AS builder
+ARG VERSION_KERNEL
+RUN apt update && \
+    apt install -y build-essential linux-headers-${VERSION_KERNEL}
+
+FROM builder AS fake-nvidia
+ARG VERSION_FAKE_NVIDIA
+ARG VERSION_KERNEL
+ARG URL_ARTIFACT_FAKE
+ADD ${URL_ARTIFACT_FAKE} /tmp/fake-nvidia.tar.gz
+RUN tar -xzf /tmp/fake-nvidia.tar.gz -C /tmp && \
+    mv /tmp/fake-nvidia-${VERSION_FAKE_NVIDIA} /usr/local/fake-nvidia && \
+    rm -rf /tmp/fake-nvidia.tar.gz && \
+    cd /usr/local/fake-nvidia && \
+    KERNEL_RELEASE=${VERSION_KERNEL} make install && \
+    ./mknod.sh
+
+FROM fake-nvidia AS nvidia-container-toolkit
+ARG VERSION_NCT_PKG
+RUN curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | \
+    gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg && \
+    curl -s -L https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list | \
+    sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' | \
+    tee /etc/apt/sources.list.d/nvidia-container-toolkit.list && \
+    sed -i -e '/experimental/ s/^#//g' /etc/apt/sources.list.d/nvidia-container-toolkit.list
+RUN apt-get update && \
+    apt-get install -y \
+      nvidia-container-toolkit=${VERSION_NCT_PKG} \
+      nvidia-container-toolkit-base=${VERSION_NCT_PKG} \
+      libnvidia-container-tools=${VERSION_NCT_PKG} \
+      libnvidia-container1=${VERSION_NCT_PKG}
+RUN nvidia-ctk runtime configure --runtime=docker
+
+FROM nvidia-container-toolkit
+ARG HOSTNAME
+RUN echo ${HOSTNAME} > /etc/hostname
