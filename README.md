@@ -113,6 +113,7 @@ root@localhost:~# docker version
 | [nvidia-container-toolkit-v1.17.6-debug](./nvidia-container-toolkit/v1.17.6-debug/) | v0.1.0 | |  |
 | [nvidia-container-toolkit-v1.17.6](./nvidia-container-toolkit/v1.17.6/) | v0.1.0 | |  |
 | [nvidia-container-toolkit-v1.17.5](./nvidia-container-toolkit/v1.17.5/) | v0.1.0 | |  |
+| [nvidia-container-toolkit-v1.17.1](./nvidia-container-toolkit/v1.17.1/) | v0.1.0 | |  |
 | [nvidia-container-toolkit-v1.17.0](./nvidia-container-toolkit/v1.17.0/) | v0.1.0 | |  |
 | [nvidia-container-toolkit-v1.17.0-rc.2](./nvidia-container-toolkit/v1.17.0-rc.2/) | v0.1.0 | |  |
 | [nvidia-container-toolkit-v1.17.0-rc.1](./nvidia-container-toolkit/v1.17.0-rc.1/) | v0.1.0 | |  |
