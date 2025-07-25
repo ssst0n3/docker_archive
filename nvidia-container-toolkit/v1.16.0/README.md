@@ -1,10 +1,12 @@
 # nvidia-container-toolkit v1.16.0
 
 * dqd:
-  * ssst0n3/docker_archive:nvidia-container-toolkit-v1.16.0 -> ssst0n3/docker_archive:nvidia-container-toolkit-v1.16.0_v0.1.0
+  * ssst0n3/docker_archive:nvidia-container-toolkit-v1.16.0 -> ssst0n3/docker_archive:nvidia-container-toolkit-v1.16.0_v0.2.0
+  * ssst0n3/docker_archive:nvidia-container-toolkit-v1.16.0_v0.2.0
   * ssst0n3/docker_archive:nvidia-container-toolkit-v1.16.0_v0.1.0
 * ctr:
-  * ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.16.0 -> ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.16.0_v0.1.0
+  * ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.16.0 -> ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.16.0_v0.2.0
+  * ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.16.0_v0.2.0: CDI compatible
   * ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.16.0_v0.1.0
 
 ## usage
@@ -12,41 +14,153 @@
 ```shell
 $ cd nvidia-container-toolkit/v1.16.0
 $ docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
+$ ./ssh
 ```
 
+### default mode(legacy)
+
 ```shell
-$ ./ssh
-root@nvidia-container-toolkit-1-16-0:~# docker run -ti --runtime=nvidia --gpus=all busybox
-Unable to find image 'busybox:latest' locally
-latest: Pulling from library/busybox
-90b9666d4aed: Pull complete 
-Digest: sha256:f85340bf132ae937d2c2a763b8335c9bab35d6e8293f70f606b9c6178d84f42b
-Status: Downloaded newer image for busybox:latest
-/ # 
+root@nvidia-container-toolkit-1-16-0:~# docker run -tid --runtime=nvidia --gpus=all busybox
+c41276fda6800866366b3160b36fe46294a2e5bfc808da1fdce1ddb38cad4053
+root@nvidia-container-toolkit-1-16-0:~# cat /run/containerd/io.containerd.runtime.v2.task/moby/c41276fda6800866366b3160b36fe46294a2e5bfc808da1fdce1ddb38cad4053/config.json | jq .hooks
+{
+  "prestart": [
+    {
+      "path": "/usr/bin/nvidia-container-runtime-hook",
+      "args": [
+        "nvidia-container-runtime-hook",
+        "prestart"
+      ],
+      "env": [
+        ...
+      ]
+    },
+    {
+      "path": "/proc/432/exe",
+      "args": [
+        "libnetwork-setkey",
+        ...
+      ],
+      "env": [
+        ...s
+      ]
+    }
+  ]
+}
 ```
 
-```shell
-$ ./ssh
-root@nvidia-container-toolkit-1-16-0:~# nvidia-container-toolkit --version
-NVIDIA Container Runtime Hook version 1.16.0
-commit: c5c124b88298f520a94e4d6046ab02f643d65436
-root@nvidia-container-toolkit-1-16-0:~# lsmod |grep fake
-fake_nvidia_driver     12288  0
-root@nvidia-container-toolkit-1-16-0:~# ls -lah /usr/local/lib/libnvidia-ml.so.1
--rwxr-xr-x 1 root root 22K Jul 24 06:55 /usr/local/lib/libnvidia-ml.so.1
-root@nvidia-container-toolkit-1-16:~# systemctl status fake-nvidia-mknod
-○ fake-nvidia-mknod.service - Create device nodes for fake nvidia driver
-     Loaded: loaded (/etc/systemd/system/fake-nvidia-mknod.service; enabled; preset: enabled)
-     Active: inactive (dead) since Thu 2025-07-24 06:59:23 UTC; 44s ago
-    Process: 619 ExecStart=/usr/local/bin/fake-nvidia-mknod.sh (code=exited, status=0/SUCCESS)
-   Main PID: 619 (code=exited, status=0/SUCCESS)
-        CPU: 7ms
+### CDI mode
 
-Jul 24 06:59:23 nvidia-container-toolkit-1-16.0 systemd[1]: Starting fake-nvidia-mknod.service - Create device nodes for fake nvidia driver...
-Jul 24 06:59:23 nvidia-container-toolkit-1-16.0 systemd[1]: fake-nvidia-mknod.service: Deactivated successfully.
-Jul 24 06:59:23 nvidia-container-toolkit-1-16.0 systemd[1]: Finished fake-nvidia-mknod.service - Create device nodes for fake nvidia driver.
+```shell
+root@nvidia-container-toolkit-1-16-0:~# nvidia-ctk cdi generate --output=/etc/cdi/nvidia.yaml
+INFO[0000] Using /usr/local/lib/libnvidia-ml.so.1       
+INFO[0000] Auto-detected mode as 'nvml'                 
+INFO[0000] Selecting /dev/nvidia0 as /dev/nvidia0       
+WARN[0000] Failed to evaluate symlink /dev/dri/by-path/pci--card; ignoring 
+WARN[0000] Failed to evaluate symlink /dev/dri/by-path/pci--render; ignoring 
+INFO[0000] Selecting /dev/nvidia1 as /dev/nvidia1       
+WARN[0000] Failed to evaluate symlink /dev/dri/by-path/pci--card; ignoring 
+WARN[0000] Failed to evaluate symlink /dev/dri/by-path/pci--render; ignoring 
+INFO[0000] Selecting /dev/nvidia2 as /dev/nvidia2       
+WARN[0000] Failed to evaluate symlink /dev/dri/by-path/pci--card; ignoring 
+WARN[0000] Failed to evaluate symlink /dev/dri/by-path/pci--render; ignoring 
+INFO[0000] Selecting /dev/nvidia3 as /dev/nvidia3       
+WARN[0000] Failed to evaluate symlink /dev/dri/by-path/pci--card; ignoring 
+WARN[0000] Failed to evaluate symlink /dev/dri/by-path/pci--render; ignoring 
+INFO[0000] Using driver version 575.57.08               
+WARN[0000] Could not locate /dev/nvidia-modeset: pattern /dev/nvidia-modeset not found 
+WARN[0000] Could not locate /dev/nvidia-uvm-tools: pattern /dev/nvidia-uvm-tools not found 
+WARN[0000] Could not locate /dev/nvidia-uvm: pattern /dev/nvidia-uvm not found 
+INFO[0000] Selecting /dev/nvidiactl as /dev/nvidiactl   
+WARN[0000] Could not locate libnvidia-egl-gbm.so.*.*: pattern libnvidia-egl-gbm.so.*.* not found
+64-bit library libnvidia-egl-gbm.so.*.*: not found 
+WARN[0000] Could not locate libnvidia-egl-wayland.so.*.*: pattern libnvidia-egl-wayland.so.*.* not found
+64-bit library libnvidia-egl-wayland.so.*.*: not found 
+WARN[0000] Could not locate libnvidia-allocator.so.575.57.08: pattern libnvidia-allocator.so.575.57.08 not found
+64-bit library libnvidia-allocator.so.575.57.08: not found 
+WARN[0000] Could not locate libnvidia-vulkan-producer.so.575.57.08: pattern libnvidia-vulkan-producer.so.575.57.08 not found
+64-bit library libnvidia-vulkan-producer.so.575.57.08: not found 
+WARN[0000] Could not locate nvidia_drv.so: pattern nvidia_drv.so not found 
+WARN[0000] Could not locate libglxserver_nvidia.so.575.57.08: pattern libglxserver_nvidia.so.575.57.08 not found 
+WARN[0000] Could not locate glvnd/egl_vendor.d/10_nvidia.json: pattern glvnd/egl_vendor.d/10_nvidia.json not found 
+WARN[0000] Could not locate egl/egl_external_platform.d/15_nvidia_gbm.json: pattern egl/egl_external_platform.d/15_nvidia_gbm.json not found 
+WARN[0000] Could not locate egl/egl_external_platform.d/10_nvidia_wayland.json: pattern egl/egl_external_platform.d/10_nvidia_wayland.json not found 
+WARN[0000] Could not locate nvidia/nvoptix.bin: pattern nvidia/nvoptix.bin not found 
+WARN[0000] Could not locate X11/xorg.conf.d/10-nvidia.conf: pattern X11/xorg.conf.d/10-nvidia.conf not found 
+WARN[0000] Could not locate X11/xorg.conf.d/nvidia-drm-outputclass.conf: pattern X11/xorg.conf.d/nvidia-drm-outputclass.conf not found 
+WARN[0000] Could not locate vulkan/icd.d/nvidia_icd.json: pattern vulkan/icd.d/nvidia_icd.json not found
+pattern vulkan/icd.d/nvidia_icd.json not found 
+WARN[0000] Could not locate vulkan/icd.d/nvidia_layers.json: pattern vulkan/icd.d/nvidia_layers.json not found
+pattern vulkan/icd.d/nvidia_layers.json not found 
+WARN[0000] Could not locate vulkan/implicit_layer.d/nvidia_layers.json: pattern vulkan/implicit_layer.d/nvidia_layers.json not found
+pattern vulkan/implicit_layer.d/nvidia_layers.json not found 
+INFO[0000] Selecting /usr/lib/x86_64-linux-gnu/libcuda.so.575.57.08 as /usr/lib/x86_64-linux-gnu/libcuda.so.575.57.08 
+WARN[0000] Could not locate /nvidia-persistenced/socket: pattern /nvidia-persistenced/socket not found 
+WARN[0000] Could not locate /nvidia-fabricmanager/socket: pattern /nvidia-fabricmanager/socket not found 
+WARN[0000] Could not locate /tmp/nvidia-mps: pattern /tmp/nvidia-mps not found 
+WARN[0000] Could not locate nvidia/575.57.08/gsp*.bin: pattern nvidia/575.57.08/gsp*.bin not found 
+WARN[0000] Could not locate nvidia-smi: pattern nvidia-smi not found 
+WARN[0000] Could not locate nvidia-debugdump: pattern nvidia-debugdump not found 
+WARN[0000] Could not locate nvidia-persistenced: pattern nvidia-persistenced not found 
+WARN[0000] Could not locate nvidia-cuda-mps-control: pattern nvidia-cuda-mps-control not found 
+WARN[0000] Could not locate nvidia-cuda-mps-server: pattern nvidia-cuda-mps-server not found 
+WARN[0000] Could not locate libnvidia-egl-gbm.so.*.*: pattern libnvidia-egl-gbm.so.*.* not found
+64-bit library libnvidia-egl-gbm.so.*.*: not found 
+WARN[0000] Could not locate libnvidia-egl-wayland.so.*.*: pattern libnvidia-egl-wayland.so.*.* not found
+64-bit library libnvidia-egl-wayland.so.*.*: not found 
+WARN[0000] Could not locate libnvidia-allocator.so.575.57.08: pattern libnvidia-allocator.so.575.57.08 not found
+64-bit library libnvidia-allocator.so.575.57.08: not found 
+WARN[0000] Could not locate libnvidia-vulkan-producer.so.575.57.08: pattern libnvidia-vulkan-producer.so.575.57.08 not found
+64-bit library libnvidia-vulkan-producer.so.575.57.08: not found 
+WARN[0000] Could not locate nvidia_drv.so: pattern nvidia_drv.so not found 
+WARN[0000] Could not locate libglxserver_nvidia.so.575.57.08: pattern libglxserver_nvidia.so.575.57.08 not found 
+INFO[0000] Generated CDI spec with version 0.8.0        
+root@nvidia-container-toolkit-1-16-0:~# nvidia-ctk cdi list
+INFO[0000] Found 9 CDI devices                          
+nvidia.com/gpu=0
+nvidia.com/gpu=1
+nvidia.com/gpu=2
+nvidia.com/gpu=3
+nvidia.com/gpu=GPU-0-FAKE-UUID
+nvidia.com/gpu=GPU-1-FAKE-UUID
+nvidia.com/gpu=GPU-2-FAKE-UUID
+nvidia.com/gpu=GPU-3-FAKE-UUID
+nvidia.com/gpu=all
+root@nvidia-container-toolkit-1-16-0:~# docker run -tid --runtime=nvidia -e NVIDIA_VISIBLE_DEVICES=nvidia.com/gpu=all busybox
+c7029f6b2a709f11afc65eb49cdee83eecf40fd79d3bc1615bb45c7914943460
+root@nvidia-container-toolkit-1-16-0:~# cat /run/containerd/io.containerd.runtime.v2.task/moby/c7029f6b2a709f11afc65eb49cdee83eecf40fd79d3bc1615bb45c7914943460/config.json | jq .hooks
+{
+  "prestart": [
+    {
+      "path": "/proc/432/exe",
+      "args": [
+        "libnetwork-setkey",
+        ...
+      ],
+      "env": [
+        "TRACEPARENT=00-f116d5114aa4cf0ca685372cbe5427d5-c0f522b4a6d3fb1a-01"
+      ]
+    }
+  ],
+  "createContainer": [
+    {
+      "path": "/usr/bin/nvidia-cdi-hook",
+      "args": [
+        "nvidia-cdi-hook",
+        "update-ldcache",
+        "--folder",
+        "/usr/lib/x86_64-linux-gnu"
+      ]
+    }
+  ]
+}
+```
+
+### fake-nvidia
+
+```shell
 root@nvidia-container-toolkit-1-16-0:~# nvidia-container-cli info
-NVRM version:   535.104.05
+NVRM version:   575.57.08
 CUDA version:   12.2
 
 Device Index:   0
@@ -80,6 +194,29 @@ Brand:          Tesla
 GPU UUID:       GPU-3-FAKE-UUID
 Bus Location:   00000000:00:00.0
 Architecture:   7.5
+root@nvidia-container-toolkit-1-16-0:~# lsmod |grep fake
+fake_nvidia_driver     12288  0
+root@nvidia-container-toolkit-1-16-0:~# ls -lah /usr/local/lib/libnvidia-ml.so.1
+-rwxr-xr-x 1 root root 22K Jul 25 11:53 /usr/local/lib/libnvidia-ml.so.1
+root@nvidia-container-toolkit-1-16-0:~# systemctl status fake-nvidia-mknod
+○ fake-nvidia-mknod.service - Create device nodes for fake nvidia driver
+     Loaded: loaded (/etc/systemd/system/fake-nvidia-mknod.service; enabled; preset: enabled)
+     Active: inactive (dead) since Fri 2025-07-25 12:01:24 UTC; 2min 30s ago
+    Process: 655 ExecStart=/usr/local/bin/fake-nvidia-mknod.sh (code=exited, status=0/SUCCESS)
+   Main PID: 655 (code=exited, status=0/SUCCESS)
+        CPU: 19ms
+
+Jul 25 12:01:24 nvidia-container-toolkit-1-16-0 systemd[1]: Starting fake-nvidia-mknod.service - Create device nodes for fake nvidia driver...
+Jul 25 12:01:24 nvidia-container-toolkit-1-16-0 systemd[1]: fake-nvidia-mknod.service: Deactivated successfully.
+Jul 25 12:01:24 nvidia-container-toolkit-1-16-0 systemd[1]: Finished fake-nvidia-mknod.service - Create device nodes for fake nvidia driver.
+```
+
+### environment details
+
+```shell
+root@nvidia-container-toolkit-1-16-0:~# nvidia-container-toolkit --version
+NVIDIA Container Runtime Hook version 1.16.0
+commit: c5c124b88298f520a94e4d6046ab02f643d65436
 root@nvidia-container-toolkit-1-16-0:~# docker info
 Client: Docker Engine - Community
  Version:    27.0.3
@@ -94,10 +231,10 @@ Client: Docker Engine - Community
     Path:     /usr/libexec/docker/cli-plugins/docker-compose
 
 Server:
- Containers: 1
-  Running: 0
+ Containers: 2
+  Running: 2
   Paused: 0
-  Stopped: 1
+  Stopped: 0
  Images: 1
  Server Version: 27.0.3
  Storage Driver: overlay2
@@ -114,7 +251,7 @@ Server:
   Network: bridge host ipvlan macvlan null overlay
   Log: awslogs fluentd gcplogs gelf journald json-file local splunk syslog
  Swarm: inactive
- Runtimes: io.containerd.runc.v2 nvidia runc
+ Runtimes: runc io.containerd.runc.v2 nvidia
  Default Runtime: runc
  Init Binary: docker-init
  containerd version: ae71819c4f5e67bb4d5ae76a6b735f29cc25774e
@@ -131,8 +268,8 @@ Server:
  Architecture: x86_64
  CPUs: 2
  Total Memory: 1.922GiB
- Name: nvidia-container-toolkit-1-16.0
- ID: 6545bb60-aa37-4ec3-a452-c6f1e57cf147
+ Name: nvidia-container-toolkit-1-16-0
+ ID: 7229bf57-f336-4e35-81f1-73fecb0d9f11
  Docker Root Dir: /var/lib/docker
  Debug Mode: false
  Experimental: false
@@ -150,5 +287,5 @@ make all DIR=nvidia-container-toolkit/v1.16.0
 for developers:
 
 ```dockerfile
-FROM ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.16.0_v0.1.0
+FROM ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.16.0_v0.2.0
 ```
