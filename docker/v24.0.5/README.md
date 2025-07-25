@@ -1,0 +1,108 @@
+# docker v24.0.5
+
+* dqd:
+  * ssst0n3/docker_archive:docker-v24.0.5 -> ssst0n3/docker_archive:docker-v24.0.5_v0.1.0
+  * ssst0n3/docker_archive:docker-v24.0.5_v0.1.0
+* ctr:
+  * ssst0n3/docker_archive:ctr_docker-v24.0.5 -> ssst0n3/docker_archive:ctr_docker-v24.0.5_v0.1.0
+  * ssst0n3/docker_archive:ctr_docker-v24.0.5_v0.1.0
+
+## start up
+
+```shell
+$ cd docker/v24.0.5
+$ docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
+$ ./ssh
+```
+
+## usage
+
+```shell
+root@docker-24-0-5:~# docker run -ti hello-world
+Unable to find image 'hello-world:latest' locally
+latest: Pulling from library/hello-world
+e6590344b1a5: Pull complete 
+Digest: sha256:ec153840d1e635ac434fab5e377081f17e0e15afab27beb3f726c3265039cfff
+Status: Downloaded newer image for hello-world:latest
+
+Hello from Docker!
+...
+```
+
+## environment details
+
+```shell
+root@docker-24-0-5:~# docker info
+Client: Docker Engine - Community
+ Version:    24.0.5
+ Context:    default
+ Debug Mode: false
+ Plugins:
+  buildx: Docker Buildx (Docker Inc.)
+    Version:  v0.11.2
+    Path:     /usr/libexec/docker/cli-plugins/docker-buildx
+  compose: Docker Compose (Docker Inc.)
+    Version:  v2.20.2
+    Path:     /usr/libexec/docker/cli-plugins/docker-compose
+
+Server:
+ Containers: 1
+  Running: 0
+  Paused: 0
+  Stopped: 1
+ Images: 1
+ Server Version: 24.0.5
+ Storage Driver: overlay2
+  Backing Filesystem: extfs
+  Supports d_type: true
+  Using metacopy: false
+  Native Overlay Diff: true
+  userxattr: false
+ Logging Driver: json-file
+ Cgroup Driver: systemd
+ Cgroup Version: 2
+ Plugins:
+  Volume: local
+  Network: bridge host ipvlan macvlan null overlay
+  Log: awslogs fluentd gcplogs gelf journald json-file local logentries splunk syslog
+ Swarm: inactive
+ Runtimes: runc io.containerd.runc.v2
+ Default Runtime: runc
+ Init Binary: docker-init
+ containerd version: 3dce8eb055cbb6872793272b4f20ed16117344f8
+ runc version: v1.1.7-0-g860f061
+ init version: de40ad0
+ Security Options:
+  apparmor
+  seccomp
+   Profile: builtin
+  cgroupns
+ Kernel Version: 5.15.0-144-generic
+ Operating System: Ubuntu 22.04.5 LTS
+ OSType: linux
+ Architecture: x86_64
+ CPUs: 2
+ Total Memory: 1.918GiB
+ Name: docker-24-0-5
+ ID: f11bf162-1231-4d43-b332-bcc6a7175820
+ Docker Root Dir: /var/lib/docker
+ Debug Mode: false
+ Experimental: false
+ Insecure Registries:
+  127.0.0.0/8
+ Live Restore Enabled: false
+root@docker-24-0-5:~# containerd --version
+containerd containerd.io 1.6.21 3dce8eb055cbb6872793272b4f20ed16117344f8
+```
+
+## build
+
+```shell
+make all DIR=docker/v24.0.5
+```
+
+for developers:
+
+```dockerfile
+FROM ssst0n3/docker_archive:ctr_docker-v24.0.5_v0.1.0
+```
