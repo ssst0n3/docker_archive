@@ -14,12 +14,12 @@
 ```shell
 $ cd nvidia-container-toolkit/v1.17.6
 $ docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
+$ ./ssh
 ```
 
 ### default mode(legacy)
 
 ```shell
-$ ./ssh
 root@nvidia-container-toolkit-1-17-6:~# docker run -tid --runtime=nvidia --gpus=all busybox
 063880e64accb86049bc905a0eeba9aabf2c6a0797e7153f1492bd8a22508b9b
 root@nvidia-container-toolkit-1-17-6:~# cat /run/containerd/io.containerd.runtime.v2.task/moby/063880e64accb86049bc905a0eeba9aabf2c6a0797e7153f1492bd8a22508b9b/config.json | jq .hooks
@@ -175,7 +175,6 @@ root@nvidia-container-toolkit-1-17-6:~# cat /run/containerd/io.containerd.runtim
 ### fake-nvidia
 
 ```shell
-$ ./ssh
 root@nvidia-container-toolkit-1-17-6:~# nvidia-container-cli info
 NVRM version:   575.57.08
 CUDA version:   12.2
