@@ -124,6 +124,7 @@ root@localhost:~# docker version
 | [nvidia-container-toolkit-v1.16.1](./nvidia-container-toolkit/v1.16.1/) | v0.2.0 | |  |
 | [nvidia-container-toolkit-v1.16.0](./nvidia-container-toolkit/v1.16.0/) | v0.2.0 | |  |
 | [nvidia-container-toolkit-v1.14.0](./nvidia-container-toolkit/v1.14.0/) | v0.1.0 | |  |
+| [nvidia-container-toolkit-v1.13.0](./nvidia-container-toolkit/v1.13.0/) | v0.1.0 | |  |
 
 ### docker
 
