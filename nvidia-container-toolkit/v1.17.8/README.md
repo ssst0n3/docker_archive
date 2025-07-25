@@ -14,7 +14,7 @@
 ```shell
 $ cd nvidia-container-toolkit/v1.17.8
 $ docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
-$ ./SSH
+$ ./ssh
 ```
 
 ### default mode(legacy)
