@@ -1,7 +1,7 @@
-ARG HOSTNAME=docker-20-10-13
-ARG VERSION_DOCKER=20.10.13
-# https://github.com/moby/moby/blob/v20.10.13/hack/dockerfile/install/containerd.installer#L18
-ARG VERSION_CONTAINERD=1.5.10
+ARG HOSTNAME=docker-20-10-17
+ARG VERSION_DOCKER=20.10.17
+# https://github.com/moby/moby/blob/v20.10.17/hack/dockerfile/install/containerd.installer#L18
+ARG VERSION_CONTAINERD=1.6.6
 ARG VERSION_UBUNTU=22.04
 ARG BASE_IMAGE=ssst0n3/docker_archive:ctr_ubuntu-${VERSION_UBUNTU}
 ARG VERSION_IMAGE=0.2.0
