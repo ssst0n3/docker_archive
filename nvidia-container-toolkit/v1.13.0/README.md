@@ -255,5 +255,5 @@ make all DIR=nvidia-container-toolkit/v1.13.0
 for developers:
 
 ```dockerfile
-FROM ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.13.0_v0.2.0
+FROM ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.13.0_v0.1.0
 ```
