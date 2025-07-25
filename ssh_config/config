@@ -1758,3 +1758,11 @@ Host nvidia-container-toolkit-v1.17.4
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
 
+Host docker-v24.0.5
+    Hostname 127.0.0.1
+    Port 24050
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
