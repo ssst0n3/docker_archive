@@ -1,5 +1,6 @@
 ARG HOSTNAME=docker-24-0-5
 ARG VERSION_DOCKER=24.0.5
+# by date
 ARG VERSION_CONTAINERD=1.6.21
 # https://github.com/moby/moby/blob/v24.0.5/Dockerfile#L15
 ARG VERSION_BUILDX=0.11.2
