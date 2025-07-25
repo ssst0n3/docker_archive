@@ -48,7 +48,7 @@ root@nvidia-container-toolkit-1-10-0:~# cat /run/containerd/io.containerd.runtim
 
 ### CDI mode
 
-nvidia-container-toolkit v1.10.0 does not support CDI mode.
+nvidia-container-toolkit v1.10.0 has not support CDI mode yet.
 
 ### CSV mode
 
