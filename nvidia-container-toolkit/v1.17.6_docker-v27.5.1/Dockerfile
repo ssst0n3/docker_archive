@@ -1,7 +1,7 @@
 ARG HOSTNAME=nvidia-container-toolkit-1-17-6-docker-27-5-1
 ARG VERSION_NCT=1.17.6
 ARG VERSION_NCT_PKG=1.17.6-1
-ARG VERSION_FAKE_NVIDIA=0.7.0
+ARG VERSION_FAKE_NVIDIA=0.7.1
 ARG VERSION_DOCKER=27.5.1
 ARG VERSION_KERNEL=6.8.0-64-generic
 ARG VERSION_NVIDIA_DRIVER=575.57.08
@@ -28,8 +28,7 @@ RUN tar -xzf /tmp/fake-nvidia.tar.gz -C /tmp && \
     mv /tmp/fake-nvidia-${VERSION_FAKE_NVIDIA} /usr/local/fake-nvidia && \
     rm -rf /tmp/fake-nvidia.tar.gz && \
     cd /usr/local/fake-nvidia && \
-    KERNEL_RELEASE=${VERSION_KERNEL} NVIDIA_DRIVER_VERSION=${VERSION_NVIDIA_DRIVER} make install && \
-    ./mknod.sh
+    KERNEL_RELEASE=${VERSION_KERNEL} NVIDIA_DRIVER_VERSION=${VERSION_NVIDIA_DRIVER} make install
 COPY --from=cuda /usr/local/cuda-${VERSION_CUDA}/compat/libcuda.so.${VERSION_NVIDIA_DRIVER} /usr/local/lib/libcuda.so.${VERSION_NVIDIA_DRIVER}
 
 FROM fake-nvidia AS nvidia-container-toolkit
