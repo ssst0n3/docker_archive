@@ -1,11 +1,13 @@
 # nvidia-container-toolkit v1.17.6 debug
 
 * dqd:
-  * ssst0n3/docker_archive:nvidia-container-toolkit-v1.17.6-debug -> ssst0n3/docker_archive:nvidia-container-toolkit-v1.17.6-debug_v0.2.0
+  * ssst0n3/docker_archive:nvidia-container-toolkit-v1.17.6-debug -> ssst0n3/docker_archive:nvidia-container-toolkit-v1.17.6-debug_v0.3.0
+  * ssst0n3/docker_archive:nvidia-container-toolkit-v1.17.6-debug_v0.3.0
   * ssst0n3/docker_archive:nvidia-container-toolkit-v1.17.6-debug_v0.2.0
   * ssst0n3/docker_archive:nvidia-container-toolkit-v1.17.6-debug_v0.1.0
 * ctr:
-  * ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.17.6-debug -> ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.17.6-debug_v0.2.0
+  * ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.17.6-debug -> ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.17.6-debug_v0.3.0
+  * ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.17.6-debug_v0.2.0: bump fake-nvidia to v0.7.1
   * ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.17.6-debug_v0.2.0: bump the base image; setup hostname
   * ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.17.6-debug_v0.1.0
 
