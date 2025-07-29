@@ -1,10 +1,12 @@
 # nvidia-container-toolkit v1.12.0
 
 * dqd:
-  * ssst0n3/docker_archive:nvidia-container-toolkit-v1.12.0 -> ssst0n3/docker_archive:nvidia-container-toolkit-v1.12.0_v0.1.0
+  * ssst0n3/docker_archive:nvidia-container-toolkit-v1.12.0 -> ssst0n3/docker_archive:nvidia-container-toolkit-v1.12.0_v0.2.0
+  * ssst0n3/docker_archive:nvidia-container-toolkit-v1.12.0_v0.2.0
   * ssst0n3/docker_archive:nvidia-container-toolkit-v1.12.0_v0.1.0
 * ctr:
-  * ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.12.0 -> ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.12.0_v0.1.0
+  * ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.12.0 -> ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.12.0_v0.2.0
+  * ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.12.0_v0.2.0: bump fake-nvidia to v0.7.1
   * ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.12.0_v0.1.0
 
 ## usage
@@ -179,9 +181,6 @@ Jul 25 15:26:20 nvidia-container-toolkit-1-12-0 systemd[1]: Finished Create devi
 ### environment details
 
 ```shell
-root@nvidia-container-toolkit-1-12-0:~# nvidia-container-toolkit --version
-NVIDIA Container Runtime Hook version 1.12.0
-commit: 62bd015475656ef795cb0d59cc4030a6bd4a9526
 root@nvidia-container-toolkit-1-12-0:~# docker info
 Client:
  Context:    default
@@ -198,11 +197,11 @@ Client:
     Path:     /usr/libexec/docker/cli-plugins/docker-scan
 
 Server:
- Containers: 3
-  Running: 2
+ Containers: 1
+  Running: 0
   Paused: 0
   Stopped: 1
- Images: 2
+ Images: 1
  Server Version: 23.0.0
  Storage Driver: overlay2
   Backing Filesystem: extfs
@@ -229,14 +228,14 @@ Server:
   seccomp
    Profile: builtin
   cgroupns
- Kernel Version: 5.15.0-144-generic
+ Kernel Version: 5.15.0-151-generic
  Operating System: Ubuntu 22.04.5 LTS
  OSType: linux
  Architecture: x86_64
  CPUs: 2
  Total Memory: 1.918GiB
  Name: nvidia-container-toolkit-1-12-0
- ID: ef988b72-9264-43ca-b10e-6489c4dc7a2e
+ ID: d8e2a6d7-0cf9-49b1-b3d7-c2804d6e35ef
  Docker Root Dir: /var/lib/docker
  Debug Mode: false
  Registry: https://index.docker.io/v1/
@@ -244,9 +243,6 @@ Server:
  Insecure Registries:
   127.0.0.0/8
  Live Restore Enabled: false
-
-root@nvidia-container-toolkit-1-12-0:~# containerd --version
-containerd containerd.io 1.6.16 31aa4358a36870b21a992d3ad2bef29e1d693bec
 ```
 
 ## build
@@ -258,5 +254,5 @@ make all DIR=nvidia-container-toolkit/v1.12.0
 for developers:
 
 ```dockerfile
-FROM ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.12.0_v0.1.0
+FROM ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.12.0_v0.2.0
 ```
