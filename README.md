@@ -1,4 +1,4 @@
-# docker archive: Provide many versions of images of container's components
+# docker archive: images of container's components
 
 See all images listed in [dockerhub](https://hub.docker.com/repository/docker/ssst0n3/docker_archive/tags?page=1&ordering=last_updated).
 
