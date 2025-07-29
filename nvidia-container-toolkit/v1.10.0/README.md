@@ -1,10 +1,12 @@
 # nvidia-container-toolkit v1.10.0
 
 * dqd:
-  * ssst0n3/docker_archive:nvidia-container-toolkit-v1.10.0 -> ssst0n3/docker_archive:nvidia-container-toolkit-v1.10.0_v0.1.0
+  * ssst0n3/docker_archive:nvidia-container-toolkit-v1.10.0 -> ssst0n3/docker_archive:nvidia-container-toolkit-v1.10.0_v0.2.0
+  * ssst0n3/docker_archive:nvidia-container-toolkit-v1.10.0_v0.2.0
   * ssst0n3/docker_archive:nvidia-container-toolkit-v1.10.0_v0.1.0
 * ctr:
-  * ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.10.0 -> ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.10.0_v0.1.0
+  * ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.10.0 -> ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.10.0_v0.2.0
+  * ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.10.0_v0.2.0: bump fake-nvidia to v0.7.1
   * ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.10.0_v0.1.0
 
 ## usage
@@ -146,9 +148,6 @@ Jul 25 18:06:00 nvidia-container-toolkit-1-10-0 systemd[1]: Finished Create devi
 ### environment details
 
 ```shell
-root@nvidia-container-toolkit-1-10-0:~# nvidia-container-toolkit --version
-NVIDIA Container Runtime Hook version 1.10.0
-commit: 7cfd3bd
 root@nvidia-container-toolkit-1-10-0:~# docker info
 Client:
  Context:    default
@@ -159,10 +158,10 @@ Client:
   scan: Docker Scan (Docker Inc., v0.23.0)
 
 Server:
- Containers: 2
-  Running: 2
+ Containers: 1
+  Running: 0
   Paused: 0
-  Stopped: 0
+  Stopped: 1
  Images: 1
  Server Version: 20.10.17
  Storage Driver: overlay2
@@ -189,14 +188,14 @@ Server:
   seccomp
    Profile: default
   cgroupns
- Kernel Version: 5.15.0-144-generic
+ Kernel Version: 5.15.0-151-generic
  Operating System: Ubuntu 22.04.5 LTS
  OSType: linux
  Architecture: x86_64
  CPUs: 2
  Total Memory: 1.918GiB
  Name: nvidia-container-toolkit-1-10-0
- ID: MR5Y:7HYZ:GVT4:TMSF:6ORA:XAPM:5RFX:XQMT:3LIM:JEKL:7ACI:XBRG
+ ID: OFAH:ALEG:TCCW:5GPH:RVEB:7AUJ:TK6O:S5QT:O3CW:UCFT:2K3I:DMNS
  Docker Root Dir: /var/lib/docker
  Debug Mode: false
  Registry: https://index.docker.io/v1/
@@ -219,5 +218,5 @@ make all DIR=nvidia-container-toolkit/v1.10.0
 for developers:
 
 ```dockerfile
-FROM ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.10.0_v0.1.0
+FROM ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.10.0_v0.2.0
 ```
