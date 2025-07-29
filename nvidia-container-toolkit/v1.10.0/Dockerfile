@@ -2,9 +2,9 @@ ARG HOSTNAME=nvidia-container-toolkit-1-10-0
 ARG VERSION_NCT=1.10.0
 ARG VERSION_NCT_PKG=${VERSION_NCT}-1
 ARG VERSION_NVIDIA_DOCKER2=2.11.0-1
-ARG VERSION_FAKE_NVIDIA=0.7.0
+ARG VERSION_FAKE_NVIDIA=0.7.1
 ARG VERSION_DOCKER=20.10.17
-ARG VERSION_KERNEL=5.15.0-144-generic
+ARG VERSION_KERNEL=5.15.0-151-generic
 ARG VERSION_NVIDIA_DRIVER=575.57.08
 ARG VERSION_CUDA=12.9
 ARG IMAGE_CUDA=nvidia/cuda:12.9.1-base-ubuntu22.04
@@ -29,8 +29,7 @@ RUN tar -xzf /tmp/fake-nvidia.tar.gz -C /tmp && \
     mv /tmp/fake-nvidia-${VERSION_FAKE_NVIDIA} /usr/local/fake-nvidia && \
     rm -rf /tmp/fake-nvidia.tar.gz && \
     cd /usr/local/fake-nvidia && \
-    KERNEL_RELEASE=${VERSION_KERNEL} NVIDIA_DRIVER_VERSION=${VERSION_NVIDIA_DRIVER} make install && \
-    ./mknod.sh
+    KERNEL_RELEASE=${VERSION_KERNEL} NVIDIA_DRIVER_VERSION=${VERSION_NVIDIA_DRIVER} make install
 COPY --from=cuda /usr/local/cuda-${VERSION_CUDA}/compat/libcuda.so.${VERSION_NVIDIA_DRIVER} /usr/lib/x86_64-linux-gnu/
 
 FROM fake-nvidia AS nvidia-container-toolkit

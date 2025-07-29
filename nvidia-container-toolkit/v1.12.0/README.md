@@ -243,6 +243,9 @@ Server:
  Insecure Registries:
   127.0.0.0/8
  Live Restore Enabled: false
+
+root@nvidia-container-toolkit-1-12-0:~# containerd --version
+containerd containerd.io 1.6.16 31aa4358a36870b21a992d3ad2bef29e1d693bec
 ```
 
 ## build
