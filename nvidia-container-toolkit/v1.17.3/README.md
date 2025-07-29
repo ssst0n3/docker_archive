@@ -1,11 +1,13 @@
 # nvidia-container-toolkit v1.17.3
 
 * dqd:
-  * ssst0n3/docker_archive:nvidia-container-toolkit-v1.17.3 -> ssst0n3/docker_archive:nvidia-container-toolkit-v1.17.3_v0.2.0
+  * ssst0n3/docker_archive:nvidia-container-toolkit-v1.17.3 -> ssst0n3/docker_archive:nvidia-container-toolkit-v1.17.3_v0.3.0
+  * ssst0n3/docker_archive:nvidia-container-toolkit-v1.17.3_v0.3.0
   * ssst0n3/docker_archive:nvidia-container-toolkit-v1.17.3_v0.2.0
   * ssst0n3/docker_archive:nvidia-container-toolkit-v1.17.3_v0.1.0
 * ctr:
-  * ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.17.3 -> ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.17.3_v0.2.0
+  * ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.17.3 -> ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.17.3_v0.3.0
+  * ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.17.3_v0.3.0: bump fake-nvidia to v0.7.1
   * ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.17.3_v0.2.0: CDI compatible
   * ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.17.3_v0.1.0
 
@@ -304,5 +306,5 @@ make all DIR=nvidia-container-toolkit/v1.17.3
 for developers:
 
 ```dockerfile
-FROM ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.17.3_v0.2.0
+FROM ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.17.3_v0.3.0
 ```
