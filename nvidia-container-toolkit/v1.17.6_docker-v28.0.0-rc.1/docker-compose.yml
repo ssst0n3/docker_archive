@@ -1,6 +1,6 @@
 services:
   vm:
-    image: ssst0n3/docker_archive:nvidia-container-toolkit-v1.17.6_docker-v28.0.0-rc.1_v0.3.0
+    image: ssst0n3/docker_archive:nvidia-container-toolkit-v1.17.6_docker-v28.0.0-rc.1_v0.9.0
     ports:
         - "11768:22"
     tty: true
