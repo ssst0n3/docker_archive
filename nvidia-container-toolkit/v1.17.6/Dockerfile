@@ -1,29 +1,37 @@
 ARG HOSTNAME=nvidia-container-toolkit-1-17-6
 ARG VERSION_NCT=1.17.6
 ARG VERSION_NCT_PKG=${VERSION_NCT}-1
-ARG VERSION_FAKE_NVIDIA=0.7.1
+ARG VERSION_FAKE_NVIDIA=0.7.2
 ARG VERSION_DOCKER=28.1.1
-ARG VERSION_KERNEL=6.8.0-64-generic
+ARG VERSION_KERNEL=6.8.0-71-generic
+ARG VERSION_NVIDIA_MAJOR=575
 ARG VERSION_NVIDIA_DRIVER=575.57.08
 ARG VERSION_CUDA=12.9
 ARG IMAGE_CUDA=nvidia/cuda:12.9.1-base-ubuntu24.04
 ARG BASE_IMAGE=ssst0n3/docker_archive:ctr_docker-v${VERSION_DOCKER}
 ARG VERSION_IMAGE=0.2.0
 ARG URL_ARTIFACT_FAKE=https://github.com/ssst0n3/fake-nvidia/archive/refs/tags/v${VERSION_FAKE_NVIDIA}.tar.gz
+ARG URL_ARTIFACT_DRIVER=https://us.download.nvidia.com/tesla/${VERSION_NVIDIA_DRIVER}/NVIDIA-Linux-x86_64-${VERSION_NVIDIA_DRIVER}.run
 
 FROM ${IMAGE_CUDA} AS cuda
-FROM ${BASE_IMAGE}_v${VERSION_IMAGE} AS builder
-ARG VERSION_KERNEL
-RUN apt update && \
-    apt install -y build-essential linux-headers-${VERSION_KERNEL}
+FROM ${BASE_IMAGE}_v${VERSION_IMAGE} AS driver
+ARG URL_ARTIFACT_DRIVER
+ADD --chmod=755 ${URL_ARTIFACT_DRIVER} /tmp/nvidia-driver.run
+# prevent nvidia-driver.run error: Unable to find the module utility modprobe
+RUN apt update && apt install -y kmod
+# https://gitlab.com/nvidia/container-images/driver/-/blob/master/ubuntu18.04/Dockerfile#L48
+RUN /tmp/nvidia-driver.run --silent \
+    --no-kernel-module \
+    --install-compat32-libs
 
-FROM builder AS fake-nvidia
+FROM driver AS fake-nvidia
 ARG VERSION_FAKE_NVIDIA
 ARG VERSION_KERNEL
 ARG VERSION_NVIDIA_DRIVER
 ARG VERSION_CUDA
 ARG URL_ARTIFACT_FAKE
 ADD ${URL_ARTIFACT_FAKE} /tmp/fake-nvidia.tar.gz
+RUN apt update && apt install -y build-essential linux-headers-${VERSION_KERNEL}
 RUN tar -xzf /tmp/fake-nvidia.tar.gz -C /tmp && \
     mv /tmp/fake-nvidia-${VERSION_FAKE_NVIDIA} /usr/local/fake-nvidia && \
     rm -rf /tmp/fake-nvidia.tar.gz && \
