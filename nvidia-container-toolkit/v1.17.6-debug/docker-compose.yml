@@ -1,6 +1,6 @@
 services:
   vm:
-    image: ssst0n3/docker_archive:nvidia-container-toolkit-v1.17.6-debug_v0.3.0
+    image: ssst0n3/docker_archive:nvidia-container-toolkit-v1.17.6-debug_v0.9.0
     environment:
         - "QEMU_HOSTFWD=hostfwd=tcp::2345-:2345,hostfwd=tcp::2346-:2346"
     ports:
