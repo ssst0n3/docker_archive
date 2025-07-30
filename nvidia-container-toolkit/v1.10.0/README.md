@@ -1,11 +1,13 @@
 # nvidia-container-toolkit v1.10.0
 
 * dqd:
-  * ssst0n3/docker_archive:nvidia-container-toolkit-v1.10.0 -> ssst0n3/docker_archive:nvidia-container-toolkit-v1.10.0_v0.2.0
+  * ssst0n3/docker_archive:nvidia-container-toolkit-v1.10.0 -> ssst0n3/docker_archive:nvidia-container-toolkit-v1.10.0_v0.9.0
+  * ssst0n3/docker_archive:nvidia-container-toolkit-v1.10.0_v0.9.0
   * ssst0n3/docker_archive:nvidia-container-toolkit-v1.10.0_v0.2.0
   * ssst0n3/docker_archive:nvidia-container-toolkit-v1.10.0_v0.1.0
 * ctr:
-  * ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.10.0 -> ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.10.0_v0.2.0
+  * ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.10.0 -> ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.10.0_v0.9.0
+  * ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.10.0_v0.9.0: install real nvidia driver without kernel module; install i386 libs; bump fake-nvidia to v0.7.2
   * ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.10.0_v0.2.0: bump fake-nvidia to v0.7.1
   * ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.10.0_v0.1.0
 
@@ -23,8 +25,8 @@ https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/1.10.0/install
 
 ```shell
 root@nvidia-container-toolkit-1-10-0:~# docker run -tid --runtime=nvidia --gpus=all busybox
-f7c82d0419a6e0f41967b46fc8b28206d1744943a208dd6d503e74ee51c7f37d
-root@nvidia-container-toolkit-1-10-0:~# cat /run/containerd/io.containerd.runtime.v2.task/moby/f7c82d0419a6e0f41967b46fc8b28206d1744943a208dd6d503e74ee51c7f37d/config.json | jq .hooks
+6ee581684513b08ffd983db39fbdf8aea5fda0567e3b12fd6badbbca6d08babd
+root@nvidia-container-toolkit-1-10-0:~# cat /run/containerd/io.containerd.runtime.v2.task/moby/6ee581684513b08ffd983db39fbdf8aea5fda0567e3b12fd6badbbca6d08babd/config.json | jq .hooks
 {
   "prestart": [
     {
@@ -38,7 +40,7 @@ root@nvidia-container-toolkit-1-10-0:~# cat /run/containerd/io.containerd.runtim
       ]
     },
     {
-      "path": "/proc/310/exe",
+      "path": "/proc/313/exe",
       "args": [
         "libnetwork-setkey",
         ...
@@ -57,12 +59,12 @@ nvidia-container-toolkit v1.10.0 has not support CDI mode yet.
 ```shell
 root@nvidia-container-toolkit-1-10-0:~# sed -i s/auto/csv/g /etc/nvidia-container-runtime/config.toml 
 root@nvidia-container-toolkit-1-10-0:~# docker run -tid --runtime=nvidia --gpus=all busybox
-ce1e41ff9e02c008f5241332bddd0989a39d01420738e436f9e6d1a24b83bc4e
-root@nvidia-container-toolkit-1-10-0:~# cat /run/containerd/io.containerd.runtime.v2.task/moby/ce1e41ff9e02c008f5241332bddd0989a39d01420738e436f9e6d1a24b83bc4e/config.json | jq .hooks
+82f232890cedf5598a544eb7c2729e3096d95cef7f6bd0a05a70c345436ea904
+root@nvidia-container-toolkit-1-10-0:~# cat /run/containerd/io.containerd.runtime.v2.task/moby/82f232890cedf5598a544eb7c2729e3096d95cef7f6bd0a05a70c345436ea904/config.json | jq .hooks
 {
   "prestart": [
     {
-      "path": "/proc/310/exe",
+      "path": "/proc/313/exe",
       "args": [
         "libnetwork-setkey",
         ...
@@ -130,24 +132,29 @@ Bus Location:   00000000:00:00.0
 Architecture:   7.5
 root@nvidia-container-toolkit-1-10-0:~# lsmod |grep fake
 fake_nvidia_driver     16384  0
-root@nvidia-container-toolkit-1-10-0:~# ls -lah /usr/local/lib/libnvidia-ml.so.1
--rwxr-xr-x 1 root root 22K Jul 25 17:14 /usr/local/lib/libnvidia-ml.so.1
-root@nvidia-container-toolkit-1-10-0:~# systemctl status fake-nvidia-mknod
-○ fake-nvidia-mknod.service - Create device nodes for fake nvidia driver
-     Loaded: loaded (/etc/systemd/system/fake-nvidia-mknod.service; enabled; vendor preset: enabled)
-     Active: inactive (dead) since Fri 2025-07-25 18:06:00 UTC; 7min ago
-    Process: 427 ExecStart=/usr/local/bin/fake-nvidia-mknod.sh (code=exited, status=0/SUCCESS)
-   Main PID: 427 (code=exited, status=0/SUCCESS)
-        CPU: 12ms
+root@nvidia-container-toolkit-1-10-0:~# ls -lah /usr/lib/x86_64-linux-gnu/libnvidia-ml.so*
+lrwxrwxrwx 1 root root  43 Jul 30 09:11 /usr/lib/x86_64-linux-gnu/libnvidia-ml.so -> /usr/lib/x86_64-linux-gnu/libnvidia-ml.so.1
+lrwxrwxrwx 1 root root  51 Jul 30 09:11 /usr/lib/x86_64-linux-gnu/libnvidia-ml.so.1 -> /usr/lib/x86_64-linux-gnu/libnvidia-ml.so.575.57.08
+-rwxr-xr-x 1 root root 22K Jul 30 09:11 /usr/lib/x86_64-linux-gnu/libnvidia-ml.so.575.57.08
+root@nvidia-container-toolkit-1-10-0:~# systemctl status fake-nvidia-device
+○ fake-nvidia-device.service - Create device nodes for fake nvidia driver
+     Loaded: loaded (/etc/systemd/system/fake-nvidia-device.service; enabled; vendor preset: enabled)
+     Active: inactive (dead) since Wed 2025-07-30 09:19:05 UTC; 3min 32s ago
+    Process: 461 ExecStart=/usr/local/bin/fake-nvidia-device.sh (code=exited, status=0/SUCCESS)
+   Main PID: 461 (code=exited, status=0/SUCCESS)
+        CPU: 9ms
 
-Jul 25 18:06:00 nvidia-container-toolkit-1-10-0 systemd[1]: Starting Create device nodes for fake nvidia driver...
-Jul 25 18:06:00 nvidia-container-toolkit-1-10-0 systemd[1]: fake-nvidia-mknod.service: Deactivated successfully.
-Jul 25 18:06:00 nvidia-container-toolkit-1-10-0 systemd[1]: Finished Create device nodes for fake nvidia driver.
+Jul 30 09:19:05 nvidia-container-toolkit-1-10-0 systemd[1]: Starting Create device nodes for fake nvidia driver...
+Jul 30 09:19:05 nvidia-container-toolkit-1-10-0 systemd[1]: fake-nvidia-device.service: Deactivated successfully.
+Jul 30 09:19:05 nvidia-container-toolkit-1-10-0 systemd[1]: Finished Create device nodes for fake nvidia driver.
 ```
 
 ### environment details
 
 ```shell
+root@nvidia-container-toolkit-1-10-0:~# nvidia-container-toolkit --version
+NVIDIA Container Runtime Hook version 1.10.0
+commit: 7cfd3bd
 root@nvidia-container-toolkit-1-10-0:~# docker info
 Client:
  Context:    default
@@ -158,10 +165,10 @@ Client:
   scan: Docker Scan (Docker Inc., v0.23.0)
 
 Server:
- Containers: 1
-  Running: 0
+ Containers: 2
+  Running: 2
   Paused: 0
-  Stopped: 1
+  Stopped: 0
  Images: 1
  Server Version: 20.10.17
  Storage Driver: overlay2
@@ -177,7 +184,7 @@ Server:
   Network: bridge host ipvlan macvlan null overlay
   Log: awslogs fluentd gcplogs gelf journald json-file local logentries splunk syslog
  Swarm: inactive
- Runtimes: io.containerd.runc.v2 io.containerd.runtime.v1.linux nvidia runc
+ Runtimes: nvidia runc io.containerd.runc.v2 io.containerd.runtime.v1.linux
  Default Runtime: runc
  Init Binary: docker-init
  containerd version: 10c12954828e7c7c9b6e0ea9b0c02b01407d3ae1
@@ -195,7 +202,7 @@ Server:
  CPUs: 2
  Total Memory: 1.918GiB
  Name: nvidia-container-toolkit-1-10-0
- ID: OFAH:ALEG:TCCW:5GPH:RVEB:7AUJ:TK6O:S5QT:O3CW:UCFT:2K3I:DMNS
+ ID: JMKT:DZYN:OAFH:X7W7:MJYA:HPJE:EGTE:WYHN:4T4N:CN4N:DFRF:OEQM
  Docker Root Dir: /var/lib/docker
  Debug Mode: false
  Registry: https://index.docker.io/v1/
@@ -218,5 +225,5 @@ make all DIR=nvidia-container-toolkit/v1.10.0
 for developers:
 
 ```dockerfile
-FROM ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.10.0_v0.2.0
+FROM ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.10.0_v0.9.0
 ```
