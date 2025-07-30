@@ -8,7 +8,7 @@
   * ssst0n3/docker_archive:nvidia-container-toolkit-v1.17.6_v0.1.0
 * ctr:
   * ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.17.6 -> ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.17.6_v0.9.0
-  * ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.17.6_v0.9.0: install real nvidia driver without kernel module; bump fake-nvidia to v0.7.2
+  * ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.17.6_v0.9.0: install real nvidia driver without kernel module; install i386 libs; bump fake-nvidia to v0.7.2
   * ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.17.6_v0.3.0: bump fake-nvidia to v0.7.1
   * ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.17.6_v0.2.0: cdi compatible
   * ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.17.6_v0.1.0
@@ -25,8 +25,13 @@ $ ./ssh
 
 ```shell
 root@nvidia-container-toolkit-1-17-6:~# docker run -tid --runtime=nvidia --gpus=all busybox
-87c10ed16d3879493f730e7db7409302fe2ad386b73179edcc44c496034f8c67
-root@nvidia-container-toolkit-1-17-6:~# cat /run/containerd/io.containerd.runtime.v2.task/moby/87c10ed16d3879493f730e7db7409302fe2ad386b73179edcc44c496034f8c67/config.json | jq .hooks
+Unable to find image 'busybox:latest' locally
+latest: Pulling from library/busybox
+90b9666d4aed: Pull complete 
+Digest: sha256:f9a104fddb33220ec80fc45a4e606c74aadf1ef7a3832eb0b05be9e90cd61f5f
+Status: Downloaded newer image for busybox:latest
+06b4ed347e997062c460bd41160dccbea8bbb996ee3bb7e4c4d367e33bd3f2f7
+root@nvidia-container-toolkit-1-17-6:~# cat /run/containerd/io.containerd.runtime.v2.task/moby/06b4ed347e997062c460bd41160dccbea8bbb996ee3bb7e4c4d367e33bd3f2f7/config.json | jq .hooks
 {
   "prestart": [
     {
@@ -36,19 +41,7 @@ root@nvidia-container-toolkit-1-17-6:~# cat /run/containerd/io.containerd.runtim
         "prestart"
       ],
       "env": [
-        "LANG=C.UTF-8",
-        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin",
-        "NOTIFY_SOCKET=/run/systemd/notify",
-        "USER=root",
-        "INVOCATION_ID=f6b54141efaf42c9b67e32dd02121942",
-        "JOURNAL_STREAM=8:5420",
-        "SYSTEMD_EXEC_PID=436",
-        "MEMORY_PRESSURE_WATCH=/sys/fs/cgroup/system.slice/docker.service/memory.pressure",
-        "MEMORY_PRESSURE_WRITE=c29tZSAyMDAwMDAgMjAwMDAwMAA=",
-        "OTEL_SERVICE_NAME=dockerd",
-        "OTEL_EXPORTER_OTLP_TRACES_PROTOCOL=http/protobuf",
-        "OTEL_EXPORTER_OTLP_METRICS_PROTOCOL=http/protobuf",
-        "TMPDIR=/var/lib/docker/tmp"
+        ...
       ]
     }
   ],
@@ -160,7 +153,7 @@ INFO[0000] Selecting /usr/bin/nvidia-cuda-mps-control as /usr/bin/nvidia-cuda-mp
 INFO[0000] Selecting /usr/bin/nvidia-cuda-mps-server as /usr/bin/nvidia-cuda-mps-server 
 WARN[0000] Could not locate nvidia-imex: pattern nvidia-imex not found 
 WARN[0000] Could not locate nvidia-imex-ctl: pattern nvidia-imex-ctl not found 
-INFO[0000] Generated CDI spec with version 0.8.0       
+INFO[0000] Generated CDI spec with version 0.8.0 
 root@nvidia-container-toolkit-1-17-6:~# nvidia-ctk cdi list
 INFO[0000] Found 9 CDI devices                          
 nvidia.com/gpu=0
@@ -173,8 +166,8 @@ nvidia.com/gpu=GPU-2-FAKE-UUID
 nvidia.com/gpu=GPU-3-FAKE-UUID
 nvidia.com/gpu=all
 root@nvidia-container-toolkit-1-17-6:~# docker run -tid --runtime=nvidia -e NVIDIA_VISIBLE_DEVICES=nvidia.com/gpu=all busybox
-1073e315daa16338a7e6f622f87461ffa3be505b843578aee0b700d207c79f33
-root@nvidia-container-toolkit-1-17-6:~# cat /run/containerd/io.containerd.runtime.v2.task/moby/1073e315daa16338a7e6f622f87461ffa3be505b843578aee0b700d207c79f33/config.json | jq .hooks
+f7a878d988dd4afbbff5516c1043cc7311c858504d8baff7ffc719b73cd9612d
+root@nvidia-container-toolkit-1-17-6:~# cat /run/containerd/io.containerd.runtime.v2.task/moby/f7a878d988dd4afbbff5516c1043cc7311c858504d8baff7ffc719b73cd9612d/config.json | jq .hooks
 {
   "createContainer": [
     {
@@ -194,9 +187,9 @@ root@nvidia-container-toolkit-1-17-6:~# cat /run/containerd/io.containerd.runtim
         "nvidia-cdi-hook",
         "create-symlinks",
         "--link",
-        "libnvidia-opticalflow.so.1::/usr/lib/x86_64-linux-gnu/libnvidia-opticalflow.so",
-        "--link",
         "libcuda.so.1::/usr/lib/x86_64-linux-gnu/libcuda.so",
+        "--link",
+        "libnvidia-opticalflow.so.1::/usr/lib/x86_64-linux-gnu/libnvidia-opticalflow.so",
         "--link",
         "libGLX_nvidia.so.575.57.08::/usr/lib/x86_64-linux-gnu/libGLX_indirect.so.0"
       ]
@@ -265,20 +258,20 @@ Architecture:   7.5
 root@nvidia-container-toolkit-1-17-6:~# lsmod |grep fake
 fake_nvidia_driver     12288  0
 root@nvidia-container-toolkit-1-17-6:~# ls -lah /usr/lib/x86_64-linux-gnu/libnvidia-ml.so*
-lrwxrwxrwx 1 root root  43 Jul 30 03:59 /usr/lib/x86_64-linux-gnu/libnvidia-ml.so -> /usr/lib/x86_64-linux-gnu/libnvidia-ml.so.1
-lrwxrwxrwx 1 root root  51 Jul 30 03:59 /usr/lib/x86_64-linux-gnu/libnvidia-ml.so.1 -> /usr/lib/x86_64-linux-gnu/libnvidia-ml.so.575.57.08
--rwxr-xr-x 1 root root 22K Jul 30 03:59 /usr/lib/x86_64-linux-gnu/libnvidia-ml.so.575.57.08
+lrwxrwxrwx 1 root root  43 Jul 30 07:30 /usr/lib/x86_64-linux-gnu/libnvidia-ml.so -> /usr/lib/x86_64-linux-gnu/libnvidia-ml.so.1
+lrwxrwxrwx 1 root root  51 Jul 30 07:30 /usr/lib/x86_64-linux-gnu/libnvidia-ml.so.1 -> /usr/lib/x86_64-linux-gnu/libnvidia-ml.so.575.57.08
+-rwxr-xr-x 1 root root 22K Jul 30 07:30 /usr/lib/x86_64-linux-gnu/libnvidia-ml.so.575.57.08
 root@nvidia-container-toolkit-1-17-6:~# systemctl status fake-nvidia-device
 ○ fake-nvidia-device.service - Create device nodes for fake nvidia driver
      Loaded: loaded (/etc/systemd/system/fake-nvidia-device.service; enabled; preset: enabled)
-     Active: inactive (dead) since Wed 2025-07-30 06:30:17 UTC; 4min 24s ago
-    Process: 655 ExecStart=/usr/local/bin/fake-nvidia-device.sh (code=exited, status=0/SUCCESS)
-   Main PID: 655 (code=exited, status=0/SUCCESS)
-        CPU: 9ms
+     Active: inactive (dead) since Wed 2025-07-30 07:40:14 UTC; 2min 37s ago
+    Process: 647 ExecStart=/usr/local/bin/fake-nvidia-device.sh (code=exited, status=0/SUCCESS)
+   Main PID: 647 (code=exited, status=0/SUCCESS)
+        CPU: 6ms
 
-Jul 30 06:30:17 nvidia-container-toolkit-1-17-6 systemd[1]: Starting fake-nvidia-device.service - Create device nodes for fake nvidia driver...
-Jul 30 06:30:17 nvidia-container-toolkit-1-17-6 systemd[1]: fake-nvidia-device.service: Deactivated successfully.
-Jul 30 06:30:17 nvidia-container-toolkit-1-17-6 systemd[1]: Finished fake-nvidia-device.service - Create device nodes for fake nvidia driver.
+Jul 30 07:40:14 nvidia-container-toolkit-1-17-6 systemd[1]: Starting fake-nvidia-device.service - Create device nodes for fake nvidia driver...
+Jul 30 07:40:14 nvidia-container-toolkit-1-17-6 systemd[1]: fake-nvidia-device.service: Deactivated successfully.
+Jul 30 07:40:14 nvidia-container-toolkit-1-17-6 systemd[1]: Finished fake-nvidia-device.service - Create device nodes for fake nvidia driver.
 ```
 
 ### environment details
@@ -339,7 +332,7 @@ Server:
  CPUs: 2
  Total Memory: 1.922GiB
  Name: nvidia-container-toolkit-1-17-6
- ID: d7a630cc-5286-4751-9e34-a9fa70f2d810
+ ID: 162f8bfd-0946-4053-ae28-04ba119aa633
  Docker Root Dir: /var/lib/docker
  Debug Mode: false
  Experimental: false
@@ -347,6 +340,9 @@ Server:
   ::1/128
   127.0.0.0/8
  Live Restore Enabled: false
+
+root@nvidia-container-toolkit-1-17-6:~# containerd --version
+containerd containerd.io 1.7.27 05044ec0a9a75232cad458027ca83437aae3f4da
 ```
 
 ## build
