@@ -101,7 +101,6 @@ root@localhost:~# docker version
 | [kubernetes-v1.32.2-calico](./kubernetes/v1.32.2-calico/) | v0.2.0 | |  |
 | [kubernetes-v1.32.2](./kubernetes/v1.32.2/) | v0.2.0 | |  |
 
-
 ### nvidia-container-toolkit
 
 | tag | version | alias | note |
@@ -125,7 +124,7 @@ root@localhost:~# docker version
 | [nvidia-container-toolkit-v1.16.0](./nvidia-container-toolkit/v1.16.0/) | v0.3.0 | |  |
 | [nvidia-container-toolkit-v1.14.0](./nvidia-container-toolkit/v1.14.0/) | v0.2.0 | |  |
 | [nvidia-container-toolkit-v1.13.0](./nvidia-container-toolkit/v1.13.0/) | v0.2.0 | |  |
-| [nvidia-container-toolkit-v1.12.0](./nvidia-container-toolkit/v1.12.0/) | v0.2.0 | |  |
+| [nvidia-container-toolkit-v1.12.0](./nvidia-container-toolkit/v1.12.0/) | v0.9.0 | |  |
 | [nvidia-container-toolkit-v1.10.0](./nvidia-container-toolkit/v1.10.0/) | v0.9.0 | |  |
 
 ### docker
