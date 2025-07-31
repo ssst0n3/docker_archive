@@ -24,9 +24,11 @@ vm: env
 	cd $(DIR) && $(VIRT_SPARSIFY) --compress vm.qcow2 shrunk.qcow2 && mv -f shrunk.qcow2 vm.qcow2 && rm -f 1
 
 dqd: env
-	cp $(DIR)/vm.qcow2 dqd/workspace
-	docker build -t $(DQD_TAG_VERSION) dqd/workspace
-	rm -f dqd/workspace/vm.qcow2
+	@TMP_DIR=$$(mktemp -d -t dqd-build-XXXXXX); \
+	trap 'rm -rf "$$TMP_DIR"' EXIT; \
+	cp -r dqd/workspace/* $$TMP_DIR; \
+	cp $(DIR)/vm.qcow2 $$TMP_DIR; \
+	docker build -t $(DQD_TAG_VERSION) $$TMP_DIR
 
 push: env
 	docker tag $(CTR_TAG_VERSION) $(CTR_TAG)
