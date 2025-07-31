@@ -1,11 +1,13 @@
 # nvidia-container-toolkit v1.13.0
 
 * dqd:
-  * ssst0n3/docker_archive:nvidia-container-toolkit-v1.13.0 -> ssst0n3/docker_archive:nvidia-container-toolkit-v1.13.0_v0.2.0
+  * ssst0n3/docker_archive:nvidia-container-toolkit-v1.13.0 -> ssst0n3/docker_archive:nvidia-container-toolkit-v1.13.0_v0.9.0
+  * ssst0n3/docker_archive:nvidia-container-toolkit-v1.13.0_v0.9.0
   * ssst0n3/docker_archive:nvidia-container-toolkit-v1.13.0_v0.2.0
   * ssst0n3/docker_archive:nvidia-container-toolkit-v1.13.0_v0.1.0
 * ctr:
-  * ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.13.0 -> ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.13.0_v0.2.0
+  * ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.13.0 -> ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.13.0_v0.9.0
+  * ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.13.0_v0.9.0: install real nvidia driver without kernel module; install i386 libs; bump fake-nvidia to v0.7.2
   * ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.13.0_v0.2.0: bump fake-nvidia to v0.7.1
   * ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.13.0_v0.1.0
 
@@ -23,8 +25,8 @@ https://web.archive.org/web/20230627162323/https://docs.nvidia.com/datacenter/cl
 
 ```shell
 root@nvidia-container-toolkit-1-13-0:~# docker run -tid --runtime=nvidia --gpus=all busybox
-b82f14bd23a4822b3c89784440ff6fd6895e75252351a6e915cc64c07ae901dd
-root@nvidia-container-toolkit-1-13-0:~# cat /run/containerd/io.containerd.runtime.v2.task/moby/b82f14bd23a4822b3c89784440ff6fd6895e75252351a6e915cc64c07ae901dd/config.json | jq .hooks
+671f50925b4c9e1f360a70918f3be2d028d34a6a32130148446dfc803f99c0ff
+root@nvidia-container-toolkit-1-13-0:~# cat /run/containerd/io.containerd.runtime.v2.task/moby/671f50925b4c9e1f360a70918f3be2d028d34a6a32130148446dfc803f99c0ff/config.json | jq .hooks
 {
   "prestart": [
     {
@@ -38,7 +40,7 @@ root@nvidia-container-toolkit-1-13-0:~# cat /run/containerd/io.containerd.runtim
       ]
     },
     {
-      "path": "/proc/311/exe",
+      "path": "/proc/312/exe",
       "args": [
         "libnetwork-setkey",
         ...
@@ -46,6 +48,7 @@ root@nvidia-container-toolkit-1-13-0:~# cat /run/containerd/io.containerd.runtim
     }
   ]
 }
+
 ```
 
 ### CDI mode
@@ -66,27 +69,62 @@ INFO[0000] Selecting /dev/nvidia3 as /dev/nvidia3
 WARN[0000] Failed to evaluate symlink /dev/dri/by-path/pci--card; ignoring 
 WARN[0000] Failed to evaluate symlink /dev/dri/by-path/pci--render; ignoring 
 INFO[0000] Using driver version 575.57.08               
-WARN[0000] Could not locate /dev/nvidia-modeset: pattern /dev/nvidia-modeset not found 
+WARN[0000] Ignoring 32-bit libraries for libcuda.so: [/lib/i386-linux-gnu/libcuda.so.575.57.08 /lib/i386-linux-gnu/libcuda.so.1] 
+INFO[0000] Selecting /dev/nvidia-modeset as /dev/nvidia-modeset 
 WARN[0000] Could not locate /dev/nvidia-uvm-tools: pattern /dev/nvidia-uvm-tools not found 
 WARN[0000] Could not locate /dev/nvidia-uvm: pattern /dev/nvidia-uvm not found 
 INFO[0000] Selecting /dev/nvidiactl as /dev/nvidiactl   
-WARN[0000] Could not locate libnvidia-egl-gbm.so: 64-bit library libnvidia-egl-gbm.so not found 
-WARN[0000] Could not locate glvnd/egl_vendor.d/10_nvidia.json: pattern glvnd/egl_vendor.d/10_nvidia.json not found 
-WARN[0000] Could not locate vulkan/icd.d/nvidia_icd.json: pattern vulkan/icd.d/nvidia_icd.json not found 
-WARN[0000] Could not locate vulkan/implicit_layer.d/nvidia_layers.json: pattern vulkan/implicit_layer.d/nvidia_layers.json not found 
-WARN[0000] Could not locate egl/egl_external_platform.d/15_nvidia_gbm.json: pattern egl/egl_external_platform.d/15_nvidia_gbm.json not found 
-WARN[0000] Could not locate egl/egl_external_platform.d/10_nvidia_wayland.json: pattern egl/egl_external_platform.d/10_nvidia_wayland.json not found 
+WARN[0000] Ignoring 32-bit libraries for libnvidia-egl-gbm.so: [/lib/i386-linux-gnu/libnvidia-egl-gbm.so.1.1.2] 
+INFO[0000] Selecting /lib/x86_64-linux-gnu/libnvidia-egl-gbm.so.1.1.2 as /lib/x86_64-linux-gnu/libnvidia-egl-gbm.so.1.1.2 
+INFO[0000] Selecting /usr/share/glvnd/egl_vendor.d/10_nvidia.json as /usr/share/glvnd/egl_vendor.d/10_nvidia.json 
+INFO[0000] Selecting /etc/vulkan/icd.d/nvidia_icd.json as /etc/vulkan/icd.d/nvidia_icd.json 
+INFO[0000] Selecting /etc/vulkan/implicit_layer.d/nvidia_layers.json as /etc/vulkan/implicit_layer.d/nvidia_layers.json 
+INFO[0000] Selecting /usr/share/egl/egl_external_platform.d/15_nvidia_gbm.json as /usr/share/egl/egl_external_platform.d/15_nvidia_gbm.json 
+INFO[0000] Selecting /usr/share/egl/egl_external_platform.d/10_nvidia_wayland.json as /usr/share/egl/egl_external_platform.d/10_nvidia_wayland.json 
+INFO[0000] Selecting /lib/x86_64-linux-gnu/libEGL_nvidia.so.575.57.08 as /lib/x86_64-linux-gnu/libEGL_nvidia.so.575.57.08 
+INFO[0000] Selecting /lib/x86_64-linux-gnu/libGLESv1_CM_nvidia.so.575.57.08 as /lib/x86_64-linux-gnu/libGLESv1_CM_nvidia.so.575.57.08 
+INFO[0000] Selecting /lib/x86_64-linux-gnu/libGLESv2_nvidia.so.575.57.08 as /lib/x86_64-linux-gnu/libGLESv2_nvidia.so.575.57.08 
+INFO[0000] Selecting /lib/x86_64-linux-gnu/libGLX_nvidia.so.575.57.08 as /lib/x86_64-linux-gnu/libGLX_nvidia.so.575.57.08 
 INFO[0000] Selecting /lib/x86_64-linux-gnu/libcuda.so.575.57.08 as /lib/x86_64-linux-gnu/libcuda.so.575.57.08 
+INFO[0000] Selecting /lib/x86_64-linux-gnu/libcudadebugger.so.575.57.08 as /lib/x86_64-linux-gnu/libcudadebugger.so.575.57.08 
+INFO[0000] Selecting /lib/x86_64-linux-gnu/libnvcuvid.so.575.57.08 as /lib/x86_64-linux-gnu/libnvcuvid.so.575.57.08 
+INFO[0000] Selecting /lib/x86_64-linux-gnu/libnvidia-allocator.so.575.57.08 as /lib/x86_64-linux-gnu/libnvidia-allocator.so.575.57.08 
+INFO[0000] Selecting /lib/x86_64-linux-gnu/libnvidia-cfg.so.575.57.08 as /lib/x86_64-linux-gnu/libnvidia-cfg.so.575.57.08 
+INFO[0000] Selecting /lib/x86_64-linux-gnu/libnvidia-eglcore.so.575.57.08 as /lib/x86_64-linux-gnu/libnvidia-eglcore.so.575.57.08 
+INFO[0000] Selecting /lib/x86_64-linux-gnu/libnvidia-encode.so.575.57.08 as /lib/x86_64-linux-gnu/libnvidia-encode.so.575.57.08 
+INFO[0000] Selecting /lib/x86_64-linux-gnu/libnvidia-fbc.so.575.57.08 as /lib/x86_64-linux-gnu/libnvidia-fbc.so.575.57.08 
+INFO[0000] Selecting /lib/x86_64-linux-gnu/libnvidia-glcore.so.575.57.08 as /lib/x86_64-linux-gnu/libnvidia-glcore.so.575.57.08 
+INFO[0000] Selecting /lib/x86_64-linux-gnu/libnvidia-glsi.so.575.57.08 as /lib/x86_64-linux-gnu/libnvidia-glsi.so.575.57.08 
+INFO[0000] Selecting /lib/x86_64-linux-gnu/libnvidia-glvkspirv.so.575.57.08 as /lib/x86_64-linux-gnu/libnvidia-glvkspirv.so.575.57.08 
+INFO[0000] Selecting /lib/x86_64-linux-gnu/libnvidia-gpucomp.so.575.57.08 as /lib/x86_64-linux-gnu/libnvidia-gpucomp.so.575.57.08 
+INFO[0000] Selecting /lib/x86_64-linux-gnu/libnvidia-gtk2.so.575.57.08 as /lib/x86_64-linux-gnu/libnvidia-gtk2.so.575.57.08 
+INFO[0000] Selecting /lib/x86_64-linux-gnu/libnvidia-gtk3.so.575.57.08 as /lib/x86_64-linux-gnu/libnvidia-gtk3.so.575.57.08 
+INFO[0000] Selecting /lib/x86_64-linux-gnu/libnvidia-ml.so.575.57.08 as /lib/x86_64-linux-gnu/libnvidia-ml.so.575.57.08 
+INFO[0000] Selecting /lib/x86_64-linux-gnu/libnvidia-ngx.so.575.57.08 as /lib/x86_64-linux-gnu/libnvidia-ngx.so.575.57.08 
+INFO[0000] Selecting /lib/x86_64-linux-gnu/libnvidia-nvvm.so.575.57.08 as /lib/x86_64-linux-gnu/libnvidia-nvvm.so.575.57.08 
+INFO[0000] Selecting /lib/x86_64-linux-gnu/libnvidia-opencl.so.575.57.08 as /lib/x86_64-linux-gnu/libnvidia-opencl.so.575.57.08 
+INFO[0000] Selecting /lib/x86_64-linux-gnu/libnvidia-opticalflow.so.575.57.08 as /lib/x86_64-linux-gnu/libnvidia-opticalflow.so.575.57.08 
+INFO[0000] Selecting /lib/x86_64-linux-gnu/libnvidia-pkcs11-openssl3.so.575.57.08 as /lib/x86_64-linux-gnu/libnvidia-pkcs11-openssl3.so.575.57.08 
+INFO[0000] Selecting /lib/x86_64-linux-gnu/libnvidia-pkcs11.so.575.57.08 as /lib/x86_64-linux-gnu/libnvidia-pkcs11.so.575.57.08 
+INFO[0000] Selecting /lib/x86_64-linux-gnu/libnvidia-present.so.575.57.08 as /lib/x86_64-linux-gnu/libnvidia-present.so.575.57.08 
+INFO[0000] Selecting /lib/x86_64-linux-gnu/libnvidia-ptxjitcompiler.so.575.57.08 as /lib/x86_64-linux-gnu/libnvidia-ptxjitcompiler.so.575.57.08 
+INFO[0000] Selecting /lib/x86_64-linux-gnu/libnvidia-rtcore.so.575.57.08 as /lib/x86_64-linux-gnu/libnvidia-rtcore.so.575.57.08 
+INFO[0000] Selecting /lib/x86_64-linux-gnu/libnvidia-sandboxutils.so.575.57.08 as /lib/x86_64-linux-gnu/libnvidia-sandboxutils.so.575.57.08 
+INFO[0000] Selecting /lib/x86_64-linux-gnu/libnvidia-tls.so.575.57.08 as /lib/x86_64-linux-gnu/libnvidia-tls.so.575.57.08 
+INFO[0000] Selecting /lib/x86_64-linux-gnu/libnvidia-vksc-core.so.575.57.08 as /lib/x86_64-linux-gnu/libnvidia-vksc-core.so.575.57.08 
+INFO[0000] Selecting /lib/x86_64-linux-gnu/libnvidia-wayland-client.so.575.57.08 as /lib/x86_64-linux-gnu/libnvidia-wayland-client.so.575.57.08 
+INFO[0000] Selecting /lib/x86_64-linux-gnu/libnvoptix.so.575.57.08 as /lib/x86_64-linux-gnu/libnvoptix.so.575.57.08 
 WARN[0000] Could not locate /nvidia-persistenced/socket: pattern /nvidia-persistenced/socket not found 
 WARN[0000] Could not locate /nvidia-fabricmanager/socket: pattern /nvidia-fabricmanager/socket not found 
 WARN[0000] Could not locate /tmp/nvidia-mps: pattern /tmp/nvidia-mps not found 
-WARN[0000] Could not locate /lib/firmware/nvidia/575.57.08/gsp*.bin: pattern /lib/firmware/nvidia/575.57.08/gsp*.bin not found 
-WARN[0000] Could not locate nvidia-smi: pattern nvidia-smi not found 
-WARN[0000] Could not locate nvidia-debugdump: pattern nvidia-debugdump not found 
-WARN[0000] Could not locate nvidia-persistenced: pattern nvidia-persistenced not found 
-WARN[0000] Could not locate nvidia-cuda-mps-control: pattern nvidia-cuda-mps-control not found 
-WARN[0000] Could not locate nvidia-cuda-mps-server: pattern nvidia-cuda-mps-server not found 
-INFO[0000] Generated CDI spec with version 0.5.0        
+INFO[0000] Selecting /lib/firmware/nvidia/575.57.08/gsp_ga10x.bin as /lib/firmware/nvidia/575.57.08/gsp_ga10x.bin 
+INFO[0000] Selecting /lib/firmware/nvidia/575.57.08/gsp_tu10x.bin as /lib/firmware/nvidia/575.57.08/gsp_tu10x.bin 
+INFO[0000] Selecting /usr/bin/nvidia-smi as /usr/bin/nvidia-smi 
+INFO[0000] Selecting /usr/bin/nvidia-debugdump as /usr/bin/nvidia-debugdump 
+INFO[0000] Selecting /usr/bin/nvidia-persistenced as /usr/bin/nvidia-persistenced 
+INFO[0000] Selecting /usr/bin/nvidia-cuda-mps-control as /usr/bin/nvidia-cuda-mps-control 
+INFO[0000] Selecting /usr/bin/nvidia-cuda-mps-server as /usr/bin/nvidia-cuda-mps-server 
+INFO[0000] Generated CDI spec with version 0.5.0    
 root@nvidia-container-toolkit-1-13-0:~# grep "  name:" /etc/cdi/nvidia.yaml
   name: "0"
   name: "1"
@@ -94,18 +132,19 @@ root@nvidia-container-toolkit-1-13-0:~# grep "  name:" /etc/cdi/nvidia.yaml
   name: "3"
   name: all
 root@nvidia-container-toolkit-1-13-0:~# sed -i s/auto/cdi/g /etc/nvidia-container-runtime/config.toml
+root@nvidia-container-toolkit-1-13-0:~# docker run -tid --runtime=nvidia -e NVIDIA_VISIBLE_DEVICES=nvidia.com/gpu=all busybox
+cd7bd17837b1434f8729c25fb95bd743a7d6d4407beb668a105746823e365941
+docker: Error response from daemon: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: error during container init: error running hook #0: error running hook: exit status 1, stdout: , stderr: time="2025-07-31T02:44:37Z" level=error msg="failed to update ld.so.conf: failed to create config file: open /var/lib/docker/overlay2/56ce37c38c3b73e917ecc4a82a5d8b051541985b23d4e065a5d875a4181796ff/merged/etc/ld.so.conf.d/nvcr-2698165039.conf: no such file or directory": unknown.
 root@nvidia-container-toolkit-1-13-0:~# docker run -tid --runtime=nvidia -e NVIDIA_VISIBLE_DEVICES=nvidia.com/gpu=all ubuntu
-3d2173588c3eb8179037f852b9ef4af67177eae9c88a14763d747a9b4d15d6cc
-root@nvidia-container-toolkit-1-13-0:~# cat /run/containerd/io.containerd.runtime.v2.task/moby/3d2173588c3eb8179037f852b9ef4af67177eae9c88a14763d747a9b4d15d6cc/config.json | jq .hooks
+cd7bd17837b1434f8729c25fb95bd743a7d6d4407beb668a105746823e365941
+root@nvidia-container-toolkit-1-13-0:~# cat /run/containerd/io.containerd.runtime.v2.task/moby/2d2c1dd8ee5aea225c10bab84cb4291ee3283d323f98e96bcc843706741b94a2/config.json | jq .hooks
 {
   "prestart": [
     {
-      "path": "/proc/311/exe",
+      "path": "/proc/312/exe",
       "args": [
         "libnetwork-setkey",
-        "-exec-root=/var/run/docker",
-        "3d2173588c3eb8179037f852b9ef4af67177eae9c88a14763d747a9b4d15d6cc",
-        "b484c5a2ad24"
+        ...
       ]
     }
   ],
@@ -164,19 +203,21 @@ Bus Location:   00000000:00:00.0
 Architecture:   7.5
 root@nvidia-container-toolkit-1-13-0:~# lsmod |grep fake
 fake_nvidia_driver     16384  0
-root@nvidia-container-toolkit-1-13-0:~# ls -lah /usr/local/lib/libnvidia-ml.so.1
--rwxr-xr-x 1 root root 22K Jul 25 14:11 /usr/local/lib/libnvidia-ml.so.1
-root@nvidia-container-toolkit-1-13-0:~# systemctl status fake-nvidia-mknod
-○ fake-nvidia-mknod.service - Create device nodes for fake nvidia driver
-     Loaded: loaded (/etc/systemd/system/fake-nvidia-mknod.service; enabled; vendor preset: enabled)
-     Active: inactive (dead) since Fri 2025-07-25 14:48:31 UTC; 3min 23s ago
-    Process: 432 ExecStart=/usr/local/bin/fake-nvidia-mknod.sh (code=exited, status=0/SUCCESS)
-   Main PID: 432 (code=exited, status=0/SUCCESS)
-        CPU: 14ms
+root@nvidia-container-toolkit-1-13-0:~# ls -lah /usr/lib/x86_64-linux-gnu/libnvidia-ml.so*
+lrwxrwxrwx 1 root root  43 Jul 31 02:33 /usr/lib/x86_64-linux-gnu/libnvidia-ml.so -> /usr/lib/x86_64-linux-gnu/libnvidia-ml.so.1
+lrwxrwxrwx 1 root root  51 Jul 31 02:33 /usr/lib/x86_64-linux-gnu/libnvidia-ml.so.1 -> /usr/lib/x86_64-linux-gnu/libnvidia-ml.so.575.57.08
+-rwxr-xr-x 1 root root 22K Jul 31 02:33 /usr/lib/x86_64-linux-gnu/libnvidia-ml.so.575.57.08
+root@nvidia-container-toolkit-1-13-0:~# systemctl status fake-nvidia-device
+○ fake-nvidia-device.service - Create device nodes for fake nvidia driver
+     Loaded: loaded (/etc/systemd/system/fake-nvidia-device.service; enabled; vendor preset: enabled)
+     Active: inactive (dead) since Thu 2025-07-31 02:40:27 UTC; 5min ago
+    Process: 462 ExecStart=/usr/local/bin/fake-nvidia-device.sh (code=exited, status=0/SUCCESS)
+   Main PID: 462 (code=exited, status=0/SUCCESS)
+        CPU: 7ms
 
-Jul 25 14:48:31 nvidia-container-toolkit-1-13-0 systemd[1]: Starting Create device nodes for fake nvidia driver...
-Jul 25 14:48:31 nvidia-container-toolkit-1-13-0 systemd[1]: fake-nvidia-mknod.service: Deactivated successfully.
-Jul 25 14:48:31 nvidia-container-toolkit-1-13-0 systemd[1]: Finished Create device nodes for fake nvidia driver.
+Jul 31 02:40:27 nvidia-container-toolkit-1-13-0 systemd[1]: Starting Create device nodes for fake nvidia driver...
+Jul 31 02:40:27 nvidia-container-toolkit-1-13-0 systemd[1]: fake-nvidia-device.service: Deactivated successfully.
+Jul 31 02:40:27 nvidia-container-toolkit-1-13-0 systemd[1]: Finished Create device nodes for fake nvidia driver.
 ```
 
 ### environment details
@@ -198,11 +239,11 @@ Client:
     Path:     /usr/libexec/docker/cli-plugins/docker-compose
 
 Server:
- Containers: 2
-  Running: 1
+ Containers: 3
+  Running: 2
   Paused: 0
   Stopped: 1
- Images: 1
+ Images: 2
  Server Version: 23.0.3
  Storage Driver: overlay2
   Backing Filesystem: extfs
@@ -229,14 +270,14 @@ Server:
   seccomp
    Profile: builtin
   cgroupns
- Kernel Version: 5.15.0-144-generic
+ Kernel Version: 5.15.0-151-generic
  Operating System: Ubuntu 22.04.5 LTS
  OSType: linux
  Architecture: x86_64
  CPUs: 2
  Total Memory: 1.918GiB
  Name: nvidia-container-toolkit-1-13-0
- ID: 46aac56d-fa77-4ca8-a59a-544cb6132fd0
+ ID: 7069e519-b829-494c-8faa-8322b1bfd2c9
  Docker Root Dir: /var/lib/docker
  Debug Mode: false
  Registry: https://index.docker.io/v1/
@@ -244,6 +285,7 @@ Server:
  Insecure Registries:
   127.0.0.0/8
  Live Restore Enabled: false
+
 root@nvidia-container-toolkit-1-13-0:~# containerd --version
 containerd containerd.io 1.6.19 1e1ea6e986c6c86565bc33d52e34b81b3e2bc71f
 ```
@@ -257,5 +299,5 @@ make all DIR=nvidia-container-toolkit/v1.13.0
 for developers:
 
 ```dockerfile
-FROM ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.13.0_v0.2.0
+FROM ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.13.0_v0.9.0
 ```
