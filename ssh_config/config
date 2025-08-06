@@ -1838,3 +1838,11 @@ Host nvidia-container-toolkit-v1.17.6_runc-v1.3.0-rc.2
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
 
+Host nvidia-container-toolkit-v1.17.6_podman-v5.5.1
+    Hostname 127.0.0.1
+    Port 11764
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
