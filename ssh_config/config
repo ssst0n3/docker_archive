@@ -1846,3 +1846,11 @@ Host nvidia-container-toolkit-v1.17.6_podman-v5.5.1
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
 
+Host cve-2025-23266_mitigation
+    Hostname 127.0.0.1
+    Port 23268
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
