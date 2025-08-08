@@ -1,0 +1,27 @@
+[Unit]
+Description=CTF Server
+After=network.target docker.service
+Requires=docker.service
+
+[Service]
+Type=simple
+
+User=root
+Group=root
+
+WorkingDirectory=/root
+
+ExecStart=/usr/local/bin/ctf-server
+
+Environment="DOCKER_HOST=unix:///var/run/docker.sock"
+
+Restart=on-failure
+RestartSec=5s
+
+LimitNOFILE=65536
+
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

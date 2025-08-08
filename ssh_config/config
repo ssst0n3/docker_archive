@@ -1854,3 +1854,11 @@ Host cve-2025-23266_mitigation
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
 
+Host your-gpu-my-shell
+    Hostname 127.0.0.1
+    Port 25872
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
