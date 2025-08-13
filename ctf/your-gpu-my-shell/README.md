@@ -9,16 +9,34 @@
 
 ## usage
 
+### Recommend
+
 ```shell
 $ cd ctf/your-gpu-my-shell
 $ docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
 ```
 
-### writeup
+### Without kvm
+
+KVM can speed up the environment, but it can also be started without KVM.
+
+```shell
+$ cd ctf/your-gpu-my-shell
+$ docker compose -f docker-compose.yml up -d
+```
+
+### Docker Image Mirror
+
+```shell
+$ cd ctf/your-gpu-my-shell
+$ docker compose -f docker-compose.yml -f docker-compose.mirror.yml up -d
+```
+
+## writeup
 
 // TODO: You could upload your writeup here.
 
-### challenge description
+## challenge description
 
 Welcome to our state-of-the-art GPU-accelerated computing service! We provide a secure, containerized environment for you to run any Docker image of your choice.
 
@@ -59,7 +77,7 @@ crw-rw-rw-    1 root     root      195, 255 Aug  8 02:49 /dev/nvidiactl
 / # 
 ```
 
-### env details
+## env details
 
 ```shell
 $ ./ssh
