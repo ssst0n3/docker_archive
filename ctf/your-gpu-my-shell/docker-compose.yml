@@ -1,0 +1,10 @@
+services:
+  vm:
+    image: ssst0n3/docker_archive:your-gpu-my-shell_v0.1.0
+    environment:
+        - "QEMU_HOSTFWD=hostfwd=tcp::8080-:8080"
+    ports:
+        - "25872:22"
+        - "25878:8080"
+    tty: true
+    stdin_open: true 
