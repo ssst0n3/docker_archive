@@ -1,13 +1,15 @@
 # nvidia-container-toolkit v1.17.6 debug
 
 * dqd:
-  * ssst0n3/docker_archive:nvidia-container-toolkit-v1.17.6-debug -> ssst0n3/docker_archive:nvidia-container-toolkit-v1.17.6-debug_v0.9.0
+  * ssst0n3/docker_archive:nvidia-container-toolkit-v1.17.6-debug -> ssst0n3/docker_archive:nvidia-container-toolkit-v1.17.6-debug_v0.9.1
+  * ssst0n3/docker_archive:nvidia-container-toolkit-v1.17.6-debug_v0.9.1
   * ssst0n3/docker_archive:nvidia-container-toolkit-v1.17.6-debug_v0.9.0
   * ssst0n3/docker_archive:nvidia-container-toolkit-v1.17.6-debug_v0.3.0
   * ssst0n3/docker_archive:nvidia-container-toolkit-v1.17.6-debug_v0.2.0
   * ssst0n3/docker_archive:nvidia-container-toolkit-v1.17.6-debug_v0.1.0
 * ctr:
-  * ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.17.6-debug -> ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.17.6-debug_v0.9.0
+  * ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.17.6-debug -> ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.17.6-debug_v0.9.1
+  * ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.17.6-debug_v0.9.1: support nvidia-container-runtime debugging
   * ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.17.6-debug_v0.9.0: install real nvidia driver without kernel module; install i386 libs; bump fake-nvidia to v0.7.2
   * ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.17.6-debug_v0.3.0: bump fake-nvidia to v0.7.1
   * ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.17.6-debug_v0.2.0: bump the base image; setup hostname
@@ -23,11 +25,19 @@ $ ./ssh
 
 ## debug
 
+runc
+
 ```shell
-root@nvidia-container-toolkit-1-17-6-debug:~# ln -sf /root/runc.debug /usr/bin/runc
+root@nvidia-container-toolkit-1-17-6-debug:~# ln -sf /usr/local/bin/debug.sh /usr/bin/runc
 root@nvidia-container-toolkit-1-17-6-debug:~# runc --version
 API server listening at: [::]:2345
 2025-07-30T08:41:44Z warn layer=rpc Listening for remote connections (connections are not authenticated nor encrypted)
+```
+
+nvidia-container-runtime
+
+```shell
+root@nvidia-container-toolkit-1-17-6-debug:~# ln -sf /usr/local/bin/debug.sh /usr/bin/nvidia-container-runtime
 ```
 
 ## usage
@@ -361,5 +371,5 @@ make all DIR=nvidia-container-toolkit/v1.17.6-debug
 for developers:
 
 ```dockerfile
-FROM ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.17.6-debug_v0.9.0
+FROM ssst0n3/docker_archive:ctr_nvidia-container-toolkit-v1.17.6-debug_v0.9.1
 ```
