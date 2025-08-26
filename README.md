@@ -249,6 +249,7 @@ root@localhost:~# docker version
 | [buildkit-v0.21.0-rc1](./buildkit/v0.21.0-rc1/) | v0.1.0  |
 | [buildkit-v0.20.2](./buildkit/v0.20.2/)         | v0.2.0  |
 | [buildkit-v0.12.5](./buildkit/v0.12.5/) | v0.1.0  |
+| [buildkit-v0.12.4-debug](./buildkit/v0.12.4-debug/) | v0.1.0  |
 | [buildkit-v0.12.4](./buildkit/v0.12.4/) | v0.1.0  |
 
 ### runc
