@@ -1862,3 +1862,11 @@ Host your-gpu-my-shell
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
 
+Host buildkit-v0.12.4
+    Hostname 127.0.0.1
+    Port 12401
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
