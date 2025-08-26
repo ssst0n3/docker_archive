@@ -1894,3 +1894,11 @@ Host buildkit-v0.12.5-debug
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
 
+Host cve-2024-23650
+    Hostname 127.0.0.1
+    Port 23650
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
