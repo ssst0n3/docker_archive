@@ -7,12 +7,27 @@
     * ssst0n3/docker_archive:ctr_buildkit-v0.12.5-debug -> ssst0n3/docker_archive:ctr_buildkit-v0.12.5-debug_v0.1.0
     * ssst0n3/docker_archive:ctr_buildkit-v0.12.5-debug_v0.1.0
 
-## usage
+## quick-start
 
 ```shell
 $ cd buildkit/v0.12.5-debug
 $ docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
 ```
+
+### debug
+
+```shell
+root@buildkit-0-12-5-debug:~# systemctl stop buildkit
+Stopping 'buildkit.service', but its triggering units are still active:
+buildkit.socket
+root@buildkit-0-12-5-debug:~# ln -sf /usr/local/bin/debug.sh /usr/local/bin/buildkitd 
+root@buildkit-0-12-5-debug:~# buildkitd
+API server listening at: [::]:2345
+2025-08-26T03:41:55Z warning layer=rpc Listening for remote connections (connections are not authenticated nor encrypted)
+
+```
+
+### usage
 
 ```shell
 $ ./ssh
@@ -40,6 +55,8 @@ root@buildkit-0-12-5-debug:~# buildctl build --frontend=dockerfile.v0 --local co
 #5 0.084 1
 #5 DONE 0.2s
 ```
+
+### env details
 
 ```shell
 $ ./ssh
