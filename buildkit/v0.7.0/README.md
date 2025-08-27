@@ -19,9 +19,9 @@ $ docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
 ```shell
 $ ./ssh
 root@buildkit-0-7-0:~# cat <<EOF >Dockerfile
-> FROM ubuntu
-> RUN echo 1
-> EOF
+FROM ubuntu
+RUN echo 1
+EOF
 root@buildkit-0-7-0:~# buildctl build --frontend=dockerfile.v0 --local context=. --local dockerfile=. --progress=plain
 #2 [internal] load .dockerignore
 #2 transferring context: 2B done

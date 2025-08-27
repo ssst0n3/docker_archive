@@ -1918,3 +1918,11 @@ Host buildkit-v0.7.0
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
 
+Host buildkit-v0.5.0
+    Hostname 127.0.0.1
+    Port 5001
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
