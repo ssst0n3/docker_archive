@@ -50,10 +50,10 @@ $ ./ssh
 root@buildkit-0-11-0:~# buildkitd --version
 buildkitd github.com/moby/buildkit v0.11.0 830288a71f447b46ad44ad5f7bd45148ec450d44
 root@buildkit-0-11-0:~# runc --version
-runc version 1.1.7
-commit: v1.1.7-0-g860f061b
+runc version 1.1.4
+commit: v1.1.4-0-g5fd4c4d1
 spec: 1.0.2-dev
-go: go1.20.3
+go: go1.17.10
 libseccomp: 2.5.4
 root@buildkit-0-11-0:~# systemctl status buildkit
 ● buildkit.service - BuildKit
