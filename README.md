@@ -256,6 +256,7 @@ root@localhost:~# docker version
 | [buildkit-v0.9.0](./buildkit/v0.9.0/) | v0.1.0  |
 | [buildkit-v0.7.0](./buildkit/v0.7.0/) | v0.1.0  |
 | [buildkit-v0.5.0](./buildkit/v0.5.0/) | v0.1.0  |
+| [buildkit-v0.4.0](./buildkit/v0.4.0/) | v0.1.0  |
 
 ### runc
 
