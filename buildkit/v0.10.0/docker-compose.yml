@@ -1,0 +1,7 @@
+services:
+  vm:
+    image: ssst0n3/docker_archive:buildkit-v0.10.0_v0.1.0
+    ports:
+        - "10001:22"
+    tty: true
+    stdin_open: true 
