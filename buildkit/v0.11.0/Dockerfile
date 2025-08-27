@@ -1,7 +1,7 @@
 ARG HOSTNAME=buildkit-0-11-0
 ARG VERSION_BUILDKIT=0.11.0
-# https://github.com/moby/buildkit/blob/v0.12.0/Dockerfile#L3
-ARG VERSION_RUNC=1.1.7
+# https://github.com/moby/buildkit/blob/v0.11.0/Dockerfile#L3
+ARG VERSION_RUNC=1.1.4
 ARG IMAGE_RUNC=ssst0n3/docker_archive:ctr_runc-v${VERSION_RUNC}
 ARG IMAGE_VERSION=0.2.0
 ARG URL_ARTIFACT_BUILDKIT=https://github.com/moby/buildkit/releases/download/v${VERSION_BUILDKIT}/buildkit-v${VERSION_BUILDKIT}.linux-amd64.tar.gz
