@@ -2,7 +2,7 @@
 
 REPO ?= ssst0n3/docker_archive
 # D2VM := docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock --privileged -v $(PWD):/d2vm -w /d2vm linkacloud/d2vm:latest $*
-D2VM := docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock --privileged -v $(PWD):/d2vm -w /d2vm ssst0n3/d2vm:v0.3.2 $*
+D2VM := docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock --privileged -v $(PWD):/d2vm -w /d2vm ssst0n3/d2vm:v0.3.3 $*
 VIRT_SPARSIFY := docker run -it --rm -v $(PWD)/$(DIR):/data -w /data --env PUID=$(shell id -u) --env PGID=$(shell id -u) bkahlert/libguestfs:edge virt-sparsify
 # Set the password for the virtual machine. This can be overridden from the command line.
 # Example: make vm VM_PASSWORD=your_new_password
@@ -23,7 +23,7 @@ ctr: env
 
 vm: env
 	# add -v to show verbose info
-	$(D2VM) convert $(CTR_TAG_VERSION) -s $(SIZE) -p $(VM_PASSWORD) -o $(DIR)/vm.qcow2
+	$(D2VM) convert $(CTR_TAG_VERSION) --kernel=$(KERNEL) -s $(SIZE) -p $(VM_PASSWORD) -o $(DIR)/vm.qcow2
 	cd $(DIR) && $(VIRT_SPARSIFY) --compress vm.qcow2 shrunk.qcow2 && mv -f shrunk.qcow2 vm.qcow2 && rm -f 1
 
 dqd: env
