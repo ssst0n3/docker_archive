@@ -7,6 +7,7 @@ VIRT_SPARSIFY := docker run -it --rm -v $(PWD)/$(DIR):/data -w /data --env PUID=
 # Set the password for the virtual machine. This can be overridden from the command line.
 # Example: make vm VM_PASSWORD=your_new_password
 VM_PASSWORD ?= root
+KERNEL ?= true
 
 env:
 	$(eval include $(DIR)/.env)
