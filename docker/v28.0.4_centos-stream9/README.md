@@ -1,10 +1,12 @@
 # docker v28.0.4 centos stream9
 
 * dqd:
-  * ssst0n3/docker_archive:docker-v28.0.4_centos-stream9 -> ssst0n3/docker_archive:docker-v28.0.4_centos-stream9_v0.1.0
+  * ssst0n3/docker_archive:docker-v28.0.4_centos-stream9 -> ssst0n3/docker_archive:docker-v28.0.4_centos-stream9_v0.2.0
+  * ssst0n3/docker_archive:docker-v28.0.4_centos-stream9_v0.2.0
   * ssst0n3/docker_archive:docker-v28.0.4_centos-stream9_v0.1.0
 * ctr:
-  * ssst0n3/docker_archive:ctr_docker-v28.0.4_centos-stream9 -> ssst0n3/docker_archive:ctr_docker-v28.0.4_centos-stream9_v0.1.0
+  * ssst0n3/docker_archive:ctr_docker-v28.0.4_centos-stream9 -> ssst0n3/docker_archive:ctr_docker-v28.0.4_centos-stream9_v0.2.0
+  * ssst0n3/docker_archive:ctr_docker-v28.0.4_centos-stream9_v0.2.0: bump base image to v0.2.0
   * ssst0n3/docker_archive:ctr_docker-v28.0.4_centos-stream9_v0.1.0
 
 ## usage
@@ -16,11 +18,11 @@ $ docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
 
 ```shell
 $ ./ssh
-[root@localhost ~]# docker run -ti hello-world
+[root@docker-28-0-4-centos-stream9 ~]# docker run -ti hello-world
 Unable to find image 'hello-world:latest' locally
 latest: Pulling from library/hello-world
-e6590344b1a5: Pull complete 
-Digest: sha256:c41088499908a59aae84b0a49c70e86f4731e588a737f1637e73c8c09d995654
+17eec7bbc9d7: Pull complete 
+Digest: sha256:a0dfb02aac212703bfcb339d77d47ec32c8706ff250850ecc0e19c8737b18567
 Status: Downloaded newer image for hello-world:latest
 
 Hello from Docker!
@@ -29,7 +31,7 @@ Hello from Docker!
 
 ```shell
 $ ./ssh
-[root@localhost ~]# docker version
+[root@docker-28-0-4-centos-stream9 ~]# docker version
 Client: Docker Engine - Community
  Version:           28.0.4
  API version:       1.48
@@ -57,7 +59,7 @@ Server: Docker Engine - Community
  docker-init:
   Version:          0.19.0
   GitCommit:        de40ad0
-[root@localhost ~]# docker info
+[root@docker-28-0-4-centos-stream9 ~]# docker info
 Client: Docker Engine - Community
  Version:    28.0.4
  Context:    default
@@ -71,11 +73,11 @@ Client: Docker Engine - Community
     Path:     /usr/libexec/docker/cli-plugins/docker-compose
 
 Server:
- Containers: 0
+ Containers: 1
   Running: 0
   Paused: 0
-  Stopped: 0
- Images: 0
+  Stopped: 1
+ Images: 1
  Server Version: 28.0.4
  Storage Driver: overlay2
   Backing Filesystem: extfs
@@ -101,14 +103,14 @@ Server:
   seccomp
    Profile: builtin
   cgroupns
- Kernel Version: 5.14.0-580.el9.x86_64
+ Kernel Version: 5.14.0-612.el9.x86_64
  Operating System: CentOS Stream 9
  OSType: linux
  Architecture: x86_64
  CPUs: 2
  Total Memory: 1.917GiB
- Name: localhost.localdomain
- ID: 2d095a79-7092-4af5-977d-4371b359494b
+ Name: docker-28-0-4-centos-stream9
+ ID: 76384a20-aa74-4444-9489-ddf48f2ca267
  Docker Root Dir: /var/lib/docker
  Debug Mode: false
  Experimental: false
@@ -117,7 +119,7 @@ Server:
   127.0.0.0/8
  Live Restore Enabled: false
 
-[root@localhost ~]# sestatus
+[root@docker-28-0-4-centos-stream9 ~]# sestatus
 SELinux status:                 enabled
 SELinuxfs mount:                /sys/fs/selinux
 SELinux root directory:         /etc/selinux
@@ -136,10 +138,10 @@ Max kernel policy version:      33
 
 ```shell
 $ ./ssh
-[root@localhost ~]# sed -i 's/^SELINUX=.*/SELINUX=disabled/' /etc/selinux/config
-[root@localhost ~]# reboot
+[root@docker-28-0-4-centos-stream9 ~]# sed -i 's/^SELINUX=.*/SELINUX=disabled/' /etc/selinux/config
+[root@docker-28-0-4-centos-stream9 ~]# reboot
 $ ./ssh
-[root@localhost ~]# sestatus
+[root@docker-28-0-4-centos-stream9 ~]# sestatus
 SELinux status:                 disabled
 ```
 
@@ -153,5 +155,5 @@ make all DIR=docker/v28.0.4_centos-stream9
 for developers:
 
 ```dockerfile
-FROM ssst0n3/docker_archive:ctr_docker-v28.0.4_centos-stream9_v0.1.0
+FROM ssst0n3/docker_archive:ctr_docker-v28.0.4_centos-stream9_v0.2.0
 ```
