@@ -7,11 +7,18 @@ KEYS_DIR=${SSH_DIR}/keys
 CONFIG_FILE=${SSH_DIR}/config
 INCLUDE_CONFIG_PATH="${PROJECT_DIR}/ssh_config/config"
 INCLUDE_LINE="Include ${INCLUDE_CONFIG_PATH}"
+KEY_FILES=(
+  docker_archive
+  docker_archive_ecdsa-sha2-nistp256
+)
 
 mkdir -p "${KEYS_DIR}"
-cp "${PROJECT_DIR}/ssh_config/docker_archive" "${KEYS_DIR}/"
-cp "${PROJECT_DIR}/ssh_config/docker_archive_ecdsa-sha2-nistp256" "${KEYS_DIR}/"
-chmod -c 600 "${KEYS_DIR}/docker_archive*"
+for file in "${KEY_FILES[@]}"; do
+  src="${PROJECT_DIR}/ssh_config/${file}"
+  dst="${KEYS_DIR}/${file}"
+  cp "$src" "$dst"
+  chmod 600 "$dst"
+done
 
 # Ensure the config file exists
 touch "${CONFIG_FILE}"
