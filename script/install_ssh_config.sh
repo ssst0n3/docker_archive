@@ -11,6 +11,7 @@ INCLUDE_LINE="Include ${INCLUDE_CONFIG_PATH}"
 mkdir -p "${KEYS_DIR}"
 cp "${PROJECT_DIR}/ssh_config/docker_archive" "${KEYS_DIR}/"
 cp "${PROJECT_DIR}/ssh_config/docker_archive_ecdsa-sha2-nistp256" "${KEYS_DIR}/"
+chmod -c 600 "${PROJECT_DIR}/ssh_config/docker_archive*"
 
 # Ensure the config file exists
 touch "${CONFIG_FILE}"
