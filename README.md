@@ -164,6 +164,7 @@ root@localhost:~# docker version
 | [docker-v24.0.5](./docker/v24.0.5/)                                                                   | v0.1.0  |
 | [ubuntu-22.04_docker-v23.0.6](./docker/v23.0.6/)                                                      | v0.1.0  |
 | [docker-v23.0.3](./docker/v23.0.3/)                                                                   | v0.1.0  |
+| [docker-v23.0.0-devicemapper](./docker/v23.0.0-devicemapper/)                                                                   | v0.1.0  |
 | [docker-v23.0.0](./docker/v23.0.0/)                                                                   | v0.1.0  |
 | [docker-v20.10.24](./docker/v20.10.24/)                                                               | v0.1.0  |
 | [docker-v20.10.19](./docker/v20.10.19/)                                                               | v0.1.0  |
