@@ -2014,3 +2014,11 @@ Host cve-2024-0132
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
 
+Host docker-v23.0.0-devicemapper
+    Hostname 127.0.0.1
+    Port 23001
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
