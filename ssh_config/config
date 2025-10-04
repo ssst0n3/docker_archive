@@ -2022,3 +2022,11 @@ Host docker-v23.0.0-devicemapper
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
 
+Host kubernetes-v1.33.1-calico-apparmor
+    Hostname 127.0.0.1
+    Port 13314
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
