@@ -1,0 +1,7 @@
+services:
+  vm:
+    image: ssst0n3/docker_archive:nerdctl-v2.1.2-apparmor_v0.1.0
+    ports:
+        - "21201:22"
+    tty: true
+    stdin_open: true 
