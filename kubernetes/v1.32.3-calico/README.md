@@ -17,6 +17,7 @@ $ docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
 ```
 
 ```shell
+$ until kubectl --kubeconfig=kubeconfig wait --for=condition=Ready pod --all -A --timeout=30s; do sleep 10; done
 $ kubectl --kubeconfig=kubeconfig get pods -A
 NAMESPACE          NAME                                        READY   STATUS    RESTARTS        AGE
 calico-apiserver   calico-apiserver-68b75f8799-82jfk           1/1     Running   1 (3m58s ago)   20m
