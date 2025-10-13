@@ -64,6 +64,7 @@ root@localhost:~# docker version
 | [cve-2024-23650](./vul/cve-2024-23650/) | v0.1.0 | buildkit-v0.12.4 |
 | [cve-2024-0132](./vul/cve-2024-0132/)                                   | v0.1.0  | nvidia-container-toolkit-v1.16.1 |
 | [cve-2022-39253](./vul/cve-2022-39253/)                                 | v0.1.0  |
+| [cve-2022-0492](./vul/cve-2022-0492/)                                   | v0.1.0  |
 | [cve-2020-15257](./vul/cve-2020-15257/)                                 | v0.1.0  | docker-v19.03.13                 |                            |
 | [cve-2016-8867](./vul/cve-2016-8867/)                                   | v0.1.0  | docker-v1.12.2                   |                            |
 | [shocker_docker-v0.7.1](./vul/shocker/shocker_docker-v0.7.1/)           | v0.1.0  |                                  | lxc execdriver             |
