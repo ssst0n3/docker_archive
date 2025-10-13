@@ -2046,3 +2046,11 @@ Host docker-v28.3.2-cron
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
 
+Host cve-2022-0492
+    Hostname 127.0.0.1
+    Port 49200
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
