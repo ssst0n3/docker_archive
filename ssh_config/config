@@ -2054,3 +2054,11 @@ Host cve-2022-0492
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
 
+Host cve-2019-5736
+    Hostname 127.0.0.1
+    Port 57360
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+

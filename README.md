@@ -66,6 +66,7 @@ root@localhost:~# docker version
 | [cve-2022-39253](./vul/cve-2022-39253/)                                 | v0.1.0  |
 | [cve-2022-0492](./vul/cve-2022-0492/)                                   | v0.1.0  |
 | [cve-2020-15257](./vul/cve-2020-15257/)                                 | v0.1.0  | docker-v19.03.13                 |                            |
+| [cve-2019-5736](./vul/cve-2019-5736/)                                   | v0.1.0  | docker-v17.06.0                  |                            |
 | [cve-2016-8867](./vul/cve-2016-8867/)                                   | v0.1.0  | docker-v1.12.2                   |                            |
 | [shocker_docker-v0.7.1](./vul/shocker/shocker_docker-v0.7.1/)           | v0.1.0  |                                  | lxc execdriver             |
 | [shocker_docker-v0.7.2](./vul/shocker/shocker_docker-v0.7.2/)           | v0.1.0  |                                  | lxc(dockerinit) execdriver |
