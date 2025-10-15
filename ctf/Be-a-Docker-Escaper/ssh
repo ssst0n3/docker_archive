@@ -1,0 +1,2 @@
+#!/bin/bash
+sshpass -p ctf ssh -o StrictHostKeyChecking=no -p 25115 ctf@127.0.0.1

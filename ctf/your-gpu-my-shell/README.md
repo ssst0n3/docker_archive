@@ -1,7 +1,7 @@
 # A CTF Challenge: your gpu my shell
 
 * dqd:
-    * ssst0n3/docker_archive:your-gpu-my-shell_ -> ssst0n3/docker_archive:your-gpu-my-shell_v0.1.0
+    * ssst0n3/docker_archive:your-gpu-my-shell -> ssst0n3/docker_archive:your-gpu-my-shell_v0.1.0
     * ssst0n3/docker_archive:your-gpu-my-shell_v0.1.0
 * ctr:
     * ssst0n3/docker_archive:ctr_your-gpu-my-shell -> ssst0n3/docker_archive:ctr_your-gpu-my-shell_v0.1.0

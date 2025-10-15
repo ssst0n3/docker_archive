@@ -1,0 +1,7 @@
+services:
+  vm:
+    image: ssst0n3/docker_archive:be-a-docker-escaper_v0.1.0
+    ports:
+        - "25115:22"
+    tty: true
+    stdin_open: true 
