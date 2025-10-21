@@ -18,13 +18,13 @@ $ docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
 $ kubectl --kubeconfig=kubeconfig wait --for=condition=Ready pod --all -A --field-selector=metadata.namespace=kube-system -l "k8s-app!=kube-dns" --timeout=30s
 $ kubectl --kubeconfig=kubeconfig get pods -A
 NAMESPACE     NAME                                        READY   STATUS    RESTARTS        AGE
-kube-system   coredns-66bc5c9577-rgvzm                    0/1     Pending   0             8m7s
-kube-system   coredns-66bc5c9577-wv9sq                    0/1     Pending   0             8m7s
-kube-system   etcd-kubernetes-1-34-0                      1/1     Running   1 (47s ago)   8m15s
-kube-system   kube-apiserver-kubernetes-1-34-0            1/1     Running   1 (47s ago)   8m15s
-kube-system   kube-controller-manager-kubernetes-1-34-0   1/1     Running   1 (47s ago)   8m15s
-kube-system   kube-proxy-p5l9m                            1/1     Running   1 (47s ago)   8m7s
-kube-system   kube-scheduler-kubernetes-1-34-0            1/1     Running   1 (47s ago)   8m15s
+kube-system   coredns-66bc5c9577-kpjdq                    0/1     Pending   0               10m
+kube-system   coredns-66bc5c9577-kzppj                    0/1     Pending   0               10m
+kube-system   etcd-kubernetes-1-34-0                      1/1     Running   1 (3m47s ago)   10m
+kube-system   kube-apiserver-kubernetes-1-34-0            1/1     Running   1 (3m47s ago)   10m
+kube-system   kube-controller-manager-kubernetes-1-34-0   1/1     Running   1 (3m47s ago)   10m
+kube-system   kube-proxy-gqmnr                            1/1     Running   1 (3m47s ago)   10m
+kube-system   kube-scheduler-kubernetes-1-34-0            1/1     Running   1 (3m47s ago)   10m
 ```
 
 ```shell

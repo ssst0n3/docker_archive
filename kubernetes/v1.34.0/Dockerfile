@@ -24,10 +24,6 @@ RUN sed -i '/exit 1/d' /kind/bin/create-kubelet-cgroup-v2.sh
 RUN --security=insecure ["/sbin/init", "--log-target=kmsg"]
 
 FROM kube_init AS final
-RUN apt update && \
-    apt install -y cloud-init && \
-    apt clean && \
-    rm -rf /var/lib/apt/lists/*
 RUN mkdir -p /root/.kube && \
     cp /etc/kubernetes/admin.conf /root/.kube/config && \
     rm /usr/lib/systemd/system/init.service /init.sh && \
