@@ -18,22 +18,22 @@ $ docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
 $ until kubectl --kubeconfig=kubeconfig wait --for=condition=Ready pod --all -A --timeout=30s; do sleep 10; done
 $ kubectl --kubeconfig=kubeconfig get pods -A
 NAMESPACE          NAME                                        READY   STATUS    RESTARTS        AGE
-calico-apiserver   calico-apiserver-579759b474-6rswk           1/1     Running   1 (2m7s ago)   9m37s
-calico-apiserver   calico-apiserver-579759b474-zmbqq           1/1     Running   1 (2m7s ago)   9m37s
-calico-system      calico-kube-controllers-6849dd4d4d-4ptxs    1/1     Running   1 (2m7s ago)   9m34s
-calico-system      calico-node-kcp7f                           1/1     Running   1 (2m7s ago)   9m34s
-calico-system      calico-typha-669dd47f87-t2fz6               1/1     Running   1 (2m7s ago)   9m34s
-calico-system      csi-node-driver-ggstd                       2/2     Running   2 (2m7s ago)   9m34s
-calico-system      goldmane-64654bd66b-5xwtb                   1/1     Running   1 (2m7s ago)   9m36s
-calico-system      whisker-c64c58759-c86jx                     2/2     Running   2 (2m7s ago)   8m44s
-kube-system        coredns-66bc5c9577-rgvzm                    1/1     Running   1 (2m7s ago)   45m
-kube-system        coredns-66bc5c9577-wv9sq                    1/1     Running   1 (2m7s ago)   45m
-kube-system        etcd-kubernetes-1-34-0                      1/1     Running   2 (2m7s ago)   45m
-kube-system        kube-apiserver-kubernetes-1-34-0            1/1     Running   2 (2m7s ago)   45m
-kube-system        kube-controller-manager-kubernetes-1-34-0   1/1     Running   2 (2m7s ago)   45m
-kube-system        kube-proxy-p5l9m                            1/1     Running   2 (2m7s ago)   45m
-kube-system        kube-scheduler-kubernetes-1-34-0            1/1     Running   2 (2m7s ago)   45m
-tigera-operator    tigera-operator-65cdcdfd6d-b4hgd            1/1     Running   1 (2m7s ago)   9m51s
+calico-apiserver   calico-apiserver-5b5b5985d5-fk6wk           1/1     Running   1 (117s ago)   15m
+calico-apiserver   calico-apiserver-5b5b5985d5-hc5nh           1/1     Running   1 (117s ago)   15m
+calico-system      calico-kube-controllers-7666dd89bb-2n458    1/1     Running   1 (117s ago)   15m
+calico-system      calico-node-6l6h8                           1/1     Running   1 (117s ago)   15m
+calico-system      calico-typha-759cd8fb57-nvbvz               1/1     Running   1 (117s ago)   15m
+calico-system      csi-node-driver-vcmv7                       2/2     Running   2 (117s ago)   15m
+calico-system      goldmane-64654bd66b-6sr99                   1/1     Running   1 (117s ago)   15m
+calico-system      whisker-7f586cccb4-z9tk8                    2/2     Running   2 (117s ago)   14m
+kube-system        coredns-66bc5c9577-kpjdq                    1/1     Running   1 (117s ago)   29m
+kube-system        coredns-66bc5c9577-kzppj                    1/1     Running   1 (117s ago)   29m
+kube-system        etcd-kubernetes-1-34-0                      1/1     Running   2 (117s ago)   29m
+kube-system        kube-apiserver-kubernetes-1-34-0            1/1     Running   2 (117s ago)   29m
+kube-system        kube-controller-manager-kubernetes-1-34-0   1/1     Running   2 (117s ago)   29m
+kube-system        kube-proxy-gqmnr                            1/1     Running   2 (117s ago)   29m
+kube-system        kube-scheduler-kubernetes-1-34-0            1/1     Running   2 (117s ago)   29m
+tigera-operator    tigera-operator-65cdcdfd6d-xmtb8            1/1     Running   1 (117s ago)   15m
 ```
 
 
