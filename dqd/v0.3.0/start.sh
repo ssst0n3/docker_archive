@@ -28,13 +28,25 @@ build_dual_net_args() {
 }
 
 build_cloudinit_args() {
-    cat > /user-data <<EOF
-#cloud-config
-runcmd:
-  - ip addr add ${QEMU_SOCKET_IP}/24 dev eth1
-  - ip link set eth1 up
+#     cat > /user-data <<EOF
+# #cloud-config
+# runcmd:
+#   - ip addr add ${QEMU_SOCKET_IP}/24 dev eth1
+#   - ip link set eth1 up
+# EOF
+
+# setup optional=true to prevent network-online.target stuck 
+    cat > /network-config <<EOF
+network:
+  version: 2
+  ethernets:
+    eth1:
+      dhcp4: false
+      addresses:
+        - ${QEMU_SOCKET_IP}/24
+      optional: true
 EOF
-    cloud-localds /seed.img /user-data
+    cloud-localds --network-config=/network-config /seed.img /dev/null
     echo "-drive file=/seed.img,if=virtio,format=raw"
 }
 
