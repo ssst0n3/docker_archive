@@ -71,6 +71,7 @@ make all DIR=kubernetes/v1.32.3
 ### for developers
 
 ```dockerfile
+# syntax=docker/dockerfile:1-labs
 FROM ssst0n3/docker_archive:ctr_kubernetes-v1.32.3_v0.2.0
 ...
 RUN --security=insecure ["/sbin/init", "--log-target=kmsg"]

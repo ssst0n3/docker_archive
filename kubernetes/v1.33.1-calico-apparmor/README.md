@@ -131,6 +131,7 @@ make all DIR=kubernetes/v1.33.1-calico-apparmor
 ### for developers
 
 ```dockerfile
+# syntax=docker/dockerfile:1-labs
 FROM ssst0n3/docker_archive:ctr_kubernetes-v1.33.1-calico-apparmor_v0.1.0
 ...
 RUN --security=insecure ["/sbin/init", "--log-target=kmsg"]
