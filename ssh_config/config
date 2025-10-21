@@ -2094,3 +2094,19 @@ Host kubernetes-v1.34.0-calico
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
 
+Host kubernetes-v1.34.0-master
+    Hostname 127.0.0.1
+    Port 13404
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
+Host kubernetes-v1.34.0-worker
+    Hostname 127.0.0.1
+    Port 13406
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+

@@ -1,0 +1,19 @@
+services:
+  master:
+    healthcheck:
+      test: ["CMD-SHELL", "pgrep qemu-system-x86_64"]
+      interval: 5s
+      timeout: 3s
+      retries: 3
+      start_period: 60s
+    extends:
+      file: master/docker-compose.yml
+      service: master
+  worker:
+    depends_on: 
+      master:
+        # wait master's qemu listen on :1234
+        condition: service_healthy
+    extends:
+      file: worker/docker-compose.yml 
+      service: worker
