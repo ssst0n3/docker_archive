@@ -2078,3 +2078,11 @@ Host be-a-docker-escaper
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
 
+Host kubernetes-v1.34.0
+    Hostname 127.0.0.1
+    Port 13400
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
