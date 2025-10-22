@@ -1,5 +1,3 @@
-# syntax=docker/dockerfile:1-labs
-
 # k8s version: https://github.com/kubernetes-sigs/kind/blob/v0.30.0/pkg/apis/config/defaults/image.go#L21
 ARG VERSION_K8S=1.34.0
 ARG VERSION_K8S_MAIN=1.34
