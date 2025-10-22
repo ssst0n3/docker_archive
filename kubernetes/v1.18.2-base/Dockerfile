@@ -6,6 +6,8 @@ ARG VERSION_K8S_RELEASE=0.2.7
 ARG VERSION_CONTAINERD=1.3.3
 # https://github.com/kubernetes-sigs/kind/blob/v0.8.1/images/base/Dockerfile#L28
 ARG VERSION_CNI_PLUGINS=0.8.5
+# https://github.com/kubernetes-sigs/kind/blob/v0.8.1/images/base/Dockerfile#L30
+ARG VERSION_CRICTL=1.18.0
 # https://helm.sh/docs/topics/version_skew/
 ARG VERSION_HELM=3.2.4
 ARG VERSION_IMAGE=0.1.0
@@ -14,6 +16,7 @@ ARG URL_ARTIFACT_CNI=https://github.com/containernetworking/plugins/releases/dow
 ARG URL_ARTIFACT_HELM=https://get.helm.sh/helm-v${VERSION_HELM}-linux-amd64.tar.gz
 ARG URL_ARTIFACT_K8S_BIN=https://dl.k8s.io/release/v${VERSION_K8S}/bin/linux/amd64
 ARG URL_ARTIFACT_K8S_RELEASE=https://raw.githubusercontent.com/kubernetes/release/v${VERSION_K8S_RELEASE}
+ARG URL_ARTIFACT_CRICTL=https://github.com/kubernetes-sigs/cri-tools/releases/download/v${VERSION_CRICTL}/crictl-v${VERSION_CRICTL}-linux-amd64.tar.gz
 
 FROM ${BASE_IMAGE}_v${VERSION_IMAGE} AS prerequisite
 ARG URL_ARTIFACT_CNI
@@ -40,6 +43,7 @@ RUN mkdir -p /opt/cni/bin && \
 FROM install_cni AS install_kube
 ARG URL_ARTIFACT_K8S_BIN
 ARG URL_ARTIFACT_K8S_RELEASE
+ARG URL_ARTIFACT_CRICTL
 RUN apt update && \
     apt install -y \
         curl && \
@@ -56,4 +60,6 @@ RUN set -ex && \
         "${URL_ARTIFACT_K8S_RELEASE}/cmd/kubepkg/templates/latest/deb/kubelet/lib/systemd/system/kubelet.service" && \
     mkdir -p /etc/systemd/system/kubelet.service.d && \
     curl -fL --show-error -o /etc/systemd/system/kubelet.service.d/10-kubeadm.conf \
-        "${URL_ARTIFACT_K8S_RELEASE}/cmd/kubepkg/templates/latest/deb/kubeadm/10-kubeadm.conf"
+        "${URL_ARTIFACT_K8S_RELEASE}/cmd/kubepkg/templates/latest/deb/kubeadm/10-kubeadm.conf" && \
+    curl -L ${URL_ARTIFACT_CRICTL} | tar -C /usr/bin/ -xz
+
