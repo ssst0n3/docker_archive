@@ -1,6 +1,8 @@
 #!/bin/bash
 
 cp /trick /var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/snapshots -r
+systemctl enable --now containerd
+systemctl enable --now kubelet
 # wait pods ready
 until kubectl wait --for=condition=Ready pod --all -A --field-selector=metadata.namespace=kube-system -l "k8s-app!=kube-dns" --timeout=5s; do sleep 1; done >>/dev/kmsg 2>&1
 

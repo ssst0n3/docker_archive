@@ -14,6 +14,8 @@ RUN systemctl enable init.service
 # https://github.com/systemd/systemd/blob/v245.4/src/basic/virt.c#L503
 ENV container=docker
 
+RUN systemctl disable kubelet && \
+    systemctl disable containerd
 RUN --mount=type=cache,id=kubernetes-v1.18.2-snapshots,target=/trick \
     cp /var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/snapshots /trick -r
 # kubeadm init under ext4 fs
