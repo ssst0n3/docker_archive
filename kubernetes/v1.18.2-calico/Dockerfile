@@ -13,6 +13,9 @@ RUN systemctl enable init.service
 # a trick to allow `systemctl exit 0` is setup the env container
 # https://github.com/systemd/systemd/blob/v245.4/src/basic/virt.c#L503
 ENV container=docker
+
+RUN --mount=type=cache,id=kubernetes-v1.18.2-snapshots,target=/trick \
+    cp /var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/snapshots /trick -r
 # kubeadm init under ext4 fs
 RUN --mount=type=cache,id=kubernetes-v1.18.2-snapshots,target=/var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/snapshots \
     --security=insecure \
