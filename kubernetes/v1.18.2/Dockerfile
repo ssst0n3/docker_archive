@@ -29,7 +29,7 @@ RUN --mount=type=cache,id=kubernetes-v1.18.2-snapshots,target=/var/lib/container
     ["/sbin/init", "--log-target=kmsg"]
 # copy snapshots from cache
 RUN --mount=type=cache,id=kubernetes-v1.18.2-snapshots,target=/trick \
-    cp /trick /var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/snapshots -r
+    cp /trick/* /var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/snapshots/ -r
 
 FROM kube_init AS final
 RUN mkdir -p /root/.kube && \
