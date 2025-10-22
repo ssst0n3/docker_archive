@@ -46,7 +46,8 @@ ARG URL_ARTIFACT_K8S_RELEASE
 ARG URL_ARTIFACT_CRICTL
 RUN apt update && \
     apt install -y \
-        curl && \
+        curl \
+        iproute2 && \
     apt clean && \
     rm -rf /var/lib/apt/lists/*
 # install kubeadm, kubelet, kubectl
