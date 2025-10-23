@@ -1,3 +1,4 @@
+# syntax=docker/dockerfile:1-labs
 ARG VERSION_K8S=1.18.2
 ARG VERSION_K8S_MAIN=1.18
 # https://github.com/kubernetes/website/blob/release-1.18/content/en/docs/setup/production-environment/tools/kubeadm/install-kubeadm.md?plain=1#L254
@@ -71,3 +72,8 @@ RUN set -ex && \
     mkdir -p /etc/systemd/system/kubelet.service.d && \
     curl -fL --show-error -o /etc/systemd/system/kubelet.service.d/10-kubeadm.conf \
         "${URL_ARTIFACT_K8S_RELEASE}/cmd/kubepkg/templates/latest/deb/kubeadm/10-kubeadm.conf"
+
+FROM install_kube AS preflight
+ARG VERSION_K8S
+COPY --chmod=755 pull.sh /tmp/
+RUN --security=insecure /tmp/pull.sh
