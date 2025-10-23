@@ -39,8 +39,8 @@ docker buildx --builder docker-archive-builder prune --filter type=exec.cachemou
 mkdir -p modules
 cp /lib/modules/$(uname -r) modules/$(uname -r) -r
 docker buildx build \
-    --add-host kubernetes-1-34-0:10.0.2.16 \
-    --build-arg BUILDKIT_SANDBOX_HOSTNAME=kubernetes-1-34-0-worker \
+    --add-host kubernetes-1-18-2:10.0.2.16 \
+    --build-arg BUILDKIT_SANDBOX_HOSTNAME=kubernetes-1-18-2-worker \
     --progress=plain \
     --builder docker-archive-builder2 \
     --allow security.insecure \
