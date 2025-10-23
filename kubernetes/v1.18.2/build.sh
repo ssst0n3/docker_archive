@@ -26,7 +26,7 @@ docker buildx --builder docker-archive-builder prune --filter type=exec.cachemou
 mkdir -p modules
 cp /lib/modules/$(uname -r) modules/$(uname -r) -r
 docker buildx build \
-    --build-arg CACHE_BUST=${date +%s} \
+    --build-arg CACHE_BUST=$(date +%s) \
     --build-arg BUILDKIT_SANDBOX_HOSTNAME=kubernetes-1-18-2 \
     --progress=plain --builder docker-archive-builder \
     --allow security.insecure \
