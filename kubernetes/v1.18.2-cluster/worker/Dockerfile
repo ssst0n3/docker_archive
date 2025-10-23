@@ -8,6 +8,7 @@ ARG BASE_IMAGE=ssst0n3/docker_archive:ctr_kubernetes-v${VERSION_K8S}-base
 FROM ${BASE_IMAGE}_v${VERSION_IMAGE} AS pre
 ARG HOSTNAME
 RUN echo ${HOSTNAME} > /etc/hostname
+COPY kubeadm.conf /kind/
 COPY kubeconfig /etc/kubernetes/admin.conf
 COPY --chmod=755 service/init.sh /init.sh
 COPY service/init.service /usr/lib/systemd/system/
