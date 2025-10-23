@@ -18,6 +18,8 @@ ENV container=docker
 # copy image snapshots
 RUN --mount=type=cache,id=kubernetes-v1.18.2-snapshots,target=/trick \
     cp -r /var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/* /trick/
+ARG CACHE_BUST
+RUN echo "No cache from here, value: $CACHE_BUST"
 # wait join
 RUN --mount=type=cache,id=kubernetes-v1.18.2-snapshots,target=/var/lib/containerd/io.containerd.snapshotter.v1.overlayfs \
     --security=insecure \
