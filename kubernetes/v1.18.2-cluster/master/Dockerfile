@@ -6,10 +6,7 @@ ARG BASE_IMAGE=ssst0n3/docker_archive:ctr_kubernetes-v${VERSION_K8S}-calico
 FROM ${BASE_IMAGE}_v${VERSION_IMAGE} AS pre
 COPY --chmod=755 service/init.sh /init.sh
 COPY service/init.service /usr/lib/systemd/system/
-COPY --chmod=755 service/setup-hosts.sh /setup-hosts.sh
-COPY service/setup-hosts.service /usr/lib/systemd/system/
-RUN systemctl enable init.service && \
-    systemctl reenable setup-hosts.service
+RUN systemctl enable init.service
 
 FROM pre AS wait-join
 # there seems a bug in systemd when executing `systemctl exit 0`:
