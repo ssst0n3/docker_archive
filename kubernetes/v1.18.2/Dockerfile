@@ -17,6 +17,9 @@ RUN systemctl enable kubelet.service && \
     systemctl enable init.service
 ENV KUBECONFIG=/etc/kubernetes/admin.conf
 
+ARG CACHE_BUST=$(date +%s)
+RUN echo "No cache from here, value: $CACHE_BUST"
+
 # there seems a bug in systemd when executing `systemctl exit 0`:
 #   ExitCode can only be set for user service managers or in containers.
 # a trick to allow `systemctl exit 0` is setup the env container
