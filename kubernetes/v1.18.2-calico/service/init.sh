@@ -4,6 +4,10 @@ log() {
   echo "[docker-archive/kubernetes/v1.18.2-calico] $1" >> /dev/kmsg
 }
 
+# fix kube-proxy(privileged): `failed to write "a *:* rwm" to devices.allow: operation not permitted`
+umount /sys/fs/cgroup/devices
+mount -t cgroup -o devices none /sys/fs/cgroup/devices
+
 log "wait pods ready"
 until kubectl wait --for=condition=Ready pod --all -A --field-selector=metadata.namespace=kube-system -l "k8s-app!=kube-dns" --timeout=5s; do sleep 1; done >>/dev/kmsg 2>&1
 
