@@ -2134,3 +2134,19 @@ Host kubernetes-v1.18.2-calico
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
 
+Host kubernetes-v1.18.2-master
+    Hostname 127.0.0.1
+    Port 11824
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
+Host kubernetes-v1.18.2-worker
+    Hostname 127.0.0.1
+    Port 11826
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
