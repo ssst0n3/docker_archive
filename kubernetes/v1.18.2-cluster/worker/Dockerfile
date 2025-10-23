@@ -9,7 +9,7 @@ FROM ${BASE_IMAGE}_v${VERSION_IMAGE} AS pre
 ARG HOSTNAME
 RUN echo ${HOSTNAME} > /etc/hostname
 COPY service/kubeadm.conf /kind/
-# COPY kubeconfig /etc/kubernetes/admin.conf
+COPY kubeconfig /etc/kubernetes/admin.conf
 COPY --chmod=755 service/init.sh /init.sh
 COPY service/init.service /usr/lib/systemd/system/
 COPY --chmod=755 service/hosts.sh /hosts.sh
