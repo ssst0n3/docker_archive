@@ -21,6 +21,12 @@ ARG URL_ARTIFACT_CRICTL=https://github.com/kubernetes-sigs/cri-tools/releases/do
 
 FROM ${BASE_IMAGE}_v${VERSION_IMAGE} AS prerequisite
 ARG URL_ARTIFACT_CNI
+RUN apt update && \
+    apt install -y \
+        curl \
+        iproute2 && \
+    apt clean && \
+    rm -rf /var/lib/apt/lists/*
 # ipv4 forwarding
 RUN echo "net.ipv4.ip_forward = 1" > /etc/sysctl.d/k8s.conf 
     # not work in dockerfile
@@ -51,12 +57,6 @@ FROM install_crictl AS install_kube
 ARG URL_ARTIFACT_K8S_BIN
 ARG URL_ARTIFACT_K8S_RELEASE
 ARG DIR_BIN
-RUN apt update && \
-    apt install -y \
-        curl \
-        iproute2 && \
-    apt clean && \
-    rm -rf /var/lib/apt/lists/*
 # install kubeadm, kubelet, kubectl
 # https://github.com/kubernetes/website/blob/release-1.18/content/en/docs/setup/production-environment/tools/kubeadm/install-kubeadm.md
 # https://kubernetes.io/blog/2023/08/15/pkgs-k8s-io-introduction/#where-can-i-get-packages-for-kubernetes-versions-prior-to-v1-24-0
