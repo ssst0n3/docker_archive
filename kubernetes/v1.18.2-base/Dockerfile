@@ -25,7 +25,8 @@ ARG URL_ARTIFACT_CNI
 RUN apt update && \
     apt install -y \
         curl \
-        iproute2 && \
+        iproute2 \
+        iptables && \
     apt clean && \
     rm -rf /var/lib/apt/lists/*
 # ipv4 forwarding
