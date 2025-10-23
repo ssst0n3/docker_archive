@@ -1,18 +1,32 @@
 #!/bin/bash
 
-# wait pods ready
+log() {
+  echo "[docker-archive/kubernetes/v1.18.2-calico] $1" >> /dev/kmsg
+}
+
+log "stop kubelet"
+systemctl stop kubelet
+
+# fix kube-proxy(privileged): `failed to write "a *:* rwm" to devices.allow: operation not permitted`
+log "fix cgroups"
+umount /sys/fs/cgroup/devices
+mount -t cgroup -o devices none /sys/fs/cgroup/devices
+
+log "start kubelet"
+systemctl start kubelet
+
+log "wait pods ready"
 until kubectl wait --for=condition=Ready pod --all -A --field-selector=metadata.namespace=kube-system -l "k8s-app!=kube-dns" --timeout=5s; do sleep 1; done >>/dev/kmsg 2>&1
 
-# install network addon
+log "install network addon"
 # https://docs.tigera.io/archive/v3.18/getting-started/kubernetes/requirements#kernel-dependencies
 kubectl create -f https://docs.projectcalico.org/archive/v3.16/manifests/tigera-operator.yaml
 kubectl create -f https://docs.projectcalico.org/archive/v3.16/manifests/custom-resources.yaml
 
-# wait pods ready
-echo "Waiting for all pods ready" >> /dev/kmsg
+log "Waiting for all pods ready"
 until kubectl wait --for=condition=Ready pod --all -A --timeout=5s; do sleep 1; done >>/dev/kmsg 2>&1
 
-# remove unused containers
+log "remove unused containers"
 crictl rm $(crictl ps -a -q) >>/dev/kmsg 2>&1
 
 # prevent data lost
