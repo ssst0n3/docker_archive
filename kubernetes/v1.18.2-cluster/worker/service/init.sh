@@ -11,7 +11,7 @@ mount -t cgroup -o devices none /sys/fs/cgroup/devices
 log "kubeadm join"
 kubeadm join 10.0.2.16:6443 --skip-phases=preflight \
   --token abcdef.0123456789abcdef \
-  --discovery-token-ca-cert-hash sha256:46f6dfd51994a2c95cf7159ae4c2c4e86229a95533819c62d71c755017e3e537 >> /dev/kmsg
+  --discovery-token-ca-cert-hash sha256:ce21591a4de607099b7c02f66bddc0e430eed665cd4f8b1c4d62e7deed6761f3 >> /dev/kmsg
 
 log "Waiting for all pods ready"
 until kubectl wait --for=condition=Ready pod --all -A --timeout=5s; do sleep 1; done >>/dev/kmsg 2>&1
