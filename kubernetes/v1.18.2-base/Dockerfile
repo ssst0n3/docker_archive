@@ -11,7 +11,8 @@ ARG VERSION_CRICTL=1.18.0
 # https://helm.sh/docs/topics/version_skew/
 ARG VERSION_HELM=3.2.4
 ARG VERSION_IMAGE=0.1.0
-ARG DIR_BIN=/usr/local/bin
+# the kubelet.service relies on '/usr/bin/kubelet'
+ARG DIR_BIN=/usr/bin
 ARG BASE_IMAGE=ssst0n3/docker_archive:ctr_containerd-v${VERSION_CONTAINERD}
 ARG URL_ARTIFACT_CNI=https://github.com/containernetworking/plugins/releases/download/v${VERSION_CNI_PLUGINS}/cni-plugins-linux-amd64-v${VERSION_CNI_PLUGINS}.tgz
 ARG URL_ARTIFACT_HELM=https://get.helm.sh/helm-v${VERSION_HELM}-linux-amd64.tar.gz
