@@ -39,7 +39,7 @@ RUN --mount=type=cache,id=kubernetes-v1.18.2-snapshots,target=/var/lib/container
 # fix: `#20 5.255 cp: cannot create special file '/var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/snapshots/27/fs/var/cache/debconf/config.dat': Operation not permitted`
 RUN --mount=type=cache,id=kubernetes-v1.18.2-snapshots,target=/trick \
     --security=insecure \
-    cp -rf /trick/* /var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/
+    cp -rf /trick/* /var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/ || true
 
 FROM kube_init AS final
 RUN mkdir -p /root/.kube && \
