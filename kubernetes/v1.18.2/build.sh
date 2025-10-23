@@ -21,7 +21,8 @@ docker buildx create --driver-opt "network=docker-archive-bridge" --name docker-
     --buildkitd-flags "--allow-insecure-entitlement security.insecure"
 
 docker buildx --builder docker-archive-builder prune --filter type=exec.cachemount -f || true
-cp /lib/modules modules -r
+mkdir -p modules
+cp /lib/modules/$(uname -r) modules/$(uname -r) -r
 docker buildx build \
     --build-arg BUILDKIT_SANDBOX_HOSTNAME=kubernetes-1-18-2 \
     --progress=plain --builder docker-archive-builder \
