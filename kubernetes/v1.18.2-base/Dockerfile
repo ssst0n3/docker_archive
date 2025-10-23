@@ -68,6 +68,4 @@ RUN set -ex && \
         "${URL_ARTIFACT_K8S_RELEASE}/cmd/kubepkg/templates/latest/deb/kubelet/lib/systemd/system/kubelet.service" && \
     mkdir -p /etc/systemd/system/kubelet.service.d && \
     curl -fL --show-error -o /etc/systemd/system/kubelet.service.d/10-kubeadm.conf \
-        "${URL_ARTIFACT_K8S_RELEASE}/cmd/kubepkg/templates/latest/deb/kubeadm/10-kubeadm.conf" && \
-
-
+        "${URL_ARTIFACT_K8S_RELEASE}/cmd/kubepkg/templates/latest/deb/kubeadm/10-kubeadm.conf"
