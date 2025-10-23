@@ -17,17 +17,17 @@ $ docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
 ```shell
 $ kubectl --kubeconfig=kubeconfig get pods -A
 NAMESPACE         NAME                                        READY   STATUS    RESTARTS   AGE
-calico-system     calico-kube-controllers-57f767d97b-fcvxn    1/1     Running   1          22m
-calico-system     calico-node-gvf7b                           1/1     Running   1          22m
-calico-system     calico-typha-759ff4749f-snhqh               1/1     Running   1          22m
-kube-system       coredns-66bff467f8-6nfh6                    1/1     Running   1          75m
-kube-system       coredns-66bff467f8-vcdk2                    1/1     Running   1          75m
-kube-system       etcd-kubernetes-1-18-2                      1/1     Running   2          75m
-kube-system       kube-apiserver-kubernetes-1-18-2            1/1     Running   2          75m
-kube-system       kube-controller-manager-kubernetes-1-18-2   1/1     Running   2          75m
-kube-system       kube-proxy-lk8pg                            1/1     Running   2          75m
-kube-system       kube-scheduler-kubernetes-1-18-2            1/1     Running   2          75m
-tigera-operator   tigera-operator-6ddb54fbf5-fnrhx            1/1     Running   2          22m
+calico-system     calico-kube-controllers-57f767d97b-k895s    1/1     Running   1          15m
+calico-system     calico-node-rj4b5                           1/1     Running   1          15m
+calico-system     calico-typha-58d98468d6-tqwgk               1/1     Running   2          15m
+kube-system       coredns-66bff467f8-47gvn                    1/1     Running   1          29m
+kube-system       coredns-66bff467f8-ztcgw                    1/1     Running   1          29m
+kube-system       etcd-kubernetes-1-18-2                      1/1     Running   2          29m
+kube-system       kube-apiserver-kubernetes-1-18-2            1/1     Running   2          29m
+kube-system       kube-controller-manager-kubernetes-1-18-2   1/1     Running   2          29m
+kube-system       kube-proxy-n2xtn                            1/1     Running   2          29m
+kube-system       kube-scheduler-kubernetes-1-18-2            1/1     Running   2          29m
+tigera-operator   tigera-operator-6ddb54fbf5-ppb6x            1/1     Running   2          15m
 ```
 
 
