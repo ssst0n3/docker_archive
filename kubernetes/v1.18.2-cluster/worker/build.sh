@@ -1,9 +1,32 @@
 #!/bin/bash
 #!/bin/bash
 set -x
-# fix kube-proxy `write /sys/module/nf_conntrack/parameters/hashsize: operation not supported`
+# fix kube-proxy:
+# I1023 18:54:00.427350       1 conntrack.go:100] Set sysctl 'net/netfilter/nf_conntrack_max' to 786432
+# F1023 18:54:00.427422       1 server.go:497] open /proc/sys/net/netfilter/nf_conntrack_max: permission denied
+# `write /sys/module/nf_conntrack/parameters/hashsize: operation not supported`
 # https://blog.michali.net/2017/08/09/ipv6-support-for-docker-in-docker/
 # https://github.com/kubernetes/kubernetes/blob/v1.18.2/cmd/kube-proxy/app/conntrack.go#L60-L66
+fix_nf_conntrack_max() {
+  local SYSCTL_PATH="/proc/sys/net/netfilter/nf_conntrack_max"
+  local PER=32768
+  local NUM_CPU
+  local VALUE
+
+  NUM_CPU=$(nproc --all 2>/dev/null || grep -c '^processor' /proc/cpuinfo)
+
+  VALUE=$(( PER * NUM_CPU ))
+
+  echo "Setting nf_conntrack_max to ${VALUE} (PER=${PER} × NUM_CPU=${NUM_CPU})"
+
+  if [[ -w "${SYSCTL_PATH}" ]]; then
+    echo "${VALUE}" > "${SYSCTL_PATH}"
+  else
+    echo "Error: Cannot write to ${SYSCTL_PATH}. Try running as root." >&2
+    return 1
+  fi
+}
+
 fix_nf_conntrack_hashsize() {
   local PARAM_PATH="/sys/module/nf_conntrack/parameters/hashsize"
   local SYSCTL_PATH="/proc/sys/net/netfilter/nf_conntrack_max"
@@ -26,6 +49,7 @@ fix_nf_conntrack_hashsize() {
   fi
 }
 
+fix_nf_conntrack_max
 fix_nf_conntrack_hashsize
 
 # https://docs.docker.com/build/builders/drivers/docker-container/#custom-network
