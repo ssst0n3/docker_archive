@@ -17,7 +17,7 @@ RUN systemctl enable kubelet.service && \
     systemctl enable init.service
 ENV KUBECONFIG=/etc/kubernetes/admin.conf
 
-ARG CACHE_BUST=$(date +%s)
+ARG CACHE_BUST
 RUN echo "No cache from here, value: $CACHE_BUST"
 
 # there seems a bug in systemd when executing `systemctl exit 0`:
