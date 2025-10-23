@@ -1,0 +1,12 @@
+services:
+  worker:
+    image: ssst0n3/docker_archive:kubernetes-v1.18.2-worker_v0.1.0
+    environment:
+      - "QEMU_DUAL_NET=1"
+      - "QEMU_SOCKET_CONNECT=master:1234"
+      - "QEMU_SOCKET_IP=10.0.2.17"
+    ports:
+        - "11826:22"
+        - "11827:6443"
+    tty: true
+    stdin_open: true 
