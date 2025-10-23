@@ -5,7 +5,8 @@ ARG VERSION_IMAGE=0.1.0
 FROM ${BASE_IMAGE}_v${VERSION_IMAGE} AS pre
 COPY --chmod=755 service/init.sh /init.sh
 COPY service/init.service /usr/lib/systemd/system/
-RUN systemctl enable init.service
+RUN systemctl enable init.service && \
+    systemctl disable kubelet.service
 
 FROM pre AS calico
 # there seems a bug in systemd when executing `systemctl exit 0`:
