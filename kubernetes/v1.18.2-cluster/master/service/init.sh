@@ -16,7 +16,7 @@ log "wait pods ready"
 until kubectl wait --for=condition=Ready pod --all -A --timeout=5s; do sleep 1; done >>/dev/kmsg 2>&1
 
 log "Waiting for at least one worker node to become Ready."
-until [ "$(kubectl get nodes -l '!node-role.kubernetes.io/control-plane' --no-headers 2>/dev/null | grep -c ' Ready ' || true)" -ge 1 ]; do
+until [ "$(kubectl get nodes -l '!node-role.kubernetes.io/master' --no-headers 2>/dev/null | grep -c ' Ready ' || true)" -ge 1 ]; do
   sleep 3
 done
 
