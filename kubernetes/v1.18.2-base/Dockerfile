@@ -11,6 +11,7 @@ ARG VERSION_CRICTL=1.18.0
 # https://helm.sh/docs/topics/version_skew/
 ARG VERSION_HELM=3.2.4
 ARG VERSION_IMAGE=0.1.0
+ARG DIR_BIN=/usr/local/bin
 ARG BASE_IMAGE=ssst0n3/docker_archive:ctr_containerd-v${VERSION_CONTAINERD}
 ARG URL_ARTIFACT_CNI=https://github.com/containernetworking/plugins/releases/download/v${VERSION_CNI_PLUGINS}/cni-plugins-linux-amd64-v${VERSION_CNI_PLUGINS}.tgz
 ARG URL_ARTIFACT_HELM=https://get.helm.sh/helm-v${VERSION_HELM}-linux-amd64.tar.gz
@@ -40,10 +41,16 @@ RUN mkdir -p /opt/cni/bin && \
     tar Cxzvf /opt/cni/bin /tmp/cni-plugins.tgz && \
     rm /tmp/cni-plugins.tgz
 
-FROM install_cni AS install_kube
+FROM install_cni AS install_crictl
+ARG URL_ARTIFACT_CRICTL
+ARG DIR_BIN
+RUN curl -L ${URL_ARTIFACT_CRICTL} | tar -C ${DIR_BIN} -xz && \
+    echo 'runtime-endpoint: unix:///var/run/containerd/containerd.sock' > /etc/crictl.yaml
+
+FROM install_crictl AS install_kube
 ARG URL_ARTIFACT_K8S_BIN
 ARG URL_ARTIFACT_K8S_RELEASE
-ARG URL_ARTIFACT_CRICTL
+ARG DIR_BIN
 RUN apt update && \
     apt install -y \
         curl \
@@ -54,7 +61,7 @@ RUN apt update && \
 # https://github.com/kubernetes/website/blob/release-1.18/content/en/docs/setup/production-environment/tools/kubeadm/install-kubeadm.md
 # https://kubernetes.io/blog/2023/08/15/pkgs-k8s-io-introduction/#where-can-i-get-packages-for-kubernetes-versions-prior-to-v1-24-0
 RUN set -ex && \
-    cd /usr/bin && \
+    cd ${DIR_BIN} && \
     curl -L --remote-name-all ${URL_ARTIFACT_K8S_BIN}/{kubeadm,kubelet,kubectl} && \
     chmod +x kubeadm kubelet kubectl && \
     curl -fL --show-error -o /etc/systemd/system/kubelet.service \
@@ -62,5 +69,5 @@ RUN set -ex && \
     mkdir -p /etc/systemd/system/kubelet.service.d && \
     curl -fL --show-error -o /etc/systemd/system/kubelet.service.d/10-kubeadm.conf \
         "${URL_ARTIFACT_K8S_RELEASE}/cmd/kubepkg/templates/latest/deb/kubeadm/10-kubeadm.conf" && \
-    curl -L ${URL_ARTIFACT_CRICTL} | tar -C /usr/bin/ -xz
+
 
