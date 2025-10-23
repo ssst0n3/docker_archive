@@ -6,6 +6,10 @@ log() {
 
 hostnamectl set-hostname kubernetes-1-18-2
 
+# fix kube-proxy(privileged): `failed to write "a *:* rwm" to devices.allow: operation not permitted`
+umount /sys/fs/cgroup/devices
+mount -t cgroups -o devices none /sys/fs/cgroup/devices
+
 log "kubeadm init"
 kubeadm init --skip-phases=preflight --config=/kind/kubeadm.conf --skip-token-print --v=6 > /dev/kmsg 2>&1
 log "taint"
