@@ -25,6 +25,8 @@ ENV container=docker
 
 # kubeadm init under ext4 fs
 RUN --mount=type=cache,id=kubernetes-v1.18.2-snapshots,target=/var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/snapshots \
+    # fix kube-proxy `Failed to load kernel module`
+    --mount=type=bind,src=/modules,target=/lib/modules \
     --security=insecure \
     ["/sbin/init", "--log-target=kmsg"]
 # copy snapshots from cache
