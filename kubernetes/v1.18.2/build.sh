@@ -5,14 +5,16 @@ set -x
 # https://github.com/kubernetes/kubernetes/blob/v1.18.2/cmd/kube-proxy/app/conntrack.go#L60-L66
 PARAM_PATH="/sys/module/nf_conntrack/parameters/hashsize"
 SYSCTL_PATH="/proc/sys/net/netfilter/nf_conntrack_max"
+
 MAX=$(< "$SYSCTL_PATH")
 TARGET_HASHSIZE=$(( MAX / 4 ))
 CURRENT_HASHSIZE=$(< "$PARAM_PATH")
-if (( CURRENT_HASH < TARGET_HASH )); then
-  echo "update nf_conntrack hashsize to $TARGET_HASH"
-  echo "$TARGET_HASH" > "$PARAM_PATH"
+
+if (( CURRENT_HASHSIZE < TARGET_HASHSIZE )); then
+  echo "update nf_conntrack hashsize to $TARGET_HASHSIZE"
+  echo "$TARGET_HASHSIZE" > "$PARAM_PATH"
 else
-  echo "current hashsize is enough"
+  echo "current hashsize ($CURRENT_HASHSIZE) is enough"
 fi
 
 # https://docs.docker.com/build/builders/drivers/docker-container/#custom-network
