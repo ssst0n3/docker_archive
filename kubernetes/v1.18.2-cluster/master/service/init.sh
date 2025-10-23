@@ -23,6 +23,11 @@ done
 log "Waiting for all pods ready"
 until kubectl wait --for=condition=Ready pod --all -A --timeout=5s; do sleep 1; done >>/dev/kmsg 2>&1
 
+log "Waiting for all worker nodes down..."
+until ! kubectl get nodes -l '!node-role.kubernetes.io/master' --no-headers 2>/dev/null | grep -q " Ready "; do
+  sleep 3
+done
+
 log "remove unused containers"
 crictl rm $(crictl ps -a -q) >>/dev/kmsg 2>&1
 
