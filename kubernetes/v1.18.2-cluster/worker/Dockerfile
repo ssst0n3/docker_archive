@@ -15,7 +15,7 @@ COPY --chmod=755 service/hosts.sh /hosts.sh
 # fix systemd-245 systemd-shutdown hangs on containerd-shim
 # https://github.com/k3s-io/k3s/issues/6218
 COPY service/cgroup-kill.service /usr/lib/systemd/system/cgroup-kill.service
-RUN systemctl enable kubelet.service && \
+RUN systemctl disable kubelet.service && \
     systemctl enable init.service && \
     systemctl enable cgroup-kill.service
 

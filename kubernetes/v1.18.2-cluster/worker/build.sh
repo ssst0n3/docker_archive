@@ -1,7 +1,8 @@
 #!/bin/bash
 #!/bin/bash
 set -x
-
+# fix kubelet `failed to run Kubelet: running with swap on is not supported, please disable swap! or set --fail-swap-on flag to false`
+swapoff -a
 # fix kube-proxy `write /sys/module/nf_conntrack/parameters/hashsize: operation not supported`
 # https://blog.michali.net/2017/08/09/ipv6-support-for-docker-in-docker/
 # https://github.com/kubernetes/kubernetes/blob/v1.18.2/cmd/kube-proxy/app/conntrack.go#L60-L66

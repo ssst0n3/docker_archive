@@ -8,6 +8,9 @@ log "fix cgroups"
 umount /sys/fs/cgroup/devices
 mount -t cgroup -o devices none /sys/fs/cgroup/devices
 
+log "start kubelet"
+systemctl enable --now kubelet.service
+
 log "kubeadm join"
 kubeadm join 10.0.2.16:6443 --skip-phases=preflight \
   --token abcdef.0123456789abcdef \
