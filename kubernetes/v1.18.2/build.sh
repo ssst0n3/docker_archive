@@ -6,8 +6,14 @@ set -x
 PARAM_PATH="/sys/module/nf_conntrack/parameters/hashsize"
 SYSCTL_PATH="/proc/sys/net/netfilter/nf_conntrack_max"
 MAX=$(< "$SYSCTL_PATH")
-HASH_SIZE=$(( MAX / 4 ))
-echo "$HASH_SIZE" > "$PARAM_PATH"
+TARGET_HASHSIZE=$(( MAX / 4 ))
+CURRENT_HASHSIZE=$(< "$PARAM_PATH")
+if (( CURRENT_HASH < TARGET_HASH )); then
+  echo "update nf_conntrack hashsize to $TARGET_HASH"
+  echo "$TARGET_HASH" > "$PARAM_PATH"
+else
+  echo "current hashsize is enough"
+fi
 
 # https://docs.docker.com/build/builders/drivers/docker-container/#custom-network
 docker network create --subnet 10.0.2.0/24 --ip-range 10.0.2.16/28 --gateway 10.0.2.1 docker-archive-bridge
