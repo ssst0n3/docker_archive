@@ -12,8 +12,12 @@ COPY kubeconfig /etc/kubernetes/admin.conf
 COPY --chmod=755 service/init.sh /init.sh
 COPY service/init.service /usr/lib/systemd/system/
 COPY --chmod=755 service/hosts.sh /hosts.sh
+# fix systemd-245 systemd-shutdown hangs on containerd-shim
+# https://github.com/k3s-io/k3s/issues/6218
+COPY service/cgroup-kill.service /usr/lib/systemd/system/cgroup-kill.service
 RUN systemctl enable kubelet.service && \
-    systemctl enable init.service
+    systemctl enable init.service && \
+    systemctl enable cgroup-kill.service
 
 FROM pre AS join
 # there seems a bug in systemd when executing `systemctl exit 0`:
