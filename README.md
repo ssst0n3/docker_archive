@@ -61,11 +61,12 @@ root@localhost:~# docker version
 | [cve-2025-23266](./vul/cve-2025-23266/)                                 | v0.9.0  | nvidia-container-toolkit-v1.17.6 |                            |
 | [cve-2025-47290](./vul/cve-2025-47290/)                                 | v0.1.0  | containerd-v2.1.0                |                            |
 | [cve-2025-1974](./vul/cve-2025-1974/)                                   | v0.1.0  | ingress-nginx-v1.11.3            |                            |
-| [cve-2024-23650](./vul/cve-2024-23650/) | v0.1.0 | buildkit-v0.12.4 |
+| [cve-2024-23650](./vul/cve-2024-23650/)                                 | v0.1.0  | buildkit-v0.12.4                 |
 | [cve-2024-0132](./vul/cve-2024-0132/)                                   | v0.1.0  | nvidia-container-toolkit-v1.16.1 |
 | [cve-2022-39253](./vul/cve-2022-39253/)                                 | v0.1.0  |
 | [cve-2022-0492](./vul/cve-2022-0492/)                                   | v0.1.0  |
 | [cve-2020-15257](./vul/cve-2020-15257/)                                 | v0.1.0  | docker-v19.03.13                 |                            |
+| [cve-2020-8558](./vul/cve-2020-8558/)                                   | v0.1.0  | kubernetes-v1.18.2-cluster       |                            |
 | [cve-2019-5736](./vul/cve-2019-5736/)                                   | v0.1.0  | docker-v17.06.0                  |                            |
 | [cve-2016-8867](./vul/cve-2016-8867/)                                   | v0.1.0  | docker-v1.12.2                   |                            |
 | [shocker_docker-v0.7.1](./vul/shocker/shocker_docker-v0.7.1/)           | v0.1.0  |                                  | lxc execdriver             |
