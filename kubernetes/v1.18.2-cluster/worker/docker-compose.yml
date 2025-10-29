@@ -5,6 +5,8 @@ services:
       - "QEMU_DUAL_NET=1"
       - "QEMU_SOCKET_CONNECT=master:1234"
       - "QEMU_SOCKET_IP=10.0.2.17"
+      - "QEMU_MAC_ADDR_0=52:54:00:12:34:58"
+      - "QEMU_MAC_ADDR_1=52:54:00:12:34:59"
     ports:
         - "11826:22"
         - "11827:6443"

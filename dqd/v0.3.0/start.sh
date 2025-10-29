@@ -14,6 +14,9 @@ build_default_net_args() {
     # Additional port forwarding, if defined
     [ -n "${QEMU_HOSTFWD:-}" ] && opts="${opts},${QEMU_HOSTFWD}"
 
+    # Set MAC address for the first NIC, if defined
+    [ -n "${QEMU_MAC_ADDR_0:-}" ] && opts="${opts},mac=${QEMU_MAC_ADDR_0}"
+
     echo "$opts,model=virtio"
 }
 
@@ -23,7 +26,8 @@ build_dual_net_args() {
 
     [ -n "${QEMU_SOCKET_LISTEN:-}" ] && opts="${opts},listen=${QEMU_SOCKET_LISTEN}"
     [ -n "${QEMU_SOCKET_CONNECT:-}" ] && opts="${opts},connect=${QEMU_SOCKET_CONNECT}"
-
+    # Set MAC address for the second NIC, if defined
+    [ -n "${QEMU_MAC_ADDR_1:-}" ] && opts="${opts},mac=${QEMU_MAC_ADDR_1}"
     echo "$opts,model=virtio"
 }
 

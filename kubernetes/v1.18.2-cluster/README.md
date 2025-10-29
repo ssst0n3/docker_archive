@@ -18,6 +18,24 @@ worker:
   * ssst0n3/docker_archive:ctr_kubernetes-v1.18.2-worker -> ssst0n3/docker_archive:ctr_kubernetes-v1.18.2-worker_v0.1.0
   * ssst0n3/docker_archive:ctr_kubernetes-v1.18.2-worker_v0.1.0
 
+## network topology
+
+* eth0: Provides internet connectivity; ports 22 and 6443 are exposed via eth0.
+* eth1: Used for inter-VM communication; isolated from the internet.
+
+```
+                            ┌─────────┐
+                            │ Host/NAT│
+                            └────┬────┘
+                                 │
+         ┌───────────────────────┴────────────────────────┐
+         │                                                │
+         │ eth0 10.0.2.15 (NAT)      eth0 10.0.2.15 (NAT) |
+    ┌────▼────┐                                      ┌────▼────┐
+    │ master  │                                      │  worker │
+    │        eth1 10.0.2.16/24   ⇆    10.0.2.17/24 eth1        |
+    └─────────┘                                      └─────────┘
+```
 
 ## usage
 
@@ -29,23 +47,23 @@ $ docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
 ```shell
 $ kubectl --kubeconfig=kubeconfig get nodes -o wide
 NAME                       STATUS   ROLES    AGE     VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION      CONTAINER-RUNTIME
-kubernetes-1-18-2          Ready    master   3h57m   v1.18.2   10.0.2.16     <none>        Ubuntu 20.04.6 LTS   5.4.0-216-generic   containerd://1.3.3
-kubernetes-1-18-2-worker   Ready    <none>   15m     v1.18.2   <none>        <none>        Ubuntu 20.04.6 LTS   5.4.0-216-generic   containerd://1.3.3
+kubernetes-1-18-2          Ready    master   5d11h   v1.18.2   10.0.2.16     <none>        Ubuntu 20.04.6 LTS   5.4.0-216-generic   containerd://1.3.3
+kubernetes-1-18-2-worker   Ready    <none>   5d7h    v1.18.2   <none>        <none>        Ubuntu 20.04.6 LTS   5.4.0-216-generic   containerd://1.3.3
 $ kubectl --kubeconfig=kubeconfig get pods -A      
 NAMESPACE         NAME                                        READY   STATUS    RESTARTS   AGE
-calico-system     calico-kube-controllers-57f767d97b-k895s    1/1     Running   2          3h43m
-calico-system     calico-node-rj4b5                           1/1     Running   2          3h43m
-calico-system     calico-node-rn2dh                           1/1     Running   1          15m
-calico-system     calico-typha-58d98468d6-tqwgk               1/1     Running   3          3h43m
-kube-system       coredns-66bff467f8-47gvn                    1/1     Running   2          3h57m
-kube-system       coredns-66bff467f8-ztcgw                    1/1     Running   2          3h57m
-kube-system       etcd-kubernetes-1-18-2                      1/1     Running   3          3h57m
-kube-system       kube-apiserver-kubernetes-1-18-2            1/1     Running   3          3h57m
-kube-system       kube-controller-manager-kubernetes-1-18-2   1/1     Running   3          3h57m
-kube-system       kube-proxy-8lhf9                            1/1     Running   1          15m
-kube-system       kube-proxy-n2xtn                            1/1     Running   3          3h57m
-kube-system       kube-scheduler-kubernetes-1-18-2            1/1     Running   3          3h57m
-tigera-operator   tigera-operator-6ddb54fbf5-ppb6x            1/1     Running   4          3h43m
+calico-system     calico-kube-controllers-57f767d97b-k895s    1/1     Running   2          5d11h
+calico-system     calico-node-rj4b5                           1/1     Running   2          5d11h
+calico-system     calico-node-rn2dh                           1/1     Running   1          5d7h
+calico-system     calico-typha-58d98468d6-tqwgk               1/1     Running   3          5d11h
+kube-system       coredns-66bff467f8-47gvn                    1/1     Running   2          5d11h
+kube-system       coredns-66bff467f8-ztcgw                    1/1     Running   2          5d11h
+kube-system       etcd-kubernetes-1-18-2                      1/1     Running   3          5d11h
+kube-system       kube-apiserver-kubernetes-1-18-2            1/1     Running   3          5d11h
+kube-system       kube-controller-manager-kubernetes-1-18-2   1/1     Running   3          5d11h
+kube-system       kube-proxy-8lhf9                            1/1     Running   1          5d7h
+kube-system       kube-proxy-n2xtn                            1/1     Running   3          5d11h
+kube-system       kube-scheduler-kubernetes-1-18-2            1/1     Running   3          5d11h
+tigera-operator   tigera-operator-6ddb54fbf5-ppb6x            1/1     Running   4          5d11h
 ```
 
 ```shell
