@@ -9,6 +9,5 @@ services:
       - "QEMU_MAC_ADDR_1=52:54:00:12:34:59"
     ports:
         - "11826:22"
-        - "11827:6443"
     tty: true
     stdin_open: true 
