@@ -69,6 +69,7 @@ root@localhost:~# docker version
 | [cve-2020-8558](./vul/cve-2020-8558/)                                   | v0.1.0  | kubernetes-v1.18.2-cluster       |                            |
 | [cve-2019-5736](./vul/cve-2019-5736/)                                   | v0.1.0  | docker-v17.06.0                  |                            |
 | [cve-2016-8867](./vul/cve-2016-8867/)                                   | v0.1.0  | docker-v1.12.2                   |                            |
+| [fork-bomb](./vul/fork-bomb/) | v0.1.0 | docker-v19.03.13 |
 | [shocker_docker-v0.7.1](./vul/shocker/shocker_docker-v0.7.1/)           | v0.1.0  |                                  | lxc execdriver             |
 | [shocker_docker-v0.7.2](./vul/shocker/shocker_docker-v0.7.2/)           | v0.1.0  |                                  | lxc(dockerinit) execdriver |
 | [shocker_docker-v0.9.0](./vul/shocker/shocker_docker-v0.9.0/)           | v0.1.0  |                                  | native execdriver          |
