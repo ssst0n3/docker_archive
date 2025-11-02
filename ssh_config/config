@@ -2165,3 +2165,11 @@ Host cve-2020-8558-worker
     IdentityFile ~/.ssh/keys/docker_archive
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
+Host fork-bomb
+    Hostname 127.0.0.1
+    Port 11211
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
