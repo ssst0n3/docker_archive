@@ -28,7 +28,7 @@ root@localhost:~# while true; do cat /proc/sys/kernel/ns_last_pid && sleep 1; do
 terminal 2
 ```shell
 $ ./ssh
-root@localhost:~# docker run -ti ubuntu bash
+root@localhost:~# docker run -ti busybox bash
 root@localhost:~# wget https://github.com/ctrsploit/ctrsploit/releases/latest/download/ctrsploit_linux_amd64 -O /usr/bin/ctrsploit
 root@0413c41a42f3:/# ctrsploit vul fork-bomb c
 [Y]  fork-bomb	
