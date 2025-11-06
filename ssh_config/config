@@ -2150,3 +2150,26 @@ Host kubernetes-v1.18.2-worker
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
 
+Host cve-2020-8558-master
+    Hostname 127.0.0.1
+    Port 28558
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
+Host cve-2020-8558-worker
+    Hostname 127.0.0.1
+    Port 48558
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+Host fork-bomb
+    Hostname 127.0.0.1
+    Port 11211
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
