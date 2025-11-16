@@ -1,5 +1,0 @@
-services:
-  master:
-    image: swr.cn-south-1.myhuaweicloud.com/nebula-lab/
-  worker:
-    image: swr.cn-south-1.myhuaweicloud.com/nebula-lab/

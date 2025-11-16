@@ -22,7 +22,7 @@
 #
 # Prerequisites:
 #   - docker: Must be installed, running, and logged into the MIRROR_REGISTRY.
-#   - yq: A command-line YAML processor (https://github.com/mikefarah/yq/).
+#   - yq: A command-line YAML processor .
 #
 # Usage:
 #   export MIRROR_REGISTRY="your-registry.com/your-project"
@@ -90,7 +90,6 @@ process_image() {
 
     echo "  [Image] => ${original_image}"
     
-    # --- MODIFIED LOGIC ---
     # Extract the base image name and tag from the original image string.
     # This removes any existing registry/project prefix.
     # Example: 'docker.io/library/nginx:latest' becomes 'nginx:latest'.
@@ -118,7 +117,7 @@ process_image() {
 ##
 # @brief Processes a single docker-compose.yml file.
 # @description Extracts images, processes them, and generates a mirror compose file.
-#              Skips processing if the mirror file already exists.
+#              Skips processing if the mirror file already exists or if no images are found.
 # @param $1 The path to the docker-compose.yml file.
 ##
 process_compose_file() {
@@ -144,16 +143,22 @@ process_compose_file() {
     local images
     images=$(yq '.services[].image | select(. != null)' -r "${compose_file}" || true)
 
+    # If the 'images' variable is empty, it means no 'image:' keys were found.
+    # In this case, we skip processing this file entirely and do not create a mirror file.
     if [ -z "$images" ]; then
-        echo "No images found in ${compose_file}. Only creating the mirror file."
-    else
-        # Process each image using the dedicated function.
-        echo "$images" | while IFS= read -r original_image; do
-            process_image "${original_image}"
-        done
+        echo "-> No images found in ${compose_file}. Skipping file creation."
+        echo "" # Add a blank line for better readability
+        return 0 # Exit this function successfully, moving to the next file.
     fi
 
+    # Process each image using the dedicated function.
+    # This block is now only executed if images were found.
+    echo "$images" | while IFS= read -r original_image; do
+        process_image "${original_image}"
+    done
+
     # After processing all images, generate the new docker-compose-mirror.yml.
+    # This block is also now only executed if images were found.
     echo "-> Generating mirror compose file: ${mirror_file}"
     
     # The yq expression now also extracts the base image name before prepending the new registry.
