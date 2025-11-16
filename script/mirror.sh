@@ -5,9 +5,14 @@
 # Script: sync_docker_images.sh
 #
 # Description: This script recursively finds 'docker-compose.yml' files,
-#              pulls the images defined within them, tags them with a new
-#              registry prefix, pushes them to the new registry, and finally
-#              generates a corresponding mirror compose file.
+#              pulls the images defined within them, tags them for a new
+#              mirror registry, pushes them, and generates a corresponding
+#              mirror compose file.
+#
+#              The script correctly handles both short image names (e.g., nginx:latest)
+#              and fully-qualified image names (e.g., docker.io/library/nginx:latest).
+#              It extracts the base image name and tag before prepending the
+#              mirror registry prefix.
 #
 #              The generated mirror compose file will only contain the 'image'
 #              field for each service.
@@ -17,7 +22,7 @@
 #
 # Prerequisites:
 #   - docker: Must be installed, running, and logged into the MIRROR_REGISTRY.
-#   - yq: A command-line YAML processor.
+#   - yq: A command-line YAML processor (https://github.com/mikefarah/yq/).
 #
 # Usage:
 #   export MIRROR_REGISTRY="your-registry.com/your-project"
@@ -49,7 +54,9 @@ check_prerequisites() {
     # Check if required environment variables are set.
     if [ -z "${MIRROR_REGISTRY-}" ] || [ -z "${MIRROR_VENDOR-}" ]; then
         echo "   [Error] MIRROR_REGISTRY and MIRROR_VENDOR environment variables must be set." >&2
-        echo "   Usage: MIRROR_REGISTRY=my-registry.com MIRROR_VENDOR=my-vendor ./sync_images.sh" >&2
+        echo "   Usage: export MIRROR_REGISTRY=\"your-registry.com/your-project\"" >&2
+        echo "          export MIRROR_VENDOR=\"internal\"" >&2
+        echo "          ./sync_docker_images.sh" >&2
         exit 1
     fi
 
@@ -71,7 +78,7 @@ check_prerequisites() {
 
 ##
 # @brief Pulls, tags, and pushes a single Docker image to the mirror registry.
-# @param $1 The original image name (e.g., "nginx:latest").
+# @param $1 The original image name (e.g., "docker.io/library/nginx:latest").
 ##
 process_image() {
     local original_image="$1"
@@ -83,8 +90,15 @@ process_image() {
 
     echo "  [Image] => ${original_image}"
     
+    # --- MODIFIED LOGIC ---
+    # Extract the base image name and tag from the original image string.
+    # This removes any existing registry/project prefix.
+    # Example: 'docker.io/library/nginx:latest' becomes 'nginx:latest'.
+    # Example: 'nginx:latest' remains 'nginx:latest'.
+    local base_image_name="${original_image##*/}"
+    
     # Define the new image name for the mirror registry.
-    local mirror_image="${MIRROR_REGISTRY}/${original_image}"
+    local mirror_image="${MIRROR_REGISTRY}/${base_image_name}"
 
     # 1. Pull the original image from its source registry.
     echo "    -> Pulling..."
@@ -142,14 +156,19 @@ process_compose_file() {
     # After processing all images, generate the new docker-compose-mirror.yml.
     echo "-> Generating mirror compose file: ${mirror_file}"
     
-    # The yq expression now updates the 'image' field and then uses 'pick' to
-    # create a new service definition containing ONLY the 'image' field.
-    MIRROR_REGISTRY="${MIRROR_REGISTRY}" yq '.services[] |= ((.image |= env(MIRROR_REGISTRY) + "/" + .) | pick(["image"]))' "${compose_file}" > "${mirror_file}"
+    # The yq expression now also extracts the base image name before prepending the new registry.
+    # It splits the image path by '/' and takes the last element (the image name + tag).
+    # Then, it constructs the new image path and uses 'pick' to create a new service
+    # definition containing ONLY the 'image' field.
+    MIRROR_REGISTRY="${MIRROR_REGISTRY}" yq '.services[] |= ((.image |= (env(MIRROR_REGISTRY) + "/" + (. | split("/") | .[-1]))) | pick(["image"]))' "${compose_file}" > "${mirror_file}"
 
     echo "--- Finished processing: ${compose_file} ---"
     echo "" # Add a blank line for better readability in the output.
 }
 
+##
+# @brief Main function to orchestrate the synchronization process.
+##
 make_mirror() {
     check_prerequisites
 
@@ -164,4 +183,5 @@ make_mirror() {
     echo "All docker-compose files have been processed successfully."
 }
 
+# --- Main Execution ---
 make_mirror
