@@ -1,0 +1,3 @@
+services:
+  vm:
+    image: swr.cn-south-1.myhuaweicloud.com/nebula-lab/docker_archive:runc-v1.2.2_v0.2.0

@@ -1,0 +1,3 @@
+services:
+  vm:
+    image: swr.cn-south-1.myhuaweicloud.com/nebula-lab/docker_archive:centos-8_v0.2.0
