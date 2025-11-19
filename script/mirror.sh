@@ -56,7 +56,7 @@ check_prerequisites() {
         echo "   [Error] MIRROR_REGISTRY and MIRROR_VENDOR environment variables must be set." >&2
         echo "   Usage: export MIRROR_REGISTRY=\"your-registry.com/your-project\"" >&2
         echo "          export MIRROR_VENDOR=\"internal\"" >&2
-        echo "          ./sync_docker_images.sh" >&2
+        echo "          $0" >&2
         exit 1
     fi
 
