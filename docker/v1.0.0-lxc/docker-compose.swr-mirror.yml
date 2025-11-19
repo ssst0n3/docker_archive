@@ -1,0 +1,4 @@
+version: '3'
+services:
+  vm:
+    image: swr.cn-south-1.myhuaweicloud.com/nebula-lab/docker_archive:docker-v1.0.0-lxc_v0.1.0

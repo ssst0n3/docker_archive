@@ -29,7 +29,7 @@ $ docker compose -f docker-compose.yml up -d
 
 ```shell
 $ cd ctf/your-gpu-my-shell
-$ docker compose -f docker-compose.yml -f docker-compose.mirror.yml up -d
+$ docker compose -f docker-compose.yml -f docker-compose.swr-mirror.yml up -d
 ```
 
 ## writeup

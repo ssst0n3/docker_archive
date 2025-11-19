@@ -1,0 +1,3 @@
+services:
+  vm:
+    image: swr.cn-south-1.myhuaweicloud.com/nebula-lab/docker_archive:buildkit-v0.12.4_v0.1.0

@@ -1,0 +1,4 @@
+version: '3'
+services:
+  vm:
+    image: swr.cn-south-1.myhuaweicloud.com/nebula-lab/docker_archive:ubuntu-18.04_docker-v23.0.6_aufs_v0.1.0

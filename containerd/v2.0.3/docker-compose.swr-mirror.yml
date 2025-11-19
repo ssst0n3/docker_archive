@@ -1,0 +1,3 @@
+services:
+  vm:
+    image: swr.cn-south-1.myhuaweicloud.com/nebula-lab/docker_archive:containerd-v2.0.3_v0.3.0

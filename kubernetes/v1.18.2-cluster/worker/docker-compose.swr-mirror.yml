@@ -1,0 +1,3 @@
+services:
+  worker:
+    image: swr.cn-south-1.myhuaweicloud.com/nebula-lab/docker_archive:kubernetes-v1.18.2-worker_v0.1.0

@@ -1,0 +1,4 @@
+version: '3'
+services:
+  vm:
+    image: swr.cn-south-1.myhuaweicloud.com/nebula-lab/docker_archive:ubuntu-14.04_v0.2.0

@@ -1,0 +1,4 @@
+version: '3'
+services:
+  vm:
+    image: swr.cn-south-1.myhuaweicloud.com/nebula-lab/docker_archive:runc-issue-4047_commit-7396ca9_v0.1.0

@@ -1,0 +1,4 @@
+version: '3'
+services:
+  vm:
+    image: swr.cn-south-1.myhuaweicloud.com/nebula-lab/docker_archive:shocker_docker-v0.11.1-lxc_v0.1.0
