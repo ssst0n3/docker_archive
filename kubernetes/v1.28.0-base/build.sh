@@ -8,7 +8,7 @@ docker buildx create --driver-opt "network=docker-archive-bridge" --name docker-
 docker buildx --builder docker-archive-builder prune --filter type=exec.cachemount -f || true
 docker buildx build \
     --build-arg CACHE_BUST=$(date +%s) \
-    --build-arg BUILDKIT_SANDBOX_HOSTNAME=kubernetes-1-18-2 \
+    --build-arg BUILDKIT_SANDBOX_HOSTNAME=kubernetes-1-28-0 \
     --progress=plain --builder docker-archive-builder \
     --allow security.insecure \
     --load -t $1 .
