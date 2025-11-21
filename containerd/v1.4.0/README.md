@@ -1,10 +1,12 @@
 # containerd v1.4.0
 
 * dqd: 
-    * ssst0n3/docker_archive:containerd-v1.4.0 -> ssst0n3/docker_archive:containerd-v1.4.0_v0.1.0
+    * ssst0n3/docker_archive:containerd-v1.4.0 -> ssst0n3/docker_archive:containerd-v1.4.0_v0.2.0
+    * ssst0n3/docker_archive:containerd-v1.4.0_v0.2.0
     * ssst0n3/docker_archive:containerd-v1.4.0_v0.1.0
 * ctr:
-    * ssst0n3/docker_archive:ctr_containerd-v1.4.0 -> ssst0n3/docker_archive:ctr_containerd-v1.4.0_v0.1.0
+    * ssst0n3/docker_archive:ctr_containerd-v1.4.0 -> ssst0n3/docker_archive:ctr_containerd-v1.4.0_v0.2.0
+    * ssst0n3/docker_archive:ctr_containerd-v1.4.0_v0.2.0: bump the base image
     * ssst0n3/docker_archive:ctr_containerd-v1.4.0_v0.1.0
 
 ## usage
@@ -46,5 +48,5 @@ make all DIR=containerd/v1.4.0
 for developers:
 
 ```dockerfile
-FROM ssst0n3/docker_archive:ctr_containerd-v1.4.0_v0.1.0
+FROM ssst0n3/docker_archive:ctr_containerd-v1.4.0_v0.2.0
 ```
