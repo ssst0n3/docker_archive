@@ -1,5 +1,5 @@
 [Unit]
-Description=Ensure dynamic IP (eth1 preferred, fallback to eth0) is mapped to kubernetes-1-18-2 in /etc/hosts
+Description=Ensure dynamic IP (eth1 preferred, fallback to eth0) is mapped to kubernetes-1-19-1 in /etc/hosts
 After=cloud-config.service network-online.target
 Wants=network-online.target
 

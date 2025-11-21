@@ -119,6 +119,7 @@ root@localhost:~# docker version
 | [kubernetes-v1.32.3](./kubernetes/v1.32.3/)               | v0.2.0  |       |      |
 | [kubernetes-v1.32.2-calico](./kubernetes/v1.32.2-calico/) | v0.2.0  |       |      |
 | [kubernetes-v1.32.2](./kubernetes/v1.32.2/)               | v0.2.0  |       |      |
+| [kubernetes-v1.19.1](./kubernetes/v1.19.1/)               | v0.1.0  |       |      |
 | [kubernetes-v1.18.2-cluster](./kubernetes/v1.18.2-cluster/) | v0.1.0  |       |      |
 | [kubernetes-v1.18.2-calico](./kubernetes/v1.18.2-calico/) | v0.1.0  |       |      |
 | [kubernetes-v1.18.2](./kubernetes/v1.18.2/) | v0.1.0  |       |      |
@@ -256,7 +257,7 @@ root@localhost:~# docker version
 | [containerd-v1.7.1](./containerd/v1.7.1/)                             | v0.1.0  |
 | [containerd-v1.5.0-beta.2](./containerd/v1.5.0-beta.2/)                 | v0.1.0  |
 | [containerd-v1.4.3](./containerd/v1.4.3/)                               | v0.1.0  |
-| [containerd-v1.4.0](./containerd/v1.4.0/)                               | v0.1.0  |
+| [containerd-v1.4.0](./containerd/v1.4.0/)                               | v0.2.0  |
 | [containerd-v1.3.8](./containerd/v1.3.8/)                               | v0.2.0  |
 | [containerd-v1.3.3](./containerd/v1.3.3/)                               | v0.1.0  |
 | [containerd-v0.2.4](./containerd/v0.2.4/)                               | v0.1.0  |

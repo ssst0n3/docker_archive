@@ -10,7 +10,7 @@ ARG VERSION_CNI_PLUGINS=0.8.7
 ARG VERSION_CRICTL=1.18.0
 # https://helm.sh/docs/topics/version_skew/
 ARG VERSION_HELM=3.4.0
-ARG VERSION_IMAGE=0.1.0
+ARG VERSION_IMAGE=0.2.0
 # the kubelet.service relies on '/usr/bin/kubelet'
 ARG DIR_BIN=/usr/bin
 ARG BASE_IMAGE=ssst0n3/docker_archive:ctr_containerd-v${VERSION_CONTAINERD}
