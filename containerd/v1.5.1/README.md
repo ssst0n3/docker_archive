@@ -24,11 +24,6 @@ spec: 1.0.2-dev
 go: go1.14.15
 libseccomp: 2.5.1
 root@containerd-1-5-1:~# ctr i pull docker.io/library/ubuntu:16.04
-docker.io/library/ubuntu:16.04: resolving      |--------------------------------------| 
-elapsed: 10.0s                  total:   0.0 B (0.0 B/s)                                         
-INFO[0010] trying next host                              error="failed to do request: Head \"https://registry-1.docker.io/v2/library/ubuntu/manifests/16.04\": net/http: TLS handshake timeout" host=registry-1.docker.io
-ctr: failed to resolve reference "docker.io/library/ubuntu:16.04": failed to do request: Head "https://registry-1.docker.io/v2/library/ubuntu/manifests/16.04": net/http: TLS handshake timeout
-root@containerd-1-5-1:~# ctr i pull docker.io/library/ubuntu:16.04
 docker.io/library/ubuntu:16.04:                                                   resolved       |++++++++++++++++++++++++++++++++++++++| 
 index-sha256:1f1a2d56de1d604801a9671f301190704c25d604a416f59e03c04f5c6ffee0d6:    exists         |++++++++++++++++++++++++++++++++++++++| 
 manifest-sha256:a3785f78ab8547ae2710c89e627783cfa7ee7824d3468cae6835c9f4eae23ff7: exists         |++++++++++++++++++++++++++++++++++++++| 
