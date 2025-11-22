@@ -1,46 +1,46 @@
-# kubernetes v1.19.1
+# kubernetes v1.20.2
 
 * dqd:
-  * ssst0n3/docker_archive:kubernetes-v1.19.1 -> ssst0n3/docker_archive:kubernetes-v1.19.1_v0.1.0
-  * ssst0n3/docker_archive:kubernetes-v1.19.1_v0.1.0
+  * ssst0n3/docker_archive:kubernetes-v1.20.2 -> ssst0n3/docker_archive:kubernetes-v1.20.2_v0.1.0
+  * ssst0n3/docker_archive:kubernetes-v1.20.2_v0.1.0
 * ctr:
-  * ssst0n3/docker_archive:ctr_kubernetes-v1.19.1 -> ssst0n3/docker_archive:ctr_kubernetes-v1.19.1_v0.1.0
-  * ssst0n3/docker_archive:ctr_kubernetes-v1.19.1_v0.1.0
+  * ssst0n3/docker_archive:ctr_kubernetes-v1.20.2 -> ssst0n3/docker_archive:ctr_kubernetes-v1.20.2_v0.1.0
+  * ssst0n3/docker_archive:ctr_kubernetes-v1.20.2_v0.1.0
 
 ## usage
 
 ```shell
-$ cd kubernetes/v1.19.1
+$ cd kubernetes/v1.20.2
 $ docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
 ```
 
 ```shell
-$ kubectl --kubeconfig=kubeconfig get pods -A
+$ kubectl --kubeconfig=kubeconfig get pods -A             
 NAMESPACE     NAME                                        READY   STATUS    RESTARTS   AGE
-kube-system   coredns-f9fd979d6-fzgxw                     0/1     Pending   0          21m
-kube-system   coredns-f9fd979d6-vctng                     0/1     Pending   0          21m
-kube-system   etcd-kubernetes-1-19-1                      1/1     Running   1          22m
-kube-system   kube-apiserver-kubernetes-1-19-1            1/1     Running   1          22m
-kube-system   kube-controller-manager-kubernetes-1-19-1   1/1     Running   1          22m
-kube-system   kube-proxy-c69kp                            1/1     Running   1          21m
-kube-system   kube-scheduler-kubernetes-1-19-1            1/1     Running   1          21m
+kube-system   coredns-74ff55c5b-j29c2                     0/1     Pending   0          11m
+kube-system   coredns-74ff55c5b-shz8g                     0/1     Pending   0          11m
+kube-system   etcd-kubernetes-1-20-2                      1/1     Running   1          11m
+kube-system   kube-apiserver-kubernetes-1-20-2            1/1     Running   1          11m
+kube-system   kube-controller-manager-kubernetes-1-20-2   1/1     Running   1          11m
+kube-system   kube-proxy-lbh6r                            1/1     Running   1          11m
+kube-system   kube-scheduler-kubernetes-1-20-2            1/1     Running   1          11m
 ```
 
 ```shell
 $ ./ssh
-root@kubernetes-1-19-1:~# helm version
-version.BuildInfo{Version:"v3.4.0", GitCommit:"7090a89efc8a18f3d8178bf47d2462450349a004", GitTreeState:"clean", GoVersion:"go1.14.10"}
-root@kubernetes-1-19-1:~# kubectl version
-Client Version: version.Info{Major:"1", Minor:"19", GitVersion:"v1.19.1", GitCommit:"206bcadf021e76c27513500ca24182692aabd17e", GitTreeState:"clean", BuildDate:"2020-09-09T11:26:42Z", GoVersion:"go1.15", Compiler:"gc", Platform:"linux/amd64"}
-Server Version: version.Info{Major:"1", Minor:"19", GitVersion:"v1.19.1", GitCommit:"206bcadf021e76c27513500ca24182692aabd17e", GitTreeState:"clean", BuildDate:"2020-09-09T11:18:22Z", GoVersion:"go1.15", Compiler:"gc", Platform:"linux/amd64"}
-root@kubernetes-1-19-1:~# containerd --version
+root@kubernetes-1-20-2:~# helm version
+version.BuildInfo{Version:"v3.5.0", GitCommit:"32c22239423b3b4ba6706d450bd044baffdcf9e6", GitTreeState:"clean", GoVersion:"go1.15.6"}
+root@kubernetes-1-20-2:~# kubectl version
+Client Version: version.Info{Major:"1", Minor:"20", GitVersion:"v1.20.2", GitCommit:"faecb196815e248d3ecfb03c680a4507229c2a56", GitTreeState:"clean", BuildDate:"2021-01-13T13:28:09Z", GoVersion:"go1.15.5", Compiler:"gc", Platform:"linux/amd64"}
+Server Version: version.Info{Major:"1", Minor:"20", GitVersion:"v1.20.2", GitCommit:"faecb196815e248d3ecfb03c680a4507229c2a56", GitTreeState:"clean", BuildDate:"2021-01-13T13:20:00Z", GoVersion:"go1.15.5", Compiler:"gc", Platform:"linux/amd64"}
+root@kubernetes-1-20-2:~# containerd --version
 containerd github.com/containerd/containerd v1.4.0 09814d48d50816305a8e6c1a4ae3e2bcc4ba725a
-root@kubernetes-1-19-1:~# runc --version
+root@kubernetes-1-20-2:~# runc --version
 runc version 1.0.0-rc92
 spec: 1.0.2-dev
-root@kubernetes-1-19-1:~# uname -a
-Linux kubernetes-1-19-1 5.4.0-216-generic #236-Ubuntu SMP Fri Apr 11 19:53:21 UTC 2025 x86_64 x86_64 x86_64 GNU/Linux
-root@kubernetes-1-19-1:~# cat /etc/os-release 
+root@kubernetes-1-20-2:~# uname -a
+Linux kubernetes-1-20-2 5.4.0-216-generic #236-Ubuntu SMP Fri Apr 11 19:53:21 UTC 2025 x86_64 x86_64 x86_64 GNU/Linux
+root@kubernetes-1-20-2:~# cat /etc/os-release
 NAME="Ubuntu"
 VERSION="20.04.6 LTS (Focal Fossa)"
 ID=ubuntu
@@ -58,7 +58,7 @@ UBUNTU_CODENAME=focal
 ## build
 
 ```shell
-make all DIR=kubernetes/v1.19.1
+make all DIR=kubernetes/v1.20.2
 ```
 
 
@@ -66,7 +66,7 @@ make all DIR=kubernetes/v1.19.1
 
 ```dockerfile
 # syntax=docker/dockerfile:1-labs
-FROM ssst0n3/docker_archive:ctr_kubernetes-v1.19.1_v0.1.0
+FROM ssst0n3/docker_archive:ctr_kubernetes-v1.20.2_v0.1.0
 ...
 RUN --security=insecure ["/sbin/init", "--log-target=kmsg"]
 ```
@@ -92,12 +92,12 @@ You can solve this issue by using a **cache mount** within your build process.
 
 ```Dockerfile
 # Run kubeadm within an ext4 filesystem using a cached mount
-RUN --mount=type=cache,id=kubernetes-v1.19.1-snapshots,target=/var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/snapshots \
+RUN --mount=type=cache,id=kubernetes-v1.20.2-snapshots,target=/var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/snapshots \
     --security=insecure \
     ["/sbin/init", "--log-target=kmsg"]
 
 # Restore cached containerd snapshots
-RUN --mount=type=cache,id=kubernetes-v1.19.1-snapshots,target=/trick \
+RUN --mount=type=cache,id=kubernetes-v1.20.2-snapshots,target=/trick \
     cp -r /trick /var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/snapshots
 ```
 
