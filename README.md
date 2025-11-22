@@ -346,7 +346,7 @@ root@localhost:~# docker version
 | [runc-v1.0.2](./runc/v1.0.2/)                                                              | v0.2.0  |       | ubuntu24.04                                                                 |
 | [runc-v1.0.1](./runc/v1.0.1/)                                                              | v0.2.0  |       | ubuntu24.04                                                                 |
 | [runc-v1.0.0](./runc/v1.0.0/)                                                              | v0.2.0  |       | ubuntu24.04                                                                 |
-| [runc-v1.0.0-rc95](./runc/v1.0.0-rc95/)                                                    | v0.2.0  |       | ubuntu24.04                                                                 |
+| [runc-v1.0.0-rc95](./runc/v1.0.0-rc95/)                                                    | v0.3.0  |       | ubuntu20.04                                                                 |
 | [runc-v1.0.0-rc94](./runc/v1.0.0-rc94/)                                                    | v0.3.0  |       | ubuntu20.04                                                                 |
 | [runc-v1.0.0-rc93](./runc/v1.0.0-rc93/)                                                    | v0.2.0  |       | ubuntu24.04                                                                 |
 | [runc-v1.0.0-rc92](./runc/v1.0.0-rc92/)                                                    | v0.3.0  |       | ubuntu20.04                                                                 |
