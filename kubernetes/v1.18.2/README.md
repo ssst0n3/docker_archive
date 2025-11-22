@@ -81,6 +81,10 @@ RUN --security=insecure ["/sbin/init", "--log-target=kmsg"]
 
 kubelet v1.18.2 only supports cgroups v1. So this image is supposed to be built on os with cgroups v1.
 
+kubernetes v.1.22 starts to support cgroups v2:
+
+https://github.com/kubernetes/kubernetes/blob/5bcb7599736327cd8c6d23e398002354a6e40f68/CHANGELOG/CHANGELOG-1.22.md#quality-of-service-for-memory-resources
+
 ### 2. Use a cache mount to avoid overlayfs-on-overlayfs errors
 
 If you encounter the following error:

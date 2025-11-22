@@ -6,7 +6,7 @@
 
 ## usage
 
-only for development
+Based on `ssst0n3/docker_archive:ctr_containerd-v1.4.0_v0.1.0`, installs Helm, CNI plugins, crictl, and Kubernetes v1.20.2 binaries (kubeadm, kubelet, kubectl) with corresponding systemd service configurations, and pre pulled kubernetes images.
 
 ## build
 
