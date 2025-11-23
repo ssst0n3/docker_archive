@@ -1,0 +1,13 @@
+[Unit]
+Description=Ensure dynamic IP (eth1 preferred, fallback to eth0) is mapped to kubernetes-1-28-0 in /etc/hosts
+After=cloud-config.service network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/hosts.sh
+User=root
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
