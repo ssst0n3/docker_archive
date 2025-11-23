@@ -2269,3 +2269,11 @@ Host containerd-v1.6.4
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
 
+Host kubernetes-v1.24.0
+    Hostname 127.0.0.1
+    Port 12404
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
