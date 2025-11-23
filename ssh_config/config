@@ -2253,3 +2253,11 @@ Host kubernetes-v1.22.0
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
 
+Host kubernetes-v1.23.0
+    Hostname 127.0.0.1
+    Port 12301
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
