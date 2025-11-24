@@ -11,6 +11,7 @@ FROM pre AS calico
 ARG CACHE_BUST
 RUN echo "No cache from here, value: $CACHE_BUST"
 # copy image snapshots
+# use cp -a instead of cp -r to preserve attributions, avoid coredns cap_net_bind_service loss
 RUN --mount=type=cache,id=kubernetes-v1.29.0-snapshots,target=/trick \
     cp -a /var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/* /trick/
 # install calico
@@ -20,8 +21,10 @@ RUN --mount=type=cache,id=kubernetes-v1.29.0-snapshots,target=/var/lib/container
 # copy snapshots from cache
 # 1. copy owner attributions, fixed calico-kube-controllers crashloop issue
 # 2. skip 'work' dir to avoid 'operation not permitted' error, caused by coping overlayfs whiteout files
+# 3. use --xattrs, --xattrs-include to preserve file capabilities
 RUN --mount=type=cache,id=kubernetes-v1.29.0-snapshots,target=/trick \
-    tar -C /trick --exclude='work' -cf - . | tar -C /var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/ -xf -
+    tar --xattrs --xattrs-include='*' -C /trick --exclude='work' -cf - . | \
+    tar --xattrs --xattrs-include='*' -C /var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/ -xf -
 
 FROM calico AS final
 RUN rm /usr/lib/systemd/system/init.service /init.sh

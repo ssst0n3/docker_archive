@@ -7,6 +7,6 @@ services:
       - "QEMU_HOSTFWD=hostfwd=tcp::6443-:6443"
     ports:
         - "12902:22"
-        - "12803:6443"
+        - "12903:6443"
     tty: true
     stdin_open: true 
