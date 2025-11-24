@@ -31,11 +31,11 @@ RUN --mount=type=cache,id=kubernetes-v1.28.0-snapshots,target=/var/lib/container
     --mount=type=bind,src=/modules,target=/lib/modules \
     --security=insecure \
     ["/sbin/init", "--log-target=kmsg"]
-# skip overlayfs whiteout files (c 0,0)
-# fix: `#20 5.255 cp: cannot create special file '/var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/snapshots/27/fs/var/cache/debconf/config.dat': Operation not permitted`
+# copy snapshots from cache
+# 1. copy owner attributions, fixed calico-kube-controllers crashloop issue
+# 2. skip 'work' dir to avoid 'operation not permitted' error, caused by coping overlayfs whiteout files
 RUN --mount=type=cache,id=kubernetes-v1.28.0-snapshots,target=/trick \
-    --security=insecure \
-    cp -rf /trick/* /var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/ || true
+    tar -C /trick --exclude='work' -cf - . | tar -C /var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/ -xf -
 
 FROM kube_init AS final
 RUN mkdir -p /root/.kube && \
