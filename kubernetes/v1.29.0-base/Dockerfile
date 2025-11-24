@@ -10,8 +10,8 @@ ARG VERSION_CNI_PLUGINS=1.3.0
 # https://github.com/kubernetes-sigs/kind/blob/v0.20.0/images/base/Dockerfile#L151
 ARG VERSION_CRICTL=1.27.0
 # https://helm.sh/docs/topics/version_skew/
-ARG VERSION_HELM=3.13.0
-ARG VERSION_IMAGE=0.1.0
+ARG VERSION_HELM=3.14.0
+ARG VERSION_IMAGE=0.2.0
 # the kubelet.service relies on '/usr/bin/kubelet'
 ARG DIR_BIN=/usr/bin
 ARG BASE_IMAGE=ssst0n3/docker_archive:ctr_containerd-v${VERSION_CONTAINERD}
@@ -34,7 +34,6 @@ RUN apt update && \
 RUN echo "net.ipv4.ip_forward = 1" > /etc/sysctl.d/k8s.conf 
     # not work in dockerfile
     # sysctl --system
-# cgroup driver: systemd is the default
 
 FROM prerequisite AS install_helm
 ARG URL_ARTIFACT_HELM
@@ -62,7 +61,6 @@ ARG URL_ARTIFACT_K8S_RELEASE
 ARG DIR_BIN
 # install kubeadm, kubelet, kubectl
 # https://github.com/kubernetes/website/blob/release-1.18/content/en/docs/setup/production-environment/tools/kubeadm/install-kubeadm.md#installing-kubeadm-kubelet-and-kubectl
-# https://kubernetes.io/blog/2023/08/15/pkgs-k8s-io-introduction/#where-can-i-get-packages-for-kubernetes-versions-prior-to-v1-24-0
 RUN set -ex && \
     cd ${DIR_BIN} && \
     curl -L --remote-name-all ${URL_ARTIFACT_K8S_BIN}/{kubeadm,kubelet,kubectl} && \
