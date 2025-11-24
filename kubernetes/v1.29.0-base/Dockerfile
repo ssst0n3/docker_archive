@@ -60,7 +60,7 @@ ARG URL_ARTIFACT_K8S_BIN
 ARG URL_ARTIFACT_K8S_RELEASE
 ARG DIR_BIN
 # install kubeadm, kubelet, kubectl
-# https://github.com/kubernetes/website/blob/release-1.18/content/en/docs/setup/production-environment/tools/kubeadm/install-kubeadm.md#installing-kubeadm-kubelet-and-kubectl
+# https://github.com/kubernetes/website/blob/release-1.29/content/en/docs/setup/production-environment/tools/kubeadm/install-kubeadm.md#installing-kubeadm-kubelet-and-kubectl
 RUN set -ex && \
     cd ${DIR_BIN} && \
     curl -L --remote-name-all ${URL_ARTIFACT_K8S_BIN}/{kubeadm,kubelet,kubectl} && \
