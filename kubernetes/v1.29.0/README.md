@@ -17,13 +17,13 @@ $ docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
 ```shell
 $ kubectl --kubeconfig=kubeconfig get pods -A
 NAMESPACE     NAME                                        READY   STATUS    RESTARTS      AGE
-kube-system   coredns-76f75df574-22bn7                    0/1     Pending   0             71m
-kube-system   coredns-76f75df574-s77c7                    0/1     Pending   0             71m
-kube-system   etcd-kubernetes-1-29-0                      1/1     Running   1 (12m ago)   71m
-kube-system   kube-apiserver-kubernetes-1-29-0            1/1     Running   1 (12m ago)   71m
-kube-system   kube-controller-manager-kubernetes-1-29-0   1/1     Running   1 (12m ago)   71m
-kube-system   kube-proxy-4gqdv                            1/1     Running   1 (12m ago)   71m
-kube-system   kube-scheduler-kubernetes-1-29-0            1/1     Running   1 (12m ago)   71m
+kube-system   coredns-76f75df574-fn8bm                    0/1     Pending   0             8m48s
+kube-system   coredns-76f75df574-fzt2w                    0/1     Pending   0             8m48s
+kube-system   etcd-kubernetes-1-29-0                      1/1     Running   1 (54s ago)   9m1s
+kube-system   kube-apiserver-kubernetes-1-29-0            1/1     Running   1 (54s ago)   9m1s
+kube-system   kube-controller-manager-kubernetes-1-29-0   1/1     Running   1 (54s ago)   9m1s
+kube-system   kube-proxy-ztvnv                            1/1     Running   1 (54s ago)   8m48s
+kube-system   kube-scheduler-kubernetes-1-29-0            1/1     Running   1 (54s ago)   9m1s
 ```
 
 ```shell
@@ -96,8 +96,9 @@ You can solve this issue by using a **cache mount** within your build process.
 
 ```Dockerfile
 # copy image snapshots
+# use cp -a instead of cp -r to preserve attributions, avoid coredns cap_net_bind_service loss
 RUN --mount=type=cache,id=kubernetes-v1.29.0-snapshots,target=/trick \
-    cp -r /var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/* /trick/
+    cp -a /var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/* /trick/
 # kubeadm init under ext4 fs
 RUN --mount=type=cache,id=kubernetes-v1.29.0-snapshots,target=/var/lib/containerd/io.containerd.snapshotter.v1.overlayfs \
     --security=insecure \
@@ -105,8 +106,10 @@ RUN --mount=type=cache,id=kubernetes-v1.29.0-snapshots,target=/var/lib/container
 # copy snapshots from cache
 # 1. copy owner attributions, fixed calico-kube-controllers crashloop issue
 # 2. skip 'work' dir to avoid 'operation not permitted' error, caused by coping overlayfs whiteout files
+# 3. use --xattrs, --xattrs-include to preserve file capabilities
 RUN --mount=type=cache,id=kubernetes-v1.29.0-snapshots,target=/trick \
-    tar -C /trick --exclude='work' -cf - . | tar -C /var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/ -xf -
+    tar --xattrs --xattrs-include='*' -C /trick --exclude='work' -cf - . | \
+    tar --xattrs --xattrs-include='*' -C /var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/ -xf -
 ```
 
 This approach stores containerd snapshots in a temp cache directory, avoiding nested overlayfs layers and improving build consistency.

@@ -23,17 +23,20 @@ ENV KUBECONFIG=/etc/kubernetes/admin.conf
 ARG CACHE_BUST
 RUN echo "No cache from here, value: $CACHE_BUST"
 # copy image snapshots
-RUN --mount=type=cache,id=kubernetes-v1.28.0-snapshots,target=/trick \
-    cp -r /var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/* /trick/
+# use cp -a instead of cp -r to preserve attributions, avoid coredns cap_net_bind_service loss
+RUN --mount=type=cache,id=kubernetes-v1.29.0-snapshots,target=/trick \
+    cp -a /var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/* /trick/
 # kubeadm init under ext4 fs
-RUN --mount=type=cache,id=kubernetes-v1.28.0-snapshots,target=/var/lib/containerd/io.containerd.snapshotter.v1.overlayfs \
+RUN --mount=type=cache,id=kubernetes-v1.29.0-snapshots,target=/var/lib/containerd/io.containerd.snapshotter.v1.overlayfs \
     --security=insecure \
     ["/sbin/init", "--log-target=kmsg"]
 # copy snapshots from cache
 # 1. copy owner attributions, fixed calico-kube-controllers crashloop issue
 # 2. skip 'work' dir to avoid 'operation not permitted' error, caused by coping overlayfs whiteout files
-RUN --mount=type=cache,id=kubernetes-v1.28.0-snapshots,target=/trick \
-    tar -C /trick --exclude='work' -cf - . | tar -C /var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/ -xf -
+# 3. use --xattrs, --xattrs-include to preserve file capabilities
+RUN --mount=type=cache,id=kubernetes-v1.29.0-snapshots,target=/trick \
+    tar --xattrs --xattrs-include='*' -C /trick --exclude='work' -cf - . | \
+    tar --xattrs --xattrs-include='*' -C /var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/ -xf -
 
 FROM kube_init AS final
 RUN mkdir -p /root/.kube && \
