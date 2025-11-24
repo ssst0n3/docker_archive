@@ -8,11 +8,10 @@ log "wait pods ready"
 until kubectl wait --for=condition=Ready pod --all -A --field-selector=metadata.namespace=kube-system -l "k8s-app!=kube-dns" --timeout=5s; do sleep 1; done >>/dev/kmsg 2>&1
 
 log "install network addon"
-# https://github.com/projectcalico/calico/issues/7103
-# https://archive-os-3-27.netlify.app/calico/3.27/getting-started/kubernetes/quickstart
-# https://archive-os-3-27.netlify.app/calico/3.27/getting-started/kubernetes/requirements/
-kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.28.5/manifests/tigera-operator.yaml >>/dev/kmsg 2>&1
-kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.28.5/manifests/custom-resources.yaml >>/dev/kmsg 2>&1
+# https://archive-os-3-25.netlify.app/calico/3.25/getting-started/kubernetes/quickstart
+# https://archive-os-3-25.netlify.app/calico/3.25/getting-started/kubernetes/requirements/
+kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.25.2/manifests/tigera-operator.yaml >>/dev/kmsg 2>&1
+kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.25.2/manifests/custom-resources.yaml >>/dev/kmsg 2>&1
 
 log "Waiting for all pods ready"
 until kubectl wait --for=condition=Ready pod --all -A --timeout=5s; do sleep 1; done >>/dev/kmsg 2>&1

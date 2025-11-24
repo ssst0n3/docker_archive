@@ -15,21 +15,31 @@ $ docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
 ```
 
 ```shell
-$ kubectl --kubeconfig=kubeconfig get pods -A
-NAMESPACE         NAME                                        READY   STATUS    RESTARTS   AGE
-calico-system     calico-kube-controllers-57f767d97b-k895s    1/1     Running   1          15m
-calico-system     calico-node-rj4b5                           1/1     Running   1          15m
-calico-system     calico-typha-58d98468d6-tqwgk               1/1     Running   2          15m
-kube-system       coredns-66bff467f8-47gvn                    1/1     Running   1          29m
-kube-system       coredns-66bff467f8-ztcgw                    1/1     Running   1          29m
-kube-system       etcd-kubernetes-1-18-2                      1/1     Running   2          29m
-kube-system       kube-apiserver-kubernetes-1-18-2            1/1     Running   2          29m
-kube-system       kube-controller-manager-kubernetes-1-18-2   1/1     Running   2          29m
-kube-system       kube-proxy-n2xtn                            1/1     Running   2          29m
-kube-system       kube-scheduler-kubernetes-1-18-2            1/1     Running   2          29m
-tigera-operator   tigera-operator-6ddb54fbf5-ppb6x            1/1     Running   2          15m
+$ kubectl --kubeconfig=kubeconfig get pods -A                 
+NAMESPACE          NAME                                        READY   STATUS    RESTARTS        AGE
+calico-apiserver   calico-apiserver-5df8bf879c-5scpx           1/1     Running   1 (11m ago)     12m
+calico-apiserver   calico-apiserver-5df8bf879c-brsn2           1/1     Running   1 (11m ago)     12m
+calico-system      calico-kube-controllers-79bc6c4447-kmkpc    1/1     Running   1 (11m ago)     15m
+calico-system      calico-node-gfr7f                           1/1     Running   1 (11m ago)     15m
+calico-system      calico-typha-5cf67cb78f-wffxw               1/1     Running   2 (2m38s ago)   15m
+calico-system      csi-node-driver-54dmv                       2/2     Running   2 (11m ago)     15m
+kube-system        coredns-5dd5756b68-87cqp                    1/1     Running   1 (3m19s ago)   70m
+kube-system        coredns-5dd5756b68-rfc64                    1/1     Running   1 (3m19s ago)   70m
+kube-system        etcd-kubernetes-1-28-0                      1/1     Running   2 (11m ago)     70m
+kube-system        kube-apiserver-kubernetes-1-28-0            1/1     Running   2 (3m19s ago)   70m
+kube-system        kube-controller-manager-kubernetes-1-28-0   1/1     Running   3 (2m43s ago)   70m
+kube-system        kube-proxy-gc469                            1/1     Running   2 (11m ago)     70m
+kube-system        kube-scheduler-kubernetes-1-28-0            1/1     Running   2 (3m19s ago)   70m
+tigera-operator    tigera-operator-74f446995b-bzszx            1/1     Running   2 (2m35s ago)   16m
 ```
 
+```shell
+$ kubectl --kubeconfig=kubeconfig run --image=docker.io/library/nginx:latest nginx  
+pod/nginx created
+$ kubectl --kubeconfig=kubeconfig get pods
+NAME    READY   STATUS    RESTARTS   AGE
+nginx   1/1     Running   0          89s
+```
 
 ```shell
 $ ./ssh
