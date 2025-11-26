@@ -17,20 +17,20 @@ $ docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
 ```shell
 $ kubectl --kubeconfig=kubeconfig get pods -A
 NAMESPACE          NAME                                        READY   STATUS    RESTARTS        AGE
-calico-apiserver   calico-apiserver-85bf5f7489-8cfnx           1/1     Running   1 (8m27s ago)   9m19s
-calico-apiserver   calico-apiserver-85bf5f7489-9qr7b           1/1     Running   1 (8m27s ago)   9m19s
-calico-system      calico-kube-controllers-bf9867dc7-xfzvm     1/1     Running   1 (8m27s ago)   11m
-calico-system      calico-node-bcbxh                           1/1     Running   1 (8m27s ago)   11m
-calico-system      calico-typha-54fff9bd67-kqfs8               1/1     Running   2 (24s ago)     11m
-calico-system      csi-node-driver-kv4tz                       2/2     Running   2 (8m27s ago)   11m
-kube-system        coredns-5d78c9869d-b4pv8                    1/1     Running   1 (70s ago)     2d17h
-kube-system        coredns-5d78c9869d-zb7mz                    1/1     Running   1 (71s ago)     2d17h
-kube-system        etcd-kubernetes-1-27-0                      1/1     Running   2 (8m27s ago)   2d17h
-kube-system        kube-apiserver-kubernetes-1-27-0            1/1     Running   2 (71s ago)     2d17h
-kube-system        kube-controller-manager-kubernetes-1-27-0   1/1     Running   2 (8m27s ago)   2d17h
-kube-system        kube-proxy-r9bt7                            1/1     Running   2 (8m27s ago)   2d17h
-kube-system        kube-scheduler-kubernetes-1-27-0            1/1     Running   2 (71s ago)     2d17h
-tigera-operator    tigera-operator-7b4b4fcf5d-bxpgk            1/1     Running   2 (23s ago)     12m
+calico-apiserver   calico-apiserver-7f6589f78d-27scs           1/1     Running   1 (4m19s ago)   22m
+calico-apiserver   calico-apiserver-7f6589f78d-h8t6h           1/1     Running   1 (4m19s ago)   22m
+calico-system      calico-kube-controllers-bf9867dc7-glt94     1/1     Running   1 (4m19s ago)   25m
+calico-system      calico-node-8mkc9                           1/1     Running   1 (4m19s ago)   25m
+calico-system      calico-typha-f7f689689-jmm5j                1/1     Running   1 (4m19s ago)   25m
+calico-system      csi-node-driver-2xrls                       2/2     Running   2 (4m19s ago)   25m
+kube-system        coredns-5d78c9869d-q4mx9                    1/1     Running   1 (4m19s ago)   168m
+kube-system        coredns-5d78c9869d-rtdhk                    1/1     Running   1 (4m19s ago)   168m
+kube-system        etcd-kubernetes-1-27-0                      1/1     Running   2 (4m19s ago)   168m
+kube-system        kube-apiserver-kubernetes-1-27-0            1/1     Running   2 (4m19s ago)   168m
+kube-system        kube-controller-manager-kubernetes-1-27-0   1/1     Running   2 (4m19s ago)   168m
+kube-system        kube-proxy-s62g9                            1/1     Running   2 (4m19s ago)   168m
+kube-system        kube-scheduler-kubernetes-1-27-0            1/1     Running   2 (4m19s ago)   168m
+tigera-operator    tigera-operator-7b4b4fcf5d-n9mkx            1/1     Running   2 (3m43s ago)   25m
 ```
 
 ```shell
@@ -38,28 +38,27 @@ $ kubectl --kubeconfig=kubeconfig run --image=docker.io/library/nginx:latest ngi
 pod/nginx created
 $ kubectl --kubeconfig=kubeconfig get pods
 NAME    READY   STATUS    RESTARTS   AGE
-nginx   1/1     Running   0          89s
+nginx   1/1     Running   0          3m41s
 ```
 
 ```shell
 $ ./ssh
-root@kubernetes-1-28-0:~# helm version
-version.BuildInfo{Version:"v3.13.0", GitCommit:"825e86f6a7a38cef1112bfa606e4127a706749b1", GitTreeState:"clean", GoVersion:"go1.20.8"}
-root@kubernetes-1-28-0:~# kubectl version
-Client Version: v1.28.0
-Kustomize Version: v5.0.4-0.20230601165947-6ce0bf390ce3
-Server Version: v1.28.0
-root@kubernetes-1-28-0:~# containerd --version
-containerd github.com/containerd/containerd v1.6.21 3dce8eb055cbb6872793272b4f20ed16117344f8
-root@kubernetes-1-28-0:~# runc --version
-runc version 1.1.7
-commit: v1.1.7-0-g860f061b
+root@kubernetes-1-27-0:~# helm version
+version.BuildInfo{Version:"v3.12.0", GitCommit:"c9f554d75773799f72ceef38c51210f1842a1dea", GitTreeState:"clean", GoVersion:"go1.20.3"}
+root@kubernetes-1-27-0:~# kubectl version
+WARNING: This version information is deprecated and will be replaced with the output from kubectl version --short.  Use --output=yaml|json to get the full version.
+Client Version: version.Info{Major:"1", Minor:"27", GitVersion:"v1.27.0", GitCommit:"1b4df30b3cdfeaba6024e81e559a6cd09a089d65", GitTreeState:"clean", BuildDate:"2023-04-11T17:10:18Z", GoVersion:"go1.20.3", Compiler:"gc", Platform:"linux/amd64"}
+Kustomize Version: v5.0.1
+Server Version: version.Info{Major:"1", Minor:"27", GitVersion:"v1.27.0", GitCommit:"1b4df30b3cdfeaba6024e81e559a6cd09a089d65", GitTreeState:"clean", BuildDate:"2023-04-11T17:04:24Z", GoVersion:"go1.20.3", Compiler:"gc", Platform:"linux/amd64"}
+root@kubernetes-1-27-0:~# containerd --version
+containerd github.com/containerd/containerd v1.6.19 1e1ea6e986c6c86565bc33d52e34b81b3e2bc71f
+root@kubernetes-1-27-0:~# runc --version
+runc version 1.1.4
+commit: v1.1.4-0-g5fd4c4d1
 spec: 1.0.2-dev
-go: go1.20.3
+go: go1.17.10
 libseccomp: 2.5.4
-root@kubernetes-1-28-0:~# uname -a
-Linux kubernetes-1-28-0 5.15.0-161-generic #171-Ubuntu SMP Sat Oct 11 08:17:01 UTC 2025 x86_64 x86_64 x86_64 GNU/Linux
-root@kubernetes-1-28-0:~# cat /etc/os-release
+root@kubernetes-1-27-0:~# cat /etc/os-release
 PRETTY_NAME="Ubuntu 22.04.5 LTS"
 NAME="Ubuntu"
 VERSION_ID="22.04"
@@ -72,12 +71,14 @@ SUPPORT_URL="https://help.ubuntu.com/"
 BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
 PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
 UBUNTU_CODENAME=jammy
+root@kubernetes-1-27-0:~# uname -a
+Linux kubernetes-1-27-0 5.15.0-161-generic #171-Ubuntu SMP Sat Oct 11 08:17:01 UTC 2025 x86_64 x86_64 x86_64 GNU/Linux
 ```
 
 ## build
 
 ```shell
-make all DIR=kubernetes/v1.28.0-calico
+make all DIR=kubernetes/v1.27.0-calico
 ```
 
 
@@ -85,7 +86,7 @@ make all DIR=kubernetes/v1.28.0-calico
 
 ```dockerfile
 # syntax=docker/dockerfile:1-labs
-FROM ssst0n3/docker_archive:ctr_kubernetes-v1.28.0-calico_v0.1.0
+FROM ssst0n3/docker_archive:ctr_kubernetes-v1.27.0-calico_v0.1.0
 ...
 RUN --security=insecure ["/sbin/init", "--log-target=kmsg"]
 ```
