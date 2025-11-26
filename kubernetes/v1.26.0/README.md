@@ -96,14 +96,21 @@ You can solve this issue by using a **cache mount** within your build process.
 **Example:**
 
 ```Dockerfile
-# Run kubeadm within an ext4 filesystem using a cached mount
-RUN --mount=type=cache,id=kubernetes-v1.26.0-snapshots,target=/var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/snapshots \
+# copy image snapshots
+# use cp -a instead of cp -r to preserve attributions, avoid coredns cap_net_bind_service loss
+RUN --mount=type=cache,id=kubernetes-v1.26.0-snapshots,target=/trick \
+    cp -a /var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/* /trick/
+# install calico
+RUN --mount=type=cache,id=kubernetes-v1.26.0-snapshots,target=/var/lib/containerd/io.containerd.snapshotter.v1.overlayfs \
     --security=insecure \
     ["/sbin/init", "--log-target=kmsg"]
-
-# Restore cached containerd snapshots
+# copy snapshots from cache
+# 1. copy owner attributions, fixed calico-kube-controllers crashloop issue
+# 2. skip 'work' dir to avoid 'operation not permitted' error, caused by coping overlayfs whiteout files
+# 3. use --xattrs, --xattrs-include to preserve file capabilities
 RUN --mount=type=cache,id=kubernetes-v1.26.0-snapshots,target=/trick \
-    cp -r /trick /var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/snapshots
+    tar --xattrs --xattrs-include='*' -C /trick --exclude='work' -cf - . | \
+    tar --xattrs --xattrs-include='*' -C /var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/ -xf -
 ```
 
 This approach stores containerd snapshots in a temp cache directory, avoiding nested overlayfs layers and improving build consistency.

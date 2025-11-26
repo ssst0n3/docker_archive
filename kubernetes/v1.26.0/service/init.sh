@@ -9,7 +9,7 @@ hostnamectl set-hostname kubernetes-1-26-0
 log "kubeadm init"
 kubeadm init --skip-phases=preflight --config=/kind/kubeadm.conf --skip-token-print --v=6 > /dev/kmsg 2>&1
 log "taint"
-kubectl taint nodes --all node-role.kubernetes.io/master- > /dev/kmsg 2>&1
+kubectl taint nodes --all node-role.kubernetes.io/control-plane- > /dev/kmsg 2>&1
 
 log "Waiting for kube-system pods to be created..."
 MAX_WAIT_TIME=300

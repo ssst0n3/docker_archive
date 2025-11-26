@@ -29,19 +29,20 @@ ENV KUBECONFIG=/etc/kubernetes/admin.conf
 ARG CACHE_BUST
 RUN echo "No cache from here, value: $CACHE_BUST"
 # copy image snapshots
+# use cp -a instead of cp -r to preserve attributions, avoid coredns cap_net_bind_service loss
 RUN --mount=type=cache,id=kubernetes-v1.26.0-snapshots,target=/trick \
-    cp -r /var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/* /trick/
-# kubeadm init under ext4 fs
+    cp -a /var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/* /trick/
+# install calico
 RUN --mount=type=cache,id=kubernetes-v1.26.0-snapshots,target=/var/lib/containerd/io.containerd.snapshotter.v1.overlayfs \
-    # fix kube-proxy `Failed to load kernel module`
-    --mount=type=bind,src=/modules,target=/lib/modules \
     --security=insecure \
     ["/sbin/init", "--log-target=kmsg"]
-# skip overlayfs whiteout files (c 0,0)
-# fix: `#20 5.255 cp: cannot create special file '/var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/snapshots/27/fs/var/cache/debconf/config.dat': Operation not permitted`
+# copy snapshots from cache
+# 1. copy owner attributions, fixed calico-kube-controllers crashloop issue
+# 2. skip 'work' dir to avoid 'operation not permitted' error, caused by coping overlayfs whiteout files
+# 3. use --xattrs, --xattrs-include to preserve file capabilities
 RUN --mount=type=cache,id=kubernetes-v1.26.0-snapshots,target=/trick \
-    --security=insecure \
-    cp -rf /trick/* /var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/ || true
+    tar --xattrs --xattrs-include='*' -C /trick --exclude='work' -cf - . | \
+    tar --xattrs --xattrs-include='*' -C /var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/ -xf -
 
 FROM kube_init AS final
 RUN mkdir -p /root/.kube && \

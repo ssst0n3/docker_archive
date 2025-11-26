@@ -12,7 +12,7 @@ cp /lib/modules/$(uname -r) modules/$(uname -r) -r
 docker buildx build \
     --build-arg CACHE_BUST=$(date +%s) \
     --build-arg BUILDKIT_SANDBOX_HOSTNAME=kubernetes-1-26-0 \
-    --progress=plain --builder docker-archive-builder \
+    --builder docker-archive-builder \
     --allow security.insecure \
     --load -t $1 .
 rm modules -r
