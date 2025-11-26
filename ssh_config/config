@@ -2405,3 +2405,11 @@ Host kubernetes-v1.31.0-calico
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
 
+Host kubernetes-v1.27.0-calico
+    Hostname 127.0.0.1
+    Port 12702
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
