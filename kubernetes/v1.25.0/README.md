@@ -16,14 +16,14 @@ $ docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
 
 ```shell
 $ kubectl --kubeconfig=kubeconfig get pods -A
-NAMESPACE     NAME                                        READY   STATUS    RESTARTS      AGE
-kube-system   coredns-565d847f94-96v4b                    0/1     Pending   0             9m47s
-kube-system   coredns-565d847f94-hfrg6                    0/1     Pending   0             9m47s
-kube-system   etcd-kubernetes-1-25-0                      1/1     Running   1 (78s ago)   10m
-kube-system   kube-apiserver-kubernetes-1-25-0            1/1     Running   1 (78s ago)   10m
-kube-system   kube-controller-manager-kubernetes-1-25-0   1/1     Running   1 (78s ago)   10m
-kube-system   kube-proxy-zw6cg                            1/1     Running   1 (78s ago)   9m47s
-kube-system   kube-scheduler-kubernetes-1-25-0            1/1     Running   1 (78s ago)   10m
+NAMESPACE     NAME                                        READY   STATUS    RESTARTS        AGE
+kube-system   coredns-565d847f94-nrdw4                    0/1     Pending   0               3h15m
+kube-system   coredns-565d847f94-qh9sd                    0/1     Pending   0               3h15m
+kube-system   etcd-kubernetes-1-25-0                      1/1     Running   1 (2m49s ago)   3h15m
+kube-system   kube-apiserver-kubernetes-1-25-0            1/1     Running   1 (2m49s ago)   3h15m
+kube-system   kube-controller-manager-kubernetes-1-25-0   1/1     Running   1 (2m49s ago)   3h15m
+kube-system   kube-proxy-hnwnb                            1/1     Running   1 (2m49s ago)   3h15m
+kube-system   kube-scheduler-kubernetes-1-25-0            1/1     Running   1 (2m49s ago)   3h15m
 ```
 
 ```shell
