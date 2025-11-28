@@ -1,0 +1,4 @@
+services:
+  vm:
+    devices:
+      - "/dev/kvm:/dev/kvm"
