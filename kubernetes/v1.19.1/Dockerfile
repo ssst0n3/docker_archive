@@ -10,8 +10,10 @@ COPY --chmod=755 service/init.sh /
 COPY service/init.service /usr/lib/systemd/system/
 COPY --chmod=755 service/hosts.sh /
 COPY service/hosts.service /usr/lib/systemd/system/
+COPY service/cgroup-kill.service /usr/lib/systemd/system/cgroup-kill.service
 RUN systemctl enable kubelet.service && \
-    systemctl enable init.service
+    systemctl enable init.service && \
+    systemctl enable cgroup-kill.service
 
 FROM pre AS kube_init
 ENV KUBECONFIG=/etc/kubernetes/admin.conf
@@ -24,18 +26,38 @@ ARG CACHE_BUST
 RUN echo "No cache from here, value: $CACHE_BUST"
 # copy image snapshots
 RUN --mount=type=cache,id=kubernetes-v1.19.1-snapshots,target=/trick \
-    cp -r /var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/* /trick/
+    cp -a /var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/* /trick/
 # kubeadm init under ext4 fs
 RUN --mount=type=cache,id=kubernetes-v1.19.1-snapshots,target=/var/lib/containerd/io.containerd.snapshotter.v1.overlayfs \
     # fix kube-proxy `Failed to load kernel module`
     --mount=type=bind,src=/modules,target=/lib/modules \
     --security=insecure \
     ["/sbin/init", "--log-target=kmsg"]
-# skip overlayfs whiteout files (c 0,0)
+# skip overlayfs whiteout files (c 0,0) , overlayfs does not allow mknod even privileged container
 # fix: `#20 5.255 cp: cannot create special file '/var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/snapshots/27/fs/var/cache/debconf/config.dat': Operation not permitted`
 RUN --mount=type=cache,id=kubernetes-v1.19.1-snapshots,target=/trick \
-    --security=insecure \
-    cp -rf /trick/* /var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/ || true
+    # all these files are safe to delete, list each file path here for more clear
+    cd /trick/snapshots/28/fs && rm \
+        var/lib/apt/lists/security.debian.org_debian-security_dists_buster_updates_main_binary-amd64_Packages.lz4 \
+        var/lib/apt/lists/deb.debian.org_debian_dists_buster-updates_main_binary-amd64_Packages.lz4 \
+        var/lib/apt/lists/deb.debian.org_debian_dists_buster-backports_InRelease \
+        var/lib/apt/lists/lock \
+        var/lib/apt/lists/deb.debian.org_debian_dists_buster_main_binary-amd64_Packages.lz4 \
+        var/lib/apt/lists/partial \
+        var/lib/apt/lists/deb.debian.org_debian_dists_buster-updates_InRelease \
+        var/lib/apt/lists/deb.debian.org_debian_dists_buster_InRelease \
+        var/lib/apt/lists/deb.debian.org_debian_dists_buster-backports_main_binary-amd64_Packages.lz4 \
+        var/lib/apt/lists/auxfiles \
+        var/lib/apt/lists/security.debian.org_debian-security_dists_buster_updates_InRelease \
+        var/log/alternatives.log \
+        var/log/dpkg.log \
+        var/log/apt \
+        var/cache/debconf/templates.dat \
+        var/cache/debconf/passwords.dat \
+        var/cache/debconf/config.dat \
+    && \
+    # use tar to preserve file capabilities
+    tar -C /trick -cf - . | tar -C /var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/ -xf -
 
 FROM kube_init AS final
 RUN mkdir -p /root/.kube && \
