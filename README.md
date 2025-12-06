@@ -137,6 +137,7 @@ root@localhost:~# docker version
 | [kubernetes-v1.22.0](./kubernetes/v1.22.0/)               | v0.1.0  |       |      |
 | [kubernetes-v1.21.1](./kubernetes/v1.21.1/)               | v0.1.0  |       |      |
 | [kubernetes-v1.20.2](./kubernetes/v1.20.2/)               | v0.1.0  |       |      |
+| [kubernetes-v1.19.1-calico](./kubernetes/v1.19.1-calico/) | v0.1.0  |       |      |
 | [kubernetes-v1.19.1](./kubernetes/v1.19.1/)               | v0.1.0  |       |      |
 | [kubernetes-v1.18.2-cluster](./kubernetes/v1.18.2-cluster/) | v0.1.0  |       |      |
 | [kubernetes-v1.18.2-calico](./kubernetes/v1.18.2-calico/) | v0.1.0  |       |      |
