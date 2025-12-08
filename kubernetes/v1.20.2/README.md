@@ -17,13 +17,13 @@ $ docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
 ```shell
 $ kubectl --kubeconfig=kubeconfig get pods -A
 NAMESPACE     NAME                                        READY   STATUS    RESTARTS   AGE
-kube-system   coredns-74ff55c5b-m4jf8                     0/1     Pending   0          11m
-kube-system   coredns-74ff55c5b-xcnxf                     0/1     Pending   0          11m
-kube-system   etcd-kubernetes-1-20-2                      1/1     Running   1          11m
-kube-system   kube-apiserver-kubernetes-1-20-2            1/1     Running   1          11m
-kube-system   kube-controller-manager-kubernetes-1-20-2   1/1     Running   1          11m
-kube-system   kube-proxy-88gdt                            1/1     Running   1          11m
-kube-system   kube-scheduler-kubernetes-1-20-2            1/1     Running   1          11m
+kube-system   coredns-74ff55c5b-7gfpn                     0/1     Pending   0          17m
+kube-system   coredns-74ff55c5b-dckgq                     0/1     Pending   0          17m
+kube-system   etcd-kubernetes-1-20-2                      1/1     Running   1          17m
+kube-system   kube-apiserver-kubernetes-1-20-2            1/1     Running   1          17m
+kube-system   kube-controller-manager-kubernetes-1-20-2   1/1     Running   1          17m
+kube-system   kube-proxy-p4tc6                            1/1     Running   1          17m
+kube-system   kube-scheduler-kubernetes-1-20-2            1/1     Running   1          17m
 ```
 
 ```shell
@@ -91,17 +91,43 @@ You can solve this issue by using a **cache mount** within your build process.
 **Example:**
 
 ```Dockerfile
-# Run kubeadm within an ext4 filesystem using a cached mount
-RUN --mount=type=cache,id=kubernetes-v1.20.2-snapshots,target=/var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/snapshots \
+# copy image snapshots
+RUN --mount=type=cache,id=kubernetes-v1.20.2-snapshots,target=/trick \
+    cp -a /var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/* /trick/
+# kubeadm init under ext4 fs
+RUN --mount=type=cache,id=kubernetes-v1.20.2-snapshots,target=/var/lib/containerd/io.containerd.snapshotter.v1.overlayfs \
+    # fix kube-proxy `Failed to load kernel module`
+    --mount=type=bind,src=/modules,target=/lib/modules \
     --security=insecure \
     ["/sbin/init", "--log-target=kmsg"]
-
-# Restore cached containerd snapshots
+# skip overlayfs whiteout files (c 0,0)
 RUN --mount=type=cache,id=kubernetes-v1.20.2-snapshots,target=/trick \
-    cp -r /trick /var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/snapshots
+    # all these files are safe to delete, list each file path here for more clear
+    cd /trick/snapshots/28/fs && rm \
+        var/lib/apt/lists/security.debian.org_debian-security_dists_buster_updates_main_binary-amd64_Packages.lz4 \
+        var/lib/apt/lists/deb.debian.org_debian_dists_buster-updates_main_binary-amd64_Packages.lz4 \
+        var/lib/apt/lists/deb.debian.org_debian_dists_buster-backports_InRelease \
+        var/lib/apt/lists/lock \
+        var/lib/apt/lists/deb.debian.org_debian_dists_buster_main_binary-amd64_Packages.lz4 \
+        var/lib/apt/lists/partial \
+        var/lib/apt/lists/deb.debian.org_debian_dists_buster-updates_InRelease \
+        var/lib/apt/lists/deb.debian.org_debian_dists_buster_InRelease \
+        var/lib/apt/lists/deb.debian.org_debian_dists_buster-backports_main_binary-amd64_Packages.lz4 \
+        var/lib/apt/lists/auxfiles \
+        var/lib/apt/lists/security.debian.org_debian-security_dists_buster_updates_InRelease \
+        var/log/alternatives.log \
+        var/log/dpkg.log \
+        var/log/apt \
+        var/cache/debconf/templates.dat \
+        var/cache/debconf/passwords.dat \
+        var/cache/debconf/config.dat && \
+    # use tar to preserve file capabilities
+    tar -C /trick -cf - . | tar -C /var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/ -xf -
 ```
 
 This approach stores containerd snapshots in a temp cache directory, avoiding nested overlayfs layers and improving build consistency.
+
+> NOTE: mknod is not allowed on overlayfs, even when running as a privileged container.
 
 ---
 
