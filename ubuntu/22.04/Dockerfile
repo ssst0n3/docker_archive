@@ -1,9 +1,11 @@
+ARG HOSTNAME=ubuntu-22-04
 ARG VERSION_UBUNTU=22.04
 ARG BASE_IMAGE=ubuntu:${VERSION_UBUNTU}
 ARG SSH_PASSWORD=root
 ARG SSH_PUB_KEY='ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPtOfmNu0t6Z3bEg47tdMkTNZdv7+Fd3KWTD0xNk5Woe default@docker_archive'
 
 FROM ${BASE_IMAGE}
+ARG HOSTNAME
 ARG SSH_PASSWORD
 ARG SSH_PUB_KEY
 
@@ -22,3 +24,5 @@ RUN apt update && \
 RUN echo root:root | chpasswd && \
   mkdir -p /root/.ssh/ && \
   echo ${SSH_PUB_KEY} >> /root/.ssh/authorized_keys
+
+RUN echo ${HOSTNAME} > /etc/hostname

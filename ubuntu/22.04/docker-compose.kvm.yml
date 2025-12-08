@@ -1,4 +1,3 @@
-version: '3'
 services:
   vm:
     command: /start.sh -enable-kvm
