@@ -1,11 +1,13 @@
 # docker v22.04
 
 * dqd: 
-	* ssst0n3/docker_archive:ubuntu-22.04 -> ssst0n3/docker_archive:ubuntu-22.04_v0.2.0
+	* ssst0n3/docker_archive:ubuntu-22.04 -> ssst0n3/docker_archive:ubuntu-22.04_v0.3.0
+	* ssst0n3/docker_archive:ubuntu-22.04_v0.3.0
 	* ssst0n3/docker_archive:ubuntu-22.04_v0.2.0
 	* ssst0n3/docker_archive:ubuntu-22.04_v0.1.0
 * ctr: 
-	* ssst0n3/docker_archive:ctr_ubuntu-22.04 -> ssst0n3/docker_archive:ctr_ubuntu-22.04_v0.2.0
+	* ssst0n3/docker_archive:ctr_ubuntu-22.04 -> ssst0n3/docker_archive:ctr_ubuntu-22.04_v0.3.0
+	* ssst0n3/docker_archive:ctr_ubuntu-22.04_v0.3.0: increase the size to 20G
 	* ssst0n3/docker_archive:ctr_ubuntu-22.04_v0.2.0: install built-in ssh key
 	* ssst0n3/docker_archive:ctr_ubuntu-22.04_v0.1.0
 
@@ -44,5 +46,5 @@ make all DIR=ubuntu/22.04
 for developers:
 
 ```dockerfile
-FROM ssst0n3/docker_archive:ctr_ubuntu-22.04_v0.2.0
+FROM ssst0n3/docker_archive:ctr_ubuntu-22.04_v0.3.0
 ```
