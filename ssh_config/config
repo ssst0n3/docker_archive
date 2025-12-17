@@ -2421,6 +2421,38 @@ Host kubernetes-v1.26.0-calico
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
 
+Host kubernetes-v1.19.1-calico
+    Hostname 127.0.0.1
+    Port 11912
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
+Host kubernetes-v1.24.0-calico
+    Hostname 127.0.0.1
+    Port 12406
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
+Host kubernetes-v1.20.2-calico
+    Hostname 127.0.0.1
+    Port 12023
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
+Host kubernetes-v1.21.1-calico
+    Hostname 127.0.0.1
+    Port 12112
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
 Host docker-compose-v2.40.1
     Hostname 127.0.0.1
     Port 24010

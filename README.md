@@ -135,8 +135,11 @@ root@localhost:~# docker version
 | [kubernetes-v1.24.0](./kubernetes/v1.24.0/)               | v0.1.0  |       |      |
 | [kubernetes-v1.23.0](./kubernetes/v1.23.0/)               | v0.1.0  |       |      |
 | [kubernetes-v1.22.0](./kubernetes/v1.22.0/)               | v0.1.0  |       |      |
+| [kubernetes-v1.21.1-calico](./kubernetes/v1.21.1-calico/) | v0.1.0  |       |      |
 | [kubernetes-v1.21.1](./kubernetes/v1.21.1/)               | v0.1.0  |       |      |
+| [kubernetes-v1.20.2-calico](./kubernetes/v1.20.2-calico/) | v0.1.0  |       |      |
 | [kubernetes-v1.20.2](./kubernetes/v1.20.2/)               | v0.1.0  |       |      |
+| [kubernetes-v1.19.1-calico](./kubernetes/v1.19.1-calico/) | v0.1.0  |       |      |
 | [kubernetes-v1.19.1](./kubernetes/v1.19.1/)               | v0.1.0  |       |      |
 | [kubernetes-v1.18.2-cluster](./kubernetes/v1.18.2-cluster/) | v0.1.0  |       |      |
 | [kubernetes-v1.18.2-calico](./kubernetes/v1.18.2-calico/) | v0.1.0  |       |      |
@@ -412,7 +415,7 @@ root@localhost:~# docker version
 |-----------------------------------------|---------|-------|
 | [ubuntu-24.04](./ubuntu/24.04/)         | v0.3.0  |
 | [ubuntu-22.04-dbg](./ubuntu/22.04-dbg/) | v0.2.0  |
-| [ubuntu-22.04](./ubuntu/22.04/)         | v0.2.0  |
+| [ubuntu-22.04](./ubuntu/22.04/)         | v0.3.0  |
 | [ubuntu-20.04](./ubuntu/20.04/)         | v0.2.0  |
 | [ubuntu-18.04](./ubuntu/18.04/)         | v0.2.0  |
 | [ubuntu-16.04](./ubuntu/16.04/)         | v0.2.0  |

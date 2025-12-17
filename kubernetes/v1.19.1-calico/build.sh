@@ -11,7 +11,7 @@ mkdir -p modules
 cp /lib/modules/$(uname -r) modules/$(uname -r) -r
 docker buildx build \
     --build-arg CACHE_BUST=$(date +%s) \
-    --build-arg BUILDKIT_SANDBOX_HOSTNAME=kubernetes-1-20-2 \
+    --build-arg BUILDKIT_SANDBOX_HOSTNAME=kubernetes-1-19-1 \
     --builder docker-archive-builder \
     --allow security.insecure \
     --load -t $1 .
