@@ -179,6 +179,7 @@ root@localhost:~# docker version
 |-----------------------------------------------------|--------|----------------|------|
 | [docker-compose-v2.40.2](./docker-compose/v2.40.2/) | v0.1.0 |  |
 | [docker-compose-v2.40.1](./docker-compose/v2.40.1/) | v0.1.0 |  |
+| [docker-compose-v2.39.4](./docker-compose/v2.39.4/) | v0.1.0 |  |
 
 ### docker
 

@@ -1,0 +1,8 @@
+services:
+  vm:
+    image: ssst0n3/docker_archive:docker-compose-v2.39.4_v0.1.0
+    ports:
+        - "23940:22"
+    tty: true
+    stdin_open: true 
+

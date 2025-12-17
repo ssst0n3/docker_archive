@@ -53,8 +53,12 @@ output_file="$project_dir/ssh_config/config"
 # Create the output directory if it doesn't exist.
 mkdir -p "$(dirname "$output_file")"
 
+# Counter to track how many configurations were added
+added_count=0
+
 # Process each .env file found in the project directory and its subdirectories
-find "$project_dir" -type f -name ".env" | sort | while IFS= read -r env_file; do
+# Use process substitution to avoid subshell, so we can track added_count
+while IFS= read -r env_file; do
     # Get the directory containing the .env file.
     dir=$(dirname "$env_file")
     # Get relative path from project directory
@@ -151,8 +155,16 @@ EOF
     echo -e "${GREEN}[ADDED]${NC} ${GREEN}Host: ${CYAN}$image${NC}"
     echo -e "         ${GREEN}SSH Port: ${CYAN}$host_port${NC}"
     echo -e "         ${GREEN}Identity File: ${CYAN}$identity_file${NC}"
-done
+    ((added_count++))
+done < <(find "$project_dir" -type f -name ".env" | sort)
 
 rel_output_file="${output_file#$project_dir/}"
-echo -e "${BLUE}[SUCCESS]${NC} ${BLUE}SSH configuration generated${NC}"
-echo -e "          ${BLUE}Output file: ${CYAN}$rel_output_file${NC}"
+if [ "$added_count" -eq 0 ]; then
+    echo -e "${YELLOW}[INFO]${NC} ${YELLOW}No new SSH configurations were added${NC}"
+    echo -e "          ${YELLOW}Output file: ${CYAN}$rel_output_file${NC}"
+    echo -e "          ${GRAY}(All configurations already exist or no valid configurations found)${NC}"
+else
+    echo -e "${BLUE}[SUCCESS]${NC} ${BLUE}SSH configuration generated${NC}"
+    echo -e "          ${BLUE}Output file: ${CYAN}$rel_output_file${NC}"
+    echo -e "          ${BLUE}Added ${CYAN}$added_count${BLUE} configuration(s)${NC}"
+fi
