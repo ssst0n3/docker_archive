@@ -20,8 +20,11 @@
 # If the .env file contains the IDENTITY_FILE variable, its value will be used as the
 # IdentityFile. Otherwise, the default value ~/.ssh/keys/docker_archive is used.
 #
-# The output file is always ../ssh_config/config relative to the script’s directory,
+# The output file is always ../ssh_config/config relative to the script's directory,
 # no matter where the script is executed from.
+#
+# To skip generating SSH config for a project, add SKIP_SSH_CONFIG=true to its .env file.
+# When set, the script will silently skip that project without printing SKIP messages.
 #
 # Assumptions:
 # - The .env file contains a line in the format: IMAGE=value or IMAGE="value".
@@ -29,6 +32,7 @@
 #       - "13239:22" or - 13239:22 (with or without quotes)
 # - The host port is the number before the colon in the mapping "host_port:22".
 # - The .env file may optionally include a line such as: IDENTITY_FILE=/path/to/key
+# - The .env file may optionally include: SKIP_SSH_CONFIG=true to skip this project
 
 # Color definitions for output
 RED='\033[0;31m'
@@ -55,6 +59,23 @@ find "$project_dir" -type f -name ".env" | sort | while IFS= read -r env_file; d
     dir=$(dirname "$env_file")
     # Get relative path from project directory
     rel_dir="${dir#$project_dir/}"
+    
+    # Check if SKIP_SSH_CONFIG is set in the .env file
+    # If set to true/1/yes, silently skip this project
+    skip_ssh_config=$(grep '^SKIP_SSH_CONFIG=' "$env_file" | head -n1 | cut -d'=' -f2- | tr -d '"' | tr '[:upper:]' '[:lower:]')
+    should_skip=false
+    if [ -n "$skip_ssh_config" ]; then
+        case "$skip_ssh_config" in
+            true|1|yes|on)
+                should_skip=true
+                ;;
+        esac
+    fi
+    
+    # If SKIP_SSH_CONFIG is set, silently skip this project without any checks
+    if [ "$should_skip" = true ]; then
+        continue
+    fi
     
     # Define the docker-compose.yml file path in the same directory.
     dc_file="$dir/docker-compose.yml"
