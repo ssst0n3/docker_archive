@@ -177,6 +177,7 @@ root@localhost:~# docker version
 
 | tag                                                 | version| alias          | note |
 |-----------------------------------------------------|--------|----------------|------|
+| [docker-compose-v2.40.2](./docker-compose/v2.40.2/) | v0.1.0 |  |
 | [docker-compose-v2.40.1](./docker-compose/v2.40.1/) | v0.1.0 |  |
 
 ### docker
