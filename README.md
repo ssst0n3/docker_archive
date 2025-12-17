@@ -173,6 +173,12 @@ root@localhost:~# docker version
 | [nvidia-container-toolkit-v1.12.0](./nvidia-container-toolkit/v1.12.0/)                                         | v0.9.0  |       |      |
 | [nvidia-container-toolkit-v1.10.0](./nvidia-container-toolkit/v1.10.0/)                                         | v0.9.0  |       |      |
 
+### docker-compose
+
+| tag                                                 | version| alias          | note |
+|-----------------------------------------------------|--------|----------------|------|
+| [docker-compose-v2.40.1](./docker-compose/v2.40.1/) | v0.1.0 |  |
+
 ### docker
 
 | tag                                                                                                   | version | alias         | note                          |
