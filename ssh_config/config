@@ -2477,3 +2477,11 @@ Host docker-compose-v2.39.4
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
 
+Host docker-compose-v2.40.0
+    Hostname 127.0.0.1
+    Port 24001
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
