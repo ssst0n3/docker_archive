@@ -57,7 +57,8 @@ root@localhost:~# docker version
 
 | tag                                                                     | version | alias                            | note                       |
 |-------------------------------------------------------------------------|---------|----------------------------------|----------------------------|
-| [cve-2025-23266_mitigation](./vul/cve-2025-23266_mitigation/)           | v0.1.0  |                                  |                            |
+| [cve-2025-62725](./vul/cve-2025-62725/)                                 | v0.1.0  |
+| [cve-2025-23266_mitigation](./vul/cve-2025-23266_mitigation/)           | v0.1.0  |
 | [cve-2025-23266](./vul/cve-2025-23266/)                                 | v0.9.0  | nvidia-container-toolkit-v1.17.6 |                            |
 | [cve-2025-47290](./vul/cve-2025-47290/)                                 | v0.1.0  | containerd-v2.1.0                |                            |
 | [cve-2025-1974](./vul/cve-2025-1974/)                                   | v0.1.0  | ingress-nginx-v1.11.3            |                            |
@@ -177,10 +178,10 @@ root@localhost:~# docker version
 
 | tag                                                 | version| alias          | note |
 |-----------------------------------------------------|--------|----------------|------|
-| [docker-compose-v2.40.2](./docker-compose/v2.40.2/) | v0.1.0 |  |
-| [docker-compose-v2.40.1](./docker-compose/v2.40.1/) | v0.1.0 |  |
-| [docker-compose-v2.40.0](./docker-compose/v2.40.0/) | v0.1.0 |  |
-| [docker-compose-v2.39.4](./docker-compose/v2.39.4/) | v0.1.0 |  |
+| [docker-compose-v2.40.2](./docker-compose/v2.40.2/) | v0.1.0 |
+| [docker-compose-v2.40.1](./docker-compose/v2.40.1/) | v0.1.0 |
+| [docker-compose-v2.40.0](./docker-compose/v2.40.0/) | v0.1.0 |
+| [docker-compose-v2.39.4](./docker-compose/v2.39.4/) | v0.1.0 |
 
 ### docker
 

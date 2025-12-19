@@ -2485,3 +2485,11 @@ Host docker-compose-v2.40.0
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
 
+Host cve-2025-62725
+    Hostname 127.0.0.1
+    Port 62725
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
