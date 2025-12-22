@@ -29,7 +29,7 @@ ARG CACHE_BUST
 RUN echo "No cache from here, value: $CACHE_BUST"
 # copy image snapshots
 RUN --mount=type=cache,id=kubernetes-v1.22.0-snapshots,target=/trick \
-    cp -r /var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/* /trick/
+    cp -a /var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/* /trick/
 # kubeadm init under ext4 fs
 RUN --mount=type=cache,id=kubernetes-v1.22.0-snapshots,target=/var/lib/containerd/io.containerd.snapshotter.v1.overlayfs \
     # fix kube-proxy `Failed to load kernel module`
@@ -39,8 +39,8 @@ RUN --mount=type=cache,id=kubernetes-v1.22.0-snapshots,target=/var/lib/container
 # skip overlayfs whiteout files (c 0,0)
 # fix: `#20 5.255 cp: cannot create special file '/var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/snapshots/27/fs/var/cache/debconf/config.dat': Operation not permitted`
 RUN --mount=type=cache,id=kubernetes-v1.22.0-snapshots,target=/trick \
-    --security=insecure \
-    cp -rf /trick/* /var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/ || true
+    # use tar to preserve file capabilities
+    tar -C /trick -cf - . | tar -C /var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/ -xf -
 
 FROM kube_init AS final
 RUN mkdir -p /root/.kube && \
