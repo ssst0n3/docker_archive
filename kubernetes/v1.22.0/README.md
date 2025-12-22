@@ -16,14 +16,14 @@ $ docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
 
 ```shell
 $ kubectl --kubeconfig=kubeconfig get pods -A
-NAMESPACE     NAME                                        READY   STATUS    RESTARTS      AGE
-kube-system   coredns-78fcd69978-9blsv                    0/1     Pending   0             10m
-kube-system   coredns-78fcd69978-qcvpr                    0/1     Pending   0             10m
-kube-system   etcd-kubernetes-1-22-0                      1/1     Running   1 (70s ago)   11m
-kube-system   kube-apiserver-kubernetes-1-22-0            1/1     Running   1 (70s ago)   11m
-kube-system   kube-controller-manager-kubernetes-1-22-0   1/1     Running   1 (70s ago)   11m
-kube-system   kube-proxy-8wcsf                            1/1     Running   1 (70s ago)   10m
-kube-system   kube-scheduler-kubernetes-1-22-0            1/1     Running   1 (70s ago)   11m
+NAMESPACE     NAME                                        READY   STATUS    RESTARTS        AGE
+kube-system   coredns-78fcd69978-lcckw                    0/1     Pending   0               15m
+kube-system   coredns-78fcd69978-tsllm                    0/1     Pending   0               15m
+kube-system   etcd-kubernetes-1-22-0                      1/1     Running   1 (3m41s ago)   15m
+kube-system   kube-apiserver-kubernetes-1-22-0            1/1     Running   1 (3m41s ago)   15m
+kube-system   kube-controller-manager-kubernetes-1-22-0   1/1     Running   1 (3m41s ago)   15m
+kube-system   kube-proxy-xv9sl                            1/1     Running   1 (3m41s ago)   15m
+kube-system   kube-scheduler-kubernetes-1-22-0            1/1     Running   1 (3m41s ago)   15m
 ```
 
 ```shell
@@ -93,19 +93,25 @@ You can solve this issue by using a **cache mount** within your build process.
 **Example:**
 
 ```Dockerfile
-# Run kubeadm within an ext4 filesystem using a cached mount
-RUN --mount=type=cache,id=kubernetes-v1.22.0-snapshots,target=/var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/snapshots \
+# copy image snapshots
+RUN --mount=type=cache,id=kubernetes-v1.22.0-snapshots,target=/trick \
+    cp -a /var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/* /trick/
+# kubeadm init under ext4 fs
+RUN --mount=type=cache,id=kubernetes-v1.22.0-snapshots,target=/var/lib/containerd/io.containerd.snapshotter.v1.overlayfs \
+    # fix kube-proxy `Failed to load kernel module`
+    --mount=type=bind,src=/modules,target=/lib/modules \
     --security=insecure \
     ["/sbin/init", "--log-target=kmsg"]
-
-# Restore cached containerd snapshots
+# skip overlayfs whiteout files (c 0,0)
+# fix: `#20 5.255 cp: cannot create special file '/var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/snapshots/27/fs/var/cache/debconf/config.dat': Operation not permitted`
 RUN --mount=type=cache,id=kubernetes-v1.22.0-snapshots,target=/trick \
-    cp -r /trick /var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/snapshots
+    # use tar to preserve file capabilities
+    tar -C /trick -cf - . | tar -C /var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/ -xf -
 ```
 
 This approach stores containerd snapshots in a temp cache directory, avoiding nested overlayfs layers and improving build consistency.
 
----
+> NOTE: mknod is not allowed on overlayfs, even when running as a privileged container.
 
 ### 2. Fix `systemctl exit 0` inside containers
 
