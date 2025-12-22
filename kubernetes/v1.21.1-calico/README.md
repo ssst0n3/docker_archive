@@ -31,7 +31,7 @@ tigera-operator   tigera-operator-5c97d4cbbf-gpsvf            1/1     Running   
 ```
 
 ```shell
-$ kubectl --kubeconfig=kubeconfig run --image=docker.io/library/nginx:latest nginx  
+$ kubectl --kubeconfig=kubeconfig run --image=docker.io/library/nginx:latest nginx
 pod/nginx created
 $ kubectl --kubeconfig=kubeconfig get pods
 NAME    READY   STATUS    RESTARTS   AGE

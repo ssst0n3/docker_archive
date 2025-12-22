@@ -2493,3 +2493,11 @@ Host cve-2025-62725
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
 
+Host kubernetes-v1.22.0-calico
+    Hostname 127.0.0.1
+    Port 12203
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
