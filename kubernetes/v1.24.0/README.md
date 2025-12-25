@@ -15,15 +15,15 @@ $ docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
 ```
 
 ```shell
-$ kubectl --kubeconfig=kubeconfig get pods -A
-NAMESPACE     NAME                                        READY   STATUS    RESTARTS      AGE
-kube-system   coredns-6d4b75cb6d-7vmqz                    0/1     Pending   0             14m
-kube-system   coredns-6d4b75cb6d-r7fjs                    0/1     Pending   0             14m
-kube-system   etcd-kubernetes-1-24-0                      1/1     Running   1 (14m ago)   15m
-kube-system   kube-apiserver-kubernetes-1-24-0            1/1     Running   1 (14m ago)   15m
-kube-system   kube-controller-manager-kubernetes-1-24-0   1/1     Running   1 (14m ago)   15m
-kube-system   kube-proxy-zzg8h                            1/1     Running   1 (69s ago)   14m
-kube-system   kube-scheduler-kubernetes-1-24-0            1/1     Running   1 (14m ago)   15m
+$ kubectl --kubeconfig=kubeconfig get pods -A       
+NAMESPACE     NAME                                        READY   STATUS    RESTARTS        AGE
+kube-system   coredns-6d4b75cb6d-64npc                    0/1     Pending   0               6h34m
+kube-system   coredns-6d4b75cb6d-rmdkl                    0/1     Pending   0               6h34m
+kube-system   etcd-kubernetes-1-24-0                      1/1     Running   1 (6h34m ago)   6h34m
+kube-system   kube-apiserver-kubernetes-1-24-0            1/1     Running   1 (6h34m ago)   6h34m
+kube-system   kube-controller-manager-kubernetes-1-24-0   1/1     Running   1 (6h34m ago)   6h34m
+kube-system   kube-proxy-nzbhw                            1/1     Running   1 (6h24m ago)   6h34m
+kube-system   kube-scheduler-kubernetes-1-24-0            1/1     Running   1 (6h34m ago)   6h34m
 ```
 
 ```shell
@@ -42,7 +42,7 @@ runc version 1.0.0-rc95
 spec: 1.0.2-dev
 go: go1.14.15
 libseccomp: 2.5.1
-root@kubernetes-1-24-0:~# cat /etc/os-release
+root@kubernetes-1-24-0:~# cat /etc/os-release 
 NAME="Ubuntu"
 VERSION="20.04.6 LTS (Focal Fossa)"
 ID=ubuntu

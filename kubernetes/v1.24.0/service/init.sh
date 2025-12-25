@@ -18,7 +18,7 @@ init_kubernetes() {
 
 remove_master_taint() {
   log "Removing master taint"
-  kubectl taint nodes --all node-role.kubernetes.io/master- > /dev/kmsg 2>&1
+  kubectl taint nodes --all node-role.kubernetes.io/control-plane- node-role.kubernetes.io/master- > /dev/kmsg 2>&1
   log "Master taint removed"
 }
 
