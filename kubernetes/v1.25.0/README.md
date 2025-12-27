@@ -15,15 +15,15 @@ $ docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
 ```
 
 ```shell
-$ kubectl --kubeconfig=kubeconfig get pods -A
-NAMESPACE     NAME                                        READY   STATUS    RESTARTS        AGE
-kube-system   coredns-565d847f94-nrdw4                    0/1     Pending   0               3h15m
-kube-system   coredns-565d847f94-qh9sd                    0/1     Pending   0               3h15m
-kube-system   etcd-kubernetes-1-25-0                      1/1     Running   1 (2m49s ago)   3h15m
-kube-system   kube-apiserver-kubernetes-1-25-0            1/1     Running   1 (2m49s ago)   3h15m
-kube-system   kube-controller-manager-kubernetes-1-25-0   1/1     Running   1 (2m49s ago)   3h15m
-kube-system   kube-proxy-hnwnb                            1/1     Running   1 (2m49s ago)   3h15m
-kube-system   kube-scheduler-kubernetes-1-25-0            1/1     Running   1 (2m49s ago)   3h15m
+$ kubectl --kubeconfig=kubeconfig get pods -A                 
+NAMESPACE     NAME                                        READY   STATUS    RESTARTS      AGE
+kube-system   coredns-565d847f94-8xwm4                    0/1     Pending   0             8m2s
+kube-system   coredns-565d847f94-vjkhf                    0/1     Pending   0             8m2s
+kube-system   etcd-kubernetes-1-25-0                      1/1     Running   1 (28s ago)   8m16s
+kube-system   kube-apiserver-kubernetes-1-25-0            1/1     Running   1 (28s ago)   8m17s
+kube-system   kube-controller-manager-kubernetes-1-25-0   1/1     Running   1 (28s ago)   8m17s
+kube-system   kube-proxy-cjjsk                            1/1     Running   1 (28s ago)   8m2s
+kube-system   kube-scheduler-kubernetes-1-25-0            1/1     Running   1 (28s ago)   8m17s
 ```
 
 ```shell
@@ -43,9 +43,7 @@ commit: v1.1.3-0-g6724737f
 spec: 1.0.2-dev
 go: go1.17.10
 libseccomp: 2.5.4
-root@kubernetes-1-25-0:~# uname -a
-Linux kubernetes-1-25-0 5.15.0-161-generic #171-Ubuntu SMP Sat Oct 11 08:17:01 UTC 2025 x86_64 x86_64 x86_64 GNU/Linux
-root@kubernetes-1-25-0:~# cat /etc/os-release 
+root@kubernetes-1-25-0:~# cat /etc/os-release
 PRETTY_NAME="Ubuntu 22.04.5 LTS"
 NAME="Ubuntu"
 VERSION_ID="22.04"
@@ -58,6 +56,8 @@ SUPPORT_URL="https://help.ubuntu.com/"
 BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
 PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
 UBUNTU_CODENAME=jammy
+root@kubernetes-1-25-0:~# uname -a
+Linux kubernetes-1-25-0 5.15.0-164-generic #174-Ubuntu SMP Fri Nov 14 20:25:16 UTC 2025 x86_64 x86_64 x86_64 GNU/Linux
 ```
 
 ## build
@@ -96,16 +96,24 @@ You can solve this issue by using a **cache mount** within your build process.
 **Example:**
 
 ```Dockerfile
-# Run kubeadm within an ext4 filesystem using a cached mount
-RUN --mount=type=cache,id=kubernetes-v1.25.0-snapshots,target=/var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/snapshots \
+# copy image snapshots
+RUN --mount=type=cache,id=kubernetes-v1.25.0-snapshots,target=/trick \
+    cp -a /var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/* /trick/
+# kubeadm init under ext4 fs
+RUN --mount=type=cache,id=kubernetes-v1.25.0-snapshots,target=/var/lib/containerd/io.containerd.snapshotter.v1.overlayfs \
+    # fix kube-proxy `Failed to load kernel module`
+    --mount=type=bind,src=/modules,target=/lib/modules \
     --security=insecure \
     ["/sbin/init", "--log-target=kmsg"]
-
-# Restore cached containerd snapshots
+# skip overlayfs whiteout files (c 0,0)
+# fix: `#20 5.255 cp: cannot create special file '/var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/snapshots/27/fs/var/cache/debconf/config.dat': Operation not permitted`
 RUN --mount=type=cache,id=kubernetes-v1.25.0-snapshots,target=/trick \
-    cp -r /trick /var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/snapshots
+    # all these files are safe to delete, list each file path here for more clear
+    rm /trick/snapshots/26/work/work/#* && \
+    # use tar to preserve file capabilities
+    tar -C /trick -cf - . | tar -C /var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/ -xf -
 ```
 
 This approach stores containerd snapshots in a temp cache directory, avoiding nested overlayfs layers and improving build consistency.
 
----
+> NOTE: mknod is not allowed on overlayfs, even when running as a privileged container.
