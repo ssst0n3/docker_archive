@@ -1,0 +1,241 @@
+---
+path: kubernetes/**/*-calico/**
+---
+
+# Cursor Rules for kubernetes/vx.x.x-calico
+
+## Overview
+This directory contains Kubernetes versions with pre-installed Calico CNI network plugin. Each `vx.x.x-calico` directory is based on the corresponding `vx.x.x` base Kubernetes image, with Calico network plugin installation added.
+
+## Directory Structure Pattern
+
+Each `kubernetes/vx.x.x-calico/` directory should contain:
+
+```
+vx.x.x-calico/
+├── .env                    # Environment variables file for Docker Compose, build system, and scripts
+├── Dockerfile              # Multi-stage build: pre -> calico -> final
+├── build.sh                # Build script with version-specific hostname
+├── docker-compose.yml      # Service definition with port mappings
+├── docker-compose.kvm.yml  # KVM device configuration
+├── kubeconfig              # Kubernetes configuration file
+├── README.md               # Documentation
+├── ssh                     # SSH connection script
+└── service/
+    ├── init.sh             # Calico installation script
+    └── init.service        # Systemd service file
+```
+
+## Key Patterns and Rules
+
+### 1. Version Number Replacement
+When creating a new calico version based on an existing version:
+- Replace `vx.x.x` with the target Kubernetes version (e.g., `v1.25.0`)
+- Update all version references in the following files:
+  - `Dockerfile`: `BASE_IMAGE=ssst0n3/docker_archive:ctr_kubernetes-vx.x.x`
+  - `Dockerfile`: Cache mount ID `kubernetes-vx.x.x-snapshots`
+  - `build.sh`: `BUILDKIT_SANDBOX_HOSTNAME=kubernetes-x-x-x` (use hyphens, e.g., `kubernetes-1-25-0`)
+  - `service/init.sh`: Log prefix `[docker-archive/kubernetes/vx.x.x-calico]`
+  - `docker-compose.yml`: Image tag `kubernetes-vx.x.x-calico_v0.1.0`
+  - `.env`: `VERSION=v0.1.0`, `IMAGE=kubernetes-vx.x.x-calico`, `COMPOSE_PROJECT_NAME=kubernetes-x-x-x-calico`
+  - `README.md`: All version references
+
+### 2. Port Number Calculation
+Port numbers follow a pattern based on Kubernetes version:
+- SSH port: `1XYYZ`, where:
+  - `X` = Major version number (e.g., 2 for v1.2x.x)
+  - `YY` = Minor version number (e.g., 25 for v1.25.0)
+  - `Z` = Fixed suffix (6 for calico versions)
+  - Example: v1.25.0-calico uses port `12506`
+- Kubernetes API port: SSH port + 1
+  - Example: v1.25.0-calico uses port `12507`
+
+**Important Constraints:**
+- **Port conflict check**: Calculated port numbers must not conflict with ports already used by other directories in the project
+- Before assigning ports, check all ports used in `docker-compose.yml` files
+- If the calculated port is already in use, adjust it (usually by modifying the suffix `Z` or version number mapping rules)
+- Check used ports with the following command:
+  ```bash
+  find . -name "docker-compose.yml" -exec grep -h "ports:" -A 2 {} \; | grep -oE '"[0-9]+:[0-9]+"' | cut -d: -f1 | tr -d '"' | sort -n | uniq
+  ```
+
+### 3. Dockerfile Structure
+Dockerfile follows a strict multi-stage pattern:
+
+```dockerfile
+# Stage 1: pre
+FROM ${BASE_IMAGE}_v${VERSION_IMAGE} AS pre
+COPY --chmod=755 service/init.sh /init.sh
+COPY service/init.service /usr/lib/systemd/system/
+RUN systemctl enable init.service
+
+# Stage 2: calico
+FROM pre AS calico
+ARG CACHE_BUST
+# Copy snapshots to cache
+RUN --mount=type=cache,id=kubernetes-vx.x.x-snapshots,target=/trick \
+    cp -a /var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/* /trick/
+# Install calico (run systemd init)
+RUN --mount=type=cache,id=kubernetes-vx.x.x-snapshots,target=/var/lib/containerd/io.containerd.snapshotter.v1.overlayfs \
+    --security=insecure \
+    ["/sbin/init", "--log-target=kmsg"]
+# Restore snapshots from cache
+RUN --mount=type=cache,id=kubernetes-vx.x.x-snapshots,target=/trick \
+    tar -C /trick -cf - . | tar -C /var/lib/containerd/io.containerd.snapshotter.v1.overlayfs/ -xf -
+
+# Stage 3: final
+FROM calico AS final
+RUN rm /usr/lib/systemd/system/init.service /init.sh
+```
+
+**Important Notes:**
+- Use `cp -a` (not `cp -r`) to preserve file attributes and capabilities
+- Use `tar` to restore snapshots to preserve file capabilities
+- Cache mount ID must match the Kubernetes version
+
+### 4. service/init.sh Pattern
+The initialization script should:
+- Define a `log()` function with version-specific prefix
+- Wait for kube-system pods to be ready (excluding kube-dns)
+- Install Calico using kubectl (version-specific Calico version)
+- Wait for all pods to stabilize (3 consecutive checks, 10-second intervals, max 600 seconds)
+- Clean up unused containers
+- Sync data and exit gracefully
+
+**Calico Version Selection:**
+- **Must confirm based on Calico official documentation**: When selecting a Calico version, check the compatibility documentation for that Calico version to confirm it supports the target Kubernetes version
+- Compatibility documentation link format: `https://docs.tigera.io/archive/v<CALICO_VERSION>/getting-started/kubernetes/requirements#kubernetes-requirements` or `https://docs.tigera.io/archive/v<CALICO_VERSION>/getting-started/kubernetes/requirements#supported-versions`
+- The `install_calico_network()` function in `service/init.sh` should include comments pointing to the compatibility documentation links
+- Example comment format:
+  ```bash
+  # https://docs.tigera.io/archive/v3.24/getting-started/kubernetes/requirements#kubernetes-requirements
+  # https://docs.tigera.io/archive/v3.24/getting-started/kubernetes/quickstart#install-calico
+  ```
+- **Selection principle**: Choose the **lowest compatible Calico version** that supports the target Kubernetes version (usually choose the lowest stable version that can support that Kubernetes version)
+- Historical reference (for reference only, must reconfirm when creating new versions):
+  - v1.23.0: Calico v3.22
+  - v1.24.0+: Calico v3.24.5
+
+### 5. build.sh Pattern
+The build script should:
+- Create a docker network with subnet `10.0.2.0/24`
+- Create a buildx builder with `security.insecure` permissions
+- Copy kernel modules to `modules/` directory
+- Use `BUILDKIT_SANDBOX_HOSTNAME=kubernetes-x-x-x` (hyphenated version)
+- Clean up modules directory after build
+
+### 6. docker-compose.yml Pattern
+```yaml
+services:
+  vm:
+    image: ssst0n3/docker_archive:kubernetes-vx.x.x-calico_v0.1.0
+    environment:
+      - "QEMU_NET=10.0.2.0/24"
+      - "QEMU_DHCPSTART=10.0.2.16"
+      - "QEMU_HOSTFWD=hostfwd=tcp::6443-:6443"
+    ports:
+        - "SSH_PORT:22"
+        - "API_PORT:6443"
+    tty: true
+    stdin_open: true
+```
+
+### 7. kubeconfig Pattern
+- Server URL: `https://127.0.0.1:API_PORT`
+- Cluster name: `kubernetes-x-x-x` (hyphenated)
+- Context name: `kubernetes-admin@kubernetes-x-x-x`
+- Copy certificate data from base version, only update server port
+
+### 8. ssh Script Pattern
+```bash
+#!/bin/bash
+sshpass -p root ssh -o StrictHostKeyChecking=no -p SSH_PORT root@127.0.0.1
+```
+
+### 9. .env File Pattern
+The `.env` file contains environment variables used for multiple purposes:
+- **Docker Compose**: Automatically reads `COMPOSE_PROJECT_NAME` to set project name
+- **Makefile**: Build system uses `IMAGE` and `VERSION` to build and publish images
+- **SSH config generation**: `script/generate_ssh_config.sh` uses `IMAGE` to generate SSH config
+- **Image checking**: `script/check.sh` uses `IMAGE` and `VERSION` to check if images exist
+- **Project statistics**: `script/count.sh` identifies and counts projects by finding `.env` files
+
+Format:
+
+```bash
+VERSION=v0.1.0
+IMAGE=kubernetes-vx.x.x-calico
+COMPOSE_PROJECT_NAME=kubernetes-x-x-x-calico
+```
+
+**Required Variables:**
+- `VERSION`: Image version number (format: `v0.1.0`), corresponding to the version suffix in the docker-compose.yml image tag
+  - Example: If the image tag is `ssst0n3/docker_archive:kubernetes-v1.25.0-calico_v0.1.0`, then `VERSION=v0.1.0`
+- `IMAGE`: Base part of the image name (excluding prefix `ssst0n3/docker_archive:` and version suffix `_v0.1.0`)
+  - Example: For `ssst0n3/docker_archive:kubernetes-v1.25.0-calico_v0.1.0`, use `IMAGE=kubernetes-v1.25.0-calico`
+- `COMPOSE_PROJECT_NAME`: Docker Compose project name (use hyphenated format, replace dots in version number with hyphens)
+  - Example: For `v1.25.0`, use `COMPOSE_PROJECT_NAME=kubernetes-1-25-0-calico`
+
+**Optional Variables:**
+- `IDENTITY_FILE`: SSH private key path (default: `~/.ssh/keys/docker_archive`)
+- `SKIP_SSH_CONFIG`: Set to `true` to skip SSH config generation (default: do not skip)
+
+**Complete Example:**
+```bash
+VERSION=v0.1.0
+IMAGE=kubernetes-v1.25.0-calico
+COMPOSE_PROJECT_NAME=kubernetes-1-25-0-calico
+# IDENTITY_FILE=~/.ssh/keys/docker_archive  # Optional
+# SKIP_SSH_CONFIG=true                      # Optional, skip SSH config generation
+```
+
+**Notes:**
+- `VERSION` and `IMAGE` combine to form the complete image tag: `ssst0n3/docker_archive:${IMAGE}_${VERSION}`
+- `COMPOSE_PROJECT_NAME` uses hyphenated format (e.g., `kubernetes-1-25-0-calico`), consistent with `BUILDKIT_SANDBOX_HOSTNAME` format in `build.sh`
+
+## Creating a New Calico Version
+
+When creating a new `vx.x.x-calico` version:
+
+1. **Copy from a similar version** (preferably the latest version)
+2. **Replace all version numbers** using the patterns above
+3. **Create or update .env file**, setting:
+   - `VERSION=v0.1.0` (initial version is usually v0.1.0)
+   - `IMAGE=kubernetes-vx.x.x-calico`
+   - `COMPOSE_PROJECT_NAME=kubernetes-x-x-x-calico` (use hyphenated format)
+4. **Calculate and verify port numbers**:
+   - Calculate SSH port and API port based on calculation rules
+   - **Check port conflicts**: Confirm calculated port numbers are not used by other directories in the project
+   - If port conflicts occur, adjust (modify suffix or other rules)
+5. **Select Calico version**:
+   - Consult Calico official compatibility documentation (link format: `https://docs.tigera.io/archive/v<CALICO_VERSION>/getting-started/kubernetes/requirements#kubernetes-requirements`)
+   - Confirm that Calico version supports the target Kubernetes version
+   - **Choose the lowest compatible Calico version that supports the target Kubernetes version**
+   - Add compatibility documentation link comments in the `install_calico_network()` function in `service/init.sh`
+6. **Update README.md** with correct version information and examples
+7. **Test build before committing**
+
+## Common Errors to Avoid
+
+1. ❌ Using `cp -r` instead of `cp -a` (will lose file capabilities)
+2. ❌ Forgetting to update cache mount ID
+3. ❌ Using incorrect port number calculation
+4. ❌ Port numbers conflict with other directories in the project (did not check used ports)
+5. ❌ Version number mismatches between files
+6. ❌ Did not confirm version compatibility based on Calico official compatibility documentation, selected wrong Calico version
+7. ❌ Selected too high a Calico version, should choose the **lowest compatible version** that supports the target Kubernetes version
+8. ❌ Missing compatibility documentation link comments in `service/init.sh`
+9. ❌ Incorrect hostname format (should use hyphens: `kubernetes-1-25-0`)
+10. ❌ Forgot to create or update `.env` file
+11. ❌ `IMAGE` value in `.env` file includes prefix or version suffix
+12. ❌ Missing `VERSION` or `COMPOSE_PROJECT_NAME` variables in `.env` file
+13. ❌ `COMPOSE_PROJECT_NAME` format error (should use hyphens: `kubernetes-1-25-0-calico`, not `kubernetes-1.25.0-calico`)
+
+## File Permissions
+
+Ensure the following files are executable:
+- `build.sh`
+- `service/init.sh`
+- `ssh`
+
+Use: `chmod +x build.sh service/init.sh ssh`

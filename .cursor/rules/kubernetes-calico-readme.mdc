@@ -1,0 +1,199 @@
+---
+path: kubernetes/**/*-calico/README.md
+---
+
+# kubernetes-calico README.md Update Rules
+
+## Overview
+This rule guides how to properly update the `kubernetes/vx.x.x-calico/README.md` file. README.md should contain image information, usage examples, build instructions, and developer information.
+
+**Important Requirement**: When updating README.md, **you must recreate the environment and actually execute all commands**, using real environment output data. It is forbidden to copy data from other versions or use outdated data.
+
+## README.md Standard Structure
+
+Each `kubernetes/vx.x.x-calico/README.md` should follow this structure:
+
+```markdown
+# kubernetes vx.x.x with calico
+
+* dqd:
+  * ssst0n3/docker_archive:kubernetes-vx.x.x-calico -> ssst0n3/docker_archive:kubernetes-vx.x.x-calico_v0.1.0
+  * ssst0n3/docker_archive:kubernetes-vx.x.x-calico_v0.1.0
+* ctr:
+  * ssst0n3/docker_archive:ctr_kubernetes-vx.x.x-calico -> ssst0n3/docker_archive:ctr_kubernetes-vx.x.x-calico_v0.1.0
+  * ssst0n3/docker_archive:ctr_kubernetes-vx.x.x-calico_v0.1.0
+
+## usage
+
+[Usage example code blocks]
+
+## build
+
+[Build instructions]
+
+### for developers
+
+[Developer information]
+```
+
+## Detailed Section Descriptions
+
+### 1. Title
+- Format: `# kubernetes vx.x.x with calico`
+- Replace `vx.x.x` with the actual Kubernetes version number (e.g., `v1.26.0`)
+
+### 2. Image List
+- **dqd section** (Docker daemon images):
+  - First line: `ssst0n3/docker_archive:kubernetes-vx.x.x-calico -> ssst0n3/docker_archive:kubernetes-vx.x.x-calico_v0.1.0`
+  - Second line: `ssst0n3/docker_archive:kubernetes-vx.x.x-calico_v0.1.0`
+- **ctr section** (containerd images):
+  - First line: `ssst0n3/docker_archive:ctr_kubernetes-vx.x.x-calico -> ssst0n3/docker_archive:ctr_kubernetes-vx.x.x-calico_v0.1.0`
+  - Second line: `ssst0n3/docker_archive:ctr_kubernetes-vx.x.x-calico_v0.1.0`
+- Replace all `vx.x.x` with the actual Kubernetes version number
+- Image version suffix is usually `_v0.1.0` (if there are subsequent updates, it may be `_v0.2.0`, etc.)
+
+### 3. usage Section
+Should contain the following code blocks (in order):
+
+#### 3.1 Startup Command
+```markdown
+```shell
+$ cd kubernetes/vx.x.x-calico
+$ docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
+```
+```
+
+#### 3.2 Pods List (All Namespaces)
+```markdown
+```shell
+$ kubectl --kubeconfig=kubeconfig get pods -A
+[Actual pods output]
+```
+```
+- **How to obtain**: Execute `kubectl --kubeconfig=kubeconfig get pods -A` in the actual running environment
+- **Namespaces included**: Usually includes `calico-system`, `calico-apiserver`, `kube-system`, `tigera-operator`, etc.
+- **Requirement**: All pods should be in `Running` state to ensure the cluster is running normally
+
+#### 3.3 Test Pod Creation
+```markdown
+```shell
+$ kubectl --kubeconfig=kubeconfig run --image=docker.io/library/nginx:latest nginx
+pod/nginx created
+$ kubectl --kubeconfig=kubeconfig get pods
+NAME    READY   STATUS    RESTARTS   AGE
+nginx   1/1     Running   0          [Actual time]
+```
+```
+- **How to obtain**: Execute the above commands to get actual output
+- **Verification**: Ensure the nginx pod can be successfully created and run
+
+#### 3.4 SSH Login and Version Information
+```markdown
+```shell
+$ ./ssh
+root@kubernetes-x-x-x:~# helm version
+[Actual helm version output]
+root@kubernetes-x-x-x:~# kubectl version
+[Actual kubectl version output]
+root@kubernetes-x-x-x:~# containerd --version
+[Actual containerd version output]
+root@kubernetes-x-x-x:~# runc --version
+[Actual runc version output]
+root@kubernetes-x-x-x:~# cat /etc/os-release
+[Actual OS information]
+root@kubernetes-x-x-x:~# uname -a
+[Actual kernel information]
+```
+```
+- **Hostname format**: Use hyphenated format, e.g., `kubernetes-1-26-0` (not `kubernetes-1.26.0`)
+- **How to obtain**: Log into the container via `./ssh` script and execute the above commands
+- **Information included**:
+  - helm version
+  - kubectl version (full output)
+  - containerd --version
+  - runc --version
+  - /etc/os-release (operating system information)
+  - uname -a (kernel information)
+
+### 4. build Section
+```markdown
+## build
+
+```shell
+make all DIR=kubernetes/vx.x.x-calico
+```
+```
+- Replace `vx.x.x` with the actual Kubernetes version number
+
+### 5. for developers Section (Recommended to include)
+```markdown
+### for developers
+
+```dockerfile
+# syntax=docker/dockerfile:1-labs
+FROM ssst0n3/docker_archive:ctr_kubernetes-vx.x.x-calico_v0.1.0
+...
+RUN --security=insecure ["/sbin/init", "--log-target=kmsg"]
+```
+
+* use `dmesg -w` to see build logs.
+* use systemd service to execute commands
+* ssh root/root 10.0.2.16 to debug
+```
+- Replace `vx.x.x` with the actual Kubernetes version number
+- Update image version suffix (e.g., `_v0.1.0`) to the actual version
+
+## Steps to Update README.md
+
+When updating or creating a kubernetes-calico README.md:
+
+1. **Confirm version number**: Ensure all `vx.x.x` are correctly replaced with the actual Kubernetes version number
+
+2. **Update image list**:
+   - Confirm image version suffix (usually `_v0.1.0`)
+   - Confirm image name format is correct
+
+3. **Recreate environment and obtain actual runtime data** (required):
+   - **Must stop and clean up old environment first** (if it exists):
+     - `docker compose -f docker-compose.yml -f docker-compose.kvm.yml down -v`
+   - **Start new container**: `docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d`
+   - **Wait for cluster to be ready**: Wait for all pods to run normally (especially pods in calico-system and kube-system)
+   - **Actually execute commands and obtain output** (do not use old data or copy data from other versions):
+     - Execute `kubectl --kubeconfig=kubeconfig get pods -A` to get pods list
+     - Execute `kubectl --kubeconfig=kubeconfig run --image=docker.io/library/nginx:latest nginx` to test Pod creation
+     - Execute `kubectl --kubeconfig=kubeconfig get pods` to view the created nginx pod
+     - Log in via `./ssh` and actually execute the following commands to get version information:
+       - `helm version`
+       - `kubectl version`
+       - `containerd --version`
+       - `runc --version`
+       - `cat /etc/os-release`
+       - `uname -a`
+
+4. **Update README.md using actual execution results**:
+   - **Must use output obtained from actually executing commands in step 3**
+   - **Forbidden to directly copy data from other versions** (even adjacent versions)
+   - **Forbidden to use outdated or speculative data**
+   - All output must reflect the true state of the current environment
+
+5. **Verify format**:
+   - Ensure code blocks use correct shell markers
+   - Ensure all version numbers are consistent
+   - Ensure hostname uses hyphenated format (`kubernetes-1-26-0` rather than `kubernetes-1.26.0`)
+
+## Common Errors to Avoid
+
+1. ❌ Version number inconsistency (some places in the file use incorrect version numbers)
+2. ❌ Hostname format error (used dots instead of hyphens)
+3. ❌ Image version suffix error (does not match the actually built image version)
+4. ❌ Pods list outdated (does not reflect current actual pods state)
+5. ❌ Missing necessary command output (e.g., incomplete version information)
+6. ❌ Code block format error (missing correct language markers or incorrect format)
+7. ❌ Forgot to add `-calico` suffix when copying from base kubernetes version
+8. ❌ **Updated README.md without recreating environment** (using old environment data)
+9. ❌ **Copied data from other versions instead of actually executing commands** (must use actual output from current environment)
+10. ❌ **Did not clean up old environment** (may cause data inconsistency or outdated data)
+
+## Reference Examples
+
+Refer to the latest or adjacent version's README.md (e.g., `kubernetes/v1.26.0-calico/README.md` or `kubernetes/v1.27.0-calico/README.md`) to ensure format and content consistency.
