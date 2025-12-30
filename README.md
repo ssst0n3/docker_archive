@@ -263,8 +263,9 @@ root@localhost:~# docker version
 | nerdctl-v2.1.0                                                          | -       | -     | bug [#4241](https://github.com/containerd/nerdctl/issues/4241) |
 | [nerdctl-v2.0.5](./nerdctl/v2.0.5/)                                     | v0.1.0  |
 | [nerdctl-v2.0.4_runc-v1.2.5-debug](./nerdctl/v2.0.4_runc-v1.2.5-debug/) | v0.2.0  |
-| [nerdctl-v2.0.4](./nerdctl/v2.0.4/)                                     | v0.2.0  |
-| [nerdctl-v2.0.3](./nerdctl/v2.0.3/)                                     | v0.1.0  |
+| [nerdctl-v2.0.4](./nerdctl/v2.0.4/)                                     | v0.2.0  | - | containerd-v2.0.4 |
+| [nerdctl-v2.0.3_containerd-v2.0.3](./nerdctl/v2.0.3_containerd-v2.0.3/) | v0.1.0  | - | containerd-v2.0.3 |
+| [nerdctl-v2.0.3](./nerdctl/v2.0.3/)                                     | v0.1.0  | - | containerd-v2.0.2 |
 | [nerdctl-v1.7.4](./nerdctl/v1.7.4/)                                     | v0.1.0  |
 | [nerdctl-v0.7.0-beta.0](./nerdctl/v0.7.0-beta.0/)                       | v0.1.0  |
 | [nerdctl-v0.5.0](./nerdctl/v0.5.0/)                                     | v0.1.0  |

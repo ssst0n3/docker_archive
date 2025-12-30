@@ -2525,3 +2525,11 @@ Host nerdctl-v2.0.3
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
 
+Host nerdctl-v2.0.3_containerd-v2.0.3
+    Hostname 127.0.0.1
+    Port 20302
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
