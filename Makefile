@@ -8,6 +8,7 @@ VIRT_SPARSIFY := docker run -it --rm -v $(PWD)/$(DIR):/data -w /data --env PUID=
 # Example: make vm VM_PASSWORD=your_new_password
 VM_PASSWORD ?= root
 KERNEL ?= true
+DEBUG ?= false
 
 env:
 	$(eval include $(DIR)/.env)
@@ -20,7 +21,7 @@ env:
 
 ctr: env
 	@echo "Building Docker image in directory $(DIR) with image name $(IMAGE) and version $(VERSION), TAG is $(CTR_TAG), SIZE is $(SIZE)"
-	@cd $(DIR) && { [ -f build.sh ] && ./build.sh $(CTR_TAG_VERSION) || docker build -t $(CTR_TAG_VERSION) . ; }
+	@cd $(DIR) && { [ -f build.sh ] && DEBUG=$(DEBUG) ./build.sh $(CTR_TAG_VERSION) || docker build -t $(CTR_TAG_VERSION) . ; }
 
 vm: env
 	# add -v to show verbose info
