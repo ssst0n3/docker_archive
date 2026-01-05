@@ -9,7 +9,7 @@ until kubectl wait --for=condition=Ready pod --all -A --field-selector=metadata.
 
 log "install network addon"
 # https://docs.tigera.io/calico/3.29/getting-started/kubernetes/requirements
-# https://docs.tigera.io/calico/3.29/getting-started/kubernetes/quickstart
+# https://docs.tigera.io/calico/3.29/getting-started/kubernetes/quickstart#install-calico
 kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.29.7/manifests/tigera-operator.yaml >>/dev/kmsg 2>&1
 kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.29.7/manifests/custom-resources.yaml >>/dev/kmsg 2>&1
 
