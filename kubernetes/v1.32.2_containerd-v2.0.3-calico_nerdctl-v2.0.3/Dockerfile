@@ -1,5 +1,4 @@
 # syntax=docker/dockerfile:1-labs
-ARG HOSTNAME=kubernetes-1-32-2-containerd-2-0-3-calico-nerdctl-2-0-3
 ARG VERSION_NERDCTL=2.0.3
 # https://github.com/containerd/nerdctl/blob/v2.0.3/Dockerfile#L26
 ARG VERSION_BUILDKIT=0.19.0
@@ -30,7 +29,3 @@ ARG URL_ARTIFACT_NERDCTL
 ADD ${URL_ARTIFACT_NERDCTL} /tmp/nerdctl.tar.gz
 RUN tar Cxzvvf /usr/local/bin /tmp/nerdctl.tar.gz \
     && rm /tmp/nerdctl.tar.gz
-
-FROM nerdctl AS final
-ARG HOSTNAME
-RUN echo ${HOSTNAME} > /etc/hostname
