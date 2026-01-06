@@ -62,6 +62,7 @@ root@localhost:~# docker version
 | [cve-2025-23266](./vul/cve-2025-23266/)                                 | v0.9.0  | nvidia-container-toolkit-v1.17.6 |                            |
 | [cve-2025-47290](./vul/cve-2025-47290/)                                 | v0.1.0  | containerd-v2.1.0                |                            |
 | [cve-2025-1974](./vul/cve-2025-1974/)                                   | v0.1.0  | ingress-nginx-v1.11.3            |                            |
+| [cve-2024-40635](./vul/cve-2024-40635/)                                 | v0.1.0  | kubernetes-v1.32.2_containerd-v2.0.3-calico_nerdctl-v2.0.3 |
 | [cve-2024-23650](./vul/cve-2024-23650/)                                 | v0.1.0  | buildkit-v0.12.4                 |
 | [cve-2024-0132](./vul/cve-2024-0132/)                                   | v0.1.0  | nvidia-container-toolkit-v1.16.1 |
 | [cve-2022-39253](./vul/cve-2022-39253/)                                 | v0.1.0  |
