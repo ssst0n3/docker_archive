@@ -271,6 +271,7 @@ root@localhost:~# docker version
 | [nerdctl-v2.0.3_containerd-v2.0.3](./nerdctl/v2.0.3_containerd-v2.0.3/) | v0.1.0  | - | containerd-v2.0.3 |
 | [nerdctl-v2.0.3](./nerdctl/v2.0.3/)                                     | v0.1.0  | - | containerd-v2.0.2 |
 | [nerdctl-v1.7.4](./nerdctl/v1.7.4/)                                     | v0.1.0  |
+| [nerdctl-v1.7.3](./nerdctl/v1.7.3/)                                     | v0.1.0  |
 | [nerdctl-v0.7.0-beta.0](./nerdctl/v0.7.0-beta.0/)                       | v0.1.0  |
 | [nerdctl-v0.5.0](./nerdctl/v0.5.0/)                                     | v0.1.0  |
 

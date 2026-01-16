@@ -2565,3 +2565,11 @@ Host cve-2024-40635
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
 
+Host nerdctl-v1.7.3
+    Hostname 127.0.0.1
+    Port 17300
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
