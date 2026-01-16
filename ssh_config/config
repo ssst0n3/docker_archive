@@ -2613,3 +2613,11 @@ Host containerd-v1.7.3
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
 
+Host nerdctl-v1.5.0
+    Hostname 127.0.0.1
+    Port 15001
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
