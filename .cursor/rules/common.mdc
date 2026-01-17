@@ -1,0 +1,40 @@
+---
+path: **/**
+alwaysApply: true
+---
+
+# Common Rules for All Projects
+
+## Overview
+
+This document defines common requirements and patterns that apply to **all project directories** in the docker_archive repository, regardless of the specific component (containerd, runc, docker, kubernetes, etc.).
+
+## Documentation Structure
+
+The common rules are organized into specialized rule files for better maintainability:
+
+- **env-file.mdc**: Rules for `.env` file configuration, required variables, and project directory identification
+- **new-version-workflow.mdc**: Step-by-step workflow for creating new version directories
+- **docker-compose-files.mdc**: Rules for `docker-compose.yml`, `docker-compose.kvm.yml`, and mirror files
+
+Please refer to these specialized rule files for detailed information on each topic.
+
+## Quick Reference
+
+### Project Requirements
+
+- **Every project directory MUST contain a `.env` file** (see env-file.mdc)
+- A directory is considered a valid project if and only if it contains a `.env` file
+- Each project directory should have exactly one `.env` file at its root
+
+### Key Files
+
+- **`.env`**: Mandatory configuration file (see env-file.mdc for details)
+- **`docker-compose.yml`**: Main service configuration (see docker-compose-files.mdc)
+- **`docker-compose.kvm.yml`**: KVM device configuration (optional, see docker-compose-files.mdc)
+- **`docker-compose.*-mirror.yml`**: Auto-generated mirror files (DO NOT manually create, see docker-compose-files.mdc)
+
+### Common Workflows
+
+- **Creating New Version Directories**: Follow the complete workflow in new-version-workflow.mdc
+- **Port Number Assignment**: See port number generation rules in docker-compose-files.mdc

@@ -1,0 +1,114 @@
+---
+path: **/**
+alwaysApply: true
+---
+
+# .env File Rules
+
+## Overview
+
+**Every project directory MUST contain a `.env` file.** This file is essential for the build system, automation scripts, and Docker Compose integration.
+
+## Why .env is Required
+
+The `.env` file is used by multiple systems:
+
+1. **Makefile Build System** (`Makefile`):
+   - The `env` target reads `$(DIR)/.env` using `include` directive
+   - All build targets (`ctr`, `vm`, `dqd`, `push`, `clean`, `all`) depend on the `env` target
+   - Extracts `IMAGE` and `VERSION` variables to construct image tags
+   - Without `.env`, the build system cannot function
+
+2. **SSH Config Generation** (`script/generate_ssh_config.sh`):
+   - Traverses all directories containing `.env` files
+   - Extracts `IMAGE` variable to generate SSH host entries
+   - Extracts optional `IDENTITY_FILE` variable for SSH key path
+   - Checks optional `SKIP_SSH_CONFIG` variable to skip projects
+
+3. **Image Checking** (`script/check.sh`):
+   - Finds all `.env` files using `find . -type f -name ".env"`
+   - Sources each `.env` file to extract `IMAGE` and `VERSION`
+   - Checks if corresponding Docker images exist in the registry
+
+4. **Project Statistics** (`script/count.sh`):
+   - Uses `.env` files to identify valid projects
+   - Only directories containing `.env` files are counted as projects
+   - Counts the number of `.env` files as artifact count
+
+5. **Docker Compose**:
+   - Automatically reads `.env` file in the same directory
+   - Uses `COMPOSE_PROJECT_NAME` variable to set project name
+   - Allows environment variable substitution in `docker-compose.yml`
+
+## Required Variables
+
+Every `.env` file MUST contain at minimum:
+
+- **`VERSION`**: Image version number (format: `v0.1.0`)
+  - Corresponds to the version suffix in docker-compose.yml image tag
+  - Example: If image tag is `ssst0n3/docker_archive:containerd-v2.1.4_v0.1.0`, then `VERSION=v0.1.0`
+
+- **`IMAGE`**: Base part of the image name (excluding prefix `ssst0n3/docker_archive:` and version suffix `_v0.1.0`)
+  - Example: For `ssst0n3/docker_archive:containerd-v2.1.4_v0.1.0`, use `IMAGE=containerd-v2.1.4`
+  - For special variants, include the suffix: `IMAGE=containerd-v2.1.0-debug`
+
+- **`COMPOSE_PROJECT_NAME`**: Docker Compose project name
+  - Use hyphenated format, replacing dots in version numbers with hyphens
+  - Example: For `v2.1.4`, use `COMPOSE_PROJECT_NAME=containerd-2-1-4`
+  - For special variants, include the variant suffix: `COMPOSE_PROJECT_NAME=containerd-2-1-0-debug`
+
+## Optional Variables
+
+- **`IDENTITY_FILE`**: SSH private key path (default: `~/.ssh/keys/docker_archive`)
+  - Used by `script/generate_ssh_config.sh` to set SSH IdentityFile
+
+- **`SKIP_SSH_CONFIG`**: Set to `true` to skip SSH config generation (default: do not skip)
+  - Used by `script/generate_ssh_config.sh` to skip projects
+
+- **`SIZE`**: Virtual machine disk size (default: `10G`)
+  - Used by Makefile `vm` target for `d2vm convert` command
+
+## Format Example
+
+```bash
+VERSION=v0.1.0
+IMAGE=containerd-v2.1.4
+COMPOSE_PROJECT_NAME=containerd-2-1-4
+# IDENTITY_FILE=~/.ssh/keys/docker_archive  # Optional
+# SKIP_SSH_CONFIG=true                      # Optional
+# SIZE=10G                                  # Optional
+```
+
+## Image Tag Construction
+
+The complete image tag is constructed as:
+- Container image: `ssst0n3/docker_archive:ctr_${IMAGE}_${VERSION}`
+- DQD image: `ssst0n3/docker_archive:${IMAGE}_${VERSION}`
+
+Where:
+- `IMAGE` comes from `.env` file
+- `VERSION` comes from `.env` file
+- Prefix `ssst0n3/docker_archive:` is defined in `Makefile` as `REPO` variable
+
+## Common Errors to Avoid
+
+1. ❌ Missing `.env` file in project directory
+2. ❌ Missing required variables (`VERSION`, `IMAGE`, `COMPOSE_PROJECT_NAME`)
+3. ❌ `IMAGE` value includes prefix (`ssst0n3/docker_archive:`) or version suffix (`_v0.1.0`)
+4. ❌ `VERSION` format error (should be `v0.1.0`, not `0.1.0` or `v0.1`)
+5. ❌ `COMPOSE_PROJECT_NAME` format error (should use hyphens, not dots)
+6. ❌ `COMPOSE_PROJECT_NAME` for special variants missing variant suffix
+
+## Project Directory Identification
+
+A directory is considered a valid project if and only if it contains a `.env` file. This is used by:
+- `script/count.sh` to count projects
+- `script/generate_ssh_config.sh` to find projects
+- `script/check.sh` to find projects
+
+## Important Notes
+
+- The `.env` file is a **mandatory requirement** for all projects, not optional
+- Without `.env`, the project cannot be built using the Makefile
+- Without `.env`, the project will not be included in automated scripts
+- Each project directory should have exactly one `.env` file at its root
