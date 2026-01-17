@@ -9,16 +9,22 @@
 #    and extracts the host port from it.
 # 4. Appends an entry to the ssh_config file in the following format:
 #
-# Host <IMAGE>
-#     Hostname 127.0.0.1
+# Host dqd-<IMAGE>
 #     Port <HOST_PORT>
+#     [IdentityFile <value>]  # Only if different from default
+#
+# The script uses a default configuration block at the top of the file:
+#
+# Host dqd-*
+#     Hostname 127.0.0.1
 #     User root
-#     IdentityFile <value>
+#     IdentityFile ~/.ssh/keys/docker_archive
 #     StrictHostKeyChecking no
 #     UserKnownHostsFile /dev/null
 #
 # If the .env file contains the IDENTITY_FILE variable, its value will be used as the
 # IdentityFile. Otherwise, the default value ~/.ssh/keys/docker_archive is used.
+# Only non-default IdentityFile values are included in individual Host entries.
 #
 # The output file is always ../ssh_config/config relative to the script's directory,
 # no matter where the script is executed from.
@@ -52,6 +58,20 @@ output_file="$project_dir/ssh_config/config"
 
 # Create the output directory if it doesn't exist.
 mkdir -p "$(dirname "$output_file")"
+
+# Initialize the output file with default configuration if it doesn't exist or is empty
+default_config="# Default configuration for all dqd-* hosts
+Host dqd-*
+    Hostname 127.0.0.1
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+"
+
+if [ ! -s "$output_file" ] || ! grep -q "^Host dqd-\*" "$output_file"; then
+    echo "$default_config" > "$output_file"
+fi
 
 # Counter to track how many configurations were added
 added_count=0
@@ -119,42 +139,35 @@ while IFS= read -r env_file; do
         continue
     fi
 
-    # Construct the full configuration block as a multiline string.
-    new_config=$(cat <<EOF
-Host $image
-    Hostname 127.0.0.1
-    Port $host_port
-    User root
-    IdentityFile $identity_file
-    StrictHostKeyChecking no
-    UserKnownHostsFile /dev/null
-EOF
-)
+    # Add dqd- prefix to host name
+    host_name="dqd-$image"
+    default_identity_file="~/.ssh/keys/docker_archive"
 
-    # Check if an identical configuration block already exists in the output file.
-    # Using awk with RS="" to treat blank lines as record separators.
-    if [ -s "$output_file" ]; then
-        if awk -v block="$new_config" 'BEGIN { RS=""; ORS="\n\n" }
-        {
-            # Remove any trailing newlines for reliable comparison.
-            sub(/\n+$/, "", $0)
-            if ($0 == block) { found=1; exit }
-        }
-        END { exit(found ? 0 : 1) }' "$output_file"; then
-            # echo "Full configuration for [$image] already exists, skipping."
-            continue
-        fi
+    # Construct the simplified configuration block
+    # Only include IdentityFile if it's different from the default
+    new_config="Host $host_name"
+    new_config="$new_config"$'\n'"    Port $host_port"
+    if [ "$identity_file" != "$default_identity_file" ]; then
+        new_config="$new_config"$'\n'"    IdentityFile $identity_file"
     fi
 
-    # Append the SSH configuration block to the output file.
+    # Check if this host already exists in the output file
+    # If it exists, skip it (assume configuration is correct)
+    if grep -q "^Host $host_name$" "$output_file"; then
+        continue
+    fi
+
+    # Append the new SSH configuration block to the output file
     {
         echo "$new_config"
         echo ""
     } >> "$output_file"
 
-    echo -e "${GREEN}[ADDED]${NC} ${GREEN}Host: ${CYAN}$image${NC}"
+    echo -e "${GREEN}[ADDED]${NC} ${GREEN}Host: ${CYAN}$host_name${NC}"
     echo -e "         ${GREEN}SSH Port: ${CYAN}$host_port${NC}"
-    echo -e "         ${GREEN}Identity File: ${CYAN}$identity_file${NC}"
+    if [ "$identity_file" != "$default_identity_file" ]; then
+        echo -e "         ${GREEN}Identity File: ${CYAN}$identity_file${NC}"
+    fi
     ((added_count++))
 done < <(find "$project_dir" -type f -name ".env" | sort)
 
