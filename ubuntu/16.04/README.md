@@ -17,7 +17,7 @@ $ docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
 ```
 
 ```shell
-$ ssh ubuntu-16.04
+$ ssh dqd-ubuntu-16.04
 root@localhost:~# uname -a
 Linux localhost.localdomain 4.4.0-210-generic #242-Ubuntu SMP Fri Apr 16 09:57:56 UTC 2021 x86_64 x86_64 x86_64 GNU/Linux
 root@localhost:~# cat /etc/os-release 

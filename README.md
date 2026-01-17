@@ -46,7 +46,7 @@ Server: Docker Engine - Community
 
 ```shell
 $ ./script/install_ssh_config.sh
-$ ssh docker-v28.1.1
+$ ssh dqd-docker-v28.1.1
 root@localhost:~# docker version
 ...
 ```
