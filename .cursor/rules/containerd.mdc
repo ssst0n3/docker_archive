@@ -1,0 +1,274 @@
+---
+path: containerd/**
+---
+
+# Cursor Rules for containerd
+
+## Overview
+This directory contains containerd container runtime versions. Each `vx.x.x` directory contains a Docker image with a specific version of containerd pre-installed and configured.
+
+## Directory Structure Pattern
+
+Each `containerd/vx.x.x/` directory should contain:
+
+```
+vx.x.x/
+├── .env                    # Environment variables file for Docker Compose, build system, and scripts
+├── Dockerfile              # Build file: install containerd from runc base image
+├── docker-compose.yml      # Service definition with port mappings
+├── docker-compose.kvm.yml  # KVM device configuration
+├── README.md               # Documentation
+├── ssh                     # SSH connection script
+└── scp                     # Optional: SCP script (for some versions)
+```
+
+## Key Patterns and Rules
+
+### 1. Version Number Replacement
+When creating a new containerd version:
+- Replace `vx.x.x` with the target containerd version (e.g., `v2.1.4`)
+- Update all version references in the following files:
+  - `Dockerfile`: `VERSION_CONTAINERD=vx.x.x`
+  - `Dockerfile`: `VERSION_RUNC` (check containerd's runc-version file for compatible runc version)
+  - `Dockerfile`: `VERSION_IMAGE` (image version, usually starts at `0.1.0`)
+  - `docker-compose.yml`: Image tag `containerd-vx.x.x_v0.1.0`
+  - `.env`: `VERSION=v0.1.0`, `IMAGE=containerd-vx.x.x`
+  - `README.md`: All version references
+  - `ssh`: Port number in SSH command
+  - `scp`: Port number in SCP command (if exists)
+
+### 2. Port Number Calculation
+Port numbers follow a pattern based on containerd version:
+- **Standard format**: `XYYZ0`, where:
+  - `X` = Major version number (e.g., 2 for v2.x.x, 1 for v1.x.x)
+  - `YY` = Minor version number (e.g., 14 for v2.1.4, 17 for v1.7.18)
+  - `Z` = Patch version number (e.g., 4 for v2.1.4, 8 for v1.7.18)
+  - Last `0` = Fixed suffix
+  - Example: v2.1.4 uses port `21400`
+  - Example: v1.7.18 uses port `17180`
+- **Special version suffixes**:
+  - `-debug`: Add `2` to the base port (e.g., v2.1.0 uses `21000`, v2.1.0-debug uses `21002`)
+  - `-fuse-overlayfs`: Add `1` to the base port (e.g., v2.0.4 uses `20400`, v2.0.4-fuse-overlayfs uses `20401`)
+  - `-rc.X`: Add `X*10` to the base port (e.g., v2.1.0-rc.1 uses `21010`)
+  - `-beta.X`: Add `X*10` to the base port (e.g., v2.1.0-beta.1 uses `21010`)
+
+**Important Constraints:**
+- **Port conflict check**: Calculated port numbers must not conflict with ports already used by other directories in the project
+- Before assigning ports, check all ports used in `docker-compose.yml` files
+- If the calculated port is already in use, adjust it (usually by modifying the suffix or version number mapping rules)
+- Check used ports with the following command:
+  ```bash
+  find . -name "docker-compose.yml" -exec grep -h "ports:" -A 2 {} \; | grep -oE '"[0-9]+:[0-9]+"' | cut -d: -f1 | tr -d '"' | sort -n | uniq
+  ```
+
+### 3. Dockerfile Structure
+
+#### 3.1 Standard Dockerfile Pattern
+```dockerfile
+ARG HOSTNAME=containerd-x-x-x
+ARG VERSION_CONTAINERD=x.x.x
+# https://github.com/containerd/containerd/blob/vx.x.x/script/setup/runc-version
+ARG VERSION_RUNC=1.x.x
+ARG VERSION_IMAGE=0.1.0
+ARG IMAGE_RUNC=ssst0n3/docker_archive:ctr_runc-v${VERSION_RUNC}
+ARG URL_ARTIFACT_CONTAINERD=https://github.com/containerd/containerd/releases/download/v${VERSION_CONTAINERD}/containerd-${VERSION_CONTAINERD}-linux-amd64.tar.gz
+ARG URL_ARTIFACT_SYSTEMD=https://raw.githubusercontent.com/containerd/containerd/refs/tags/v${VERSION_CONTAINERD}/containerd.service
+
+FROM ${IMAGE_RUNC}_v${VERSION_IMAGE}
+ARG URL_ARTIFACT_CONTAINERD
+ARG URL_ARTIFACT_SYSTEMD
+# install containerd
+ADD ${URL_ARTIFACT_CONTAINERD} /tmp/containerd.tar.gz
+RUN tar Cxzvf /usr/local /tmp/containerd.tar.gz \
+    && rm /tmp/containerd.tar.gz
+
+# config systemd
+ADD ${URL_ARTIFACT_SYSTEMD} /usr/local/lib/systemd/system/containerd.service
+
+ARG HOSTNAME
+RUN echo "${HOSTNAME}" > /etc/hostname
+```
+
+**Important Notes:**
+- **HOSTNAME**: Must be defined at the beginning of the Dockerfile (before FROM) and re-declared after FROM to set the container hostname
+  - Format: Use hyphenated format, replacing dots in version number with hyphens (e.g., `containerd-2-1-4` for v2.1.4)
+  - For special variants, include the variant suffix: `containerd-2-1-0-debug` or `containerd-2-0-4-fuse-overlayfs`
+  - Example: `ARG HOSTNAME=containerd-2-1-4`
+- **RUNC version selection**: Must check the `runc-version` file in containerd repository for the compatible runc version
+  - File location: `https://github.com/containerd/containerd/blob/vx.x.x/script/setup/runc-version`
+  - **MUST verify the actual version** by fetching the file content:
+    ```bash
+    curl -sL https://raw.githubusercontent.com/containerd/containerd/vx.x.x/script/setup/runc-version
+    ```
+  - The file may contain a version with or without the `v` prefix (e.g., `v1.3.3` or `1.3.3`)
+  - **Remove the `v` prefix** when setting `ARG VERSION_RUNC` (e.g., if file contains `v1.3.3`, use `ARG VERSION_RUNC=1.3.3`)
+  - Use the exact runc version specified in that file (without the `v` prefix)
+- **Systemd service path**: Some older versions may use `/etc/systemd/system/` instead of `/usr/local/lib/systemd/system/`
+
+#### 3.2 Special Variants
+
+**Debug Version** (`-debug`):
+- Based on standard containerd image
+- Adds debug binaries (containerd.debug, ctr.debug, runc.debug, etc.)
+- Adds debug tools (dlv)
+- Adds debug scripts (debug.sh, attach.sh)
+- Backs up real binaries
+
+**Fuse-overlayfs Version** (`-fuse-overlayfs`):
+- Based on standard containerd image
+- Installs fuse3
+- Installs fuse-overlayfs binary
+- Installs containerd-fuse-overlayfs snapshotter
+- Configures containerd to use fuse-overlayfs snapshotter
+- Adds systemd service for containerd-fuse-overlayfs
+
+### 4. docker-compose.yml Pattern
+
+Follow the **standard `docker-compose.yml` pattern** defined in `common.mdc`. 
+
+For containerd, the image tag format is:
+- `ssst0n3/docker_archive:containerd-vx.x.x_v0.1.0` (where `x.x.x` is the containerd version)
+- Image tag should match `.env` file: `IMAGE=containerd-vx.x.x` and `VERSION=v0.1.0`
+
+See `common.mdc` → "docker-compose.yml File (COMMON FILE PATTERN)" for the complete standard template and configuration details.
+
+### 5. docker-compose.kvm.yml Pattern
+```yaml
+services:
+  vm:
+    devices:
+      - "/dev/kvm:/dev/kvm"
+```
+
+### 6. ssh Script Pattern
+```bash
+#!/bin/bash
+sshpass -p root ssh -o StrictHostKeyChecking=no -p PORT_NUMBER root@127.0.0.1
+```
+- Replace `PORT_NUMBER` with the calculated port number
+- Ensure the script is executable: `chmod +x ssh`
+
+### 8. scp Script Pattern (Optional)
+Some versions include an `scp` script:
+```bash
+#!/bin/bash
+sshpass -p root scp -P PORT_NUMBER $1 root@127.0.0.1:
+```
+- Replace `PORT_NUMBER` with the calculated port number
+- Ensure the script is executable: `chmod +x scp`
+
+### 9. .env File Pattern
+The `.env` file contains environment variables used for multiple purposes:
+- **Docker Compose**: Automatically reads `COMPOSE_PROJECT_NAME` to set project name
+- **Makefile**: Build system uses `IMAGE` and `VERSION` to build and publish images
+- **SSH config generation**: `script/generate_ssh_config.sh` uses `IMAGE` to generate SSH config
+- **Image checking**: `script/check.sh` uses `IMAGE` and `VERSION` to check if images exist
+- **Project statistics**: `script/count.sh` identifies and counts projects by finding `.env` files
+
+Format:
+
+```bash
+VERSION=v0.1.0
+IMAGE=containerd-vx.x.x
+COMPOSE_PROJECT_NAME=containerd-x-x-x
+```
+
+**Required Variables:**
+- `VERSION`: Image version number (format: `v0.1.0`), corresponding to the version suffix in the docker-compose.yml image tag
+  - Example: If the image tag is `ssst0n3/docker_archive:containerd-v2.1.4_v0.1.0`, then `VERSION=v0.1.0`
+- `IMAGE`: Base part of the image name (excluding prefix `ssst0n3/docker_archive:` and version suffix `_v0.1.0`)
+  - Example: For `ssst0n3/docker_archive:containerd-v2.1.4_v0.1.0`, use `IMAGE=containerd-v2.1.4`
+  - For special variants, include the suffix: `IMAGE=containerd-v2.1.0-debug` or `IMAGE=containerd-v2.0.4-fuse-overlayfs`
+- `COMPOSE_PROJECT_NAME`: Docker Compose project name (use hyphenated format, replace dots in version number with hyphens)
+  - Example: For `v2.1.4`, use `COMPOSE_PROJECT_NAME=containerd-2-1-4`
+  - For special variants, include the variant suffix: `COMPOSE_PROJECT_NAME=containerd-2-1-0-debug` or `COMPOSE_PROJECT_NAME=containerd-2-0-4-fuse-overlayfs`
+
+**Optional Variables:**
+- `IDENTITY_FILE`: SSH private key path (default: `~/.ssh/keys/docker_archive`)
+- `SKIP_SSH_CONFIG`: Set to `true` to skip SSH config generation (default: do not skip)
+
+**Complete Example:**
+```bash
+VERSION=v0.1.0
+IMAGE=containerd-v2.1.4
+COMPOSE_PROJECT_NAME=containerd-2-1-4
+# IDENTITY_FILE=~/.ssh/keys/docker_archive  # Optional
+# SKIP_SSH_CONFIG=true                      # Optional, skip SSH config generation
+```
+
+**Special Variants Examples:**
+```bash
+# For debug version
+VERSION=v0.1.0
+IMAGE=containerd-v2.1.0-debug
+COMPOSE_PROJECT_NAME=containerd-2-1-0-debug
+
+# For fuse-overlayfs version
+VERSION=v0.2.0
+IMAGE=containerd-v2.0.4-fuse-overlayfs
+COMPOSE_PROJECT_NAME=containerd-2-0-4-fuse-overlayfs
+```
+
+**Notes:**
+- `VERSION` and `IMAGE` combine to form the complete image tag: `ssst0n3/docker_archive:${IMAGE}_${VERSION}`
+- For special variants (debug, fuse-overlayfs, etc.), the `IMAGE` value should include the variant suffix
+- `COMPOSE_PROJECT_NAME` uses hyphenated format (e.g., `containerd-2-1-4`), replacing dots in version numbers with hyphens
+
+## Creating a New Containerd Version
+
+When creating a new `vx.x.x` version:
+
+1. **Copy from a similar version** (preferably the latest version)
+2. **Replace all version numbers** using the patterns above, including:
+   - `ARG HOSTNAME=containerd-x-x-x` (use hyphenated format, e.g., `containerd-2-1-4` for v2.1.4)
+   - All version references in Dockerfile, docker-compose.yml, .env, README.md, ssh, and scp scripts
+3. **Create or update .env file**, setting:
+   - `VERSION=v0.1.0` (initial version is usually v0.1.0)
+   - `IMAGE=containerd-vx.x.x` (or `containerd-vx.x.x-variant` for special variants)
+   - `COMPOSE_PROJECT_NAME=containerd-x-x-x` (or `containerd-x-x-x-variant` for special variants, use hyphenated format)
+4. **Determine compatible runc version**:
+   - Check `https://github.com/containerd/containerd/blob/vx.x.x/script/setup/runc-version`
+   - **MUST verify the actual version** by fetching the file content:
+     ```bash
+     curl -sL https://raw.githubusercontent.com/containerd/containerd/vx.x.x/script/setup/runc-version
+     ```
+   - The file may contain a version with or without the `v` prefix (e.g., `v1.3.3` or `1.3.3`)
+   - **Remove the `v` prefix** when setting `ARG VERSION_RUNC` (e.g., if file contains `v1.3.3`, use `ARG VERSION_RUNC=1.3.3`)
+   - Use the exact runc version specified in that file (without the `v` prefix)
+5. **Calculate and verify port numbers**:
+   - Calculate SSH port based on calculation rules
+   - **Check port conflicts**: Confirm calculated port numbers are not used by other directories
+   - If port conflicts occur, adjust (modify suffix or other rules)
+6. **Update README.md** with correct version information and examples
+7. **Set file permissions**: Ensure `ssh` and `scp` (if exists) are executable
+8. **Test build before committing**
+
+## Common Errors to Avoid
+
+1. ❌ Using incorrect runc version (did not check containerd's runc-version file or did not verify by fetching the actual file content)
+2. ❌ Using runc version with `v` prefix in ARG (should remove `v` prefix, e.g., use `1.3.3` not `v1.3.3`)
+3. ❌ Incorrect port number calculation
+4. ❌ Port numbers conflict with other directories in the project (did not check used ports)
+5. ❌ Version number mismatches between files
+6. ❌ Missing or incorrect systemd service path
+7. ❌ Forgot to update port number in `ssh` or `scp` scripts
+8. ❌ Scripts not executable (missing `chmod +x`)
+9. ❌ Incorrect image tag format in docker-compose.yml
+10. ❌ Missing HOSTNAME setting in Dockerfile (must define at beginning and re-declare after FROM)
+11. ❌ HOSTNAME format error (should use hyphens: `containerd-2-1-4`, not `containerd-2.1.4`)
+12. ❌ HOSTNAME for special variants does not include variant suffix (e.g., `-debug`, `-fuse-overlayfs`)
+13. ❌ Incorrect URL format for containerd artifacts or systemd service
+14. ❌ Forgot to create or update `.env` file
+15. ❌ `IMAGE` value in `.env` file includes prefix or version suffix
+16. ❌ Missing `VERSION`, `IMAGE`, or `COMPOSE_PROJECT_NAME` variables in `.env` file
+17. ❌ `IMAGE` value for special variants does not include variant suffix (e.g., `-debug`, `-fuse-overlayfs`)
+18. ❌ `COMPOSE_PROJECT_NAME` format error (should use hyphens: `containerd-2-1-4`, not `containerd-2.1.4`)
+19. ❌ `COMPOSE_PROJECT_NAME` for special variants does not include variant suffix (e.g., `-debug`, `-fuse-overlayfs`)
+
+## File Permissions
+
+Ensure the following files are executable:
+- `ssh`
+- `scp` (if exists)
+
+Use: `chmod +x ssh` (and `chmod +x scp` if exists)

@@ -1,0 +1,377 @@
+---
+path: runc/**
+---
+
+# Cursor Rules for runc
+
+## Overview
+This directory contains runc container runtime versions. Each version directory contains a Docker image with a specific version of runc pre-installed and configured.
+
+## Directory Structure Pattern
+
+### Standard Version Directory
+Each `runc/vx.y.z/` directory should contain:
+
+```
+vx.y.z/
+├── Dockerfile              # Build file: install runc binary
+├── docker-compose.yml      # Service definition with port mappings
+├── docker-compose.kvm.yml  # KVM device configuration
+├── docker-compose.swr-mirror.yml  # Optional: SWR mirror configuration
+├── README.md               # Documentation
+├── ssh                     # SSH connection script
+└── scp                     # Optional: SCP script (for some versions)
+```
+
+### Special Variant Directories
+- **Distribution-based versions**: `{distro}-{version}_runc-vx.y.z/` (e.g., `centos-stream9_runc-v1.2.0`, `debian-11.0_runc-v1.2.6`)
+- **RC versions**: `vx.y.z-rc.N/` (e.g., `v1.3.0-rc.1`)
+- **Debug versions**: `vx.y.z-rc.N-dbg/` or `vx.y.z-dbg/` (e.g., `v1.0.0-rc2-dbg`)
+- **CRIU variants**: `vx.y.z-rc.N_criu/` or `{distro}-{version}_runc-vx.y.z_criu-v{version}/` (e.g., `v1.3.0-rc.1_criu`)
+- **SELinux variants**: `{distro}-{version}_runc-vx.y.z_selinux/` (e.g., `centos-stream9_runc-v1.2.0_selinux`)
+- **Git commit versions**: `vx.y.z-{commit-hash}/` (e.g., `v1.1.0-a6f4081`)
+
+## Key Patterns and Rules
+
+### 1. Version Number Replacement
+When creating a new runc version:
+- Replace `vx.y.z` with the target runc version (e.g., `v1.2.0`)
+- Update all version references in the following files:
+  - `Dockerfile`: `HOSTNAME=runc-x-y-z` (replace dots with hyphens, e.g., `v1.1.12` → `runc-1-1-12`)
+  - `Dockerfile`: `VERSION_RUNC=x.y.z` (without `v` prefix)
+  - `Dockerfile`: `VERSION_IMAGE` (image version, usually starts at `0.1.0`)
+  - `docker-compose.yml`: Image tag `runc-vx.y.z_v0.1.0`
+  - `ssh`: Port number in SSH command
+  - `scp`: Port number in SCP command (if exists)
+  - `README.md`: All version references
+
+### 2. Port Number Calculation
+Port numbers follow a pattern based on runc version:
+
+**Standard Format**: `XYYZ0`
+- `X` = Major version number (e.g., 1 for v1.x.x)
+- `YY` = Minor version number (e.g., 20 for v1.2.0, 30 for v1.3.0, 11 for v1.1.9)
+- `Z` = Patch version number (e.g., 0 for v1.2.0, 6 for v1.2.6, 9 for v1.1.9)
+- Last `0` = Fixed suffix
+- Examples:
+  - v1.2.0 uses port `12000`
+  - v1.3.0 uses port `13000`
+  - v1.1.9 uses port `11900`
+  - v1.2.6 uses port `12600`
+
+**Special Version Suffixes**:
+- `-rc.N`: Add `N*10` to the base port
+  - Example: v1.3.0-rc.1 uses `13010` (base 13000 + 10)
+  - Example: v1.3.0-rc.2 uses `13020` (base 13000 + 20)
+  - Example: v1.2.0-rc.1 uses `12010` (base 12000 + 10)
+- `-rc.N-dbg`: Add `N*10 + 2` to the base port
+  - Example: v1.0.0-rc2-dbg uses `10022` (base 10000 + 20 + 2)
+  - Example: v1.0.0-rc3-dbg uses `10032` (base 10000 + 30 + 2)
+- `_criu`: Add `1` to the base port (for versions with CRIU support)
+  - Example: v1.3.0-rc.1_criu uses `13011` (base 13010 + 1)
+- `_selinux`: Add `1` to the base port (for SELinux variants)
+  - Example: centos-stream9_runc-v1.2.0_selinux uses `12091` (base 12090 + 1)
+- Distribution-based versions: May use different port calculation rules
+  - Example: `debian-11.0_runc-v1.2.6` uses `11126`
+  - Example: `centos-stream9_runc-v1.2.0` uses `12090`
+  - Example: `ubuntu-20.04_runc-v1.1.9` uses `21190`
+
+**Important Constraints:**
+- **Port conflict check**: Calculated port numbers must not conflict with ports already used by other directories in the project
+- Before assigning ports, check all ports used in `docker-compose.yml` files
+- If the calculated port is already in use, adjust it (usually by modifying the suffix or version number mapping rules)
+- Check used ports with the following command:
+  ```bash
+  find . -name "docker-compose.yml" -exec grep -h "ports:" -A 2 {} \; | grep -oE '"[0-9]+:[0-9]+"' | cut -d: -f1 | tr -d '"' | sort -n | uniq
+  ```
+
+### 3. Dockerfile Structure
+
+#### 3.1 Standard Dockerfile Pattern (Ubuntu-based)
+```dockerfile
+ARG HOSTNAME=runc-x-y-z
+ARG VERSION_RUNC=x.y.z
+ARG VERSION_UBUNTU=24.04
+ARG VERSION_BASE_IMAGE=0.3.0
+ARG URL_ARTIFACT_RUNC=https://github.com/opencontainers/runc/releases/download/v${VERSION_RUNC}/runc.amd64
+ARG BASE_IMAGE=ssst0n3/docker_archive:ctr_ubuntu-${VERSION_UBUNTU}_v${VERSION_BASE_IMAGE}
+
+FROM ${BASE_IMAGE}
+ARG URL_ARTIFACT_RUNC
+ARG HOSTNAME
+RUN apt update && apt install -y busybox-static && apt-get clean -y && rm -rf /var/lib/apt/lists/*
+ADD ${URL_ARTIFACT_RUNC} /tmp/runc.amd64
+RUN install -m 755 /tmp/runc.amd64 /usr/local/sbin/runc && rm /tmp/runc.amd64
+RUN echo ${HOSTNAME} > /etc/hostname
+```
+
+**Important Notes:**
+- `HOSTNAME`: Container hostname (optional but recommended). Format: `runc-{version-with-hyphens}` where dots are replaced with hyphens (e.g., `v1.1.12` → `runc-1-1-12`, `v1.0.0-rc95` → `runc-1-0-0-rc95`). Must be declared both before `FROM` (for default value) and after `FROM` (for use in build stage). Typically used to set container hostname via `RUN echo ${HOSTNAME} > /etc/hostname`
+- `VERSION_RUNC`: Must be without the `v` prefix (e.g., `1.2.0`, not `v1.2.0`)
+- `VERSION_UBUNTU`: Base Ubuntu version (commonly `24.04`)
+- `VERSION_BASE_IMAGE`: Version of the base container image (usually `0.3.0` for newer versions)
+- `BASE_IMAGE`: Points to the base container image (`ctr_ubuntu-{VERSION_UBUNTU}_v{VERSION_BASE_IMAGE}`)
+- The runc binary is downloaded from GitHub releases and installed to `/usr/local/sbin/runc`
+- `busybox-static` is installed for container runtime testing
+
+#### 3.2 Alternative Dockerfile Pattern (using ADD with chmod)
+Some versions use a more concise pattern:
+```dockerfile
+ADD --chmod=755 ${URL_ARTIFACT_RUNC} /usr/local/sbin/runc
+```
+This directly installs runc with proper permissions without needing the temporary file step.
+
+#### 3.3 Distribution-based Dockerfile Pattern (Debian)
+```dockerfile
+ARG VERSION_RUNC=x.y.z
+ARG VERSION_DEBIAN=11.0
+ARG VERSION_IMAGE=0.1.0
+ARG URL_ARTIFACT_RUNC=https://github.com/opencontainers/runc/releases/download/v${VERSION_RUNC}/runc.amd64
+ARG BASE_IMAGE=ssst0n3/docker_archive:ctr_debian-${VERSION_DEBIAN}_v${VERSION_IMAGE}
+
+FROM ${BASE_IMAGE}
+ARG URL_ARTIFACT_RUNC
+RUN apt update && apt install -y busybox-static && apt-get clean -y && rm -rf /var/lib/apt/lists/*
+ADD --chmod=755 ${URL_ARTIFACT_RUNC} /usr/local/sbin/runc
+```
+
+#### 3.4 Distribution-based Dockerfile Pattern (CentOS)
+```dockerfile
+ARG VERSION_RUNC=x.y.z
+ARG VERSION_CENTOS=stream9
+ARG VERSION_IMAGE=0.2.0
+ARG BASE_IMAGE=ssst0n3/docker_archive:ctr_centos-${VERSION_CENTOS}
+ARG URL_ARTIFACT_RUNC=https://github.com/opencontainers/runc/releases/download/v${VERSION_RUNC}/runc.amd64
+ARG URL_ARTIFACT_BUSYBOX=https://github.com/docker-library/busybox/raw/.../busybox.tar.xz
+
+FROM ${BASE_IMAGE}_v${VERSION_IMAGE}
+ARG URL_ARTIFACT_RUNC
+ARG URL_ARTIFACT_BUSYBOX
+ADD ${URL_ARTIFACT_BUSYBOX} /tmp/busybox.tar.xz
+RUN dnf -y install xz && \
+    dnf clean all && \
+    rm -rf /var/cache/dnf
+RUN mkdir -p /root/rootfs && \
+    tar --exclude './dev/*' -C /root/rootfs -xf /tmp/busybox.tar.xz && \
+    rm /tmp/busybox.tar.xz
+ADD --chmod=755 ${URL_ARTIFACT_RUNC} /usr/local/sbin/runc
+```
+
+**Note**: CentOS-based images may use busybox from tar archive instead of package manager.
+
+#### 3.5 CRIU Variant Pattern
+```dockerfile
+ARG VERSION_RUNC=x.y.z-rc.N
+ARG VERSION_UBUNTU=24.04
+ARG VERSION_BASE_IMAGE=0.2.0
+ARG URL_ARTIFACT_RUNC=https://github.com/opencontainers/runc/releases/download/v${VERSION_RUNC}/runc.amd64
+ARG BASE_IMAGE=ssst0n3/docker_archive:ctr_runc-v${VERSION_RUNC}_v${VERSION_BASE_IMAGE}
+ARG CRIU_REPO=https://download.opensuse.org/repositories/devel:/tools:/criu/xUbuntu_${VERSION_UBUNTU}
+ARG KEYFILE=/usr/share/keyrings/criu-repo-keyring.gpg
+
+FROM ${BASE_IMAGE}
+ARG CRIU_REPO
+ARG KEYFILE
+RUN apt update && \
+    apt install -y gpg xz-utils && \
+    wget -nv $CRIU_REPO/Release.key -O- | gpg --dearmor > "$KEYFILE" && \
+    echo "deb [signed-by=$KEYFILE] $CRIU_REPO/ /" > /etc/apt/sources.list.d/criu.list && \
+    apt update && \
+    apt install -y criu iptables && \
+    apt-get clean -y && rm -rf /var/lib/apt/lists/*
+```
+
+**Note**: CRIU variants install CRIU (Checkpoint/Restore In Userspace) for container checkpoint/restore functionality.
+
+#### 3.6 Debug Version Pattern
+```dockerfile
+ARG VERSION_RUNC=x.y.z-rcN
+ARG URL_ARTIFACT_RUNC=https://github.com/ssst0n3/container-debug-artifacts/releases/download/runc/runc-v${VERSION_RUNC}-debug-flag
+ARG VERSION_DLV=1.22.1
+ARG URL_ARTIFACT_DLV=https://github.com/ssst0n3/container-debug-artifacts/releases/download/dlv/dlv-v${VERSION_DLV}
+ARG BASE_IMAGE=ssst0n3/docker_archive:ctr_runc-v${VERSION_RUNC}_v0.2.0
+
+FROM ${BASE_IMAGE}
+ARG URL_ARTIFACT_RUNC
+ARG URL_ARTIFACT_DLV
+WORKDIR /root
+RUN mkdir -p rootfs/bin/ && \
+    cp /bin/busybox rootfs/bin/ && \
+    ln -s /bin/busybox rootfs/bin/sh && \
+    runc spec
+ADD --chmod=755 ${URL_ARTIFACT_RUNC} /root/runc-debug-flag
+ADD --chmod=755 ${URL_ARTIFACT_DLV} /usr/local/bin/dlv
+COPY --chmod=755 runc.debug /root/runc.debug
+COPY --chmod=755 attach.sh /usr/local/bin/
+RUN mv /usr/local/sbin/runc /root/runc.real && \
+    ln -s /root/runc.debug /usr/local/sbin/runc
+```
+
+**Note**: Debug versions include debug binaries and tools (dlv, runc.debug, attach.sh) for debugging runc.
+
+### 4. docker-compose.yml Pattern
+
+Follow the **standard `docker-compose.yml` pattern** defined in `common.mdc`.
+
+For runc, the image tag format is:
+- `ssst0n3/docker_archive:runc-vx.y.z_v0.1.0` (where `x.y.z` is the runc version)
+- Image tag should match `.env` file: `IMAGE=runc-vx.y.z` and `VERSION=v0.1.0`
+
+See `common.mdc` → "docker-compose.yml File (COMMON FILE PATTERN)" for the complete standard template and configuration details.
+
+### 5. docker-compose.kvm.yml Pattern
+```yaml
+services:
+  vm:
+    devices:
+      - "/dev/kvm:/dev/kvm"
+```
+
+### 6. docker-compose.swr-mirror.yml Pattern (Optional)
+Some versions include a SWR mirror configuration file for image registry mirroring.
+
+### 7. ssh Script Pattern
+```bash
+#!/bin/bash
+sshpass -p root ssh -o StrictHostKeyChecking=no -p PORT_NUMBER root@127.0.0.1
+```
+- Replace `PORT_NUMBER` with the calculated port number
+- Ensure the script is executable: `chmod +x ssh`
+
+### 8. scp Script Pattern (Optional)
+Some versions include an `scp` script:
+```bash
+#!/bin/bash
+sshpass -p root scp -P PORT_NUMBER $1 root@127.0.0.1:
+```
+- Replace `PORT_NUMBER` with the calculated port number
+- Ensure the script is executable: `chmod +x scp`
+
+### 9. README.md Pattern
+
+#### 9.1 Structure
+The `README.md` file should contain:
+1. **Title**: `# runc vx.y.z`
+2. **Image Information**: List of dqd and ctr images (with version history if applicable)
+3. **usage Section**: Commands with **actual execution results**
+4. **build Section**: Build commands
+
+#### 9.2 Command Execution Requirement (CRITICAL)
+
+**All commands in `README.md` MUST include actual execution results, not just the commands themselves.**
+
+- ❌ **WRONG**: Only showing the command without output
+  ```shell
+  $ runc --version
+  ```
+
+- ✅ **CORRECT**: Including actual execution output
+  ```shell
+  $ ./ssh
+  root@localhost:~# runc --version
+  runc version 1.3.3
+  commit: v1.3.3-0-g4ca628d1
+  spec: 1.2.1
+  go: go1.23.8
+  libseccomp: 2.5.6
+  ```
+
+**When creating or updating README.md:**
+1. **Execute all commands** in the actual container environment
+2. **Copy the complete output** from the terminal
+3. **Include the output** in the README.md code blocks
+4. **Verify accuracy**: Ensure version numbers, paths, and outputs match the actual environment
+5. **Update version-specific outputs**: When copying from another version, update all version references in outputs (e.g., `runc version 1.3.3` should match the actual version)
+
+#### 9.3 Typical Commands to Include
+
+The `usage` section typically includes:
+
+1. **Startup commands**:
+   ```shell
+   $ cd runc/vx.y.z
+   $ docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
+   ```
+
+2. **SSH connection and version check** (with actual output):
+   ```shell
+   $ ./ssh
+   root@localhost:~# runc --version
+   [actual version output]
+   root@localhost:~# cat /etc/os-release 
+   [actual OS release information]
+   ```
+
+3. **Container runtime example** (with actual container output):
+   ```shell
+   root@localhost:~# mkdir -p rootfs/bin/
+   root@localhost:~# cp /bin/busybox rootfs/bin/
+   root@localhost:~# ln -s /bin/busybox rootfs/bin/sh
+   root@localhost:~# runc spec
+   root@localhost:~# runc run container-1
+   [actual container shell prompt]
+   ```
+
+#### 9.4 Build Section
+
+The `build` section includes:
+```shell
+make all DIR=runc/vx.y.z
+```
+
+And optionally a `for developers` section with Dockerfile snippet:
+```dockerfile
+FROM ssst0n3/docker_archive:ctr_runc-vx.y.z_v0.1.0
+```
+
+## Creating a New Runc Version
+
+When creating a new `vx.y.z` version:
+
+1. **Copy from a similar version** (preferably the latest version)
+2. **Replace all version numbers** using the patterns above, including:
+   - `HOSTNAME=runc-x-y-z` (replace dots with hyphens in version number, e.g., `v1.1.12` → `runc-1-1-12`)
+   - `VERSION_RUNC=x.y.z` (without `v` prefix in Dockerfile)
+   - All version references in Dockerfile, docker-compose.yml, README.md, ssh, and scp scripts
+3. **Determine port number**:
+   - Calculate SSH port based on calculation rules
+   - **Check port conflicts**: Confirm calculated port numbers are not used by other directories
+   - If port conflicts occur, adjust (modify suffix or other rules)
+4. **Update base image version** if needed:
+   - Check the base image version (`VERSION_BASE_IMAGE` or `VERSION_IMAGE`)
+   - Update if a newer base image version is available
+5. **Update README.md** with correct version information and examples:
+   - **CRITICAL**: All commands in README.md must include actual execution results
+   - Execute commands in the actual container environment and copy real output
+   - Update all version references in command outputs to match the new version
+   - Do not copy command outputs from other versions without verification
+6. **Set file permissions**: Ensure `ssh` and `scp` (if exists) are executable
+7. **Test build before committing**
+
+## Common Errors to Avoid
+
+1. ❌ Using `v` prefix in `VERSION_RUNC` ARG (should be `1.2.0`, not `v1.2.0`)
+2. ❌ Incorrect `HOSTNAME` format (should use hyphens instead of dots, e.g., `runc-1-1-12` not `runc-1.1.12`)
+3. ❌ Missing `ARG HOSTNAME` declaration after `FROM` statement (required for use in build stage)
+4. ❌ Incorrect port number calculation
+5. ❌ Port numbers conflict with other directories in the project (did not check used ports)
+6. ❌ Version number mismatches between files
+7. ❌ Forgot to update port number in `ssh` or `scp` scripts
+8. ❌ Scripts not executable (missing `chmod +x`)
+9. ❌ Incorrect image tag format in docker-compose.yml
+10. ❌ Using wrong base image (e.g., `ctr_ubuntu` vs `ctr_debian` vs `ctr_centos`)
+11. ❌ Missing busybox installation (required for container runtime testing)
+12. ❌ Incorrect URL format for runc artifacts
+13. ❌ Forgot to clean up temporary files in Dockerfile
+14. ❌ Missing `--chmod=755` flag when using ADD for runc binary (in newer Dockerfile patterns)
+15. ❌ README.md commands without actual execution results (commands must be executed and include real output)
+16. ❌ Copying command outputs from other versions without updating version-specific information
+17. ❌ Including placeholder or fake command outputs instead of real execution results
+
+## File Permissions
+
+Ensure the following files are executable:
+- `ssh`
+- `scp` (if exists)
+
+Use: `chmod +x ssh` (and `chmod +x scp` if exists)

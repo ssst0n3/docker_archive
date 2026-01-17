@@ -1,0 +1,194 @@
+---
+path: **/**
+alwaysApply: true
+---
+
+# Docker Compose Files Rules
+
+## File Creation Restrictions
+
+### docker-compose.*-mirror.yml Files (DO NOT AUTO-CREATE)
+
+**NEVER automatically create `docker-compose.*-mirror.yml` files** (e.g., `docker-compose.swr-mirror.yml`).
+
+#### Why This Restriction Exists
+
+These mirror compose files are **automatically generated** by `script/mirror.sh` when users execute the mirror synchronization workflow:
+
+1. **Workflow Process**:
+   - `script/mirror.sh` finds all `docker-compose.yml` files recursively
+   - For each compose file, it checks if the corresponding mirror file already exists
+   - **If the mirror file does NOT exist**: The script will:
+     - Pull the original images from their source registry
+     - Tag them for the mirror registry (e.g., SWR)
+     - Push them to the mirror registry
+     - Generate the `docker-compose.*-mirror.yml` file
+   - **If the mirror file already exists**: The script skips processing for that directory entirely
+
+2. **Problem with Auto-Creation**:
+   - If the mirror file is created before running `script/mirror.sh`, the script will detect it exists and skip the entire directory
+   - This means images will **NOT be pulled, tagged, or pushed** to the mirror registry
+   - The mirror file will exist but point to images that don't exist in the mirror registry
+   - This breaks the mirror synchronization workflow
+
+3. **Correct Usage**:
+   - Users should run `script/mirror.sh` when they want to sync images to a mirror registry
+   - The script will automatically create the mirror compose file **after** successfully pushing images
+   - The mirror file is a **byproduct** of the mirror synchronization process, not a source file
+
+## docker-compose.yml File (COMMON FILE PATTERN)
+
+**`docker-compose.yml` is a common file pattern** used across all project directories in the docker_archive repository.
+
+### Purpose
+
+The `docker-compose.yml` file defines the main service configuration for Docker Compose. It provides the standard structure for running containerized virtual machine services with SSH access.
+
+### Standard Pattern
+
+The standard `docker-compose.yml` file follows this pattern:
+
+```yaml
+services:
+  vm:
+    image: ssst0n3/docker_archive:COMPONENT-VERSION_v0.1.0
+    ports:
+        - "PORT_NUMBER:22"
+    tty: true
+    stdin_open: true
+```
+
+Where:
+- **`COMPONENT-VERSION`**: The component name and version (e.g., `runc-v1.3.0`, `containerd-v2.2.0`, `docker-v20.10.17`)
+- **`PORT_NUMBER`**: The SSH port number for this service (e.g., `13000`, `22000`, `21017`)
+- **Image tag format**: `ssst0n3/docker_archive:${IMAGE}_${VERSION}` where `IMAGE` and `VERSION` come from the `.env` file
+
+### Key Configuration Elements
+
+1. **Service name**: Always `vm` (standardized across all projects)
+2. **Image**: Must match the image tag format: `ssst0n3/docker_archive:${IMAGE}_${VERSION}`
+3. **Ports**: Maps SSH port 22 from container to a unique host port
+   - **Port uniqueness requirement**: Each project directory MUST use a unique host port number
+   - Port conflicts will cause Docker Compose to fail when starting multiple services simultaneously
+   - Before creating a new project, verify that the intended port number is not already used by other projects
+   - Check existing `docker-compose.yml` files across all project directories to ensure no port conflicts
+4. **TTY**: Required for interactive terminal access
+5. **Stdin open**: Required for interactive input
+
+### Version Field (Optional)
+
+Some older `docker-compose.yml` files may include a `version: '3'` field at the top:
+
+```yaml
+version: '3'
+services:
+  vm:
+    ...
+```
+
+This is **optional** and not required for newer Docker Compose versions. Modern Docker Compose automatically detects the format.
+
+### Port Number Generation Rules
+
+When creating a new project directory, you must assign a unique SSH port number. Follow these rules to generate port numbers:
+
+1. **Basic Rule - Version-Based Port Generation**:
+   - Extract numeric digits from the version string (remove `v`, dots, hyphens, and letters)
+   - Combine the digits to form a 5-digit port number (pad with zeros if necessary)
+   - Examples:
+     - `v1.3.0` → `13000` (digits: 1,3,0,0,0)
+     - `v2.2.0` → `22000` (digits: 2,2,0,0,0)
+     - `v1.3.3` → `13300` (digits: 1,3,3,0,0)
+     - `v28.0.4` → `28040` (digits: 28,0,4,0)
+
+2. **CVE Number Ports**:
+   - For CVE-related projects, use the last 5 digits of the CVE number
+     - Example: `cve-2025-62725` → `62725`
+
+3. **Multi-Component Versions**:
+   - For combinations (e.g., `debian-11.0_runc-v1.3.0-rc.1`), prioritize the main component version
+   - Extract digits from the main component version to form the base port number
+
+4. **Port Conflict Resolution**:
+   - **MANDATORY**: Before assigning a port number, verify it is not already used
+   - Search all `docker-compose.yml` files in the repository: `grep -r '"PORT_NUMBER:22"' .`
+   - If the generated port number conflicts with an existing one, increment by 1 until finding an available port
+   - Example: If `13000` is taken, try `13001`, `13002`, etc. until finding an unused port
+   - **There is no fixed rule for special suffixes** (e.g., `-rc.N`, `-debug`) - simply resolve conflicts by incrementing
+
+5. **Port Range**:
+   - Port numbers should be 5-digit numbers (10000-99999)
+   - Avoid using ports below 10000 (may conflict with system ports)
+   - Keep port numbers within a consistent range for the same component family
+
+### When to Create
+
+- **Every project directory** must have a `docker-compose.yml` file
+- **Copy from similar project** when creating a new version directory
+- **Update** the `image` tag to match the component and version
+- **Update** the `ports` mapping to use the correct port number for this version
+
+### Common Errors to Avoid
+
+1. ❌ Missing `docker-compose.yml` file in project directory
+2. ❌ Incorrect image tag format (should match `.env` file `IMAGE` and `VERSION` variables)
+3. ❌ Wrong service name (should be `vm`, not `container` or other names)
+4. ❌ Missing `tty: true` or `stdin_open: true` (required for interactive access)
+5. ❌ Port conflict with other project directories (port numbers MUST be unique across all projects)
+6. ❌ Incorrect YAML indentation (ports should be indented with 4 spaces)
+
+## docker-compose.kvm.yml File (COMMON FILE PATTERN)
+
+**`docker-compose.kvm.yml` is a common file pattern** used across multiple project directories in the docker_archive repository.
+
+### Purpose
+
+The `docker-compose.kvm.yml` file provides KVM (Kernel-based Virtual Machine) device configuration for Docker Compose services. It is used to enable hardware virtualization support when running containers that require KVM access.
+
+### Standard Pattern
+
+The standard `docker-compose.kvm.yml` file follows this pattern:
+
+```yaml
+services:
+  vm:
+    devices:
+      - "/dev/kvm:/dev/kvm"
+```
+
+### Usage
+
+This file is typically used in combination with the main `docker-compose.yml` file:
+
+```bash
+docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
+```
+
+### Variations
+
+While most `docker-compose.kvm.yml` files follow the standard pattern, some may include additional configuration:
+
+- **Standard pattern**: Only KVM device mapping
+- **Extended pattern**: May include additional service configuration (e.g., `command`, `environment`, etc.)
+
+Example of extended pattern:
+```yaml
+services:
+  vm:
+    command: /start.sh -enable-kvm
+    devices:
+      - "/dev/kvm:/dev/kvm"
+```
+
+### When to Create
+
+- **Create `docker-compose.kvm.yml`** when a project directory needs KVM device access
+- **Copy from similar project** when creating a new version directory
+- **Follow the standard pattern** unless specific requirements dictate additional configuration
+
+### Common Errors to Avoid
+
+1. ❌ Missing `docker-compose.kvm.yml` when KVM access is required
+2. ❌ Incorrect device path (should be `/dev/kvm:/dev/kvm`)
+3. ❌ Wrong service name (should match the service name in `docker-compose.yml`, typically `vm`)
+4. ❌ Incorrect YAML indentation

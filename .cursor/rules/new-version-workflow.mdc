@@ -1,0 +1,95 @@
+---
+path: **/**
+alwaysApply: true
+---
+
+# Creating New Version Directories Workflow
+
+## Overview
+
+When creating a new version directory (e.g., `runc/v1.3.3` from `runc/v1.3.0`), you **MUST** follow this complete workflow.
+
+## Required Steps
+
+1. **Create the directory structure**
+   - Create the new version directory: `COMPONENT/VERSION/`
+   - Example: `runc/v1.3.3/`
+
+2. **Copy files from source version directory**
+   - Copy all files from a similar version directory (e.g., `runc/v1.3.0/`)
+   - Files to copy typically include:
+     - `docker-compose.yml`
+     - `docker-compose.kvm.yml` (if exists)
+     - `Dockerfile`
+     - `README.md`
+     - `ssh` (if exists)
+     - **DO NOT copy** `docker-compose.*-mirror.yml` files (see File Creation Restrictions)
+
+3. **Create `.env` file (MANDATORY)**
+   - **CRITICAL**: You MUST create a `.env` file in the new directory
+   - Even if the source directory's `.env` is filtered by globalignore and not visible, you MUST create it
+   - The `.env` file is required for the project to function properly
+   - Format:
+     ```bash
+     VERSION=v0.1.0
+     IMAGE=COMPONENT-VERSION
+     COMPOSE_PROJECT_NAME=COMPONENT-VERSION-WITH-HYPHENS
+     ```
+   - Example for `runc/v1.3.3`:
+     ```bash
+     VERSION=v0.1.0
+     IMAGE=runc-v1.3.3
+     COMPOSE_PROJECT_NAME=runc-1-3-3
+     ```
+
+4. **Update version numbers in all files**
+   - Update `docker-compose.yml`: Change image tag from `COMPONENT-OLD-VERSION` to `COMPONENT-NEW-VERSION`
+   - Update `Dockerfile`: Change `ARG VERSION_RUNC=OLD_VERSION` to `ARG VERSION_RUNC=NEW_VERSION` (or equivalent for other components)
+   - Update `README.md`: Replace all occurrences of old version with new version
+   - Update `ssh` script: Update port number if changed (see Port Number section in docker-compose-files.mdc)
+
+5. **Assign unique SSH port number**
+   - Follow the Port Number Generation Rules (see docker-compose-files.mdc)
+   - Generate port from version: `v1.3.3` → `13300` (digits: 1,3,3,0,0)
+   - **MANDATORY**: Check for port conflicts using `grep -r "PORT_NUMBER:22" .`
+   - If port is already used, increment by 1 until finding an available port
+   - Update `docker-compose.yml` with the correct port number
+   - Update `ssh` script with the correct port number
+
+6. **Verify all files are created**
+   - Ensure `.env` file exists (use `ls -la` or `cat` to verify, as it may be filtered by globalignore)
+   - Ensure all copied files are updated with correct version numbers
+   - Ensure port numbers are unique and correctly set
+
+## Common Mistakes to Avoid
+
+1. ❌ **Forgetting to create `.env` file** - This is the most common mistake
+   - The `.env` file may be filtered by globalignore and not visible in directory listings
+   - Always explicitly create the `.env` file even if you cannot see it in the source directory
+   - Use terminal commands (`cat > .env`) if file editing tools are blocked
+
+2. ❌ **Copying `.env` from source without updating** - The `.env` file contains version-specific information
+   - Always create a new `.env` file with updated `IMAGE` and `COMPOSE_PROJECT_NAME` values
+   - Never copy the `.env` file directly from the source directory
+
+3. ❌ **Using wrong port number** - Port conflicts will cause Docker Compose to fail
+   - Always check for port conflicts before assigning a port
+   - Follow the port generation rules, but verify uniqueness
+
+4. ❌ **Not updating all version references** - Inconsistent version numbers cause confusion
+   - Update version numbers in ALL files: `docker-compose.yml`, `Dockerfile`, `README.md`, `ssh`
+   - Use search and replace to ensure all occurrences are updated
+
+## Workflow Checklist
+
+When creating a new version directory, verify:
+- [ ] Directory created
+- [ ] All source files copied
+- [ ] **`.env` file created** (MANDATORY - check with `ls -la` or `cat`)
+- [ ] `.env` file contains correct `VERSION`, `IMAGE`, and `COMPOSE_PROJECT_NAME`
+- [ ] `docker-compose.yml` updated with new version and port number
+- [ ] `Dockerfile` updated with new version
+- [ ] `README.md` updated with new version
+- [ ] `ssh` script updated with new port number (if changed)
+- [ ] Port number is unique (verified with `grep`)
+- [ ] No `docker-compose.*-mirror.yml` files copied

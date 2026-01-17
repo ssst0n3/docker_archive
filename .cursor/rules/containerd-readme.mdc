@@ -1,0 +1,163 @@
+---
+path: containerd/**/README.md
+---
+
+# containerd README.md Update Rules
+
+## Overview
+This rule guides how to properly update the `containerd/vx.x.x/README.md` file. README.md should contain image information, usage examples, build instructions, and developer information.
+
+**Important Requirement**: When updating README.md, **you must recreate the environment and actually execute all commands**, using real environment output data. It is forbidden to copy data from other versions or use outdated data.
+
+## README.md Standard Structure
+
+Each `containerd/vx.x.x/README.md` should follow this structure:
+
+```markdown
+# containerd vx.x.x
+
+* dqd:
+  * ssst0n3/docker_archive:containerd-vx.x.x -> ssst0n3/docker_archive:containerd-vx.x.x_v0.1.0
+  * ssst0n3/docker_archive:containerd-vx.x.x_v0.1.0
+* ctr:
+  * ssst0n3/docker_archive:ctr_containerd-vx.x.x -> ssst0n3/docker_archive:ctr_containerd-vx.x.x_v0.1.0
+  * ssst0n3/docker_archive:ctr_containerd-vx.x.x_v0.1.0
+
+## usage
+
+[Usage example code blocks]
+
+## build
+
+[Build instructions]
+
+for developers:
+
+[Developer information]
+```
+
+## Detailed Section Descriptions
+
+### 1. Title
+- Format: `# containerd vx.x.x`
+- Replace `vx.x.x` with the actual containerd version number (e.g., `v2.1.4`)
+
+### 2. Image List
+- **dqd section** (Docker daemon images):
+  - First line: `ssst0n3/docker_archive:containerd-vx.x.x -> ssst0n3/docker_archive:containerd-vx.x.x_v0.1.0`
+  - Second line: `ssst0n3/docker_archive:containerd-vx.x.x_v0.1.0`
+- **ctr section** (containerd images):
+  - First line: `ssst0n3/docker_archive:ctr_containerd-vx.x.x -> ssst0n3/docker_archive:ctr_containerd-vx.x.x_v0.1.0`
+  - Second line: `ssst0n3/docker_archive:ctr_containerd-vx.x.x_v0.1.0`
+- Replace all `vx.x.x` with the actual containerd version number
+- Image version suffix is usually `_v0.1.0` (if there are subsequent updates, it may be `_v0.2.0`, etc.)
+
+### 3. usage Section
+Should contain the following code blocks (in order):
+
+#### 3.1 Startup Command
+```markdown
+```shell
+$ cd containerd/vx.x.x
+$ docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
+```
+```
+- Replace `vx.x.x` with the actual containerd version number
+
+#### 3.2 SSH Login and Version Information
+```markdown
+```shell
+$ ./ssh
+root@localhost:~# containerd --version
+[Actual containerd version output]
+root@localhost:~# runc --version
+[Actual runc version output]
+root@localhost:~# ctr i pull docker.io/library/hello-world:latest
+[Actual pull output]
+root@localhost:~# ctr run docker.io/library/hello-world:latest hello
+[Actual run output]
+```
+```
+- **How to obtain**: Log into the container via `./ssh` script and execute the above commands
+- **Information included**:
+  - containerd --version (full output)
+  - runc --version (full output)
+  - ctr image pull example (hello-world)
+  - ctr run example (hello-world)
+- **Verification**: Ensure containerd and runc versions match the expected versions, and that containers can be pulled and run successfully
+
+#### 3.3 Additional Examples (Optional)
+Some versions may include additional usage examples:
+- Container management examples
+- Image management examples
+- Snapshotter-specific examples (for fuse-overlayfs variants)
+
+### 4. build Section
+```markdown
+## build
+
+```shell
+make all DIR=containerd/vx.x.x
+```
+```
+- Replace `vx.x.x` with the actual containerd version number
+
+### 5. for developers Section (Recommended to include)
+```markdown
+for developers:
+
+```dockerfile
+FROM ssst0n3/docker_archive:ctr_containerd-vx.x.x_v0.1.0
+```
+```
+- Replace `vx.x.x` with the actual containerd version number
+- Update image version suffix (e.g., `_v0.1.0`) to the actual version
+
+## Steps to Update README.md
+
+When updating or creating a containerd README.md:
+
+1. **Confirm version number**: Ensure all `vx.x.x` are correctly replaced with the actual containerd version number
+
+2. **Update image list**:
+   - Confirm image version suffix (usually `_v0.1.0`)
+   - Confirm image name format is correct
+
+3. **Recreate environment and obtain actual runtime data** (required):
+   - **Must stop and clean up old environment first** (if it exists):
+     - `docker compose -f docker-compose.yml -f docker-compose.kvm.yml down -v`
+   - **Start new container**: `docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d`
+   - **Wait for container to be ready**: Wait for the container to start and containerd service to be running
+   - **Actually execute commands and obtain output** (do not use old data or copy data from other versions):
+     - Execute `./ssh` to log into the container
+     - Execute `containerd --version` to get containerd version
+     - Execute `runc --version` to get runc version
+     - Execute `ctr i pull docker.io/library/hello-world:latest` to test image pull
+     - Execute `ctr run docker.io/library/hello-world:latest hello` to test container run
+
+4. **Update README.md using actual execution results**:
+   - **Must use output obtained from actually executing commands in step 3**
+   - **Forbidden to directly copy data from other versions** (even adjacent versions)
+   - **Forbidden to use outdated or speculative data**
+   - All output must reflect the true state of the current environment
+
+5. **Verify format**:
+   - Ensure code blocks use correct shell markers
+   - Ensure all version numbers are consistent
+   - Ensure image tags match the actual built images
+
+## Common Errors to Avoid
+
+1. ❌ Version number inconsistency (some places in the file use incorrect version numbers)
+2. ❌ Image version suffix error (does not match the actually built image version)
+3. ❌ Missing necessary command output (e.g., incomplete version information)
+4. ❌ Code block format error (missing correct language markers or incorrect format)
+5. ❌ **Updated README.md without recreating environment** (using old environment data)
+6. ❌ **Copied data from other versions instead of actually executing commands** (must use actual output from current environment)
+7. ❌ **Did not clean up old environment** (may cause data inconsistency or outdated data)
+8. ❌ Version information does not match expected versions (containerd or runc version mismatch)
+9. ❌ Container run examples fail (indicating environment issues)
+
+## Reference Examples
+
+Refer to the latest or adjacent version's README.md (e.g., `containerd/v2.1.4/README.md` or `containerd/v2.1.1/README.md`) to ensure format and content consistency.
