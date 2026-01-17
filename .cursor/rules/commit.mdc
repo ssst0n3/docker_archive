@@ -29,29 +29,49 @@ Strictly follow the **Conventional Commits** standard.
   - Do not end with a period.
   - **Keep length within 50-72 characters**. Be concise.
 
-### Body - Required for Complex Changes
-- **When to Use**: If changes involve specific logic, environment variables, multiple component interactions, or breaking changes.
-- **Content Requirements**: Explain *what changed* and *why it changed*.
+### Body - Use Sparingly
+- **Default**: Prefer **title-only commits**. Do **not** add a body if the
+  title can clearly express the intent.
+- **When to Use**: Only add a body for complex changes (e.g. breaking
+  changes, non-obvious behavior changes, or important operational notes).
+- **Content Requirements**: Focus on *intent and impact* (why) instead of
+  exhaustively listing every changed detail (what).
+- **Length**: Keep the body short (1–3 lines, or a few concise bullets).
 - **Line Wrapping**: Wrap at 72 characters.
 
 ## 3. Content Guidelines (Core Requirements)
-- **Information Parity**: The generated English commit message must convey **the same level of technical detail** as the Chinese summary.
-- **Specific Details**: If the Chinese summary mentions specific environment variables (such as `SKIP_SSH_CONFIG`), specific file paths, or specific algorithm logic, these **must** be included in the English message (usually in the Body section).
-- **Avoid Over-Simplification**: Do not sacrifice technical accuracy for brevity.
+- **Different Roles**:
+  - The **Chinese summary** is for detailed explanation and can describe
+    concrete behavior, key variables, and files when needed.
+  - The **English commit message** should be **concise** and mainly express
+    the **intent, behavior change, or reason**, not repeat all details.
+- **Key Details Only**: Mention specific environment variables (such as
+  `SKIP_SSH_CONFIG`), file paths, or algorithm logic **only when they are
+  crucial for understanding the intent or future maintenance**.
+- **Avoid Over-Specification**: Do not mirror the Chinese summary line by
+  line. Prefer a higher-level description that captures *why this change
+  exists*.
 
 ## 4. Output Workflow
-Before asking whether to commit, first display the "review block".
 
-**Output Template:**
+**REQUIRED FLOW**:
+1. Analyze staged changes
+2. Generate commit message
+3. Display summary (optional, for user information)
+4. Proceed directly to section 5 (Commit Execution Protocol)
+
+**Output Template (Optional Display):**
 
 ```text
 Files staged. Generating commit message:
-Review / Confirm:
-Chinese Summary: <Generate a detailed Chinese summary here, including variable names, logic details, and other technical points>
+Chinese Summary: <Generate a clear Chinese summary here. It can be a bit more
+                 detailed and may include key variable names or logic when
+                 helpful.>
 English Draft:
 <type>(<scope>): <subject>
 
-<body - Detailed English explanation that must include all technical details mentioned in the Chinese summary>
+<body - Optional. If used, briefly explain the intent / behavior change and
+ only the most important context, in a concise way.>
 ```
 
 ## 5. Commit Execution Protocol
@@ -69,12 +89,13 @@ English Draft:
 1. **Create Temporary File**: Use file editing tools (such as `write`) to directly write the complete commit message to `.commit-message` file
    - **Forbidden**: `echo`, `printf` and other shell commands (may encounter quote escaping issues)
    - **Required**: File editing tools (`write`) to directly write file content
+   - **MUST**: Use the exact content from the "English Draft" shown in section 4
 2. **Commit Using File**: Execute `git commit -F .commit-message`
 3. **Clean Up File**: Delete `.commit-message` file after commit is complete
 
 ### 5.3 Strict Consistency
 
-If the user replies with "confirm", "yes", or similar affirmative instructions, the information used when executing `git commit` must be **exactly consistent** (literal match) with the content displayed in **English Draft**. **Forbidden** to modify, polish, reduce, or reformat the commit message in any form after user confirmation.
+The information used when executing `git commit` must be **exactly consistent** (literal match) with the content displayed in **English Draft**. **Forbidden** to modify, polish, reduce, or reformat the commit message in any form.
 
 ---
 
@@ -85,7 +106,6 @@ If the user replies with "confirm", "yes", or similar affirmative instructions, 
 *Scenario*: Fix button click style issue.
 
 *Output*:
-Review / Confirm:
 Chinese Summary: Fix button click style issue, ensuring visual feedback is correctly displayed in the clicked state.
 English Draft:
 fix(ui): correct button click style feedback
@@ -97,7 +117,6 @@ fix(ui): correct button click style feedback
 *Scenario*: Fix API authentication token expiration handling, involving modifications to multiple files and functions.
 
 *Output*:
-Review / Confirm:
 Chinese Summary: Fix API authentication token expiration handling issue. Added token expiration check logic in the `validateToken()` function in `src/api/auth.ts`. When the token exceeds the expiration time set by the `JWT_EXPIRY_TIME` environment variable (default: 3600 seconds), automatically calls `refreshToken()` to refresh the token. Also updated the `getAuthConfig()` function in `src/config.ts` to correctly read the `JWT_EXPIRY_TIME` configuration.
 English Draft:
 fix(auth): handle token expiration with auto-refresh

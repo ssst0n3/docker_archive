@@ -2517,6 +2517,110 @@ Host kubernetes-v1.25.0-calico
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
 
+Host nerdctl-v2.0.3
+    Hostname 127.0.0.1
+    Port 20301
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
+Host nerdctl-v2.0.3_containerd-v2.0.3
+    Hostname 127.0.0.1
+    Port 20302
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
+Host kubernetes-v1.32.2_containerd-v2.0.3
+    Hostname 127.0.0.1
+    Port 13223
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
+Host kubernetes-v1.32.2_containerd-v2.0.3-calico
+    Hostname 127.0.0.1
+    Port 13225
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
+Host kubernetes-v1.32.2_containerd-v2.0.3-calico_nerdctl-v2.0.3
+    Hostname 127.0.0.1
+    Port 13227
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
+Host cve-2024-40635
+    Hostname 127.0.0.1
+    Port 40635
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
+Host nerdctl-v1.7.3
+    Hostname 127.0.0.1
+    Port 17300
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
+Host containerd-v1.7.8
+    Hostname 127.0.0.1
+    Port 17800
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
+Host nerdctl-v1.7.0
+    Hostname 127.0.0.1
+    Port 17001
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
+Host containerd-v1.7.6
+    Hostname 127.0.0.1
+    Port 17600
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
+Host nerdctl-v1.6.0
+    Hostname 127.0.0.1
+    Port 16000
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
+Host containerd-v1.7.3
+    Hostname 127.0.0.1
+    Port 17301
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
+Host nerdctl-v1.5.0
+    Hostname 127.0.0.1
+    Port 15001
+    User root
+    IdentityFile ~/.ssh/keys/docker_archive
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+
 Host runc-v1.3.3
     Hostname 127.0.0.1
     Port 13301

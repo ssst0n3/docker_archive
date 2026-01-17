@@ -62,6 +62,7 @@ root@localhost:~# docker version
 | [cve-2025-23266](./vul/cve-2025-23266/)                                 | v0.9.0  | nvidia-container-toolkit-v1.17.6 |                            |
 | [cve-2025-47290](./vul/cve-2025-47290/)                                 | v0.1.0  | containerd-v2.1.0                |                            |
 | [cve-2025-1974](./vul/cve-2025-1974/)                                   | v0.1.0  | ingress-nginx-v1.11.3            |                            |
+| [cve-2024-40635](./vul/cve-2024-40635/)                                 | v0.1.0  | kubernetes-v1.32.2_containerd-v2.0.3-calico_nerdctl-v2.0.3 |
 | [cve-2024-23650](./vul/cve-2024-23650/)                                 | v0.1.0  | buildkit-v0.12.4                 |
 | [cve-2024-0132](./vul/cve-2024-0132/)                                   | v0.1.0  | nvidia-container-toolkit-v1.16.1 |
 | [cve-2022-39253](./vul/cve-2022-39253/)                                 | v0.1.0  |
@@ -118,6 +119,9 @@ root@localhost:~# docker version
 | [kubernetes-v1.33.1](./kubernetes/v1.33.1/)               | v0.1.0  |       |      |
 | [kubernetes-v1.32.3-calico](./kubernetes/v1.32.3-calico/) | v0.2.0  |       |      |
 | [kubernetes-v1.32.3](./kubernetes/v1.32.3/)               | v0.2.0  |       |      |
+| [kubernetes-v1.32.2_containerd-v2.0.3-calico_nerdctl-v2.0.3](./kubernetes/v1.32.2_containerd-v2.0.3-calico_nerdctl-v2.0.3/) | v0.1.0  |       |      |
+| [kubernetes-v1.32.2_containerd-v2.0.3-calico](./kubernetes/v1.32.2_containerd-v2.0.3-calico/) | v0.1.0  |       |      |
+| [kubernetes-v1.32.2_containerd-v2.0.3](./kubernetes/v1.32.2_containerd-v2.0.3/) | v0.1.0  |       |      |
 | [kubernetes-v1.32.2-calico](./kubernetes/v1.32.2-calico/) | v0.2.0  |       |      |
 | [kubernetes-v1.32.2](./kubernetes/v1.32.2/)               | v0.2.0  |       |      |
 | [kubernetes-v1.31.0-calico](./kubernetes/v1.31.0-calico/) | v0.1.0  |       |      |
@@ -263,9 +267,15 @@ root@localhost:~# docker version
 | nerdctl-v2.1.0                                                          | -       | -     | bug [#4241](https://github.com/containerd/nerdctl/issues/4241) |
 | [nerdctl-v2.0.5](./nerdctl/v2.0.5/)                                     | v0.1.0  |
 | [nerdctl-v2.0.4_runc-v1.2.5-debug](./nerdctl/v2.0.4_runc-v1.2.5-debug/) | v0.2.0  |
-| [nerdctl-v2.0.4](./nerdctl/v2.0.4/)                                     | v0.2.0  |
+| [nerdctl-v2.0.4](./nerdctl/v2.0.4/)                                     | v0.2.0  | - | containerd-v2.0.4 |
+| [nerdctl-v2.0.3_containerd-v2.0.3](./nerdctl/v2.0.3_containerd-v2.0.3/) | v0.1.0  | - | containerd-v2.0.3 |
+| [nerdctl-v2.0.3](./nerdctl/v2.0.3/)                                     | v0.1.0  | - | containerd-v2.0.2 |
 | [nerdctl-v1.7.4](./nerdctl/v1.7.4/)                                     | v0.1.0  |
+| [nerdctl-v1.7.3](./nerdctl/v1.7.3/)                                     | v0.1.0  |
+| [nerdctl-v1.7.0](./nerdctl/v1.7.0/)                                     | v0.1.0  |
 | [nerdctl-v0.7.0-beta.0](./nerdctl/v0.7.0-beta.0/)                       | v0.1.0  |
+| [nerdctl-v1.6.0](./nerdctl/v1.6.0/)                                     | v0.1.0  |
+| [nerdctl-v1.5.0](./nerdctl/v1.5.0/)                                     | v0.1.0  |
 | [nerdctl-v0.5.0](./nerdctl/v0.5.0/)                                     | v0.1.0  |
 
 ### containerd
@@ -290,6 +300,9 @@ root@localhost:~# docker version
 | [containerd-v1.7.16](./containerd/v1.7.16/)                             | v0.2.0  |
 | [containerd-v1.7.15](./containerd/v1.7.15/)                             | v0.1.0  |
 | [containerd-v1.7.13](./containerd/v1.7.13/)                             | v0.1.0  |
+| [containerd-v1.7.8](./containerd/v1.7.8/)                               | v0.1.0  |
+| [containerd-v1.7.6](./containerd/v1.7.6/)                               | v0.1.0  |
+| [containerd-v1.7.3](./containerd/v1.7.3/)                               | v0.1.0  |
 | [containerd-v1.7.1](./containerd/v1.7.1/)                               | v0.2.0  |
 | [containerd-v1.6.21](./containerd/v1.6.21/)                             | v0.1.0  |
 | [containerd-v1.6.19](./containerd/v1.6.19/)                             | v0.1.0  |
