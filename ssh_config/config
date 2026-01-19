@@ -1018,3 +1018,6 @@ Host dqd-nerdctl-v1.1.0
 Host dqd-containerd-v1.6.8
     Port 16800
 
+Host dqd-nerdctl-v1.0.0
+    Port 10002
+
