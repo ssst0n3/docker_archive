@@ -1087,3 +1087,6 @@ Host dqd-containerd-v1.5.4
 Host dqd-nerdctl-v0.11.0
     Port 11004
 
+Host dqd-kubernetes-v1.35.0
+    Port 13500
+
