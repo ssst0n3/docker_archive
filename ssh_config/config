@@ -1045,3 +1045,6 @@ Host dqd-nerdctl-v0.19.0
 Host dqd-nerdctl-v0.18.0
     Port 18001
 
+Host dqd-containerd-v1.6.0
+    Port 16001
+
