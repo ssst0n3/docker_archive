@@ -58,3 +58,14 @@ for developers:
 ```dockerfile
 FROM ssst0n3/docker_archive:ctr_nerdctl-v0.23.0_v0.1.0
 ```
+
+## Known Issue
+
+### apparmor_parser
+
+https://github.com/containerd/nerdctl/issues/3945
+
+```
+root@nerdctl-0-23-0:~# nerdctl run hello-world
+FATA[0000] get apparmor_parser version: apparmor_parser resolves to executable in current directory (./apparmor_parser)
+```
