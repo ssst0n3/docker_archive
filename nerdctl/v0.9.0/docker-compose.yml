@@ -1,0 +1,7 @@
+services:
+  vm:
+    image: ssst0n3/docker_archive:nerdctl-v0.9.0_v0.1.0
+    ports:
+        - "9000:22"
+    tty: true
+    stdin_open: true
