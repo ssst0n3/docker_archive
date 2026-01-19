@@ -997,3 +997,93 @@ Host dqd-runc-v1.3.3
 Host dqd-containerd-v2.2.0
     Port 22000
 
+Host dqd-nerdctl-v1.4.0
+    Port 14001
+
+Host dqd-containerd-v1.7.0
+    Port 17002
+
+Host dqd-nerdctl-v1.3.0
+    Port 13005
+
+Host dqd-containerd-v1.6.16
+    Port 16160
+
+Host dqd-nerdctl-v1.2.0
+    Port 12002
+
+Host dqd-containerd-v1.6.12
+    Port 16120
+
+Host dqd-nerdctl-v1.1.0
+    Port 11003
+
+Host dqd-containerd-v1.6.8
+    Port 16800
+
+Host dqd-nerdctl-v1.0.0
+    Port 10002
+
+Host dqd-nerdctl-v0.23.0
+    Port 23002
+
+Host dqd-containerd-v1.6.6
+    Port 16600
+
+Host dqd-nerdctl-v0.22.0
+    Port 22000
+
+Host dqd-nerdctl-v0.21.0
+    Port 21001
+
+Host dqd-nerdctl-v0.20.0
+    Port 20000
+
+Host dqd-containerd-v1.6.2
+    Port 16200
+
+Host dqd-nerdctl-v0.19.0
+    Port 19001
+
+Host dqd-nerdctl-v0.18.0
+    Port 18001
+
+Host dqd-containerd-v1.6.0
+    Port 16001
+
+Host dqd-nerdctl-v0.17.0
+    Port 17003
+
+Host dqd-containerd-v1.5.9
+    Port 15900
+
+Host dqd-nerdctl-v0.16.0
+    Port 16003
+
+Host dqd-containerd-v1.5.8
+    Port 15800
+
+Host dqd-nerdctl-v0.15.0
+    Port 15002
+
+Host dqd-nerdctl-v0.14.0
+    Port 14002
+
+Host dqd-containerd-v1.5.7
+    Port 15700
+
+Host dqd-nerdctl-v0.13.0
+    Port 13006
+
+Host dqd-containerd-v1.5.6
+    Port 15600
+
+Host dqd-nerdctl-v0.12.0
+    Port 12003
+
+Host dqd-containerd-v1.5.4
+    Port 15400
+
+Host dqd-nerdctl-v0.11.0
+    Port 11004
+
