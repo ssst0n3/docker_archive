@@ -1042,3 +1042,6 @@ Host dqd-containerd-v1.6.2
 Host dqd-nerdctl-v0.19.0
     Port 19001
 
+Host dqd-nerdctl-v0.18.0
+    Port 18001
+
