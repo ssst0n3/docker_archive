@@ -994,9 +994,6 @@ Host dqd-nerdctl-v1.5.0
 Host dqd-runc-v1.3.3
     Port 13301
 
-Host dqd-containerd-v2.2.0
-    Port 22000
-
 Host dqd-nerdctl-v1.4.0
     Port 14001
 
