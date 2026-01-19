@@ -18,7 +18,7 @@ $ docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
 $ ./ssh
 root@nerdctl-0-23-0:~# nerdctl run hello-world
 FATA[0000] get apparmor_parser version: apparmor_parser resolves to executable in current directory (./apparmor_parser)
-root@nerdctl-0-23-0:~# nerdctl run hello-world
+root@nerdctl-0-23-0:~# nerdctl run --security-opt apparmor=unconfined hello-world
 
 Hello from Docker!
 ...
