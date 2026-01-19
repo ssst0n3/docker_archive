@@ -1090,3 +1090,6 @@ Host dqd-nerdctl-v0.11.0
 Host dqd-kubernetes-v1.35.0
     Port 13500
 
+Host dqd-nerdctl-v0.10.0
+    Port 10003
+
