@@ -1075,3 +1075,6 @@ Host dqd-nerdctl-v0.13.0
 Host dqd-containerd-v1.5.6
     Port 15600
 
+Host dqd-nerdctl-v0.12.0
+    Port 12003
+
