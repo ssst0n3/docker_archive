@@ -68,17 +68,18 @@ $ docker compose -f docker-compose.yml -f docker-compose.kvm.yml up -d
 ```markdown
 ```shell
 $ ./ssh
-root@localhost:~# containerd --version
+root@HOSTNAME:~# containerd --version
 [Actual containerd version output]
-root@localhost:~# runc --version
+root@HOSTNAME:~# runc --version
 [Actual runc version output]
-root@localhost:~# ctr i pull docker.io/library/hello-world:latest
+root@HOSTNAME:~# ctr i pull docker.io/library/hello-world:latest
 [Actual pull output]
-root@localhost:~# ctr run docker.io/library/hello-world:latest hello
+root@HOSTNAME:~# ctr run docker.io/library/hello-world:latest hello
 [Actual run output]
 ```
 ```
 - **How to obtain**: Log into the container via `./ssh` script and execute the above commands
+- **Hostname**: **Must use actual hostname** obtained by executing `hostname` command in the container (e.g., `containerd-2-2-0`), **NOT** use placeholder `localhost` or copy from other versions
 - **Information included**:
   - containerd --version (full output)
   - runc --version (full output)
@@ -130,6 +131,7 @@ When updating or creating a containerd README.md:
    - **Wait for container to be ready**: Wait for the container to start and containerd service to be running
    - **Actually execute commands and obtain output** (do not use old data or copy data from other versions):
      - Execute `./ssh` to log into the container
+     - Execute `hostname` to get the actual hostname (must use this actual hostname in README.md, not `localhost`)
      - Execute `containerd --version` to get containerd version
      - Execute `runc --version` to get runc version
      - Execute `ctr i pull docker.io/library/hello-world:latest` to test image pull
@@ -157,6 +159,7 @@ When updating or creating a containerd README.md:
 7. ❌ **Did not clean up old environment** (may cause data inconsistency or outdated data)
 8. ❌ Version information does not match expected versions (containerd or runc version mismatch)
 9. ❌ Container run examples fail (indicating environment issues)
+10. ❌ **Using placeholder hostname `localhost` instead of actual hostname** (must execute `hostname` command to get actual hostname and use it in README.md)
 
 ## Reference Examples
 
