@@ -1,0 +1,7 @@
+services:
+  vm:
+    image: ssst0n3/docker_archive:containerd-v1.6.2_v0.1.0
+    ports:
+        - "16200:22"
+    tty: true
+    stdin_open: true 
