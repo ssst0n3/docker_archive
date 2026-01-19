@@ -1,13 +1,10 @@
 ARG VERSION_K8S=1.35.0
 ARG VERSION_K8S_MAIN=1.35
 # the lowest version of kind supported k8s v1.35.0: https://github.com/kubernetes-sigs/kind/releases/tag/v0.31.0
-ARG VERSION_KIND=0.31.0
 # https://github.com/kubernetes-sigs/kind/blob/v0.31.0/images/base/Dockerfile#L125
 ARG VERSION_CONTAINERD=2.2.0
 # https://github.com/kubernetes-sigs/kind/blob/v0.31.0/images/base/Dockerfile#L173
 ARG VERSION_CNI_PLUGINS=1.8.0
-# https://github.com/kubernetes-sigs/kind/blob/v0.31.0/images/base/Dockerfile#L194
-ARG VERSION_CONTAINERD_FUSE_OVERLAYFS=2.1.7
 # https://helm.sh/docs/topics/version_skew/
 # https://github.com/helm/helm/releases
 # There's no helm support for k8s v1.35.0, just use the latest version of helm is v4.0.4 when this Dockerfile is created
@@ -15,8 +12,6 @@ ARG VERSION_HELM=4.0.4
 ARG VERSION_IMAGE=0.1.0
 ARG BASE_IMAGE=ssst0n3/docker_archive:ctr_containerd-v${VERSION_CONTAINERD}
 ARG URL_ARTIFACT_CNI=https://github.com/containernetworking/plugins/releases/download/v${VERSION_CNI_PLUGINS}/cni-plugins-linux-amd64-v${VERSION_CNI_PLUGINS}.tgz
-ARG URL_ARTIFACT_KIND=https://raw.githubusercontent.com/kubernetes-sigs/kind/refs/tags/v${VERSION_KIND}
-ARG URL_ARTIFACT_FUSE_OVERLAYFS=https://github.com/containerd/fuse-overlayfs-snapshotter/releases/download/v${VERSION_CONTAINERD_FUSE_OVERLAYFS}/containerd-fuse-overlayfs-${VERSION_CONTAINERD_FUSE_OVERLAYFS}-linux-amd64.tar.gz
 ARG URL_ARTIFACT_HELM=https://get.helm.sh/helm-v${VERSION_HELM}-linux-amd64.tar.gz
 
 FROM ${BASE_IMAGE}_v${VERSION_IMAGE} AS prerequisite
