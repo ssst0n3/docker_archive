@@ -323,6 +323,7 @@ root@localhost:~# docker version
 | [containerd-v1.6.7](./containerd/v1.6.7/)                               | v0.1.0  |
 | [containerd-v1.6.6](./containerd/v1.6.6/)                               | v0.1.0  |
 | [containerd-v1.6.4](./containerd/v1.6.4/)                               | v0.1.0  |
+| [containerd-v1.6.2](./containerd/v1.6.2/)                               | v0.1.0  |
 | [containerd-v1.5.2](./containerd/v1.5.2/)                               | v0.1.0  |
 | [containerd-v1.5.1](./containerd/v1.5.1/)                               | v0.1.0  |
 | [containerd-v1.5.0-beta.2](./containerd/v1.5.0-beta.2/)                 | v0.1.0  |
