@@ -1099,3 +1099,6 @@ Host dqd-nerdctl-v0.9.0
 Host dqd-containerd-v1.3.0
     Port 13007
 
+Host dqd-containerd-v1.2.0
+    Port 12004
+
