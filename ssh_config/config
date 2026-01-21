@@ -1108,3 +1108,6 @@ Host dqd-containerd-v1.1.0
 Host dqd-containerd-v1.0.1
     Port 10011
 
+Host dqd-containerd-v0.2.9
+    Port 29000
+
