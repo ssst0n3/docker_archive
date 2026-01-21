@@ -355,6 +355,7 @@ root@localhost:~# docker version
 | [containerd-v1.2.0](./containerd/v1.2.0/)                               | v0.1.0  |
 | [containerd-v1.1.0](./containerd/v1.1.0/)                               | v0.1.0  |
 | [containerd-v1.0.1](./containerd/v1.0.1/)                               | v0.1.0  |
+| [containerd-v0.2.9](./containerd/v0.2.9/)                               | v0.1.0  |
 | [containerd-v0.2.4](./containerd/v0.2.4/)                               | v0.1.0  |
 
 ### buildkit
