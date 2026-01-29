@@ -1117,3 +1117,6 @@ Host dqd-containerd-v1.5.0-rc.1
 Host dqd-containerd-v1.0.0
     Port 10004
 
+Host dqd-kubernetes-v1.32.4_containerd-v2.0.4
+    Port 13240
+

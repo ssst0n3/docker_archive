@@ -118,6 +118,7 @@ root@localhost:~# docker version
 | [kubernetes-v1.33.1-calico-apparmor](./kubernetes/v1.33.1-calico-apparmor/) | v0.1.0  |       |      |
 | [kubernetes-v1.33.1-calico](./kubernetes/v1.33.1-calico/) | v0.1.0  |       |      |
 | [kubernetes-v1.33.1](./kubernetes/v1.33.1/)               | v0.1.0  |       |      |
+| [kubernetes-v1.32.4_containerd-v2.0.4](./kubernetes/v1.32.4_containerd-v2.0.4/) | v0.1.0  |       |      |
 | [kubernetes-v1.32.3-calico](./kubernetes/v1.32.3-calico/) | v0.2.0  |       |      |
 | [kubernetes-v1.32.3](./kubernetes/v1.32.3/)               | v0.2.0  |       |      |
 | [kubernetes-v1.32.2_containerd-v2.0.3-calico_nerdctl-v2.0.3](./kubernetes/v1.32.2_containerd-v2.0.3-calico_nerdctl-v2.0.3/) | v0.1.0  |       |      |
