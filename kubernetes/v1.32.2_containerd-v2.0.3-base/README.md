@@ -11,7 +11,7 @@ Based on `ssst0n3/docker_archive:ctr_containerd-v2.0.3_v0.3.0`, installs Helm, C
 ## build
 
 ```shell
-make ctr DIR=kubernetes/v1.32.2-base
+make ctr DIR=kubernetes/v1.32.2_containerd-v2.0.3-base
 ```
 
 ### for developers
