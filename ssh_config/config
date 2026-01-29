@@ -1120,3 +1120,6 @@ Host dqd-containerd-v1.0.0
 Host dqd-kubernetes-v1.32.4_containerd-v2.0.4
     Port 13240
 
+Host dqd-kubernetes-v1.32.4_containerd-v2.0.4-calico
+    Port 13242
+
