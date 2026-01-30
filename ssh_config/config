@@ -1141,3 +1141,6 @@ Host dqd-kubernetes-v1.33.1-calico_nerdctl-v2.1.1
 Host dqd-kubernetes-v1.33.3_containerd-v2.1.1
     Port 13330
 
+Host dqd-kubernetes-v1.33.3_containerd-v2.1.1-calico
+    Port 13332
+
