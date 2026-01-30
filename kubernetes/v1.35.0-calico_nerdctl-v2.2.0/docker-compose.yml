@@ -1,6 +1,8 @@
 services:
   vm:
     image: ssst0n3/docker_archive:kubernetes-v1.35.0-calico_nerdctl-v2.2.0_v0.1.0
+    # Use host cpu to fix: "This program can only be run on AMD64 processors with v2 microarchitecture support."
+    command: /start.sh -cpu host    
     environment:
       - "QEMU_NET=10.0.2.0/24"
       - "QEMU_DHCPSTART=10.0.2.16"
