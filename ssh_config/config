@@ -1132,3 +1132,6 @@ Host dqd-kubernetes-v1.35.0-calico
 Host dqd-kubernetes-v1.35.0-calico_nerdctl-v2.2.0
     Port 13502
 
+Host dqd-kubernetes-v1.34.0-calico_nerdctl-v2.1.4
+    Port 13408
+
