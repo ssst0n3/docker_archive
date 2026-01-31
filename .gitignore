@@ -1,3 +1,6 @@
 .idea
 *.qcow2
 experiment
+.opencode/*
+!.opencode/skills
+!.opencode/skills/**
