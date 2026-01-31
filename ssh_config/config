@@ -1159,3 +1159,6 @@ Host dqd-containerd-v2.1.3
 Host dqd-kubernetes-v1.33.3_containerd-v2.1.3
     Port 13338
 
+Host dqd-kubernetes-v1.33.3_containerd-v2.1.3-calico
+    Port 33330
+
