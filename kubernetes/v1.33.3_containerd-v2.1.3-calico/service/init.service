@@ -1,0 +1,17 @@
+[Unit]
+Description=Install k8s network addon
+After=multi-user.target network.target containerd.service
+Requires=network.target containerd.service
+
+[Service]
+Type=oneshot
+Environment="KUBECONFIG=/etc/kubernetes/admin.conf"
+ExecStart=/init.sh
+User=root
+RemainAfterExit=yes
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
+
