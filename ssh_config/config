@@ -1165,3 +1165,6 @@ Host dqd-kubernetes-v1.33.3_containerd-v2.1.3-calico
 Host dqd-kubernetes-v1.33.4
     Port 13340
 
+Host dqd-kubernetes-v1.33.4-calico
+    Port 13342
+
