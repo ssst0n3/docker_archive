@@ -1156,3 +1156,6 @@ Host dqd-kubernetes-v1.33.3_containerd-v2.1.2-calico
 Host dqd-containerd-v2.1.3
     Port 21300
 
+Host dqd-kubernetes-v1.33.3_containerd-v2.1.3
+    Port 13338
+
