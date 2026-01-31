@@ -20,7 +20,7 @@ description: Create Conventional Commit messages and commit safely: operate on s
 - Title highlights intent and version/variant, e.g., `feat(kubernetes): add v1.35.0-calico_nerdctl-v2.2.0 support`.
 
 ## Process
-1) Check atomicity of changes; if mixed domains (e.g., kubernetes vs containerd, CSS vs migration, docs vs code), stop and ask for separate commits—do not craft one message for mixed scope. If staged changes exist, operate only on what is staged and ignore unstaged/untracked files (do not auto-add). If nothing is staged and working tree has relevant changes, stage the appropriate set once, then continue. `.env` and kubeconfig files are allowed to commit; skip any sensitive-info checks or warnings for them.
+1) Check atomicity of changes; if mixed domains (e.g., kubernetes vs containerd, CSS vs migration, docs vs code), stop and ask for separate commits—do not craft one message for mixed scope. If staged changes exist, operate only on what is staged and ignore unstaged/untracked files (do not auto-add). If nothing is staged and working tree has relevant changes, stage the appropriate set once, then continue. Ignore `vm.qcow2` files (do not stage or commit them; if staged, instruct user to unstage). `.env` and kubeconfig files are allowed to commit; skip any sensitive-info checks or warnings for them.
 2) Title `<type>(<scope>): <subject>`; types: feat, fix, docs, style, refactor, perf, test, build, ci, chore, revert; scope optional; subject imperative, no period, 50–72 chars.
 3) Body optional; use 1–3 short lines wrapped at 72 chars only for notable intent/behavior/impact; default to title-only.
 4) Chinese summary can be detailed; English commit message stays concise and intent-focused with version/variant context, not a translation.
