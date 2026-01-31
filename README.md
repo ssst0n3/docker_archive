@@ -118,6 +118,7 @@ root@localhost:~# docker version
 | [kubernetes-v1.34.0-calico_nerdctl-v2.1.4](./kubernetes/v1.34.0-calico_nerdctl-v2.1.4/) | v0.1.0  |       |      |
 | [kubernetes-v1.34.0-calico](./kubernetes/v1.34.0-calico/) | v0.1.0  |       |      |
 | [kubernetes-v1.34.0](./kubernetes/v1.34.0/)               | v0.1.0  |       |      |
+| [kubernetes-v1.33.3_containerd-v2.1.2-calico](./kubernetes/v1.33.3_containerd-v2.1.2-calico/) | v0.1.0  |       |      |
 | [kubernetes-v1.33.3_containerd-v2.1.2](./kubernetes/v1.33.3_containerd-v2.1.2/) | v0.1.0  |       |      |
 | [kubernetes-v1.33.3_containerd-v2.1.1-calico](./kubernetes/v1.33.3_containerd-v2.1.1-calico/) | v0.1.0  |       |      |
 | [kubernetes-v1.33.3_containerd-v2.1.1](./kubernetes/v1.33.3_containerd-v2.1.1/) | v0.1.0  |       |      |
