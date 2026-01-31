@@ -19,7 +19,7 @@
 2) Title `<type>(<scope>): <subject>`; types: feat, fix, docs, style, refactor, perf, test, build, ci, chore, revert; scope optional; subject imperative, no period, 50–72 chars.
 3) Body optional; use 1–3 short lines wrapped at 72 chars only for notable intent/behavior/impact; default to title-only.
 4) Chinese summary can be detailed; English commit message stays concise and intent-focused with version/variant context, not a translation.
-5) Execution (strict): require staged changes (else ask to stage); warn about sensitive/generated artifacts (.env, credentials, images, etc.); write exact English draft to project-root `.commit-message` via file tool; do not edit after showing; run `git commit -F .commit-message` (no `-m`); if commit fails (hooks, etc.), surface error and keep `.commit-message`; on success, delete it.
+5) Execution (strict): require staged changes (else ask to stage); write exact English draft to project-root `.commit-message` via file tool; do not edit after showing; run `git commit -F .commit-message` (no `-m`); if commit fails (hooks, etc.), surface error and keep `.commit-message`; on success, delete it.
 6) Quick flow: ensure staged → draft message → write `.commit-message` → `git commit -F .commit-message` → remove on success.
 
 ## Examples
