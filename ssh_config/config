@@ -1174,3 +1174,9 @@ Host dqd-containerd-v2.1.5
 Host dqd-kubernetes-v1.33.7
     Port 13370
 
+Host dqd-kubernetes-v1.33.7-calico
+    Port 13372
+
+Host dqd-nerdctl-v0.8.0
+    Port 8000
+
