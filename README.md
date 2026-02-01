@@ -320,6 +320,7 @@ root@localhost:~# docker version
 | tag                                                                     | version | alias |
 |-------------------------------------------------------------------------|---------|-------|
 | [containerd-v2.2.0](./containerd/v2.2.0/)                               | v0.1.0  |
+| [containerd-v2.1.5](./containerd/v2.1.5/)                               | v0.1.0  |
 | [containerd-v2.1.4](./containerd/v2.1.4/)                               | v0.1.0  |
 | [containerd-v2.1.3](./containerd/v2.1.3/)                               | v0.1.0  |
 | [containerd-v2.1.2](./containerd/v2.1.2/)                               | v0.1.0  |
