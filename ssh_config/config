@@ -1186,3 +1186,6 @@ Host dqd-runc-v1.3.4
 Host dqd-containerd-v2.2.1
     Port 22100
 
+Host dqd-kubernetes-v1.33.8
+    Port 13380
+
