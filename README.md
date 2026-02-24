@@ -111,6 +111,7 @@ root@localhost:~# docker version
 
 | tag                                                       | version | alias | note |
 |-----------------------------------------------------------|---------|-------|------|
+| [kubernetes-v1.33.8-calico](./kubernetes/v1.33.8-calico/) | v0.1.0  |       |      |
 | [kubernetes-v1.33.8](./kubernetes/v1.33.8/)               | v0.1.0  |       |      |
 | [kubernetes-v1.33.7-calico](./kubernetes/v1.33.7-calico/) | v0.1.0  |       |      |
 | [kubernetes-v1.33.7](./kubernetes/v1.33.7/)               | v0.1.0  |       |      |
