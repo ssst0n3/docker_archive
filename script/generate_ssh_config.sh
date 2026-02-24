@@ -13,6 +13,8 @@
 #     Port <HOST_PORT>
 #     [IdentityFile <value>]  # Only if different from default
 #
+# 5. Generates/updates a per-project ssh script at <project_dir>/ssh.
+#
 # The script uses a default configuration block at the top of the file:
 #
 # Host dqd-*
@@ -28,6 +30,10 @@
 #
 # The output file is always ../ssh_config/config relative to the script's directory,
 # no matter where the script is executed from.
+#
+# The per-project ssh script uses this template:
+#   #!/bin/bash
+#   sshpass -p root ssh -o StrictHostKeyChecking=no -p <HOST_PORT> root@127.0.0.1
 #
 # To skip generating SSH config for a project, add SKIP_SSH_CONFIG=true to its .env file.
 # When set, the script will silently skip that project without printing SKIP messages.
@@ -75,6 +81,8 @@ fi
 
 # Counter to track how many configurations were added
 added_count=0
+# Counter to track how many ssh scripts were added/updated
+ssh_script_count=0
 
 # Process each .env file found in the project directory and its subdirectories
 # Use process substitution to avoid subshell, so we can track added_count
@@ -151,6 +159,17 @@ while IFS= read -r env_file; do
         new_config="$new_config"$'\n'"    IdentityFile $identity_file"
     fi
 
+    # Generate per-project ssh script only if it does not exist
+    ssh_script_file="$dir/ssh"
+    ssh_script_content="#!/bin/bash"$'\n'
+    ssh_script_content+="sshpass -p root ssh -o StrictHostKeyChecking=no -p $host_port root@127.0.0.1"$'\n'
+
+    if [ ! -f "$ssh_script_file" ]; then
+        printf "%s" "$ssh_script_content" > "$ssh_script_file"
+        chmod +x "$ssh_script_file"
+        ((ssh_script_count++))
+    fi
+
     # Check if this host already exists in the output file
     # If it exists, skip it (assume configuration is correct)
     if grep -q "^Host $host_name$" "$output_file"; then
@@ -180,4 +199,8 @@ else
     echo -e "${BLUE}[SUCCESS]${NC} ${BLUE}SSH configuration generated${NC}"
     echo -e "          ${BLUE}Output file: ${CYAN}$rel_output_file${NC}"
     echo -e "          ${BLUE}Added ${CYAN}$added_count${BLUE} configuration(s)${NC}"
+fi
+
+if [ "$ssh_script_count" -gt 0 ]; then
+    echo -e "${BLUE}[SUCCESS]${NC} ${BLUE}SSH scripts updated: ${CYAN}$ssh_script_count${NC}"
 fi
