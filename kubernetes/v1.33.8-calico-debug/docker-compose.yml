@@ -1,0 +1,13 @@
+services:
+  vm:
+    image: ssst0n3/docker_archive:kubernetes-v1.33.8-calico-debug_v0.1.0
+    environment:
+      - "QEMU_NET=10.0.2.0/24"
+      - "QEMU_DHCPSTART=10.0.2.16"
+      - "QEMU_HOSTFWD=hostfwd=tcp::6443-:6443,hostfwd=tcp::2345-:2345"
+    ports:
+        - "13384:22"
+        - "13385:6443"
+        - "13386:2345"
+    tty: true
+    stdin_open: true 
