@@ -1,3 +1,7 @@
+# Migrated to https://github.com/ctrsploit/dqd
+
+----
+
 # docker archive: images of container's components
 
 See all images listed
